@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+    font-family: "Poppins", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.hero-image{
+    width: 45%;
+}
+.bg-tentang{
+    background-color: #1F8A70;
+}
+.bg-berita{
+    background-color: #fefefe;
+}
+
+.hover-navbar{
+    color: #000;
+}
+
+.hover-navbar:hover{
+    color: #0d6efd;
+    transition: 0.4s;
+}
