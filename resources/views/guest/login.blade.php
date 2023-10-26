@@ -33,13 +33,37 @@
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password">
-            </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="checkbox">
-                <label class="form-check-label" for="checkbox">Check me out</label>
-            </div>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                        autocomplete="off" required>
+                    <button class="btn btn-outline-primary" type="button" id="passwordToggle">
+                        <i class="bi bi-eye" id="passwordIconTerlihat"></i>
+                    </button>
+                </div>
 
+                <script>
+                    const passwordInput = document.getElementById("password");
+                    const passwordIcon = document.getElementById("passwordIconTerlihat");
+                    const passwordIconHilang = document.getElementById("passwordIconHilang");
+
+                    document.getElementById("passwordToggle").addEventListener("click", function() {
+                        if (passwordInput.type === "password") {
+                            passwordInput.type = "text";
+                            passwordIcon.classList.remove("bi");
+                            passwordIcon.classList.remove("bi-eye");
+                            passwordIcon.classList.add("bi");
+                            passwordIcon.classList.add("bi-eye-slash");
+                            
+                        } else {
+                            passwordInput.type = "password";
+                            passwordIcon.classList.add("bi");
+                            passwordIcon.classList.add("bi-eye");
+                            passwordIcon.classList.remove("bi");
+                            passwordIcon.classList.remove("bi-eye-slash");
+                        }
+                    });
+                </script>
+            </div>
             <button type="submit" class="btn btn-primary w-100">Submit</button>
         </form>
     </div>
