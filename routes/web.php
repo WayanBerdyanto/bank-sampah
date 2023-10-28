@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,4 +24,9 @@ Route::get('/register', [GuestController::class, 'register']);
 
 // Halaman Pengujung Controller
 Route::get('pengguna/', [PenggunaController::class, 'index']);
+
+// Register Controller
+Route::get('/register', [RegisterController::class, 'register']);
+Route::post('/postRegister', [RegisterController::class, 'postRegister']);
+
 

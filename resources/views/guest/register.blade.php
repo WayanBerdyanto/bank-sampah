@@ -27,14 +27,15 @@
         </nav>
     </div>
     <div class="container w-100 p-4">
-        <form class="w-75 border border-solid p-4 mx-auto">
+        <form class="w-75 border border-solid p-4 mx-auto" method="POST" action="/postRegister">
+            @csrf
             <div class="mb-3">
                 {{-- HIDDEN --}}
                 <input type="text" class="form-control" id="id" name="id" hidden>
             </div>
             <div class="mb-3">
-                <label for="nama_lengkap" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" placeholder="Masukan Nama" required>
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Masukan Username" required>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
@@ -73,9 +74,10 @@
                     });
                 </script>
             </div>
+            <input type="text" class="form-control" id="role" name="role" hidden>
             <div class="mb-3">
-                <label for="no_hp" class="form-label">No HP</label>
-                <input type="number" class="form-control" id="no_hp" name="no_hp" placeholder="Masukan NoHp" required>
+                <label for="no_telpon" class="form-label">No HP</label>
+                <input type="number" class="form-control" id="no_telpon" name="no_telpon" placeholder="Masukan NoHp" required>
             </div>
 
             <button type="submit" class="btn btn-primary w-100">Submit</button>

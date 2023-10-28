@@ -1,5 +1,13 @@
 @extends('guest.layouts.main')
 @section('home')
+    @if (session('flash_success'))
+        <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+            <i class="bi bi-patch-check-fill"></i>
+            <strong> {{ session('flash_success') }}</strong> Silahkan Lanjut Melakukan Login
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <section id="home" class="mb-4">
         <div class="container-fluid d-flex position-relative mt-2">
             <div class="container d-flex align-items-center">
@@ -20,25 +28,29 @@
     <section id="tentang" class="mt-4 bg-tentang p-4 mb-4 text-light">
         <div class="container w-75 p-4">
             <h3 class="text-center fw-bold mt-4">Tentang Kami</h3>
-            <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit dicta voluptatum laboriosam maiores quibusdam
+            <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit dicta voluptatum laboriosam
+                maiores quibusdam
                 praesentium velit, architecto inventore eos officia.</p>
         </div>
         <div class="w-100 justify-content-center d-flex p-2 flex-wrap text-center">
             <div class="container w-50">
                 <h4>Judul 1</h4>
-                <p class="fst-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ad animi cumque quaerat placeat laborum non.</p>
+                <p class="fst-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ad animi cumque
+                    quaerat placeat laborum non.</p>
             </div>
             <div class="container w-50">
                 <h4>Judul 2</h4>
-                <p class="fst-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ad animi cumque quaerat placeat laborum non.</p>
+                <p class="fst-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ad animi cumque
+                    quaerat placeat laborum non.</p>
             </div>
         </div>
     </section>
-    
+
     <section id="berita" class="bg-berita p-4">
         <div class="container w-75">
             <h3 class="text-center fw-bold">Berita Kami</h3>
-            <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit dicta voluptatum laboriosam maiores quibusdam
+            <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit dicta voluptatum laboriosam
+                maiores quibusdam
                 praesentium velit, architecto inventore eos officia.</p>
         </div>
         <div class="w-100 justify-content-center d-flex p-2 flex-wrap">
