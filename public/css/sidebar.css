@@ -10,9 +10,9 @@
   --first-color: #6923D0;
   --first-color-light: #F4F0FA;
   --title-color: #19181B;
-  --text-color: #58555E;
+  --text-color: #fff;
   --text-color-light: #A5A1AA;
-  --body-color: #F9F6FD;
+  --body-color: #fff;
   --container-color: #FFFFFF;
 
   /*========== Font and typography ==========*/
@@ -48,7 +48,6 @@ body {
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
   background-color: var(--body-color);
-  color: var(--text-color);
 }
 
 h3 {
@@ -90,8 +89,8 @@ img {
 }
 
 .header__logo {
-  color: var(--title-color);
-  font-weight: var(--font-medium);
+  color: var(--text-color);
+  font-weight: var(--font-semi-bold);
   display: none;
 }
 
@@ -144,10 +143,9 @@ img {
   justify-content: space-between;
   padding-bottom: 3rem;
   overflow: auto;
-  scrollbar-width: none; /* For mozilla */
+  scrollbar-width: none; 
 }
 
-/* For Google Chrome and others */
 .nav__container::-webkit-scrollbar {
   display: none;
 }

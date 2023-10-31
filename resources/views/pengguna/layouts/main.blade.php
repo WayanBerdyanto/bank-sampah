@@ -26,25 +26,34 @@
 
 <body>
     <!--========== HEADER ==========-->
-    <header class="header">
+    <header class="header" style="background-color:  #141e46ee">
         <div class="header__container">
-            <img src="assets/img/perfil.jpg" alt="" class="header__img">
-
-            <a href="#" class="header__logo">BankSampah</a>
-
-            <div class="header__search">
-                <input type="search" placeholder="Search" class="header__input">
-                <i class='bx bx-search header__icon'></i>
-            </div>
-
+            {{-- <img src="{{ asset('image/hero/romusa.png') }}" alt="" class="header__img"> --}}
             <div class="header__toggle">
                 <i class='bx bx-menu' id="header-toggle"></i>
+            </div>
+            <a href="#" class="header__logo fs-5 mr-4">BankSampah</a>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="bi bi-person-circle"></i>
+                    User
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                </ul>
             </div>
         </div>
     </header>
 
     <!--========== NAV ==========-->
-    <div class="nav" id="navbar">
+    <div class="nav" id="navbar" style="background-color: #141E46">
         @include('pengguna.layouts.sidebar')
     </div>
 
