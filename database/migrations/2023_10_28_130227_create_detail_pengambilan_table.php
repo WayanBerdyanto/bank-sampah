@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('id_dtl_langganan');
             $table->foreign('id_dtl_langganan')->references('id_dtl_langganan')->on('detail_langganan');
 
-            $table->unsignedBigInteger('id_pengambilsampah');
-            $table->foreign('id_pengambilsampah')->references('id_pengambilsampah')->on('pengambil_sampah');
+            $table->unsignedBigInteger('id');
+            $table->foreign('id')->references('id')->on('users');
 
             $table->date('tanggal');
             $table->string('hari', 12);

@@ -18,15 +18,17 @@
 
 <body>
     <div class="container w-100 mx-auto mt-3">
-        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+            aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Login</li>
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Login</li>
             </ol>
-          </nav>
+        </nav>
     </div>
     <div class="container w-100 p-4">
-        <form class="w-50 border border-solid p-4 mx-auto">
+        <form class="w-50 border border-solid p-4 mx-auto" method="POST" action="/loginPengguna">
+            @csrf
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username">
@@ -34,8 +36,7 @@
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <div class="input-group">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"
-                        autocomplete="off" required>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                     <button class="btn btn-outline-primary" type="button" id="passwordToggle">
                         <i class="bi bi-eye" id="passwordIconTerlihat"></i>
                     </button>
@@ -53,7 +54,7 @@
                             passwordIcon.classList.remove("bi-eye");
                             passwordIcon.classList.add("bi");
                             passwordIcon.classList.add("bi-eye-slash");
-                            
+
                         } else {
                             passwordInput.type = "password";
                             passwordIcon.classList.add("bi");
@@ -63,6 +64,7 @@
                         }
                     });
                 </script>
+                {{-- <input type="text" class="form-control" id="role" name="role" value="pengguna" hidden> --}}
             </div>
             <button type="submit" class="btn btn-primary w-100">Submit</button>
         </form>

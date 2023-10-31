@@ -17,8 +17,8 @@ return new class extends Migration
             $table->char('kode_penerimaan', 5);
             $table->foreign('kode_penerimaan')->references('kode_penerimaan')->on('status_penerimaan');
 
-            $table->unsignedBigInteger('id_banksampah');
-            $table->foreign('id_banksampah')->references('id_banksampah')->on('bank_sampah');
+            $table->unsignedBigInteger('id');
+            $table->foreign('id')->references('id')->on('users');
 
             $table->unsignedBigInteger('id_dtl_pengambilan');
             $table->foreign('id_dtl_pengambilan')->references('id_dtl_pengambilan')->on('detail_pengambilan');

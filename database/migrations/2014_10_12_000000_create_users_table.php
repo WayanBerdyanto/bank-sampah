@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bank_sampah', function (Blueprint $table) {
-            $table->bigIncrements('id_banksampah');
+        Schema::create('users', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('username', 40)->unique();
             $table->string('email', 40);
             $table->string('password', 80);
-            $table->string('role', 30)->default('banksampah');
+            $table->enum('role',['pengguna', 'pengambil', 'banksampah'])->default('pengguna');
             $table->string('nama_lengkap', 50)->nullable();
             $table->string('provinsi', 50)->nullable();
             $table->string('kabupaten', 50)->nullable();
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bank_sampah');
+        Schema::dropIfExists('users');
     }
 };

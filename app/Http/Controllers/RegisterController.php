@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-use App\Models\Pengguna;
+
+use App\Models\User;
 
 class RegisterController extends Controller
 {
@@ -13,8 +15,9 @@ class RegisterController extends Controller
     }
 
     public function postRegister(Request $request){
-        Pengguna::create([
+        User::create([
             'username'=> $request->username,
+            'nama_lengkap'=> $request->nama_lengkap,
             'email'=> $request->email,
             'password'=> bcrypt($request->password),
             'no_telpon'=> $request->no_telpon
