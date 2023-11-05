@@ -50,9 +50,14 @@ html {
     transition: 0.2s linear;
 }
 
+.text-secondary:hover {
+    color: aqua;
+}
 .navbar .navbar-nav a:hover::after {
     transform: scaleX(0.5);
 }
+
+
 
 
 .chart-container {

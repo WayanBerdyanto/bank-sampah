@@ -21,4 +21,8 @@ class PenggunaController extends Controller
         Auth::logout();
         return view('guest.login');
     }
+
+    public function profilesetting() {
+        return view('pengguna.profile');
+    }
 }
