@@ -55,7 +55,7 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="/profilesetting">
                             <i class='bx bxs-cog mr-2'></i>
                             Settings
                         </a>
@@ -107,6 +107,10 @@
     </script>
 
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+
+    <script src="{{ asset('js/map.js') }}"></script>
 </body>
 
 </html>

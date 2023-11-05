@@ -35,4 +35,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pengguna/', [PenggunaController::class, 'index']);
     Route::get('/pengguna/paket', [PenggunaController::class, 'paket']);
     Route::get('/logout', [PenggunaController::class, 'logout']);
+    Route::get('/profilesetting', [PenggunaController::class, 'profilesetting']);
 });
