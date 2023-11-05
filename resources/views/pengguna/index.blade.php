@@ -5,6 +5,7 @@
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <i class="bi bi-patch-check-fill"></i>
                 <strong> {{ session('flash_success') }}</strong>
+                <span>Selamat Datang {{ Auth::user()->nama_lengkap }}</span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                     <i class="bi bi-x-lg"></i>
                 </button>
@@ -22,10 +23,9 @@
                 <span class="mt-4">20</span>
             </div>
         </div>
-
-        {{-- <div class="chart-container">
-            {!! $chart->container() !!}
-        </div> --}}
-
     </section>
+    <script src="{{ $chart->cdn() }}"></script>
+
+    {{ $chart->script() }}
 @endsection
+

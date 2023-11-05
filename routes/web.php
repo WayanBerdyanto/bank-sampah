@@ -1,12 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
-
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +15,7 @@ use App\Http\Controllers\LoginController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 // HALAMAN GUEST Controller
 Route::get('/', [GuestController::class, 'index']);
 Route::get('/login', [GuestController::class, 'login']);
@@ -32,8 +31,8 @@ Route::get('/login', [LoginController::class, 'login']);
 Route::post('/loginPengguna', [LoginController::class, 'loginPengguna']);
 
 // Pengguna Controller
-Route::get('/pengguna/', [PenggunaController::class, 'index']);
-
-
-
-
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/pengguna/', [PenggunaController::class, 'index']);
+    Route::get('/pengguna/paket', [PenggunaController::class, 'paket']);
+    Route::get('/logout', [PenggunaController::class, 'logout']);
+});
