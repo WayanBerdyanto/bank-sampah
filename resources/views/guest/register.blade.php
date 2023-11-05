@@ -35,53 +35,53 @@
             </div>
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Masukan Username" required>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Masukan Username"
+                    required value="{{ old('username') }}">
             </div>
             <div class="mb-3">
                 <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
-                <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" placeholder="Masukan Nama" required>
+                <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap"
+                    placeholder="Masukan Nama" required value="{{ old('nama_lengkap') }}">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Masukan Email" required>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Masukan Email"
+                    required value="{{ old('email') }}">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <div class="input-group">
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password"
-                        autocomplete="off" required>
+                        autocomplete="off" required value="{{ old('password') }}">
                     <button class="btn btn-outline-primary" type="button" id="passwordToggle">
                         <i class="bi bi-eye" id="passwordIconTerlihat"></i>
                     </button>
                 </div>
-
-                <script>
-                    const passwordInput = document.getElementById("password");
-                    const passwordIcon = document.getElementById("passwordIconTerlihat");
-                    const passwordIconHilang = document.getElementById("passwordIconHilang");
-
-                    document.getElementById("passwordToggle").addEventListener("click", function() {
-                        if (passwordInput.type === "password") {
-                            passwordInput.type = "text";
-                            passwordIcon.classList.remove("bi");
-                            passwordIcon.classList.remove("bi-eye");
-                            passwordIcon.classList.add("bi");
-                            passwordIcon.classList.add("bi-eye-slash");
-                            
-                        } else {
-                            passwordInput.type = "password";
-                            passwordIcon.classList.add("bi");
-                            passwordIcon.classList.add("bi-eye");
-                            passwordIcon.classList.remove("bi");
-                            passwordIcon.classList.remove("bi-eye-slash");
-                        }
-                    });
-                </script>
+            </div>
+            <div class="mb-3">
+                <label for="password2" class="form-label">Confirm Password</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Password"
+                        autocomplete="off" required value="{{ old('password2') }}">
+                    <button class="btn btn-outline-primary" type="button" id="passwordToggle2">
+                        <i class="bi bi-eye" id="passwordIconTerlihat2"></i>
+                    </button>
+                </div>
+                @if (session('flash_error'))
+                    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                        <i class="bi bi-exclamation-circle-fill"></i>
+                        <strong> {{ session('flash_error') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                @endif
             </div>
             <input type="text" class="form-control" id="role" name="role" hidden>
             <div class="mb-3">
                 <label for="no_telpon" class="form-label">No HP</label>
-                <input type="number" class="form-control" id="no_telpon" name="no_telpon" placeholder="Masukan NoHp" required>
+                <input type="number" class="form-control" id="no_telpon" name="no_telpon" placeholder="Masukan NoHp"
+                    required value="{{ old('no_telpon') }}">
             </div>
 
             <button type="submit" class="btn btn-primary w-100">Submit</button>
@@ -94,6 +94,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
     </script>
+    <script src="{{ asset('js/password.js') }}"></script>
 </body>
 
 </html>
