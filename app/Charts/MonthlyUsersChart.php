@@ -16,8 +16,7 @@ class MonthlyUsersChart
     public function build(): \ArielMejiaDev\LarapexCharts\PieChart
     {
         return $this->chart->pieChart()
-            ->setTitle('Data Jenis Sampah Yang Diambil')
-            ->setSubtitle('Selama Berlangganan')
+            ->setTitle('Data Jenis Sampah :')
             ->addData([40, 50])
             ->setLabels(['Organik', 'An-organik']);
     }

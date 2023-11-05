@@ -19,6 +19,14 @@ html {
     background-color: #1F8A70;
 }
 
+.bg-organik{
+    background-color: #A8DF8E;
+}
+
+.bg-anorganik{
+    background-color: #E8FFCE;
+}
+
 .bg-white {
     background-color: #fefefe;
 }
@@ -44,4 +52,33 @@ html {
 
 .navbar .navbar-nav a:hover::after {
     transform: scaleX(0.5);
+}
+
+
+.chart-container {
+    width: 50%;
+}
+
+@media (min-width: 576px) {
+    .chart-container {
+        width: 50%;
+    }
+}
+
+@media (min-width: 768px) {
+    .chart-container {
+        width: 80%;
+    }
+}
+
+@media (min-width: 992px) {
+    .chart-container {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .chart-container {
+        width: 30%;
+    }
 }

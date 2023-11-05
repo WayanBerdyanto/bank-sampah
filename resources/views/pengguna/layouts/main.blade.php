@@ -20,6 +20,7 @@
 
     <!--========== CSS ==========-->
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <title>Dashboard pengguna</title>
 </head>
@@ -33,17 +34,33 @@
                 <i class='bx bx-menu' id="header-toggle"></i>
             </div>
             <div class="dropdown">
-                <button class="btn btn-light" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown button
+                <button class="text-primary" id="dropdownMenuButton2" data-bs-toggle="dropdown">
+                    <i class="bi bi-person-circle"></i>
+                    user
                 </button>
                 <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
-                  <li><a class="dropdown-item active" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    <li>
+                        <a class="dropdown-item text-yellow-300" href="#">
+                            <i class='bx bxs-badge-dollar'></i>
+                            Premium
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-bell-fill"></i>
+                            Notifikasi
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <i class='bx bxs-cog'></i>Settings
+                        </a>
+                    </li>
                 </ul>
-              </div>
+            </div>
         </div>
     </header>
 

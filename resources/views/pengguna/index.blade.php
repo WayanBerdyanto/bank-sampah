@@ -10,22 +10,22 @@
                 </button>
             </div>
         @endif
-        <div class="row vh-100 ">
-            <div class="col-md-4 border border-dark ">
-                <h1>User</h1>
+
+        <h1 class="mb-4 mx-4 fs-4 fw-bold">Data Sampah</h1>
+        <div class=" mx-4 d-flex">
+            <div class="bg-green-700 text-center text-light card w-50 p-1 mr-2">
+                Organik
+                <span class="mt-4">50</span>
             </div>
-            <div class="col-md-4 border border-dark">
-                <h1>Map</h1>
-            </div>
-            <div class="col-md-4 border border-dark ">
-                <h1>Tanggal</h1>
-            </div>
-            <div class="col-md-8 border border-dark w-50">
-                {!! $chart->container() !!}
-            </div>
-            <div class="col-md-4 border border-dark">
-                <h1>Grafik</h1>
+            <div class="bg-red-700 text-light text-center card w-50 p-1">
+                An-Organik
+                <span class="mt-4">20</span>
             </div>
         </div>
+
+        {{-- <div class="chart-container">
+            {!! $chart->container() !!}
+        </div> --}}
+
     </section>
 @endsection
