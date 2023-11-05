@@ -34,20 +34,20 @@
                 <i class='bx bx-menu' id="header-toggle"></i>
             </div>
             <div class="dropdown">
-                <button class="text-primary" id="dropdownMenuButton2" data-bs-toggle="dropdown">
+                <button class="text-dark fw-bold" id="dropdownMenuButton2" data-bs-toggle="dropdown">
                     <i class="bi bi-person-circle"></i>
-                    user
+                    {{ Auth::user()->username ?? '' }}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
                     <li>
-                        <a class="dropdown-item text-yellow-300" href="#">
-                            <i class='bx bxs-badge-dollar'></i>
-                            Premium
+                        <a class="dropdown-item text-yellow-500" href="#">
+                            <i class='bx bxs-badge-dollar mr-2'></i>
+                            Langganan
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="#">
-                            <i class="bi bi-bell-fill"></i>
+                            <i class="bi bi-bell-fill mr-2"></i>
                             Notifikasi
                         </a>
                     </li>
@@ -56,7 +56,8 @@
                     </li>
                     <li>
                         <a class="dropdown-item" href="#">
-                            <i class='bx bxs-cog'></i>Settings
+                            <i class='bx bxs-cog mr-2'></i>
+                            Settings
                         </a>
                     </li>
                 </ul>
@@ -73,7 +74,27 @@
     <!--========== CONTENTS ==========-->
     <main class="row vh-100">
         @yield('content')
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Anda Yakin Logout?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        logout dari user
+                        <strong>{{ Auth::user()->username }}</strong>
+                    </div>
+                    <div class="modal-footer">
+                        <button  class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+                        <a href="/logout" class="btn btn-primary">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
+
 
     <!--========== MAIN JS ==========-->
     <script src="{{ asset('js/main.js') }}"></script>
@@ -86,9 +107,6 @@
     </script>
 
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <script src="{{ $chart->cdn() }}"></script>
-
-    {{ $chart->script() }}
 </body>
 
 </html>

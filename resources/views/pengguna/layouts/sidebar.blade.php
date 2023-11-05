@@ -7,14 +7,14 @@
 
         <div class="nav__list">
             <div class="nav__items mt-4">
-                <a href="#dashboard" class="nav__link active">
+                <a href="/pengguna/" class="nav__link active">
                     <i class='bx bxs-dashboard nav__icon'></i>
                     <span class="nav__name">Dashboard</span>
                 </a>
 
-                <a href="#" class="nav__link">
-                    <i class='bx bx-message-rounded nav__icon'></i>
-                    <span class="nav__name">Messages</span>
+                <a href="/pengguna/paket" class="nav__link">
+                    <i class='bx bxs-package nav__icon'></i>
+                    <span class="nav__name">Paket</span>
                 </a>
 
                 <a href="#" class="nav__link">
@@ -28,9 +28,9 @@
             </div>
         </div>
     </div>
-    <a class="nav__link nav__logout">
+    <button class="nav__link nav__logout" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <i class='bx bx-log-out nav__icon'></i>
         <span class="nav__name">Log Out</span>
-    </a>
+    </button>
     
 </nav>
