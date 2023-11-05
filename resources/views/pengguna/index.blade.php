@@ -6,17 +6,26 @@
                 <i class="bi bi-patch-check-fill"></i>
                 <strong> {{ session('flash_success') }}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                    <i class="bi bi-x-lg"></i> 
+                    <i class="bi bi-x-lg"></i>
                 </button>
             </div>
         @endif
-        <h1 class="mb-4 fs-2 fw-bold">Halaman Pengguna</h1>
-        <ul class="list-group">
-            <li class="list-group-item active" aria-current="true">An active item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
-            <li class="list-group-item">A fourth item</li>
-            <li class="list-group-item">And a fifth one</li>
-        </ul>
+        <div class="row vh-100 ">
+            <div class="col-md-4 border border-dark ">
+                <h1>User</h1>
+            </div>
+            <div class="col-md-4 border border-dark">
+                <h1>Map</h1>
+            </div>
+            <div class="col-md-4 border border-dark ">
+                <h1>Tanggal</h1>
+            </div>
+            <div class="col-md-8 border border-dark w-50">
+                {!! $chart->container() !!}
+            </div>
+            <div class="col-md-4 border border-dark">
+                <h1>Grafik</h1>
+            </div>
+        </div>
     </section>
 @endsection

@@ -1,7 +1,7 @@
 <nav class="nav__container">
     <div>
         <a href="#" class="nav__link nav__logo">
-            <i class='bx bxs-disc nav__icon'></i>
+            <i class='bx bxs-disc nav__icon' id="hamburger-menu"></i>
             <span class="nav__logo-name">BankSampah</span>
         </a>
 
@@ -29,8 +29,13 @@
         </div>
     </div>
 
+    <a class="nav__link nav__user">
+        <i class='bx bxs-user nav__icon'></i>
+        <span class="nav__name">User</span>
+    </a>
     <a class="nav__link nav__logout">
         <i class='bx bx-log-out nav__icon'></i>
         <span class="nav__name">Log Out</span>
     </a>
+    
 </nav>

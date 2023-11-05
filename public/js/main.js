@@ -5,12 +5,17 @@ const showMenu = (headerToggle, navbarId) =>{
     
     // Validate that variables exist
     if(headerToggle && navbarId){
-        toggleBtn.addEventListener('click', ()=>{
+        toggleBtn.addEventListener('click', function(e){
             // We add the show-menu class to the div tag with the nav__menu class
             nav.classList.toggle('show-menu')
             // change icon
-            toggleBtn.classList.toggle('bx-x')
-        })
+        });
+        document.addEventListener('click', function (e) {
+            if (e.target !== toggleBtn && !nav.contains(e.target)) {
+                // Check if the clicked element is not the toggle button and not a child of the nav
+                nav.classList.remove('show-menu');
+            }
+        });
     }
 }
 showMenu('header-toggle','navbar')
@@ -24,3 +29,6 @@ function colorLink(){
 }
 
 linkColor.forEach(l => l.addEventListener('click', colorLink))
+
+
+

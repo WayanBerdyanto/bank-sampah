@@ -89,7 +89,7 @@ img {
 }
 
 .header__logo {
-  color: var(--text-color);
+  color: var(--title-color);
   font-weight: var(--font-semi-bold);
   display: none;
 }
@@ -187,17 +187,22 @@ img {
 
 .nav__icon {
   font-size: 1.2rem;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 
 .nav__name {
   font-size: var(--small-font-size);
   font-weight: var(--font-medium);
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .nav__logout {
-  margin-top: 5rem;
+  margin-top: 0.4rem;
+}
+
+.nav__user{
+  margin-top: 10rem;
 }
 
 /* Dropdown */

@@ -22,11 +22,10 @@ class LoginController extends Controller
         $user = Auth::User()->nama_lengkap ?? '';
         if (Auth::attempt($validate)){
             $request->session()->regenerate();
-            return redirect('/pengguna/index')->with('flash_success', 'Login Berhasil, ' . 'Hallo ' . $user . ' 😊 ');
+            return redirect('/pengguna/')->with('flash_success', 'Login Berhasil, ' . 'Hallo ' . $user . ' 😊 ');
 
         }
     }
-
     public function dashBoardPengguna()
     {
         return view('pengguna.index');

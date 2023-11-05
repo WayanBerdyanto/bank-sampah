@@ -30,7 +30,9 @@ Route::post('/postRegister', [RegisterController::class, 'postRegister']);
 // Login Controller
 Route::get('/login', [LoginController::class, 'login']);
 Route::post('/loginPengguna', [LoginController::class, 'loginPengguna']);
-Route::get('/pengguna/index', [LoginController::class, 'dashBoardPengguna']);
+
+// Pengguna Controller
+Route::get('/pengguna/', [PenggunaController::class, 'index']);
 
 
 

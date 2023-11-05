@@ -26,31 +26,27 @@
 
 <body>
     <!--========== HEADER ==========-->
-    <header class="header" style="background-color:  #141e46ee">
+    <header class="header" style="background-color: #fff">
         <div class="header__container">
-            {{-- <img src="{{ asset('image/hero/romusa.png') }}" alt="" class="header__img"> --}}
+            <a href="#" class="header__logo fs-5 mr-4">BankSampah</a>
             <div class="header__toggle">
                 <i class='bx bx-menu' id="header-toggle"></i>
             </div>
-            <a href="#" class="header__logo fs-5 mr-4">BankSampah</a>
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <i class="bi bi-person-circle"></i>
-                    User
+            <div class="dropdown">
+                <button class="btn btn-light" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown button
                 </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
+                  <li><a class="dropdown-item active" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Separated link</a></li>
                 </ul>
-            </div>
+              </div>
         </div>
     </header>
+
 
     <!--========== NAV ==========-->
     <div class="nav" id="navbar" style="background-color: #141E46">
@@ -71,6 +67,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
+
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script src="{{ $chart->cdn() }}"></script>
+
+    {{ $chart->script() }}
 </body>
 
 </html>

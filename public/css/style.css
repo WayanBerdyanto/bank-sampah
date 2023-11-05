@@ -11,22 +11,37 @@ html {
     scroll-behavior: smooth;
 }
 
-.hero-image{
+.hero-image {
     width: 45%;
 }
-.bg-tentang{
+
+.bg-green {
     background-color: #1F8A70;
 }
-.bg-berita{
+
+.bg-white {
     background-color: #fefefe;
 }
 
-.hover-navbar{
+.hover-navbar {
     color: #000;
+    font-size: 1rem;
+    transition: 0.2s;
 }
 
-.hover-navbar:hover{
-    color: #0d6efd;
-    transition: 0.4s;
+.hover-navbar:hover {
+    color: #1F8A70;
 }
 
+.hover-navbar::after {
+    content: "";
+    display: block;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.1rem solid #1F8A70;
+    transform: scaleX(0);
+    transition: 0.2s linear;
+}
+
+.navbar .navbar-nav a:hover::after {
+    transform: scaleX(0.5);
+}

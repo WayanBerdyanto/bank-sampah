@@ -25,7 +25,7 @@
         </div>
     </section>
 
-    <section id="tentang" class="mt-4 bg-tentang p-4 mb-4 text-light">
+    <section id="tentang" class="mt-4 bg-green p-4 mb-4 text-light">
         <div class="container w-75 p-4">
             <h3 class="text-center fw-bold mt-4">Tentang Kami</h3>
             <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit dicta voluptatum laboriosam
@@ -46,7 +46,7 @@
         </div>
     </section>
 
-    <section id="berita" class="bg-berita p-4">
+    <section id="berita" class="bg-white p-4">
         <div class="container w-75">
             <h3 class="text-center fw-bold">Berita Kami</h3>
             <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit dicta voluptatum laboriosam
