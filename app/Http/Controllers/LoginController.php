@@ -22,7 +22,7 @@ class LoginController extends Controller
         $user = Auth::User()->nama_lengkap ?? '';
         if (Auth::attempt($validate)){
             $request->session()->regenerate();
-            return redirect('/pengguna/')->with('flash_success', 'Login Berhasil, ' . 'Hallo ' . $user . ' 😊 ');
+            return redirect('/pengguna/')->with('flash_success', 'Login Berhasil');
 
         }
     }
