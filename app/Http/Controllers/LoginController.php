@@ -24,6 +24,8 @@ class LoginController extends Controller
             $request->session()->regenerate();
             return redirect('/pengguna/')->with('flash_success', 'Login Berhasil');
 
+        }else{
+            return redirect('/login')->with('flash_error', 'Email atau Password Salah')->withInput();
         }
     }
     public function dashBoardPengguna()
