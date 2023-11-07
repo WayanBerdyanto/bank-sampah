@@ -30,6 +30,7 @@ Route::post('/postRegister', [RegisterController::class, 'postRegister']);
 Route::get('/login', [LoginController::class, 'login']);
 Route::post('/loginpengguna', [LoginController::class, 'loginPengguna']);
 
+
 // Pengguna Controller
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/pengguna/', [PenggunaController::class, 'index']);
