@@ -28,7 +28,7 @@ Route::post('/postRegister', [RegisterController::class, 'postRegister']);
 
 // Login Controller
 Route::get('/login', [LoginController::class, 'login']);
-Route::post('/loginPengguna', [LoginController::class, 'loginPengguna']);
+Route::post('/loginpengguna', [LoginController::class, 'loginPengguna']);
 
 // Pengguna Controller
 Route::group(['middleware' => ['auth']], function () {
