@@ -21,6 +21,7 @@
 </head>
 
 <body class="bg-slate-200">
+
     <nav class="flex mt-5 ml-5" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
             <li class="inline-flex items-center">
@@ -49,9 +50,7 @@
     </nav>
 
     @if (session('flash_error'))
-        <div id="alert-2"
-            class="flex items-center p-3 mb-4 text-white bg-red-50 dark:bg-red-500 mt-4"
-            role="alert">
+        <div id="alert-2" class="flex items-center p-3 mb-4 text-white bg-red-50 dark:bg-red-500 mt-4" role="alert">
             <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                 viewBox="0 0 20 20">
                 <path
@@ -81,8 +80,9 @@
     @endif
 
     <div class="w-full h-full flex justify-center mt-32">
-        <form class="bg-white shadow-md rounded px-20 pt-6 pb-8 mb-4 ring-2 ring-blue-400 ring-offset-4 ring-offset-slate-50 dark:ring-offset-slate-200 relative group transition-all duration-300 transform hover:scale-105" method="POST"
-            action="/loginpengguna">
+        <form
+            class="bg-white shadow-md rounded px-20 pt-6 pb-8 mb-4 ring-2 ring-blue-400 ring-offset-4 ring-offset-slate-50 dark:ring-offset-slate-200 relative group transition-all duration-300 transform hover:bg-gray-50"
+            method="POST" action="/loginpengguna">
             @csrf
             <h1 class="text-center text-2xl font-semibold mb-4">Form Login</h1>
             <div class="mb-4">
@@ -116,34 +116,17 @@
                     Sign In
                 </button>
             </div>
-            <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 text-center w-full mt-3"
-                href="/register">
-                Belum Punya Akun?
-            </a>
+            <span class="mt-3 block">
+                Belum Punya Akun ?
+                <a class="align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 text-start w-full"
+                    href="/register">
+                    Daftar disini
+                </a>
+            </span>
         </form>
     </div>
-    <script>
-        const passwordInput = document.getElementById("password");
-        const passwordIcon = document.getElementById("passwordIconTerlihat");
-        const passwordIconHilang = document.getElementById("passwordIconHilang");
+    <script src="{{ asset('js/password.js') }}"></script>
 
-        document.getElementById("passwordToggle").addEventListener("click", function() {
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                passwordIcon.classList.remove("bi");
-                passwordIcon.classList.remove("bi-eye");
-                passwordIcon.classList.add("bi");
-                passwordIcon.classList.add("bi-eye-slash");
-
-            } else {
-                passwordInput.type = "password";
-                passwordIcon.classList.add("bi");
-                passwordIcon.classList.add("bi-eye");
-                passwordIcon.classList.remove("bi");
-                passwordIcon.classList.remove("bi-eye-slash");
-            }
-        });
-    </script>
 
 </body>
 
