@@ -34,7 +34,8 @@ Route::post('/loginpengguna', [LoginController::class, 'loginPengguna']);
 // Pengguna Controller
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/pengguna/', [PenggunaController::class, 'index']);
-    Route::get('/pengguna/paket', [PenggunaController::class, 'paket']);
+    Route::get('/pengguna/langganan', [PenggunaController::class, 'langganan']);
+    Route::get('/pengguna/history', [PenggunaController::class, 'history']);
     Route::get('/logout', [PenggunaController::class, 'logout']);
     Route::get('/profilesetting', [PenggunaController::class, 'profilesetting']);
 });
