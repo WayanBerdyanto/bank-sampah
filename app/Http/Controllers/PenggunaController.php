@@ -13,8 +13,11 @@ class PenggunaController extends Controller
         return view('pengguna.index', ['chart' => $chart->build()]);
     }
 
-    public function paket(){
-        return view('pengguna.paket');
+    public function langganan(){
+        return view('pengguna.langganan');
+    }
+    public function history(){
+        return view('pengguna.history');
     }
 
     public function logout(){
