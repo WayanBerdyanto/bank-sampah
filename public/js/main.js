@@ -1,3 +1,12 @@
+function toggleNavbar(navbarId) {
+    console.log('Toggle Navbar clicked!');
+    var navbar = document.getElementById(navbarId);
+    if (navbar.style.display === 'none') {
+        navbar.style.display = 'flex';
+    } else {
+        navbar.style.display = 'none';
+    }
+}
 window.onload = function(){
     const sidebar = document.querySelector(".sidebar");
     const closeBtn = document.querySelector("#btn");

@@ -4,6 +4,8 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PengambilController;
+use App\Http\Controllers\BankSampahController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,10 +34,20 @@ Route::post('/loginpengguna', [LoginController::class, 'loginPengguna']);
 
 
 // Pengguna Controller
-Route::group(['middleware' => ['auth']], function () {
+Route::middleware('cekrole:pengguna')->group(function () {
     Route::get('/pengguna/', [PenggunaController::class, 'index']);
     Route::get('/pengguna/langganan', [PenggunaController::class, 'langganan']);
     Route::get('/pengguna/history', [PenggunaController::class, 'history']);
     Route::get('/logout', [PenggunaController::class, 'logout']);
     Route::get('/profilesetting', [PenggunaController::class, 'profilesetting']);
+});
+
+Route::middleware('cekrole:banksampah')->group(function(){
+    Route::get('/banksampah/', [BankSampahController::class, 'index']);
+    Route::get('/logout', [BankSampahController::class, 'logout']);
+});
+
+Route::middleware('cekrole:pengambil')->group(function(){
+    Route::get('/pengambil/', [PengambilController::class, 'index']);
+    Route::get('/logout', [PengambilController::class, 'logout']);
 });
