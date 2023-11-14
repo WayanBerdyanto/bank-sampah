@@ -3,8 +3,9 @@
     <div class="p-4 sm:ml-20" id="close">
         <div class="py-4 px-10 border- mt-14">
             <div class="grid grid-cols-3 gap-4 mb-4">
-                <input type="text" id="latitude" name="latitude" class="border border-black">
-                <input type="text" id="longitude" name="longitude">
+                <input type="text" id="latitudeInput" name="latitudeInput" class="border border-black" readonly>
+                <input type="text" id="longitudeInput" name="longitudeInput" readonly>
+
                 <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
                     <p class="text-2xl text-gray-400 dark:text-gray-500">
                         <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -28,18 +29,25 @@
                             },
                             zoom: 15
                         });
+
                         if (navigator.geolocation) {
                             navigator.geolocation.getCurrentPosition(function(position) {
                                 var userLocation = {
                                     lat: position.coords.latitude,
                                     lng: position.coords.longitude
                                 };
+
                                 var marker = new google.maps.Marker({
                                     position: userLocation,
                                     map: map,
                                     title: 'Lokasi Saat Ini'
                                 });
+
                                 map.setCenter(userLocation);
+
+                                // Mengisi nilai latitude dan longitude ke dalam input teks
+                                document.getElementById('latitudeInput').value = userLocation.lat;
+                                document.getElementById('longitudeInput').value = userLocation.lng;
                             }, function(error) {
                                 console.error('Error: ' + error.message);
                             });
