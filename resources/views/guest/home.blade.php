@@ -7,20 +7,18 @@
                 style='background-image: url("/img/hero-sampah.jpg");'>
                 <span id="blackOverlay" class="w-full h-full absolute opacity-10 bg-white"></span>
             </div>
-            <div class="container relative mx-auto">
-                <div class="items-center flex flex-wrap">
+            <div class="container relative mx-auto text-center flex justify-center">
+                <div class="items-center flex flex-wrap justify-center">
                     <div class="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
-                        <div class="pr-12">
-                            <h1 class="text-white font-semibold text-4xl ">
+                        <div class="mx-auto">
+                            <h1 class="text-white font-semibold text-4xl text-center">
                                 Peduli Lingkungan
                             </h1>
-                            <p class="mt-4 text-lg text-gray-100 mb-6">
-                                Dengan peduli lingkungan, kita berusaha menciptakan dunia yang lebih seimbang, bersih,
-                                dan sehat bagi semua makhluk hidup.
+                            <p class="mt-4 text-lg text-gray-100 mb-6 text-center">
+                                Dengan peduli lingkungan, kita berusaha menciptakan dunia yang lebih seimbang, bersih, dan sehat bagi semua makhluk hidup.
                             </p>
-                            <a href="#layanan"
-                                class="text-white px-12 py-2 bg-green-600 rounded-lg leading-normal text-lg text-center font-semibold hover:bg-green-500">
-                                Paket Langganan
+                            <a href="#layanan">
+                                <button  class="text-white px-12 py-2 bg-green-600 rounded-lg leading-normal text-lg text-center font-semibold hover:bg-green-500" >Paket Langganan</button>
                             </a>
                         </div>
                     </div>
@@ -60,7 +58,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="pt-6 w-full md:w-4/12 px-4 text-center">
+                    <div class="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
                         <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                             <div class="px-4 py-5 flex-auto">
                                 <div
@@ -130,8 +128,8 @@
                         </p>
                     </div>
                 </div>
-                <div class="flex flex-wrap">
-                    <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+                <div class="flex flex-wrap items-center justify-center">
+                    <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4 flex items-center justify-center">
                         <div
                             class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <h1 class="my-2 text-center text-2xl font-bold">
@@ -192,7 +190,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+                    <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4 flex items-center justify-center">
                         <div
                             class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <h1 class="my-2 text-center text-2xl font-bold">
@@ -253,7 +251,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4 ">
+                    <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4 flex items-center justify-center">
                         <div
                             class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
                             <h1 class="my-2 text-center text-2xl font-bold">
@@ -314,7 +312,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+                    <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4 flex items-center justify-center">
                         <div
                             class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <h1 class="my-2 text-center text-2xl font-bold">

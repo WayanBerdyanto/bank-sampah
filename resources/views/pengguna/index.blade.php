@@ -16,76 +16,30 @@
                 </div>
             </div>
 
-            <div class="flex items-center justify-center h-96 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-                <div id="map" class="container" style="height: 400px"></div>
+            <div class="flex items-center justify-center h-96 mb-4 rounded bg-gray-50 dark:bg-gray-800" id="map">
+                <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-
+                                   20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
                 <script>
-                    let map, infoWindow, marker;
-            
-                    function initMap() {
-                        map = new google.maps.Map(document.getElementById("map"), {
-                            center: { lat: -7.8035, lng: 110.3646 },
-                            zoom: 15,
-                        });
-                        infoWindow = new google.maps.InfoWindow();
-            
-                        // Create a marker and set its position
-                        marker = new google.maps.Marker({
-                            map: map,
-                            position: { lat: -7.8035, lng: 110.3646 },
-                            title: "Marker Title"
-                        });
-            
-                        const locationButton = document.createElement("button");
-                        locationButton.textContent = "Pan to Current Location";
-                        locationButton.classList.add("custom-map-control-button");
-                        map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-                        locationButton.addEventListener("click", () => {
-                            // Try HTML5 geolocation.
-                            if (navigator.geolocation) {
-                                navigator.geolocation.getCurrentPosition(
-                                    (position) => {
-                                        const pos = {
-                                            lat: position.coords.latitude,
-                                            lng: position.coords.longitude,
-                                        };
-            
-                                        infoWindow.setPosition(pos);
-                                        infoWindow.setContent("Location found.");
-                                        infoWindow.open(map);
-                                        map.setCenter(pos);
-                                        // Update marker position
-                                        marker.setPosition(pos);
-                                    },
-                                    () => {
-                                        handleLocationError(true, infoWindow, map.getCenter());
-                                    }
-                                );
-                            } else {
-                                // Browser doesn't support Geolocation
-                                handleLocationError(false, infoWindow, map.getCenter());
-                            }
-                        });
-                    }
-            
-                    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-                        infoWindow.setPosition(pos);
-                        infoWindow.setContent(
-                            browserHasGeolocation ?
-                            "Error: The Geolocation service failed." :
-                            "Error: Your browser doesn't support geolocation."
-                        );
-                        infoWindow.open(map);
-                    }
-            
-                    window.initMap = initMap;
-                </script>
-            
-                <script async defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6gdhH-9Asec5cxoNt4XMEZ6GLGMeajLw&callback=initMap"></script>
-                <script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.3/mapsJavaScriptAPI.js" async defer>
+                    // Initialize the map
+                    var map = L.map('map').setView([0, 0], 30);
+                    // Add a basemap (e.g., OpenStreetMap)
+                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '&copy; <ahref = "http://www.openstreetmap.org/copyright" > OpenStreetMap < /a>'
+                    }).addTo(map);
+
+                    // Get the user's geolocation and add a marker
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var lat = position.coords.latitude;
+                        var lon = position.coords.longitude;
+                        map.setView([lat, lon], 18);
+                        var userLocation = L.marker([lat, lon]).addTo(map);
+                        userLocation.bindPopup('You are here!').openPopup();
+                    });
                 </script>
             </div>
-            
+
             <div class="grid grid-cols-2 gap-4 mb-4">
                 <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
                     <p class="text-2xl text-gray-400 dark:text-gray-500">
