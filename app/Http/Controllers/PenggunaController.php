@@ -2,30 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Charts\MonthlyUsersChart;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Stevebauman\Location\Facades\Location;
 
 class PenggunaController extends Controller
 {
-    public function index(MonthlyUsersChart $chart){
+    public function index(MonthlyUsersChart $chart)
+    {
         return view('pengguna.index', ['chart' => $chart->build()]);
     }
 
-    public function langganan(){
+    public function langganan()
+    {
         return view('pengguna.langganan');
     }
-    public function history(){
+    public function history()
+    {
         return view('pengguna.history');
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return view('guest.login');
     }
 
-    public function profilesetting() {
+    public function profilesetting()
+    {
         return view('pengguna.profile');
+    }
+
+    public function settings(Request $reuqest)
+    {
+        $ip = '182.4.103.214';
+        $data = Location::get($ip);
+        dd($data);
+
+        return view('pengguna.settings');
     }
 }

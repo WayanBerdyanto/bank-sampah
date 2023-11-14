@@ -86,7 +86,6 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
     <script src="{{ asset('js/main.js') }}"></script>
-     {{-- <script src="{{ asset('js/map.js') }}"></script> --}}
 </body>
 
 </html>

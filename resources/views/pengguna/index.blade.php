@@ -19,38 +19,63 @@
             <div class="flex items-center justify-center h-96 mb-4 rounded bg-gray-50 dark:bg-gray-800">
                 <div id="map" class="container" style="height: 400px"></div>
                 <script>
-                    var map;
+                    let map, infoWindow;
 
                     function initMap() {
-                        map = new google.maps.Map(document.getElementById('map'), {
+                        map = new google.maps.Map(document.getElementById("map"), {
                             center: {
-                                lat: -6.175392,
-                                lng: 106.827153
+                                // lat: -34.397,
+                                // lng: 150.644
+
+                                lat: map.data.map.center.lat(),
+                                lng: map.data.map.center.lng()
                             },
-                            zoom: 8
+                            zoom: 6,
                         });
+                        infoWindow = new google.maps.InfoWindow();
 
-                        if (navigator.geolocation) {
-                            navigator.geolocation.getCurrentPosition(function(position) {
-                                var userLocation = {
-                                    lat: position.coords.latitude,
-                                    lng: position.coords.longitude
-                                };
+                        const locationButton = document.createElement("button");
 
-                                var marker = new google.maps.Marker({
-                                    position: userLocation,
-                                    map: map,
-                                    title: 'Lokasi Saat Ini'
-                                });
+                        locationButton.textContent = "Pan to Current Location";
+                        locationButton.classList.add("custom-map-control-button");
+                        map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+                        locationButton.addEventListener("click", () => {
+                            // Try HTML5 geolocation.
+                            if (navigator.geolocation) {
+                                navigator.geolocation.getCurrentPosition(
+                                    (position) => {
+                                        const pos = {
+                                            lat: position.coords.latitude,
+                                            lng: position.coords.longitude,
+                                        };
 
-                                map.setCenter(userLocation);
-                            }, function(error) {
-                                console.error('Error: ' + error.message);
-                            });
-                        } else {
-                            console.error('Error: Your browser doesn\'t support geolocation.');
-                        }
+                                        infoWindow.setPosition(pos);
+                                        infoWindow.setContent("Location found.");
+                                        infoWindow.open(map);
+                                        map.setCenter(pos);
+                                    },
+                                    () => {
+                                        handleLocationError(true, infoWindow, map.getCenter());
+                                    }
+                                );
+                            } else {
+                                // Browser doesn't support Geolocation
+                                handleLocationError(false, infoWindow, map.getCenter());
+                            }
+                        });
                     }
+
+                    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                        infoWindow.setPosition(pos);
+                        infoWindow.setContent(
+                            browserHasGeolocation ?
+                            "Error: The Geolocation service failed." :
+                            "Error: Your browser doesn't support geolocation."
+                        );
+                        infoWindow.open(map);
+                    }
+
+                    window.initMap = initMap;
                 </script>
 
                 <script async defer

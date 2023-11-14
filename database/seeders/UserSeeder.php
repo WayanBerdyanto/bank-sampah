@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
             [
                 "username" => "pengambil1",
                 "email" => "pengambil@gmail.com",
-                "password" => bcrypt("123"),
+                "password" => bcrypt("12345678"),
                 "role" => "pengambil",
                 "nama_lengkap" => "pengambil sampah",
                 "no_telpon" => "123123123",
@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             [
                 "username" => "banksampah1",
                 "email" => "banksampah@gmail.com",
-                "password" => bcrypt("123"),
+                "password" => bcrypt("12345678"),
                 "role" => "banksampah",
                 "nama_lengkap" => "bank sampah",
                 "no_telpon" => "123123123",
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             [
                 "username" => "pengguna1",
                 "email" => "pengguna@gmail.com",
-                "password" => bcrypt("123"),
+                "password" => bcrypt("12345678"),
                 "role" => "pengguna",
                 "nama_lengkap" => "Pengguna Wayan",
                 "no_telpon" => "123123123",

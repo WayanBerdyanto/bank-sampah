@@ -40,6 +40,7 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::get('/pengguna/history', [PenggunaController::class, 'history']);
     Route::get('/logout', [PenggunaController::class, 'logout']);
     Route::get('/profilesetting', [PenggunaController::class, 'profilesetting']);
+    Route::get('/pengguna/settings', [PenggunaController::class, 'settings']);
 });
 
 Route::middleware('cekrole:banksampah')->group(function(){

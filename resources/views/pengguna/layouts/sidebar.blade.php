@@ -32,7 +32,7 @@
             <span class="tooltip">History</span>
         </li>
         <li>
-            <a href="#">
+            <a href="/pengguna/settings">
                 <i class="bx bx-cog"></i>
                 <span class="link_name">Settings</span>
             </a>
