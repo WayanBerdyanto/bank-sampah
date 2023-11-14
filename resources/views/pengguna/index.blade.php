@@ -26,7 +26,7 @@
                                 lat: -6.175392,
                                 lng: 106.827153
                             },
-                            zoom: 8
+                            zoom: 15
                         });
                         if (navigator.geolocation) {
                             navigator.geolocation.getCurrentPosition(function(position) {
