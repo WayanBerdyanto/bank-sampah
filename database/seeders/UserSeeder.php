@@ -29,6 +29,14 @@ class UserSeeder extends Seeder
                 "nama_lengkap" => "bank sampah",
                 "no_telpon" => "123123123",
             ],
+            [
+                "username" => "pengguna1",
+                "email" => "pengguna@gmail.com",
+                "password" => bcrypt("123"),
+                "role" => "pengguna",
+                "nama_lengkap" => "Pengguna Wayan",
+                "no_telpon" => "123123123",
+            ],
         ]);
     }
 }

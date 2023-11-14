@@ -33,27 +33,6 @@
         </li>
         <li>
             <a href="#">
-                <i class="bx bx-pie-chart-alt-2"></i>
-                <span class="link_name">Analytics</span>
-            </a>
-            <span class="tooltip">Analytics</span>
-        </li>
-        <li>
-            <a href="#">
-                <i class="bx bx-folder"></i>
-                <span class="link_name">File Manger</span>
-            </a>
-            <span class="tooltip">File Manger</span>
-        </li>
-        <li>
-            <a href="#">
-                <i class="bx bx-cart-alt"></i>
-                <span class="link_name">Order</span>
-            </a>
-            <span class="tooltip">Order</span>
-        </li>
-        <li>
-            <a href="#">
                 <i class="bx bx-cog"></i>
                 <span class="link_name">Settings</span>
             </a>

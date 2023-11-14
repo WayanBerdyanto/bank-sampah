@@ -23,7 +23,7 @@ class RegisterController extends Controller
                 'password'=> bcrypt($request->password),
                 'no_telpon'=> $request->no_telpon
             ]);
-            return redirect('/')->with('flash_success', 'Register Berhasil');
+            return redirect('/register')->with('flash_success', 'Register Berhasil');
         }
         else{
             return redirect('/register')->with('flash_error', 'Masukan Password Dengan Benar')->withInput();

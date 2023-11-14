@@ -1,4 +1,4 @@
-var map, mapoptions;
+var map, mapOptions;
 var pinInfobox = null;
 var loc;
 var existingPin = null;
@@ -6,6 +6,8 @@ var isPinAdded = false;
 
 function GetMap() {
     var bingkey = "AjXKMCtulq4nJHNAOduup_pZA-263SCe3nZPT9kOGv0maVrYwYTlSc7Uk6LOUgv4";
+
+    // Get the user's location
     navigator.geolocation.getCurrentPosition(function (position) {
         loc = new Microsoft.Maps.Location(
             position.coords.latitude,
@@ -15,22 +17,26 @@ function GetMap() {
         document.getElementById("latitude").value = loc.latitude;
         document.getElementById("longitude").value = loc.longitude;
 
+        // Set the map center after getting the location
+        mapOptions = {
+            credentials: bingkey,
+            center: loc,
+            zoom: 15.2,
+            mapTypeId: Microsoft.Maps.MapTypeId.aerial
+        }
+
+        map = new Microsoft.Maps.Map(document.getElementById("myMap"), mapOptions);
+
         // Add a pushpin at the user's location.
         var pin = new Microsoft.Maps.Pushpin(loc);
         map.entities.push(pin);
+
+        // Microsoft.Maps.Events.addHandler(map, 'click', getLatlng);
+    }, function(error) {
+        // Handle geolocation error
+        console.error('Error getting geolocation:', error);
     });
-
-    mapOptions = {
-        credentials: bingkey,
-        center: loc,
-        zoom: 15.2,
-        mapTypeId: Microsoft.Maps.MapTypeId.aerial
-    }
-
-    map = new Microsoft.Maps.Map(document.getElementById("myMap"), mapOptions);
-    // Microsoft.Maps.Events.addHandler(map, 'click', getLatlng);
 }
-
 
 function getLatlng(e) {
     if (e.targetType == "map") {
@@ -61,3 +67,4 @@ function getLatlng(e) {
         isPinAdded = true;
     }
 }
+2

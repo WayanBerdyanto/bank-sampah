@@ -1,4 +1,4 @@
-@extends('pengguna.layouts.main')
+@extends('banksampah.layouts.main')
 @section('content')
     <div class="p-4 sm:ml-20" id="close">
         <div class="py-4 px-10 border- mt-14">
