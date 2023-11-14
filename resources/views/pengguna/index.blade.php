@@ -19,23 +19,23 @@
             <div class="flex items-center justify-center h-96 mb-4 rounded bg-gray-50 dark:bg-gray-800">
                 <div id="map" class="container" style="height: 400px"></div>
                 <script>
-                    let map, infoWindow;
-
+                    let map, infoWindow, marker;
+            
                     function initMap() {
                         map = new google.maps.Map(document.getElementById("map"), {
-                            center: {
-                                // lat: -34.397,
-                                // lng: 150.644
-
-                                lat: map.data.map.center.lat(),
-                                lng: map.data.map.center.lng()
-                            },
-                            zoom: 6,
+                            center: { lat: -7.8035, lng: 110.3646 },
+                            zoom: 15,
                         });
                         infoWindow = new google.maps.InfoWindow();
-
+            
+                        // Create a marker and set its position
+                        marker = new google.maps.Marker({
+                            map: map,
+                            position: { lat: -7.8035, lng: 110.3646 },
+                            title: "Marker Title"
+                        });
+            
                         const locationButton = document.createElement("button");
-
                         locationButton.textContent = "Pan to Current Location";
                         locationButton.classList.add("custom-map-control-button");
                         map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
@@ -48,11 +48,13 @@
                                             lat: position.coords.latitude,
                                             lng: position.coords.longitude,
                                         };
-
+            
                                         infoWindow.setPosition(pos);
                                         infoWindow.setContent("Location found.");
                                         infoWindow.open(map);
                                         map.setCenter(pos);
+                                        // Update marker position
+                                        marker.setPosition(pos);
                                     },
                                     () => {
                                         handleLocationError(true, infoWindow, map.getCenter());
@@ -64,7 +66,7 @@
                             }
                         });
                     }
-
+            
                     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                         infoWindow.setPosition(pos);
                         infoWindow.setContent(
@@ -74,15 +76,16 @@
                         );
                         infoWindow.open(map);
                     }
-
+            
                     window.initMap = initMap;
                 </script>
-
+            
                 <script async defer
                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6gdhH-9Asec5cxoNt4XMEZ6GLGMeajLw&callback=initMap"></script>
                 <script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.3/mapsJavaScriptAPI.js" async defer>
                 </script>
             </div>
+            
             <div class="grid grid-cols-2 gap-4 mb-4">
                 <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
                     <p class="text-2xl text-gray-400 dark:text-gray-500">
