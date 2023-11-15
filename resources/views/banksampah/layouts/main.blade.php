@@ -13,9 +13,11 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+
     {{-- @vite('resources/css/style.css')
     @vite('resources/js/script.js') --}}
-    @vite('resources/js/bootstrap.bundle.min.js')
+    {{-- @vite('resources/js/bootstrap.bundle.min.js') --}}
 
     <title>Bank Sampah Page</title>
 </head>
