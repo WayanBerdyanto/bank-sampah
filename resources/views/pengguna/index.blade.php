@@ -58,10 +58,10 @@
                     <div class="card h-100">
                         <div class="card-header">
                             <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                            Area Chart Example
+                            Area Map User
                         </div>
-                        <div class="card-body">
-                            <canvas class="chart" width="400" height="200"></canvas>
+                        <div class="card-body" id="map" style="height: 400px">
+
                         </div>
                     </div>
                 </div>
@@ -69,10 +69,11 @@
                     <div class="card h-100">
                         <div class="card-header">
                             <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                            Area Chart Example
+                            Lat Long
                         </div>
                         <div class="card-body">
-                            <canvas class="chart" width="400" height="200"></canvas>
+                            <input type="text" id="latitudeInput" name="latitudeInput" class="border border-black" readonly>
+                            <input type="text" id="longitudeInput" name="longitudeInput" readonly>
                         </div>
                     </div>
                 </div>

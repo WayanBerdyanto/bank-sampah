@@ -25,8 +25,8 @@
                 aria-controls="offcanvasExample">
                 <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
             </button>
-            <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold" href="#"><span class="text-warning">Mobile</span> <span
-                    class="text-primary">Trash</span></a>
+            <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold" href="#"><span
+                    class="text-warning">Mobile</span> <span class="text-primary">Trash</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavBar"
                 aria-controls="topNavBar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -66,10 +66,15 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
 
     <script src="{{ asset('js/password.js') }}"></script>
+    <script src="{{ asset('js/map.js') }}"></script>
+
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6gdhH-9Asec5cxoNt4XMEZ6GLGMeajLw&callback=initMap"></script>
+    <script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.3/mapsJavaScriptAPI.js" async defer>
+    </script>
 
 
 
 </body>
 
 </html>
-        
