@@ -23,12 +23,6 @@ class PenggunaController extends Controller
         return view('pengguna.history');
     }
 
-    public function logout()
-    {
-        Auth::logout();
-        return view('guest.login');
-    }
-
     public function profilesetting()
     {
         return view('pengguna.profile');

@@ -28,13 +28,15 @@ class LoginController extends Controller
                 return redirect('/pengguna/')->with('flash_success', 'Login Berhasil');
             } elseif (Auth::user()->role == 'banksampah') {
                 return redirect('/banksampah/')->with('flash_success', 'Login Berhasil');
-            } else {
-                return redirect('/login')->with('flash_error', 'Email atau Password Salah')->withInput();
-            }
+            } 
+        }else {
+            return redirect('/login')->with('flash_error', 'Email atau Password Salah')->withInput();
         }
     }
-    public function dashBoardPengguna()
+
+    public function logout()
     {
-        return view('pengguna.index');
+        Auth::logout();
+        return view('guest.login');
     }
 }

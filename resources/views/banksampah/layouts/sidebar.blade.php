@@ -1,42 +1,43 @@
-<div class="sidebar bg-slate-900">
-    <div class="logo_details">
-        <i class="bx bxl-audible icon"></i>
-        <div class="logo_name">Bank Sampah</div>
-        <i class="bx bx-menu" id="btn"></i>
+<!-- top navigation bar -->
+<!-- offcanvas -->
+<div class="offcanvas offcanvas-start sidebar-nav bg-dark" tabindex="-1" id="sidebar">
+    <div class="offcanvas-body p-0">
+        <nav class="navbar-dark">
+            <ul class="navbar-nav">
+                <li>
+                    <div class="text-muted small fw-bold text-uppercase px-3">
+                        Bank Sampah
+                    </div>
+                </li>
+                <li>
+                    <a href="/banksampah" class="nav-link px-3 active mt-4">
+                        <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="my-2">
+                    <hr class="dropdown-divider bg-light" />
+                </li>
+                <li class="py-2">
+                    <a href="/banksampah/datapembuangan" class="nav-link px-3">
+                        <span class="me-2"><i class="bi bi-book-fill"></i></span>
+                        <span>Data Pembuangan</span>
+                    </a>
+                </li>
+                <li class="py-2">
+                    <a href="#" class="nav-link px-3">
+                        <span class="me-2"><i class="bi bi-book-fill"></i></span>
+                        <span>Penerimaan</span>
+                    </a>
+                </li>
+                <li class="py-2">
+                    <a href="#" class="nav-link px-3">
+                        <span class="me-2"><i class="bi bi-book-fill"></i></span>
+                        <span>Nontification</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
-    <ul class="nav-list">
-        {{-- <li>
-            <i class="bx bx-search"></i>
-            <input type="text" placeholder="Search...">
-            <span class="tooltip">Search</span>
-        </li> --}}
-        <li>
-            <a href="/pengguna/">
-                <i class="bx bx-grid-alt"></i>
-                <span class="link_name">Dashboard</span>
-            </a>
-            <span class="tooltip">Dashboard</span>
-        </li>
-        <li>
-            <a href="/pengguna/langganan">
-                <i class='bx bxs-package'></i>
-                <span class="link_name">Langganan</span>
-            </a>
-            <span class="tooltip">Langganan</span>
-        </li>
-        <li>
-            <a href="/pengguna/history">
-                <i class='bx bx-history'></i>
-                <span class="link_name">History</span>
-            </a>
-            <span class="tooltip">History</span>
-        </li>
-        <li>
-            <a href="#">
-                <i class="bx bx-cog"></i>
-                <span class="link_name">Settings</span>
-            </a>
-            <span class="tooltip">Settings</span>
-        </li>
-    </ul>
 </div>
+<!-- offcanvas -->

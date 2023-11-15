@@ -31,6 +31,7 @@ Route::post('/postRegister', [RegisterController::class, 'postRegister']);
 // Login Controller
 Route::get('/login', [LoginController::class, 'login']);
 Route::post('/loginpengguna', [LoginController::class, 'loginPengguna']);
+Route::get('/logout', [LoginController::class, 'logout']);
 
 
 // Pengguna Controller
@@ -38,17 +39,15 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::get('/pengguna/', [PenggunaController::class, 'index']);
     Route::get('/pengguna/langganan', [PenggunaController::class, 'langganan']);
     Route::get('/pengguna/history', [PenggunaController::class, 'history']);
-    Route::get('/logout', [PenggunaController::class, 'logout']);
     Route::get('/profilesetting', [PenggunaController::class, 'profilesetting']);
     Route::get('/pengguna/settings', [PenggunaController::class, 'settings']);
 });
 
 Route::middleware('cekrole:banksampah')->group(function(){
     Route::get('/banksampah/', [BankSampahController::class, 'index']);
-    Route::get('/logout', [BankSampahController::class, 'logout']);
+    Route::get('/banksampah/datapembuangan', [BankSampahController::class, 'dataPembuangan']);
 });
 
 Route::middleware('cekrole:pengambil')->group(function(){
     Route::get('/pengambil/', [PengambilController::class, 'index']);
-    Route::get('/logout', [PengambilController::class, 'logout']);
 });
