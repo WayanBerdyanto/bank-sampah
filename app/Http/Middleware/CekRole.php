@@ -15,21 +15,22 @@ class CekRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, string $roles): Response
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
         try {
             // Coba mendapatkan peran pengguna saat ini
-            $user = Auth::user();
-    
-            if ($user && $user->role == $roles) {
-                return $next($request);
-            } else {
-                // Jika peran tidak sesuai atau pengguna tidak ada, lempar pengecualian
+            $userRole = Auth::user()->role;
+
+            // Periksa apakah peran pengguna ada dalam daftar peran yang diizinkan
+            if (!in_array($userRole, $roles)) {
                 throw new \Exception('Unauthorized access');
+            } else {
+                return $next($request);
             }
         } catch (\Exception $e) {
             // Tangkap pengecualian dan arahkan pengguna ke tampilan error
             return response()->view('guest.login', ['error' => $e->getMessage()], 403);
+            throw $e;
         }
     }
 }

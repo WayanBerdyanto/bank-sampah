@@ -6,12 +6,14 @@ use App\Charts\MonthlyUsersChart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Stevebauman\Location\Facades\Location;
+use App\Models\User;
 
 class PenggunaController extends Controller
 {
-    public function index(MonthlyUsersChart $chart)
+    public function index()
     {
-        return view('pengguna.index', ['chart' => $chart->build()]);
+        $user = Auth::User()->nama_lengkap ?? '';
+        return view('pengguna.index', ['user'=>$user]);
     }
 
     public function langganan()
@@ -25,7 +27,11 @@ class PenggunaController extends Controller
 
     public function profilesetting()
     {
-        return view('pengguna.profile');
+        $username = Auth::User()->username ?? '';
+        $result = User::where('username' , $username)->first();
+        // $result = User::find($id);
+        // dd($result);
+        return view('pengguna.profile', ['result'=>$result]);
     }
 
     public function settings(Request $reuqest)

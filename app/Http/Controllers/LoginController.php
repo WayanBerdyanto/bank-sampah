@@ -19,7 +19,6 @@ class LoginController extends Controller
             'username' => ['required'],
             'password' => ['required'],
         ]);
-        $user = Auth::User()->nama_lengkap ?? '';
         if (Auth::attempt($validate)) {
             $request->session()->regenerate();
             if (Auth::user()->role == 'pengambil') {

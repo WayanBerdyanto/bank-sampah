@@ -4,23 +4,32 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h4>Dashboard Pengguna</h4>
+                    @if (session('flash_success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="bi bi-patch-check-fill"></i>
+                            Selamat Datang Pengguna <strong>{{ $user }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                    <h4 class="mt-4 mb-3">Dashboard Pengguna</h4>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <div class="card bg-primary text-white h-100">
-                        <div class="card-body py-5">Primary Card</div>
-                        <div class="card-footer d-flex">
-                            View Details
-                            <span class="ms-auto">
-                                <i class="bi bi-chevron-right"></i>
-                            </span>
-                        </div>
+                        <div class="card-body py-5">Berat Sampah Yang Di Angkut</div>
+                        <a data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <div class="card-footer d-flex">
+                                View Details
+                                <span class="ms-auto">
+                                    <i class="bi bi-chevron-right"></i>
+                                </span>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <div class="card bg-warning text-dark h-100">
+                    <div class="card bg-success text-light h-100">
                         <div class="card-body py-5">Warning Card</div>
                         <div class="card-footer d-flex">
                             View Details
@@ -31,10 +40,10 @@
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <div class="card bg-success text-white h-100">
+                    <div class="card bg-danger text-white h-100">
                         <div class="card-body py-5">Success Card</div>
                         <div class="card-footer d-flex">
-                            View Details
+                            Success
                             <span class="ms-auto">
                                 <i class="bi bi-chevron-right"></i>
                             </span>
@@ -42,7 +51,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <div class="card bg-danger text-white h-100">
+                    <div class="card bg-warning text-dark h-100">
                         <div class="card-body py-5">Danger Card</div>
                         <div class="card-footer d-flex">
                             View Details
@@ -54,93 +63,53 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 mb-3">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                            Area Map User
-                        </div>
-                        <div class="card-body" id="map" style="height: 400px">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                            Lat Long
-                        </div>
-                        <div class="card-body">
-                            <input type="text" id="latitudeInput" name="latitudeInput" class="border border-black" readonly>
-                            <input type="text" id="longitudeInput" name="longitudeInput" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-md-12 mb-3">
                     <div class="card">
                         <div class="card-header">
-                            <span><i class="bi bi-table me-2"></i></span> Data Table
+                            <span><i class="bi bi-table me-2"></i></span> Data History Pengambilan
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="example" class="table table-striped data-table" style="width: 100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>No</th>
+                                            <th>Hari</th>
+                                            <th>Tanggal</th>
+                                            <th>Jam</th>
+                                            <th>Berat</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                            <td>1</td>
+                                            <td>Senin</td>
+                                            <td>20/11/2023</td>
+                                            <td>08.30</td>
+                                            <td>3kg</td>
                                         </tr>
                                         <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
+                                            <td>2</td>
+                                            <td>Rabu</td>
+                                            <td>22/11/2023</td>
+                                            <td>08.30</td>
+                                            <td>3kg</td>
                                         </tr>
                                         <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
+                                            <td>3</td>
+                                            <td>Jumat</td>
+                                            <td>24/11/2023</td>
+                                            <td>08.30</td>
+                                            <td>3kg</td>
                                         </tr>
                                         <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>$433,060</td>
+                                            <td>4</td>
+                                            <td>Minggu</td>
+                                            <td>26/11/2023</td>
+                                            <td>09.00</td>
+                                            <td>3kg</td>
                                         </tr>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -150,3 +119,24 @@
         </div>
     </main>
 @endsection
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <i class="bi bi-info-circle-fill text-success"></i>
+                    Informasi
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Hi Pengguna <strong>{{ $user }} </strong>, Sampah Yang diangkut Hari ini adalah <strong>2Kg</strong>
+                Karena yang ambil adalah Paket Mingguan sehingga Batas Berat/hari yang diangkut sebanyak 4kg
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

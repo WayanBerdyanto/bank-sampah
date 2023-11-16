@@ -2,7 +2,7 @@
     <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
         <div class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <a class="text-lg font-bold leading-relaxed inline-block mr-4 py-2 text-white hitespace-nowrap uppercase md:hover:text-slate-600"
-                href="#">Bank Sampah</a>
+                href="#">Mobile Trash</a>
             <button @click="open = !open" class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none">
                 <i class="text-white fas fa-bars"></i>
             </button>
@@ -20,7 +20,7 @@
                 </li>
                 <li class="flex items-center mx-3">
                     <a class="lg:text-white md:hover:text-slate-600 text-xs text-gray-800 px-3 py-4 lg:py-2 flex items-center uppercase font-bold"
-                        href="#layanan">Langganan</a>
+                        href="#langganan">Langganan</a>
                 </li>
                 <li class="flex items-center mx-3">
                     <a class="lg:text-white md:hover:text-slate-600 text-xs text-gray-800 px-3 py-4 lg:py-2 flex items-center uppercase font-bold"

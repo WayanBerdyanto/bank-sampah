@@ -15,10 +15,12 @@
                                 Peduli Lingkungan
                             </h1>
                             <p class="mt-4 text-lg text-gray-100 mb-6 text-center">
-                                Dengan peduli lingkungan, kita berusaha menciptakan dunia yang lebih seimbang, bersih, dan sehat bagi semua makhluk hidup.
+                                Dengan peduli lingkungan, kita berusaha menciptakan dunia yang lebih seimbang, bersih, dan
+                                sehat bagi semua makhluk hidup.
                             </p>
-                            <a href="#layanan">
-                                <button  class="text-white px-12 py-2 bg-green-600 rounded-lg leading-normal text-lg text-center font-semibold hover:bg-green-500" >Paket Langganan</button>
+                            <a href="#langganan">
+                                <button
+                                    class="text-white px-12 py-2 bg-green-600 rounded-lg leading-normal text-lg text-center font-semibold hover:bg-green-500">Ayo Langganan</button>
                             </a>
                         </div>
                     </div>
@@ -80,15 +82,15 @@
                 <div class="flex flex-wrap items-center">
                     <div class="w-full md:w-4/12 px-4 mr-auto ml-auto">
                         <p class="text-lg text-normal leading-relaxed mt-4 mb-4 text-gray-700">
-                            <strong class="ml-10">Bank Sampah</strong> adalah Sistem jasa angkut sampah yang membantu
-                            untuk menjaga kebersihan lingkungan sekitar. Bank Sampah di bentuk pada Tahun 2023
+                            <strong class="ml-10">Mobile Trash</strong> adalah Sistem jasa angkut sampah yang membantu
+                            untuk menjaga kebersihan lingkungan sekitar. Mobile Trash di bentuk pada Tahun 2023
                             Oleh gabungan Mahasiswa Pecinta Alam Universitas Kristen Duta Wacana (Mapala)
                         </p>
                         <p class="text-lg text-normal leading-relaxed mt-0 mb-4 text-gray-700">
-                            <span class="ml-10">Sudah</span> Lebih dari 100 Pengguna di Daerah Istimewa Yogyakarta yang
+                            <span class="ml-10">Sudah</span> Lebih dari 100 Pengguna  yang
                             sudah
-                            berlangganan di Bank Sampah ini dan
-                            Tersebar sudah diseluruh Kabupaten DIY.
+                            berlangganan di Mobile Trash ini dan
+                            sudah tersebar diseluruh Kota Yogyakarta
                         </p>
                     </div>
                     <div class="w-full md:w-4/12 px-4 mr-auto ml-auto">
@@ -106,10 +108,10 @@
                             </div>
                             <blockquote class="relative p-8 mb-4">
                                 <h4 class="text-xl font-bold text-white">
-                                    Komunitas Bank Sampah
+                                    Komunitas Mobile Trash
                                 </h4>
                                 <p class="text-md text-normal mt-2 text-white">
-                                    Komunitas Bank Sampah Kerjasama dengan Pandawara Group
+                                    Komunitas Mobile Trash Kerjasama dengan Pandawara Group
                                 </p>
                             </blockquote>
                         </div>
@@ -118,13 +120,14 @@
             </div>
         </section>
 
-        <section class="pt-20 pb-48 bg-blue-50" id="layanan">
+
+        <section class="pt-20 pb-48 bg-blue-50" id="langganan">
             <div class="container mx-auto px-4">
-                <div class="flex flex-wrap justify-center text-center mb-24">
+                <div class="flex flex-wrap justify-center text-center mb-14">
                     <div class="w-full lg:w-6/12 px-4">
-                        <h2 class="text-4xl font-semibold">Paket Langganan</h2>
+                        <h2 class="text-4xl font-semibold">Daftar Paket Langganan</h2>
                         <p class="text-lg leading-relaxed m-4 text-gray-600">
-                            Pilih paket langganan sesuai dengan yang kalian mau
+                            Pilih paket langganan untuk mengurangi Sampah di Lingkungan kalian
                         </p>
                     </div>
                 </div>
@@ -175,12 +178,12 @@
                                             d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                                     </svg>
                                     <span
-                                        class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">5.0</span>
+                                        class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">4.0</span>
                                 </div>
                                 <div class="flex items-center justify-between">
                                     <span class="text-xl text-gray-900 dark:text-white">
                                         Rp <span class="text-2xl font-bold text-gray-900 dark:text-while">
-                                            50.000
+                                            35.000
                                         </span>
                                     </span>
                                     <a href="#"
@@ -236,12 +239,12 @@
                                             d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                                     </svg>
                                     <span
-                                        class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">5.0</span>
+                                        class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">4.0</span>
                                 </div>
                                 <div class="flex items-center justify-between">
                                     <span class="text-xl text-gray-900 dark:text-white">
                                         Rp <span class="text-2xl font-bold text-gray-900 dark:text-while">
-                                            145.000
+                                            120.000
                                         </span>
                                     </span>
                                     <a href="#"
@@ -291,7 +294,7 @@
                                         <path
                                             d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                                     </svg>
-                                    <svg class="w-4 h-4 text-gray-200 dark:text-gray-600" aria-hidden="true"
+                                    <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                                         <path
                                             d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
@@ -302,7 +305,7 @@
                                 <div class="flex items-center justify-between">
                                     <span class="text-xl text-gray-900 dark:text-white">
                                         Rp <span class="text-2xl font-bold text-gray-900 dark:text-while">
-                                            400.000
+                                            350.000
                                         </span>
                                     </span>
                                     <a href="#"
@@ -352,7 +355,7 @@
                                         <path
                                             d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                                     </svg>
-                                    <svg class="w-4 h-4 text-gray-200 dark:text-gray-600" aria-hidden="true"
+                                    <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                                         <path
                                             d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
@@ -363,7 +366,7 @@
                                 <div class="flex items-center justify-between">
                                     <span class="text-xl text-gray-900 dark:text-white">
                                         Rp <span class="text-2xl font-bold text-gray-900 dark:text-while">
-                                            700.000
+                                            600.000
                                         </span>
                                     </span>
                                     <a href="#"

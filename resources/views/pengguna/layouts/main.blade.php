@@ -9,15 +9,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <script src="{{ asset('js/script.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-
-    {{-- @vite('resources/css/style.css')
-    @vite('resources/js/script.js') --}}
-    {{-- @vite('resources/js/bootstrap.bundle.min.js') --}}
 
     <title>Bank Sampah Page</title>
 </head>
@@ -52,7 +47,10 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item py-2" href="#">Profile</a>
+                                <a class="dropdown-item py-2" href="/pengguna/profilesetting">Profile</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item py-2" href="/pengguna/profilesetting">Ubah Passowrd</a>
                             </li>
                             <li>
                                 <a class="dropdown-item py-2" href="/logout">Logout</a>
@@ -71,6 +69,8 @@
 
     <script src="{{ asset('js/password.js') }}"></script>
     <script src="{{ asset('js/map.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6gdhH-9Asec5cxoNt4XMEZ6GLGMeajLw&callback=initMap"></script>
