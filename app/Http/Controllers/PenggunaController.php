@@ -35,14 +35,6 @@ class PenggunaController extends Controller
         return view('pengguna.profile', ['result'=>$result]);
     }
 
-    public function profilesettings($username)
-    {
-        $result = User::where('username' , $username)->first();
-        // $result = User::find($id);
-        // dd($result);
-        return view('pengguna.profile', ['result'=>$result]);
-    }
-
     public function settings(Request $reuqest)
     {
         $ip = '182.4.103.214';
