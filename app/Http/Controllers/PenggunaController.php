@@ -13,7 +13,8 @@ class PenggunaController extends Controller
     public function index()
     {
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('pengguna.index', ['user'=>$user]);
+        $username = Auth::User()->username ?? '';
+        return view('pengguna.index', ['user'=>$user, 'username'=>$username]);
     }
 
     public function langganan()
@@ -28,6 +29,14 @@ class PenggunaController extends Controller
     public function profilesetting()
     {
         $username = Auth::User()->username ?? '';
+        $result = User::where('username' , $username)->first();
+        // $result = User::find($id);
+        // dd($result);
+        return view('pengguna.profile', ['result'=>$result]);
+    }
+
+    public function profilesettings($username)
+    {
         $result = User::where('username' , $username)->first();
         // $result = User::find($id);
         // dd($result);

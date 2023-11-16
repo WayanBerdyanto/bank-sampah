@@ -30,13 +30,15 @@
                 </div>
                 <div class="col-md-3 mb-3">
                     <div class="card bg-success text-light h-100">
-                        <div class="card-body py-5">Warning Card</div>
-                        <div class="card-footer d-flex">
-                            View Details
-                            <span class="ms-auto">
-                                <i class="bi bi-chevron-right"></i>
-                            </span>
-                        </div>
+                        <div class="card-body py-5"><strong>Lengkapi Profile</strong></div>
+                        <a  href="/pengguna/profilesettings/{{ $username }}" class="text-decoration-none text-light">
+                            <div class="card-footer d-flex">
+                                Edit Profile
+                                <span class="ms-auto">
+                                    <i class="bi bi-chevron-right"></i>
+                                </span>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
@@ -130,7 +132,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Hi Pengguna <strong>{{ $user }} </strong>, Sampah Yang diangkut Hari ini adalah <strong>2Kg</strong>
+                Hi Pengguna <strong>{{ $user }} </strong>, Sampah Yang diangkut Hari ini adalah
+                <strong>2Kg</strong>
                 Karena yang ambil adalah Paket Mingguan sehingga Batas Berat/hari yang diangkut sebanyak 4kg
             </div>
             <div class="modal-footer">
