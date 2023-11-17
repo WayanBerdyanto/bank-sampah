@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\BankSampahController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PengambilController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\PengambilController;
-use App\Http\Controllers\BankSampahController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,8 +31,6 @@ Route::post('/postRegister', [RegisterController::class, 'postRegister']);
 // Login Controller
 Route::get('/login', [LoginController::class, 'login']);
 Route::post('/loginpengguna', [LoginController::class, 'loginPengguna']);
-Route::get('/logout', [LoginController::class, 'logout']);
-
 
 // Pengguna Controller
 Route::middleware('cekrole:pengguna')->group(function () {
@@ -41,13 +39,15 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::get('/pengguna/history', [PenggunaController::class, 'history']);
     Route::get('/pengguna/profilesetting', [PenggunaController::class, 'profilesetting']);
     Route::put('/pengguna/postprofile/{id}', [PenggunaController::class, 'postProfile']);
+    Route::get('/pengguna/logout', [PenggunaController::class, 'logout']);
+
 });
 
-Route::middleware('cekrole:banksampah')->group(function(){
+Route::middleware('cekrole:banksampah')->group(function () {
     Route::get('/banksampah/', [BankSampahController::class, 'index']);
     Route::get('/banksampah/datapembuangan', [BankSampahController::class, 'dataPembuangan']);
 });
 
-Route::middleware('cekrole:pengambil')->group(function(){
+Route::middleware('cekrole:pengambil')->group(function () {
     Route::get('/pengambil/', [PengambilController::class, 'index']);
 });

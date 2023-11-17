@@ -53,7 +53,8 @@
                                 <a class="dropdown-item py-2" href="/pengguna/profilesetting">Ubah Passowrd</a>
                             </li>
                             <li>
-                                <a class="dropdown-item py-2" href="/logout">Logout</a>
+                                <button class="btn dropdown-item py-2" data-bs-toggle="modal"
+                                    data-bs-target="#modallogout">Logout</button>
                             </li>
                         </ul>
                     </li>
@@ -64,6 +65,27 @@
     @include('pengguna.layouts.sidebar')
 
     @yield('content')
+
+    <div class="modal fade" id="modallogout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="exampleModalLabel">
+                        <i class="bi bi-exclamation-circle-fill mr-2 text-danger"></i>
+                        Logout
+                    </h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Anda Yakin Logout dari <strong>{{ $user }}</strong> ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a class="btn btn-danger" href="/pengguna/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
 
@@ -76,9 +98,6 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6gdhH-9Asec5cxoNt4XMEZ6GLGMeajLw&callback=initMap"></script>
     <script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.3/mapsJavaScriptAPI.js" async defer>
     </script>
-
-
-
 </body>
 
 </html>

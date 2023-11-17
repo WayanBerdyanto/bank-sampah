@@ -14,6 +14,12 @@ class PenggunaController extends Controller
         $username = Auth::User()->username ?? '';
         return view('pengguna.index', ['user' => $user, 'username' => $username]);
     }
+    
+    public function logout()
+    {
+        Auth::logout();
+        return view('guest.login');
+    }
 
     public function langganan()
     {
