@@ -11,6 +11,13 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
+                    @if (session('success_update'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="bi bi-patch-check-fill"></i>
+                            Informasi <strong>{{ session('success_update') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <h4 class="mt-4 mb-3">Dashboard Pengguna</h4>
                 </div>
             </div>

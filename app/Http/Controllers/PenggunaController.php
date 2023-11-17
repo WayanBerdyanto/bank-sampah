@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Charts\MonthlyUsersChart;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Stevebauman\Location\Facades\Location;
-use App\Models\User;
 
 class PenggunaController extends Controller
 {
@@ -14,7 +12,7 @@ class PenggunaController extends Controller
     {
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
-        return view('pengguna.index', ['user'=>$user, 'username'=>$username]);
+        return view('pengguna.index', ['user' => $user, 'username' => $username]);
     }
 
     public function langganan()
@@ -29,18 +27,37 @@ class PenggunaController extends Controller
     public function profilesetting()
     {
         $username = Auth::User()->username ?? '';
-        $result = User::where('username' , $username)->first();
+        $result = User::where('username', $username)->first();
         // $result = User::find($id);
         // dd($result);
-        return view('pengguna.profile', ['result'=>$result]);
+        return view('pengguna.profile', ['result' => $result]);
     }
 
-    public function settings(Request $reuqest)
+    public function postProfile($id, Request $request)
     {
-        $ip = '182.4.103.214';
-        $data = Location::get($ip);
-        dd($data);
+        $user = User::find($id);
+        if ($user) {
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->nama_lengkap = $request->namalengkap;
+            $user->provinsi = $request->provinsi;
+            $user->kabupaten = $request->kabupaten;
+            $user->kecamatan = $request->kecamatan;
+            $user->kelurahan = $request->kelurahan;
+            $user->no_telpon = $request->no_telpon;
+            $user->latitude = $request->latitudeInput;
+            $user->longitude = $request->longitudeInput;
 
-        return view('pengguna.settings');
+            if ($user->save()) {
+                return redirect('/pengguna/')->with('success_update', 'Profile Berhasil Diupdate');
+            } else {
+                return redirect('/pengguna/profilesetting')->with('error_update', 'Error Dalam Input Data');
+
+            }
+        } else {
+            return redirect('/pengguna/profilesetting')->with('error_update', 'User Not Found');
+
+        }
+
     }
 }
