@@ -3,6 +3,9 @@ const passwordInput2 = document.getElementById("password2");
 const passwordIcon = document.getElementById("passwordIconTerlihat");
 const passwordIcon2 = document.getElementById("passwordIconTerlihat2");
 
+const passwordInputcurrent = document.getElementById("passwordcurrent");
+const passwordIconcurrent = document.getElementById("passwordIconTerlihatcurrent");
+
 
 document
     .getElementById("passwordToggle")
@@ -36,5 +39,23 @@ document
             passwordIcon2.classList.add("bi-eye");
             passwordIcon2.classList.remove("bi");
             passwordIcon2.classList.remove("bi-eye-slash");
+        }
+    });
+
+document
+    .getElementById("passwordToggle3")
+    .addEventListener("click", function () {
+        if (passwordInputcurrent.type == "password") {
+            passwordInputcurrent.type = "text";
+            passwordIconcurrent.classList.remove("bi");
+            passwordIconcurrent.classList.remove("bi-eye");
+            passwordIconcurrent.classList.add("bi");
+            passwordIconcurrent.classList.add("bi-eye-slash");
+        } else {
+            passwordInputcurrent.type = "password";
+            passwordIconcurrent.classList.add("bi");
+            passwordIconcurrent.classList.add("bi-eye");
+            passwordIconcurrent.classList.remove("bi");
+            passwordIconcurrent.classList.remove("bi-eye-slash");
         }
     });

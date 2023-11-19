@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class PenggunaController extends Controller
 {
@@ -14,7 +15,7 @@ class PenggunaController extends Controller
         $username = Auth::User()->username ?? '';
         return view('pengguna.index', ['user' => $user, 'username' => $username]);
     }
-    
+
     public function logout()
     {
         Auth::logout();
@@ -24,12 +25,12 @@ class PenggunaController extends Controller
     public function langganan()
     {
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('pengguna.langganan', ['user'=>$user]);
+        return view('pengguna.langganan', ['user' => $user]);
     }
     public function history()
     {
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('pengguna.history', ['user'=>$user]);
+        return view('pengguna.history', ['user' => $user]);
     }
 
     public function profilesetting()
@@ -65,5 +66,31 @@ class PenggunaController extends Controller
 
         }
 
+    }
+
+    public function ubahpassword()
+    {
+        return view('pengguna.ubahpassword');
+    }
+
+    public function postubahpassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:8|different:current_password',
+            'confirm_password' => 'required|string|min:8|same:new_password',
+        ]);
+
+        $user = Auth::user();
+
+        if (Hash::check($request->current_password, $user->password)) {
+            // Update the password with the new one
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+
+            return redirect('/pengguna/')->with('success', 'Password berhasil diubah!');
+        } else {
+            return redirect()->back()->with('error', 'Password saat ini salah.');
+        }
     }
 }

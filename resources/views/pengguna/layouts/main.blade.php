@@ -54,7 +54,7 @@
                                 <a class="dropdown-item py-2" href="/pengguna/profilesetting">Profile</a>
                             </li>
                             <li>
-                                <a class="dropdown-item py-2" href="/pengguna/profilesetting">Ubah Passowrd</a>
+                                <a class="dropdown-item py-2" href="/pengguna/ubahpassword">Ubah Passowrd</a>
                             </li>
                             <li>
                                 <button class="btn dropdown-item py-2" data-bs-toggle="modal"
@@ -88,6 +88,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @include('sweetalert::alert')
+
+    <script src="{{ asset('js/password.js') }}"></script>
+
 
 </body>
 

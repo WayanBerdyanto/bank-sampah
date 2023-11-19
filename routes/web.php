@@ -40,6 +40,8 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::get('/pengguna/profilesetting', [PenggunaController::class, 'profilesetting']);
     Route::put('/pengguna/postprofile/{id}', [PenggunaController::class, 'postProfile']);
     Route::get('/pengguna/logout', [PenggunaController::class, 'logout']);
+    Route::get('/pengguna/ubahpassword', [PenggunaController::class, 'ubahpassword']);
+    Route::post('/pengguna/postubahpassword', [PenggunaController::class, 'postubahpassword']);
 
 });
 
