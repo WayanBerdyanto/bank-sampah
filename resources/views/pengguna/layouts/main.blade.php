@@ -51,10 +51,15 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item py-2" href="/pengguna/profilesetting">Profile</a>
+                                <a class="dropdown-item py-2" href="/pengguna/profilesetting">
+                                    <i class="fa-solid fa-address-card mr-3"></i>
+                                    Profile</a>
                             </li>
                             <li>
-                                <a class="dropdown-item py-2" href="/pengguna/ubahpassword">Ubah Passowrd</a>
+                                
+                                <a class="dropdown-item py-2" href="/pengguna/ubahpassword">
+                                    <i class="fa-solid fa-user-pen mr-3"></i>
+                                    Ubah Passowrd</a>
                             </li>
                             <li>
                                 <button class="btn dropdown-item py-2" data-bs-toggle="modal"

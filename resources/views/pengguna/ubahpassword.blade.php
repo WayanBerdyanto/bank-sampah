@@ -3,8 +3,8 @@
     <main class="mt-5 pt-3">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
-                    <h1>Hello DUnia</h1>
+                <div class="col-md-12 px-4">
+                    <h3 class="mt-3">Ubah Password</h3>
                     <!-- Tambahkan field password baru -->
                     <form action="/pengguna/postubahpassword" method="POST">
                         @csrf
