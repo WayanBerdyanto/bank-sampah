@@ -86,7 +86,9 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('js/sweet-alert.js') }}"></script>
+
+    @include('sweetalert::alert')
+
 </body>
 
 </html>

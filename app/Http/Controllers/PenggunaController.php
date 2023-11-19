@@ -55,13 +55,13 @@ class PenggunaController extends Controller
             $user->longitude = $request->longitudeInput;
 
             if ($user->save()) {
-                return redirect('/pengguna/');
+                return redirect('/pengguna/')->with('success', 'Profile Berhasil Di Ubah');
             } else {
-                return redirect('/pengguna/profilesetting')->with('error', 'Error Dalam Input Data');
+                return redirect('/pengguna/profilesetting')->with('errors', $validator->messages()->all()[0])->withInput();
 
             }
         } else {
-            return redirect('/pengguna/profilesetting')->with('error', 'User Not Found');
+            return redirect('/pengguna/profilesetting')->with('error', 'User Not Found')->with('errors', $validator->messages()->all()[0])->withInput();
 
         }
 

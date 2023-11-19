@@ -11,20 +11,6 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
-                    @if (session('success'))
-                    <script>
-                        Swal.fire({
-                            title: 'Success',
-                            text: '{{ session('success') }}',
-                            icon: 'success',
-                            timer: 3000, // Automatically close after 3 seconds
-                            showConfirmButton: false,
-                            timerProgressBar: true,
-                        });
-                    </script>
-                    @elseif(session('error'))
-                        
-                    @endif
                     <h4 class="mt-4 mb-3">Dashboard Pengguna</h4>
                 </div>
             </div>
