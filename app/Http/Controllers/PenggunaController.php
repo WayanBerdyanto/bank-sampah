@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use \RealRashid\SweetAlert\Facades\Alert;
 
 class PenggunaController extends Controller
 {
@@ -56,7 +55,6 @@ class PenggunaController extends Controller
             $user->longitude = $request->longitudeInput;
 
             if ($user->save()) {
-                Alert::success('Success', 'Your success message here');
                 return redirect('/pengguna/');
             } else {
                 return redirect('/pengguna/profilesetting')->with('error', 'Error Dalam Input Data');
