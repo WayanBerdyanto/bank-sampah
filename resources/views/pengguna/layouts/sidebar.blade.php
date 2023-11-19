@@ -17,13 +17,13 @@
                     <hr class="dropdown-divider bg-light" />
                 </li>
                 <li class="py-2">
-                    <a href="/banksampah/langganan" class="nav-link px-3">
+                    <a href="/pengguna/langganan" class="nav-link px-3">
                         <span class="me-2"><i class="bi bi-book-fill"></i></span>
                         <span>Langganan</span>
                     </a>
                 </li>
                 <li class="py-2">
-                    <a href="/banksampah/history" class="nav-link px-3">
+                    <a href="/pengguna/history" class="nav-link px-3">
                         <span class="me-2"><i class="bi bi-book-fill"></i></span>
                         <span>History</span>
                     </a>

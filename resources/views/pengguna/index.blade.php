@@ -11,12 +11,19 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
-                    @if (session('success_update'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="bi bi-patch-check-fill"></i>
-                            Informasi <strong>{{ session('success_update') }}</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
+                    @if (session('success'))
+                    <script>
+                        Swal.fire({
+                            title: 'Success',
+                            text: '{{ session('success') }}',
+                            icon: 'success',
+                            timer: 3000, // Automatically close after 3 seconds
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                        });
+                    </script>
+                    @elseif(session('error'))
+                        
                     @endif
                     <h4 class="mt-4 mb-3">Dashboard Pengguna</h4>
                 </div>
@@ -156,6 +163,27 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modallogout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="exampleModalLabel">
+                    <i class="bi bi-exclamation-circle-fill mr-2 text-danger"></i>
+                    Logout
+                </h5>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Anda Yakin Logout dari <strong>{{ $user }}</strong> ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a class="btn btn-danger" href="/pengguna/logout">Logout</a>
             </div>
         </div>
     </div>

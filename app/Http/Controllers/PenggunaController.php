@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use \RealRashid\SweetAlert\Facades\Alert;
 
 class PenggunaController extends Controller
 {
@@ -23,19 +24,19 @@ class PenggunaController extends Controller
 
     public function langganan()
     {
-        return view('pengguna.langganan');
+        $user = Auth::User()->nama_lengkap ?? '';
+        return view('pengguna.langganan', ['user'=>$user]);
     }
     public function history()
     {
-        return view('pengguna.history');
+        $user = Auth::User()->nama_lengkap ?? '';
+        return view('pengguna.history', ['user'=>$user]);
     }
 
     public function profilesetting()
     {
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        // $result = User::find($id);
-        // dd($result);
         return view('pengguna.profile', ['result' => $result]);
     }
 
@@ -55,13 +56,14 @@ class PenggunaController extends Controller
             $user->longitude = $request->longitudeInput;
 
             if ($user->save()) {
-                return redirect('/pengguna/')->with('success_update', 'Profile Berhasil Diupdate');
+                Alert::success('Success', 'Your success message here');
+                return redirect('/pengguna/');
             } else {
-                return redirect('/pengguna/profilesetting')->with('error_update', 'Error Dalam Input Data');
+                return redirect('/pengguna/profilesetting')->with('error', 'Error Dalam Input Data');
 
             }
         } else {
-            return redirect('/pengguna/profilesetting')->with('error_update', 'User Not Found');
+            return redirect('/pengguna/profilesetting')->with('error', 'User Not Found');
 
         }
 
