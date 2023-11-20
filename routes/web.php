@@ -54,6 +54,12 @@ Route::middleware('cekrole:banksampah')->group(function () {
     Route::get('/banksampah/datapembuangan', [BankSampahController::class, 'dataPembuangan']);
     Route::get('/banksampah/datapenerimaan', [BankSampahController::class, 'dataPenerimaan']);
     Route::get('/banksampah/dataPenerimaan/detailPenerimaan', [BankSampahController::class, 'detailPenerimaan']);
+    Route::get('/banksampah/profilebank', [BankSampahController::class, 'profilebank']);
+    Route::put('/banksampah/postprofile/{id}', [BankSampahController::class, 'postProfile']);
+    Route::get('/banksampah/ubahpassword', [BankSampahController::class, 'ubahpassword']);
+    Route::post('/banksampah/postubahpassword', [BankSampahController::class, 'postubahpassword']);
+    Route::get('/banksampah/logout', [BankSampahController::class, 'logout']);
+
 });
 
 Route::middleware('cekrole:pengambil')->group(function () {
