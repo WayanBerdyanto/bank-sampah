@@ -3,7 +3,9 @@
     <main class="mt-5 pt-3">
         <div class="container-fluid">
             <div class="row">
-                <h1>Hello Ambil Sampah</h1>
+                <div class="col-md-4">
+                    <button></button>
+                </div>
             </div>
         </div>
     </main>

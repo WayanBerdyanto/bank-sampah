@@ -38,8 +38,9 @@ class PenggunaController extends Controller
     public function profilesetting()
     {
         $username = Auth::User()->username ?? '';
+        $user = Auth::User()->nama_lengkap ?? '';
         $result = User::where('username', $username)->first();
-        return view('pengguna.profile', ['result' => $result, 'key'=>'profilesettings']);
+        return view('pengguna.profile', ['result' => $result, 'key'=>'profilesettings', 'user'=>$user]);
     }
 
     public function postProfile($id, Request $request)
@@ -72,7 +73,8 @@ class PenggunaController extends Controller
 
     public function ubahpassword()
     {
-        return view('pengguna.ubahpassword', ['key'=>'ubahpassword']);
+        $user = Auth::User()->nama_lengkap ?? '';
+        return view('pengguna.ubahpassword', ['key'=>'ubahpassword', 'user'=>$user]);
     }
 
     public function postubahpassword(Request $request)
@@ -97,9 +99,11 @@ class PenggunaController extends Controller
     }
 
     public function ambilsampah(){
-        return view('pengguna.ambilsampah' , ['key'=>'ambilsampah']);
+        $user = Auth::User()->nama_lengkap ?? '';
+        return view('pengguna.ambilsampah' , ['key'=>'ambilsampah', 'user'=>$user]);
     }
     public function buangsampah(){
-        return view('pengguna.buangsampah', ['key'=>'buangsampah']);
+        $user = Auth::User()->nama_lengkap ?? '';
+        return view('pengguna.buangsampah', ['key'=>'buangsampah', 'user'=>$user]);
     }
 }

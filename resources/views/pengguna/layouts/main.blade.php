@@ -26,7 +26,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/color.css') }}">
 
-    <title>Bank Sampah Page</title>
+    <title>Pengguna Page</title>
 </head>
 
 <body>
@@ -61,7 +61,8 @@
                             <li>
                                 <a class="dropdown-item py-2 {{ $key == 'profilesettings' ? 'active bg-primary' : '' }}" href="/pengguna/profilesetting">
                                     <i class="fa-solid fa-address-card mr-3"></i>
-                                    Profile</a>
+                                    Profile
+                                </a>
                             </li>
                             <li>
 
@@ -86,6 +87,29 @@
 
     @yield('content')
 
+    @yield('charts')
+
+    <div class="modal fade" id="modallogout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="exampleModalLabel">
+                        <i class="bi bi-exclamation-circle-fill mr-2 text-danger"></i>
+                        Logout
+                    </h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Anda Yakin Logout dari <strong>{{ $user }}</strong> ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a class="btn btn-danger" href="/pengguna/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
 
     <script src="{{ asset('js/password.js') }}"></script>
@@ -108,7 +132,8 @@
 
     <script src="{{ asset('js/password.js') }}"></script>
 
-    @yield('charts')
+
+    
 
 
 </body>

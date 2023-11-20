@@ -4,7 +4,7 @@
             <ul class="navbar-nav">
                 <li>
                     <div class="text-muted small fw-bold text-uppercase px-3">
-                        Bank Sampah
+                        Pengguna
                     </div>
                 </li>
                 <li>

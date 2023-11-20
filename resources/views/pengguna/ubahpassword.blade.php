@@ -39,9 +39,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                         <div class="form-group row mt-5">
                             <label for="password2"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Konfirmasi Password Baru') }}</label>
