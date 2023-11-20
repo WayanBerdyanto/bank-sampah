@@ -1,31 +1,142 @@
 @extends('pengguna.layouts.main')
 @section('content')
-    <section class="margin-content">
-        @if (session('flash_success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="bi bi-patch-check-fill"></i>
-                <strong> {{ session('flash_success') }}</strong>
-                <span>Selamat Datang {{ Auth::user()->nama_lengkap }}</span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                    <i class="bi bi-x-lg"></i>
-                </button>
+    <main class="mt-5 pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    @if (session('flash_success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="bi bi-patch-check-fill"></i>
+                            Selamat Datang Pengguna <strong>{{ $user }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                    <h2 class="mt-2 mb-4 text-center fw-bold fs-2">Dashboard Pengguna</h2>
+                </div>
             </div>
-        @endif
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card bg-warning text-dark" style="height: 280px">
+                        <div class="card-header text-center fw-bold">
+                            Grafik Jenis Sampah Disetiap Hari
+                        </div>
+                        <div class="card-body px-4" >
+                            {!! $linechart->container() !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card bg-success text-light" style="height: 280px">
+                        <div class="card-header text-center fw-bold mb-1">
+                            Jenis Sampah
+                        </div>
+                        <div class="card-body px-4">
+                            {!! $chart->container() !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <span><i class="bi bi-table me-2"></i></span> Data History Pengambilan
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example" class="table table-striped data-table" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Hari</th>
+                                            <th>Tanggal</th>
+                                            <th>Jam</th>
+                                            <th>Berat</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Senin</td>
+                                            <td>20/11/2023</td>
+                                            <td>08.30</td>
+                                            <td>3kg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Rabu</td>
+                                            <td>22/11/2023</td>
+                                            <td>08.30</td>
+                                            <td>3kg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Jumat</td>
+                                            <td>24/11/2023</td>
+                                            <td>08.30</td>
+                                            <td>3kg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Minggu</td>
+                                            <td>26/11/2023</td>
+                                            <td>09.00</td>
+                                            <td>3kg</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination flex justify-content-end">
+                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <h3 class="form-label fw-bold">Lokasi Rumah</h3>
+                        <div class="card-body" id="map" style="height: 400px">
 
-        <h1 class="mb-4 mx-4 fs-4 fw-bold">Data Sampah</h1>
-        <div class=" mx-4 d-flex">
-            <div class="bg-green-700 text-center text-light card w-50 p-1 mr-2">
-                Organik
-                <span class="mt-4">50</span>
-            </div>
-            <div class="bg-red-700 text-light text-center card w-50 p-1">
-                An-Organik
-                <span class="mt-4">20</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
-    <script src="{{ $chart->cdn() }}"></script>
-
-    {{ $chart->script() }}
+    </main>
 @endsection
 
+<div class="modal fade" id="modallogout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="exampleModalLabel">
+                    <i class="bi bi-exclamation-circle-fill mr-2 text-danger"></i>
+                    Logout
+                </h5>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Anda Yakin Logout dari <strong>{{ $user }}</strong> ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a class="btn btn-danger" href="/pengguna/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+@section('charts')
+
+    <script src="{{ $chart->cdn() }}"></script>
+    {{ $chart->script() }}
+    <script src="{{ $linechart->cdn() }}"></script>
+    {{ $linechart->script() }}
+@endsection

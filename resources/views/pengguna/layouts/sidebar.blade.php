@@ -1,36 +1,50 @@
-<nav class="nav__container">
-    <div>
-        <a href="#" class="nav__link nav__logo">
-            <i class='bx bxs-disc nav__icon' id="hamburger-menu"></i>
-            <span class="nav__logo-name">BankSampah</span>
-        </a>
-
-        <div class="nav__list">
-            <div class="nav__items mt-4">
-                <a href="/pengguna/" class="nav__link active">
-                    <i class='bx bxs-dashboard nav__icon'></i>
-                    <span class="nav__name">Dashboard</span>
-                </a>
-
-                <a href="/pengguna/paket" class="nav__link">
-                    <i class='bx bxs-package nav__icon'></i>
-                    <span class="nav__name">Paket</span>
-                </a>
-
-                <a href="#" class="nav__link">
-                    <i class='bx bx-compass nav__icon'></i>
-                    <span class="nav__name">Explore</span>
-                </a>
-                <a href="#" class="nav__link">
-                    <i class='bx bx-bookmark nav__icon'></i>
-                    <span class="nav__name">Saved</span>
-                </a>
-            </div>
-        </div>
+<div class="offcanvas offcanvas-start sidebar-nav bg-dark" tabindex="-1" id="sidebar">
+    <div class="offcanvas-body p-0">
+        <nav class="navbar-dark">
+            <ul class="navbar-nav">
+                <li>
+                    <div class="text-muted small fw-bold text-uppercase px-3">
+                        Bank Sampah
+                    </div>
+                </li>
+                <li>
+                    <a href="/pengguna" class="nav-link px-3 mt-4 {{ $key == 'index' ? 'active bg-primary' : '' }}">
+                        <span class="mx-2"><i class="bi bi-speedometer2"></i></span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="my-2">
+                    <hr class="dropdown-divider bg-light" />
+                </li>
+                <li class="py-2">
+                    <a href="/pengguna/ambilsampah" class="nav-link px-3 {{ $key == 'ambilsampah' ? 'active bg-primary' : '' }}">
+                        <span class="mx-2"><i class="bi bi-recycle"></i></span>
+                        <span>Ambil Sampah</span>
+                    </a>
+                </li>
+                <li class="py-2">
+                    <a href="/pengguna/buangsampah" class="nav-link px-3 {{ $key == 'buangsampah' ? 'active bg-primary' : '' }}">
+                        <span class="mx-2"> <i class="bi bi-trash"></i>
+                        </span>
+                        <span>Buang Sampah</span>
+                    </a>
+                </li>
+                <li class="py-2">
+                    <a href="/pengguna/langganan"
+                        class="nav-link px-3 {{ $key == 'langganan' ? 'active bg-primary' : '' }}">
+                        <span class="mx-2"><i class="fa-solid fa-crown"></i></span>
+                        <span>Langganan</span>
+                    </a>
+                </li>
+                <li class="py-2">
+                    <a href="/pengguna/history"
+                        class="nav-link px-3 {{ $key == 'history' ? 'active bg-primary' : '' }}">
+                        <span class="mx-2"><i class="fa-solid fa-clock-rotate-left"></i></span>
+                        <span>History</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
-    <button class="nav__link nav__logout" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <i class='bx bx-log-out nav__icon'></i>
-        <span class="nav__name">Log Out</span>
-    </button>
-    
-</nav>
+</div>
+<!-- offcanvas -->

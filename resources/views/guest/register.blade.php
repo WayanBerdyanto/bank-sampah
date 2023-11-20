@@ -2,99 +2,147 @@
 <html lang="en">
 
 <head>
-    <title>Registrasi</title>
+    <title>Login</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS v5.2.1 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 </head>
 
-<body>
-    <div class="container w-100 mx-auto mt-3">
-        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
-            aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Registrasi</li>
-            </ol>
-        </nav>
-    </div>
-    <div class="container w-100 p-4">
-        <form class="w-75 border border-solid p-4 mx-auto" method="POST" action="/postRegister">
+<body class="bg-slate-200">
+    <nav class="flex mt-5 ml-5" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-3">
+            <li class="inline-flex items-center">
+                <a href="/"
+                    class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-gray-900">
+                    <svg class="w-3 h-3 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                    </svg>
+                    Home
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 9 4-4-4-4" />
+                    </svg>
+                    <a href="/register"
+                        class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-gray-900">Register</a>
+                </div>
+            </li>
+        </ol>
+    </nav>
+
+    <div class="w-full h-full flex justify-center mt-14">
+        <form
+            class="bg-white shadow-md rounded px-20 pt-6 pb-8 mb-4 ring-2 ring-blue-400 ring-offset-4 ring-offset-slate-50 dark:ring-offset-slate-200 relative group transition-all duration-300 transform hover:bg-gray-50"
+            method="POST" action="/postRegister">
             @csrf
-            <div class="mb-3">
-                {{-- HIDDEN --}}
-                <input type="text" class="form-control" id="id" name="id" hidden>
+            <h1 class="text-center text-2xl font-semibold mb-4">Form Registrasi</h1>
+            <div class="flex lg:justify-between">
+                <div class="mb-2 w-full">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                        Username
+                    </label>
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="username" type="text" name="username" placeholder="Username" required
+                        value="{{ old('username') }}">
+                </div>
+                <div class="mb-2 w-full ml-1">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="nama_lengkap">
+                        Nama
+                    </label>
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="nama_lengkap" type="text" name="nama_lengkap" placeholder="Nama" required
+                        value="{{ old('nama_lengkap') }}">
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Masukan Username"
-                    required value="{{ old('username') }}">
+
+            <div class="mb-2">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                    Email
+                </label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="email" type="text" name="email" placeholder="Email" required
+                    value="{{ old('email') }}">
             </div>
-            <div class="mb-3">
-                <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
-                <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap"
-                    placeholder="Masukan Nama" required value="{{ old('nama_lengkap') }}">
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Masukan Email"
-                    required value="{{ old('email') }}">
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <div class="input-group">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"
-                        autocomplete="off" required value="{{ old('password') }}">
-                    <button class="btn btn-outline-primary" type="button" id="passwordToggle">
+
+            <div class="mb-2">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                    Password
+                </label>
+                <div class="relative">
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline pr-10"
+                        id="password" type="password" name="password" placeholder="******************" required
+                        value="{{ old('password') }}" minlength="8">
+                    <button type="button" id="passwordToggle"
+                        class="absolute inset-y-4 top-1 right-1 flex items-center justify-end px-4">
                         <i class="bi bi-eye" id="passwordIconTerlihat"></i>
                     </button>
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="password2" class="form-label">Confirm Password</label>
-                <div class="input-group">
-                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Password"
-                        autocomplete="off" required value="{{ old('password2') }}">
-                    <button class="btn btn-outline-primary" type="button" id="passwordToggle2">
+            <div class="mb-2">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="password2">
+                    Confirm password
+                </label>
+                <div class="relative">
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline pr-10"
+                        id="password2" type="password" name="password2" placeholder="******************" required  minlength="8">
+                    <button type="button" id="passwordToggle2"
+                        class="absolute inset-y-4 top-1 right-1 flex items-center justify-end px-4">
                         <i class="bi bi-eye" id="passwordIconTerlihat2"></i>
                     </button>
                 </div>
-                @if (session('flash_error'))
-                    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <i class="bi bi-exclamation-circle-fill"></i>
-                        <strong> {{ session('flash_error') }}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                            <i class="bi bi-x-lg"></i>
-                        </button>
-                    </div>
-                @endif
-            </div>
-            <input type="text" class="form-control" id="role" name="role" hidden>
-            <div class="mb-3">
-                <label for="no_telpon" class="form-label">No HP</label>
-                <input type="number" class="form-control" id="no_telpon" name="no_telpon" placeholder="Masukan NoHp"
-                    required value="{{ old('no_telpon') }}">
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Submit</button>
+            <div class="mb-2">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="no_telpon">
+                    No Telpon
+                </label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="no_telpon" type="number" name="no_telpon" placeholder="Nomor Hp" required
+                    value="{{ old('no_telpon') }}">
+            </div>
+            <div class="flex items-center justify-between">
+                <button
+                    class="bg-blue-500 hover:bg-blue-700 mt-2 text-white font-bold py-1 w-full px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="submit">
+                    Sign In
+                </button>
+            </div>
+            <span class="mt-3 block">
+                Sudah Punya Akun ?
+                <a class="align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 text-start w-full"
+                    href="/login">
+                    Login disini
+                </a>
+            </span>
         </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-    </script>
     <script src="{{ asset('js/password.js') }}"></script>
+    @include('sweetalert::alert')
+
 </body>
 
 </html>

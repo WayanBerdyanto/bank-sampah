@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\BankSampahController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PengambilController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -28,12 +30,29 @@ Route::post('/postRegister', [RegisterController::class, 'postRegister']);
 
 // Login Controller
 Route::get('/login', [LoginController::class, 'login']);
-Route::post('/loginPengguna', [LoginController::class, 'loginPengguna']);
+Route::post('/loginpengguna', [LoginController::class, 'loginPengguna']);
 
 // Pengguna Controller
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/pengguna/', [PenggunaController::class, 'index']);
-    Route::get('/pengguna/paket', [PenggunaController::class, 'paket']);
-    Route::get('/logout', [PenggunaController::class, 'logout']);
-    Route::get('/profilesetting', [PenggunaController::class, 'profilesetting']);
+Route::middleware('cekrole:pengguna')->group(function () {
+    Route::get('/pengguna/', [PenggunaController::class, 'index'])->name('pengguna.index');
+    Route::get('/pengguna/langganan', [PenggunaController::class, 'langganan']);
+    Route::get('/pengguna/history', [PenggunaController::class, 'history']);
+    Route::get('/pengguna/profilesetting', [PenggunaController::class, 'profilesetting']);
+    Route::put('/pengguna/postprofile/{id}', [PenggunaController::class, 'postProfile']);
+    Route::get('/pengguna/logout', [PenggunaController::class, 'logout']);
+    Route::get('/pengguna/ubahpassword', [PenggunaController::class, 'ubahpassword']);
+    Route::post('/pengguna/postubahpassword', [PenggunaController::class, 'postubahpassword']);
+    Route::get('/pengguna/buangsampah', [PenggunaController::class, 'buangsampah']);
+    Route::get('/pengguna/ambilsampah', [PenggunaController::class, 'ambilsampah']);
+
+
+});
+
+Route::middleware('cekrole:banksampah')->group(function () {
+    Route::get('/banksampah/', [BankSampahController::class, 'index']);
+    Route::get('/banksampah/datapembuangan', [BankSampahController::class, 'dataPembuangan']);
+});
+
+Route::middleware('cekrole:pengambil')->group(function () {
+    Route::get('/pengambil/', [PengambilController::class, 'index']);
 });
