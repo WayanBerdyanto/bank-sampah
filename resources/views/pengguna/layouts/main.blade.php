@@ -59,13 +59,13 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item py-2" href="/pengguna/profilesetting">
+                                <a class="dropdown-item py-2 {{ $key == 'profilesettings' ? 'active bg-primary' : '' }}" href="/pengguna/profilesetting">
                                     <i class="fa-solid fa-address-card mr-3"></i>
                                     Profile</a>
                             </li>
                             <li>
 
-                                <a class="dropdown-item py-2" href="/pengguna/ubahpassword">
+                                <a class="dropdown-item py-2 {{ $key == 'ubahpassword' ? 'active bg-primary' : '' }}" href="/pengguna/ubahpassword">
                                     <i class="fa-solid fa-user-pen mr-3"></i>
                                     Ubah Passowrd</a>
                             </li>

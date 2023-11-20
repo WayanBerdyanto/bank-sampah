@@ -4,7 +4,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 px-4">
-                    <h3 class="mt-3">Ubah Password</h3>
+                    <h3 class="mt-3 mb-3 fs-4 fw-semi-bold">Ubah Password
+                        <i class="bi bi-person-fill-lock"></i>
+                    </h3>
                     <!-- Tambahkan field password baru -->
                     <form action="/pengguna/postubahpassword" method="POST">
                         @csrf

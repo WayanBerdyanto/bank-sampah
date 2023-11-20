@@ -15,7 +15,7 @@ class PenggunaController extends Controller
     {
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
-        return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build()]);
+        return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key'=>'index']);
     }
 
     public function logout()
@@ -27,19 +27,19 @@ class PenggunaController extends Controller
     public function langganan()
     {
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('pengguna.langganan', ['user' => $user]);
+        return view('pengguna.langganan', ['user' => $user, 'key'=>'langganan']);
     }
     public function history()
     {
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('pengguna.history', ['user' => $user]);
+        return view('pengguna.history', ['user' => $user, 'key'=>'history']);
     }
 
     public function profilesetting()
     {
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        return view('pengguna.profile', ['result' => $result]);
+        return view('pengguna.profile', ['result' => $result, 'key'=>'profilesettings']);
     }
 
     public function postProfile($id, Request $request)
@@ -72,7 +72,7 @@ class PenggunaController extends Controller
 
     public function ubahpassword()
     {
-        return view('pengguna.ubahpassword');
+        return view('pengguna.ubahpassword', ['key'=>'ubahpassword']);
     }
 
     public function postubahpassword(Request $request)

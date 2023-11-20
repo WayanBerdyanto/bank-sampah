@@ -8,7 +8,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="/pengguna" class="nav-link px-3 active mt-4">
+                    <a href="/pengguna" class="nav-link px-3 mt-4 {{ $key == 'index' ? 'active bg-primary' : '' }}">
                         <span class="mx-2"><i class="bi bi-speedometer2"></i></span>
                         <span>Dashboard</span>
                     </a>
@@ -17,13 +17,13 @@
                     <hr class="dropdown-divider bg-light" />
                 </li>
                 <li class="py-2">
-                    <a href="/pengguna/langganan" class="nav-link px-3">
+                    <a href="/pengguna/langganan" class="nav-link px-3 {{ $key == 'langganan' ? 'active bg-primary' : '' }}">
                         <span class="mx-2"><i class="fa-solid fa-crown"></i></span>
                         <span>Langganan</span>
                     </a>
                 </li>
                 <li class="py-2">
-                    <a href="/pengguna/history" class="nav-link px-3">
+                    <a href="/pengguna/history" class="nav-link px-3 {{ $key == 'history' ? 'active bg-primary' : '' }}">
                         <span class="mx-2"><i class="bi bi-clock-history"></i></span>
                         <span>History</span>
                     </a>
