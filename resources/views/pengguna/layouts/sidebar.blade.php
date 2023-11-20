@@ -9,7 +9,7 @@
                 </li>
                 <li>
                     <a href="/pengguna" class="nav-link px-3 active mt-4">
-                        <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                        <span class="mx-2"><i class="bi bi-speedometer2"></i></span>
                         <span>Dashboard</span>
                     </a>
                 </li>
@@ -18,13 +18,13 @@
                 </li>
                 <li class="py-2">
                     <a href="/pengguna/langganan" class="nav-link px-3">
-                        <span class="me-2"><i class="bi bi-book-fill"></i></span>
+                        <span class="mx-2"><i class="fa-solid fa-crown"></i></span>
                         <span>Langganan</span>
                     </a>
                 </li>
                 <li class="py-2">
                     <a href="/pengguna/history" class="nav-link px-3">
-                        <span class="me-2"><i class="bi bi-book-fill"></i></span>
+                        <span class="mx-2"><i class="bi bi-clock-history"></i></span>
                         <span>History</span>
                     </a>
                 </li>

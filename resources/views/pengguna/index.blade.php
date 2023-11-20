@@ -11,13 +11,18 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
-                    <h4 class="mt-4 mb-3">Dashboard Pengguna</h4>
+                    <h2 class="mt-2 mb-4 text-center fw-bold fs-2">Dashboard Pengguna</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <div class="card bg-primary text-white h-100">
-                        <div class="card-body py-5">Berat Sampah Yang Di Angkut</div>
+                    <div class="card bg-card-10 text-white" style="height: 300px;">
+                        <div class="card-header fw-bold text-center text-light">Berat Sampah Yang Di Angkut</div>
+                        <div class="card-body px-4">
+                            Hi Pengguna <strong>{{ $user }} </strong>, Sampah Yang diangkut Hari ini adalah
+                            <strong>2Kg</strong>
+                            Karena yang ambil adalah Paket Mingguan sehingga Batas Berat/hari yang diangkut sebanyak 4kg
+                        </div>
                         <a data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <div class="card-footer d-flex">
                                 View Details
@@ -29,29 +34,23 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <div class="card bg-success text-light h-100">
-                        <div class="card-body py-5">Sampah Organik</div>
-                        <a data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <div class="card-footer d-flex">
-                                View Details
-                                <span class="ms-auto">
-                                    <i class="bi bi-chevron-right"></i>
-                                </span>
-                            </div>
-                        </a>
+                    <div class="card bg-warning text-dark">
+                        <div class="card-header text-center fw-bold">
+                            Grafik Jenis Sampah Disetiap Hari
+                        </div>
+                        <div class="card-body px-4" >
+                            {!! $linechart->container() !!}
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <div class="card bg-danger text-white h-100">
-                        <div class="card-body py-5">Sampah An-Organik</div>
-                        <a data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <div class="card-footer d-flex">
-                                View Details
-                                <span class="ms-auto">
-                                    <i class="bi bi-chevron-right"></i>
-                                </span>
-                            </div>
-                        </a>
+                    <div class="card bg-success text-light">
+                        <div class="card-header text-center fw-bold mb-4">
+                            Jenis Sampah
+                        </div>
+                        <div class="card-body px-4">
+                            {!! $chart->container() !!}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -174,3 +173,10 @@
         </div>
     </div>
 </div>
+@section('charts')
+
+    <script src="{{ $chart->cdn() }}"></script>
+    {{ $chart->script() }}
+    <script src="{{ $linechart->cdn() }}"></script>
+    {{ $linechart->script() }}
+@endsection

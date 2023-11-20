@@ -34,7 +34,7 @@ Route::post('/loginpengguna', [LoginController::class, 'loginPengguna']);
 
 // Pengguna Controller
 Route::middleware('cekrole:pengguna')->group(function () {
-    Route::get('/pengguna/', [PenggunaController::class, 'index']);
+    Route::get('/pengguna/', [PenggunaController::class, 'index'])->name('pengguna.index');
     Route::get('/pengguna/langganan', [PenggunaController::class, 'langganan']);
     Route::get('/pengguna/history', [PenggunaController::class, 'history']);
     Route::get('/pengguna/profilesetting', [PenggunaController::class, 'profilesetting']);

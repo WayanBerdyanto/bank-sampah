@@ -6,14 +6,16 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Charts\PieChartSampah;
+use App\Charts\LineChartPengguna;
 
 class PenggunaController extends Controller
 {
-    public function index()
+    public function index(PieChartSampah $chart, LineChartPengguna $linechart)
     {
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
-        return view('pengguna.index', ['user' => $user, 'username' => $username]);
+        return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build()]);
     }
 
     public function logout()
