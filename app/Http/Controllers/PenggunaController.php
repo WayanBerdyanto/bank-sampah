@@ -95,4 +95,11 @@ class PenggunaController extends Controller
             return redirect()->back()->with('error', 'Password saat ini salah.');
         }
     }
+
+    public function ambilsampah(){
+        return view('pengguna.ambilsampah' , ['key'=>'ambilsampah']);
+    }
+    public function buangsampah(){
+        return view('pengguna.buangsampah', ['key'=>'buangsampah']);
+    }
 }

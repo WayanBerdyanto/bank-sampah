@@ -17,14 +17,29 @@
                     <hr class="dropdown-divider bg-light" />
                 </li>
                 <li class="py-2">
-                    <a href="/pengguna/langganan" class="nav-link px-3 {{ $key == 'langganan' ? 'active bg-primary' : '' }}">
+                    <a href="/pengguna/ambilsampah" class="nav-link px-3 {{ $key == 'ambilsampah' ? 'active bg-primary' : '' }}">
+                        <span class="mx-2"><i class="bi bi-recycle"></i></span>
+                        <span>Ambil Sampah</span>
+                    </a>
+                </li>
+                <li class="py-2">
+                    <a href="/pengguna/buangsampah" class="nav-link px-3 {{ $key == 'buangsampah' ? 'active bg-primary' : '' }}">
+                        <span class="mx-2"> <i class="bi bi-trash"></i>
+                        </span>
+                        <span>Buang Sampah</span>
+                    </a>
+                </li>
+                <li class="py-2">
+                    <a href="/pengguna/langganan"
+                        class="nav-link px-3 {{ $key == 'langganan' ? 'active bg-primary' : '' }}">
                         <span class="mx-2"><i class="fa-solid fa-crown"></i></span>
                         <span>Langganan</span>
                     </a>
                 </li>
                 <li class="py-2">
-                    <a href="/pengguna/history" class="nav-link px-3 {{ $key == 'history' ? 'active bg-primary' : '' }}">
-                        <span class="mx-2"><i class="bi bi-clock-history"></i></span>
+                    <a href="/pengguna/history"
+                        class="nav-link px-3 {{ $key == 'history' ? 'active bg-primary' : '' }}">
+                        <span class="mx-2"><i class="fa-solid fa-clock-rotate-left"></i></span>
                         <span>History</span>
                     </a>
                 </li>
