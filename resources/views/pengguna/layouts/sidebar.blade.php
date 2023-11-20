@@ -17,9 +17,9 @@
                     <hr class="dropdown-divider bg-light" />
                 </li>
                 <li class="py-2">
-                    <a href="/pengguna/ambilsampah" class="nav-link px-3 {{ $key == 'ambilsampah' ? 'active bg-primary' : '' }}">
+                    <a href="/pengguna/jemputsampah" class="nav-link px-3 {{ $key == 'jemputsampah' ? 'active bg-primary' : '' }}">
                         <span class="mx-2"><i class="bi bi-recycle"></i></span>
-                        <span>Ambil Sampah</span>
+                        <span>Jemput Sampah</span>
                     </a>
                 </li>
                 <li class="py-2">
