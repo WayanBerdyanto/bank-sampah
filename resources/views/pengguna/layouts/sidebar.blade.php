@@ -30,17 +30,17 @@
                     </a>
                 </li>
                 <li class="py-2">
+                    <a href="/pengguna/transaksi"
+                        class="nav-link px-3 {{ $key == 'transaksi' ? 'active bg-primary' : '' }}">
+                        <span class="mx-2"><i class="fa-solid fa-clock-rotate-left"></i></span>
+                        <span>Transaksi</span>
+                    </a>
+                </li>
+                <li class="py-2">
                     <a href="/pengguna/langganan"
                         class="nav-link px-3 {{ $key == 'langganan' ? 'active bg-primary' : '' }}">
                         <span class="mx-2"><i class="fa-solid fa-crown"></i></span>
                         <span>Langganan</span>
-                    </a>
-                </li>
-                <li class="py-2">
-                    <a href="/pengguna/history"
-                        class="nav-link px-3 {{ $key == 'history' ? 'active bg-primary' : '' }}">
-                        <span class="mx-2"><i class="fa-solid fa-clock-rotate-left"></i></span>
-                        <span>History</span>
                     </a>
                 </li>
             </ul>

@@ -29,10 +29,10 @@ class PenggunaController extends Controller
         $user = Auth::User()->nama_lengkap ?? '';
         return view('pengguna.langganan', ['user' => $user, 'key'=>'langganan']);
     }
-    public function history()
+    public function transaksi()
     {
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('pengguna.history', ['user' => $user, 'key'=>'history']);
+        return view('pengguna.transaksi', ['user' => $user, 'key'=>'transaksi']);
     }
 
     public function profilesetting()

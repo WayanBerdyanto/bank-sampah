@@ -36,7 +36,7 @@ Route::post('/loginpengguna', [LoginController::class, 'loginPengguna']);
 Route::middleware('cekrole:pengguna')->group(function () {
     Route::get('/pengguna/', [PenggunaController::class, 'index'])->name('pengguna.index');
     Route::get('/pengguna/langganan', [PenggunaController::class, 'langganan']);
-    Route::get('/pengguna/history', [PenggunaController::class, 'history']);
+    Route::get('/pengguna/transaksi', [PenggunaController::class, 'transaksi']);
     Route::get('/pengguna/profilesetting', [PenggunaController::class, 'profilesetting']);
     Route::put('/pengguna/postprofile/{id}', [PenggunaController::class, 'postProfile']);
     Route::get('/pengguna/logout', [PenggunaController::class, 'logout']);
@@ -44,6 +44,7 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::post('/pengguna/postubahpassword', [PenggunaController::class, 'postubahpassword']);
     Route::get('/pengguna/buangsampah', [PenggunaController::class, 'buangsampah']);
     Route::get('/pengguna/jemputsampah', [PenggunaController::class, 'jemputsampah']);
+    Route::get('/pengguna/transaksi/pembayaran', [PenggunaController::class, 'pembayaran']);
 
 
 });
@@ -51,6 +52,8 @@ Route::middleware('cekrole:pengguna')->group(function () {
 Route::middleware('cekrole:banksampah')->group(function () {
     Route::get('/banksampah/', [BankSampahController::class, 'index']);
     Route::get('/banksampah/datapembuangan', [BankSampahController::class, 'dataPembuangan']);
+    Route::get('/banksampah/datapenerimaan', [BankSampahController::class, 'dataPenerimaan']);
+    Route::get('/banksampah/dataPenerimaan/detailPenerimaan', [BankSampahController::class, 'detailPenerimaan']);
 });
 
 Route::middleware('cekrole:pengambil')->group(function () {
