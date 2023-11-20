@@ -24,7 +24,7 @@ class LineChartPengguna
             ->addData('An-Organik', [1, 0, 3, 1, 2, 1, 0])
             ->setXAxis(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'])
             ->setFontColor('#000')
-            ->setHeight(210) 
+            ->setHeight(200) 
             ->setWidth(300);
     }
 }

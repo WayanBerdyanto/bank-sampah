@@ -21,7 +21,7 @@ class PieChartSampah
             ->setLabels(['Organik', 'Anorganik'])
             ->setColors(['#ffc63b', '#ff6384'])
             ->setFontColor('#fff')
-            ->setHeight(300)
+            ->setHeight(200)
             ->setWidth(300);
         // ->setTitle('Monthly Users')
         // ->addData([

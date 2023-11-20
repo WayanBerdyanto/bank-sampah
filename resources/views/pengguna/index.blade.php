@@ -15,26 +15,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4 mb-3">
-                    <div class="card bg-card-10 text-white" style="height: 300px;">
-                        <div class="card-header fw-bold text-center text-light">Berat Sampah Yang Di Angkut</div>
-                        <div class="card-body px-4">
-                            Hi Pengguna <strong>{{ $user }} </strong>, Sampah Yang diangkut Hari ini adalah
-                            <strong>2Kg</strong>
-                            Karena yang ambil adalah Paket Mingguan sehingga Batas Berat/hari yang diangkut sebanyak 4kg
-                        </div>
-                        <a data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <div class="card-footer d-flex">
-                                View Details
-                                <span class="ms-auto">
-                                    <i class="bi bi-chevron-right"></i>
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card bg-warning text-dark">
+                <div class="col-md-6 mb-3">
+                    <div class="card bg-warning text-dark" style="height: 280px">
                         <div class="card-header text-center fw-bold">
                             Grafik Jenis Sampah Disetiap Hari
                         </div>
@@ -43,9 +25,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card bg-success text-light">
-                        <div class="card-header text-center fw-bold mb-4">
+                <div class="col-md-6 mb-3">
+                    <div class="card bg-success text-light" style="height: 280px">
+                        <div class="card-header text-center fw-bold mb-1">
                             Jenis Sampah
                         </div>
                         <div class="card-body px-4">
@@ -130,28 +112,6 @@
         </div>
     </main>
 @endsection
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                    <i class="bi bi-info-circle-fill text-success"></i>
-                    Informasi
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Hi Pengguna <strong>{{ $user }} </strong>, Sampah Yang diangkut Hari ini adalah
-                <strong>2Kg</strong>
-                Karena yang ambil adalah Paket Mingguan sehingga Batas Berat/hari yang diangkut sebanyak 4kg
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="modal fade" id="modallogout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
