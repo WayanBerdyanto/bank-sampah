@@ -38,7 +38,7 @@ class PenggunaController extends Controller
     public function profilesetting()
     {
         $username = Auth::User()->username ?? '';
-        $user = Auth::User()->nama_lengkap ?? '';
+        $user = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
         return view('pengguna.profile', ['result' => $result, 'key'=>'profilesettings', 'user'=>$user]);
     }
@@ -98,9 +98,9 @@ class PenggunaController extends Controller
         }
     }
 
-    public function ambilsampah(){
+    public function jemputsampah(){
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('pengguna.ambilsampah' , ['key'=>'ambilsampah', 'user'=>$user]);
+        return view('pengguna.jemputsampah' , ['key'=>'jemputsampah', 'user'=>$user]);
     }
     public function buangsampah(){
         $user = Auth::User()->nama_lengkap ?? '';
