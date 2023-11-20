@@ -64,4 +64,9 @@ Route::middleware('cekrole:banksampah')->group(function () {
 
 Route::middleware('cekrole:pengambil')->group(function () {
     Route::get('/pengambil/', [PengambilController::class, 'index']);
+    Route::get('/pengambil/profilepengambil', [PengambilController::class, 'profilepengambil']);
+    Route::put('/pengambil/postprofile/{id}', [PengambilController::class, 'postProfile']);
+    Route::get('/pengambil/ubahpassword', [PengambilController::class, 'ubahpassword']);
+    Route::post('/pengambil/postubahpassword', [PengambilController::class, 'postubahpassword']);
+    Route::get('/pengambil/logout', [PengambilController::class, 'logout']);
 });

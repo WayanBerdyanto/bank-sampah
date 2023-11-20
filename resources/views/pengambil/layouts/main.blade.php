@@ -10,11 +10,13 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
-    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    
+
     {{-- @vite('resources/css/style.css')
     @vite('resources/js/script.js') --}}
     {{-- @vite('resources/js/bootstrap.bundle.min.js') --}}
@@ -52,10 +54,22 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item py-2" href="#">Profile</a>
+                                <a class="dropdown-item py-2 " href="/pengambil/profilepengambil">
+                                    <i class="fa-solid fa-address-card mr-3"></i>
+                                    Profile
+                                </a>
                             </li>
                             <li>
-                                <a class="dropdown-item py-2" href="/logout">Logout</a>
+                                <a class="dropdown-item py-2 " href="/pengambil/ubahpassword">
+                                    <i class="fa-solid fa-user-pen mr-3"></i>
+                                    Ubah Passowrd</a>
+                            </li>
+                            <li>
+                                <button class="btn dropdown-item py-2" data-bs-toggle="modal"
+                                data-bs-target="#modallogout">
+                                <i class="fa-solid fa-right-from-bracket mr-3"></i>
+                                <span>Logout</span>
+                            </button>
                             </li>
                         </ul>
                     </li>
@@ -67,13 +81,37 @@
 
     @yield('content')
 
+    <div class="modal fade" id="modallogout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="exampleModalLabel">
+                        <i class="bi bi-exclamation-circle-fill mr-2 text-danger"></i>
+                        Logout
+                    </h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Anda Yakin Logout dari <strong>{{ $user }}</strong> ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a class="btn btn-danger" href="/pengambil/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
 
     <script src="{{ asset('js/password.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @include('sweetalert::alert')
 
 
 
 </body>
 
 </html>
-        
