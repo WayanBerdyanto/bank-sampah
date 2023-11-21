@@ -17,13 +17,16 @@ class BankSampahController extends Controller
     }
 
     public function dataPembuangan(){
-        return view('banksampah.dataPembuangan');
+        $user = Auth::User()->nama_lengkap ?? '';
+        return view('banksampah.dataPembuangan', ['user'=>$user]);
     }
     public function dataPenerimaan() {
-        return view('banksampah.dataPenerimaan');
+        $user = Auth::User()->nama_lengkap ?? '';
+        return view('banksampah.dataPenerimaan', ['user'=>$user]);
     }
     public function detailPenerimaan() {
-        return view('banksampah.detailPenerimaan');
+        $user = Auth::User()->nama_lengkap ?? '';
+        return view('banksampah.detailPenerimaan', ['user'=>$user]);
     }
 
     public function profilebank()

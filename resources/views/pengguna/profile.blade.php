@@ -44,17 +44,14 @@
                         </li>
                     </ul>
                 </div>
-
                 <div class="col-md-5 mt-2 px-4 d-flex justify-content-center">
                     <div class="ml-2">
-                        <div class="" id="map" style="height: 300px; width: 400px">
-                        </div>
+                        <div id="maps" style="height: 300px; width: 400px"></div>
                     </div>
                 </div>
-
             </div>
         </div>
-        <hr>
+        <hr class="mt-2">
         <div class="row">
             <div class="col-md-12">
                 <a href="#settings" class="d-flex justify-content-end px-2 text-primary fs-4 text-decoration-none">
@@ -121,7 +118,7 @@
                             value="{{ $result->longitude }}" hidden>
                     </div>
                     <div class="mb-3" hidden>
-                        <div class="card-body" id="map" style="height: 400px">
+                        <div class="card-body" id="maps" style="height: 400px">
                         </div>
                     </div>
                 </div>

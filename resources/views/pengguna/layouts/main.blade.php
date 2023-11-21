@@ -58,14 +58,16 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item py-2 {{ $key == 'profilesettings' ? 'active bg-primary' : '' }}" href="/pengguna/profilesetting">
+                                <a class="dropdown-item py-2 {{ $key == 'profilesettings' ? 'active bg-primary' : '' }}"
+                                    href="/pengguna/profilesetting">
                                     <i class="fa-solid fa-address-card mr-3"></i>
                                     Profile
                                 </a>
                             </li>
                             <li>
 
-                                <a class="dropdown-item py-2 {{ $key == 'ubahpassword' ? 'active bg-primary' : '' }}" href="/pengguna/ubahpassword">
+                                <a class="dropdown-item py-2 {{ $key == 'ubahpassword' ? 'active bg-primary' : '' }}"
+                                    href="/pengguna/ubahpassword">
                                     <i class="fa-solid fa-user-pen mr-3"></i>
                                     Ubah Passowrd</a>
                             </li>
@@ -111,14 +113,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
 
-    <script src="{{ asset('js/password.js') }}"></script>
-    <script src="{{ asset('js/map.js') }}"></script>
-    <script src="{{ asset('js/map_label.js') }}"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6gdhH-9Asec5cxoNt4XMEZ6GLGMeajLw&callback=initMap"></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrqEdaadXnnDWGx7Lr7WDJTzewjHZSItQ&callback=initMap"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrqEdaadXnnDWGx7Lr7WDJTzewjHZSItQ&callback=initMapLabel"></script>
     <script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.3/mapsJavaScriptAPI.js" async defer>
     </script>
 
@@ -131,8 +129,12 @@
     </script>
 
     <script src="{{ asset('js/password.js') }}"></script>
+    <script src="{{ asset('js/map.js') }}"></script>
+    <script src="{{ asset('js/map_label.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 
-
+    <script src="{{ asset('js/password.js') }}"></script>
 
 
 

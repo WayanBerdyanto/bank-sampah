@@ -103,7 +103,7 @@
                 <div class="col-md-12">
                     <div class="mb-3">
                         <h3 class="form-label fw-bold">Lokasi Rumah</h3>
-                        <div class="card-body" id="map" style="height: 400px">
+                        <div class="card-body" id="maps" style="height: 400px">
 
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 // map_label.js
 
 var map;
-function initMap() {
+function initMapLabel() {
     map = new google.maps.Map(document.getElementById("maplabel"), {
         center: {
             lat: -6.175392,
