@@ -62,7 +62,7 @@
                     <input
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="username" type="text" name="username" placeholder="Username" required
-                        value="{{ old('username') }}">
+                        value="{{ old('username') }}"  autocomplete="off">
                 </div>
                 <div class="mb-2 w-full ml-1">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="nama_lengkap">
@@ -82,7 +82,7 @@
                 <input
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="email" type="text" name="email" placeholder="Email" required
-                    value="{{ old('email') }}">
+                    value="{{ old('email') }}" autocomplete="off">
             </div>
 
             <div class="mb-2">

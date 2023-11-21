@@ -27,9 +27,16 @@
                         </li>
                         <li class="list-group-item">
                             <span>Status :</span>
-                            <span class="btn btn-primary btn-sm" onclick="showSweetAlert()">
-                                Langganan
-                            </span>
+                            @if ($result->email == 'pengguna@gmail.com')
+                                <span class="btn btn-primary btn-sm" onclick="showSweetAlert()">
+                                    Langganan
+                                </span>
+                            @else
+                                <span class="btn btn-danger btn-sm" onclick="showSweetAlert()">
+                                    Belum Langganan
+                                </span>
+                            @endif
+
 
                             <script>
                                 function showSweetAlert() {
