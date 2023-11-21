@@ -116,7 +116,6 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrqEdaadXnnDWGx7Lr7WDJTzewjHZSItQ&callback=initMap"></script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrqEdaadXnnDWGx7Lr7WDJTzewjHZSItQ&callback=initMapLabel"></script>
     <script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.3/mapsJavaScriptAPI.js" async defer>
     </script>
 
@@ -130,7 +129,6 @@
 
     <script src="{{ asset('js/password.js') }}"></script>
     <script src="{{ asset('js/map.js') }}"></script>
-    <script src="{{ asset('js/map_label.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 
