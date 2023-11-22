@@ -24,7 +24,7 @@
                 </li>
                 <li class="flex items-center mx-3">
                     <a class="lg:text-white md:hover:text-slate-600 text-xs text-gray-800 px-3 py-4 lg:py-2 flex items-center uppercase font-bold"
-                        href="#kontak">Kontak</a>
+                        href="#blog">Blog</a>
                 </li>
                 <li class="flex items-center">
                     <a href="/login"
