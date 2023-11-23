@@ -46,6 +46,9 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::get('/pengguna/jemputsampah', [PenggunaController::class, 'jemputsampah']);
     Route::get('/pengguna/transaksi/pembayaran', [PenggunaController::class, 'pembayaran']);
 
+    Route::get('/pengguna/buanglangganan', [PenggunaController::class, 'buanglangganan']);
+
+
 
 });
 

@@ -17,18 +17,39 @@
                     <hr class="dropdown-divider bg-light" />
                 </li>
                 <li class="py-2">
-                    <a href="/pengguna/jemputsampah" class="nav-link px-3 {{ $key == 'jemputsampah' ? 'active bg-primary' : '' }}">
+                    <a class="nav-link px-3" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        <span class="mx-2"><i class="bi bi-list"></i></i></span>
+                        <span>Menu Langganan</span>
+                    </a>
+                    <div class="collapse px-3 ml-4" id="collapseExample">
+                        <a href="/pengguna/buanglangganan"
+                            class="nav-link {{ $key == 'buanglangganan' ? 'active bg-primary' : '' }}">
+                            <span class="mx-2"><i class="bi bi-trash"></i></span>
+                            <span>Buang Sampah</span>
+                        </a>
+                        <a href="/pengguna/transaksi" class="nav-link">
+                            <span class="mx-2"><i class="fa-solid fa-clock-rotate-left"></i></span>
+                            <span>Transaksi</span>
+                        </a>
+                    </div>
+                </li>
+                <li class="py-2">
+                    <a href="/pengguna/jemputsampah"
+                        class="nav-link px-3 {{ $key == 'jemputsampah' ? 'active bg-primary' : '' }}">
                         <span class="mx-2"><i class="bi bi-recycle"></i></span>
                         <span>Jemput Sampah</span>
                     </a>
                 </li>
                 <li class="py-2">
-                    <a href="/pengguna/buangsampah" class="nav-link px-3 {{ $key == 'buangsampah' ? 'active bg-primary' : '' }}">
+                    <a href="/pengguna/buangsampah"
+                        class="nav-link px-3 {{ $key == 'buangsampah' ? 'active bg-primary' : '' }}">
                         <span class="mx-2"> <i class="bi bi-trash"></i>
                         </span>
                         <span>Buang Sampah</span>
                     </a>
                 </li>
+
                 <li class="py-2">
                     <a href="/pengguna/transaksi"
                         class="nav-link px-3 {{ $key == 'transaksi' ? 'active bg-primary' : '' }}">
