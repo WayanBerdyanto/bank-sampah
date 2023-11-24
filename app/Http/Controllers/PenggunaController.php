@@ -113,6 +113,7 @@ class PenggunaController extends Controller
         return view('pengguna.buangsampah', ['key'=>'buangsampah', 'user'=>$user, 'result'=>$result]);
     }
 
+
     public function buanglangganan(){
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
