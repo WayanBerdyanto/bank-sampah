@@ -39,5 +39,41 @@ class UserSeeder extends Seeder
                 "no_telpon" => "123123123",
             ],
         ]);
+
+        DB::table("langganan")->insert([
+            [
+                'kode_langganan'=>'GOLD1',
+                'nama_langganan'=>'Paket Mingguan',
+                'layanan'=>'keren, rapi, aman, dan tentram',
+                'lama_langganan'=> 7,
+                'desc'=>'lorem ipsum',
+                'harga'=>35000,
+            ],
+            [
+                'kode_langganan'=>'GOLD2',
+                'nama_langganan'=>'Paket Bulanan',
+                'layanan'=>'keren, rapi, aman, dan tentram',
+                'lama_langganan'=> 30,
+                'desc'=>'lorem ipsum',
+                'harga'=>120000,
+            ],
+            [
+                'kode_langganan'=>'GOLD3',
+                'nama_langganan'=>'Paket 6 Bulanan',
+                'layanan'=>'keren, rapi, aman, dan tentram',
+                'lama_langganan'=> 180,
+                'desc'=>'lorem ipsum',
+                'harga'=>120000,
+            ],
+            [
+                'kode_langganan'=>'GOLD4',
+                'nama_langganan'=>'Paket Tahunan',
+                'layanan'=>'keren, rapi, aman, dan tentram',
+                'lama_langganan'=> 365,
+                'desc'=>'lorem ipsum',
+                'harga'=>120000,
+            ],
+
+        ]);
     }
 }

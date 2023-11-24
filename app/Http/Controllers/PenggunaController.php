@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Langganan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,8 @@ class PenggunaController extends Controller
     {
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
-        return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key'=>'index']);
+        $result = User::where('username', $username)->first();
+        return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key'=>'index', 'result'=>$result]);
     }
 
     public function logout()
@@ -27,12 +29,17 @@ class PenggunaController extends Controller
     public function langganan()
     {
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('pengguna.langganan', ['user' => $user, 'key'=>'langganan']);
+        $username = Auth::User()->username ?? '';
+        $result = User::where('username', $username)->first();
+        $langganan = Langganan::All();
+        return view('pengguna.langganan', ['user' => $user, 'key'=>'langganan', 'result'=>$result, 'langganan'=>$langganan]);
     }
     public function transaksi()
     {
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('pengguna.transaksi', ['user' => $user, 'key'=>'transaksi']);
+        $username = Auth::User()->username ?? '';
+        $result = User::where('username', $username)->first();
+        return view('pengguna.transaksi', ['user' => $user, 'key'=>'transaksi', 'result'=>$result]);
     }
 
     public function profilesetting()
@@ -74,7 +81,9 @@ class PenggunaController extends Controller
     public function ubahpassword()
     {
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('pengguna.ubahpassword', ['key'=>'ubahpassword', 'user'=>$user]);
+        $username = Auth::User()->username ?? '';
+        $result = User::where('username', $username)->first();
+        return view('pengguna.ubahpassword', ['key'=>'ubahpassword', 'user'=>$user, 'result'=>$result]);
     }
 
     public function postubahpassword(Request $request)
@@ -97,14 +106,18 @@ class PenggunaController extends Controller
             return redirect()->back()->with('error', 'Password saat ini salah.');
         }
     }
-
-    public function jemputsampah(){
-        $user = Auth::User()->nama_lengkap ?? '';
-        return view('pengguna.jemputsampah' , ['key'=>'jemputsampah', 'user'=>$user]);
-    }
     public function buangsampah(){
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('pengguna.buangsampah', ['key'=>'buangsampah', 'user'=>$user]);
+        $username = Auth::User()->username ?? '';
+        $result = User::where('username', $username)->first();
+        return view('pengguna.buangsampah', ['key'=>'buangsampah', 'user'=>$user, 'result'=>$result]);
+    }
+
+    public function buanglangganan(){
+        $user = Auth::User()->nama_lengkap ?? '';
+        $username = Auth::User()->username ?? '';
+        $result = User::where('username', $username)->first();
+        return view('pengguna.langganan.langgananbuang', ['key'=>'buanglangganan', 'user'=>$user, 'result'=>$result]);
     }
 
     public function buanglangganan(){

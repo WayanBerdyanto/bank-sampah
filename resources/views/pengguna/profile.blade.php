@@ -3,6 +3,18 @@
     <main class="mt-5 pt-3">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-md-5 mt-2 px-4 d-flex justify-content-center">
+                    <div class="ml-2 d-flex align-items-center border border-dark px-2 mb-3">
+                        @if ($result->foto == null)
+                            <form method="POST" action="/pengguna/postprofile/{{ $result->id }}" class="text-center">
+                                <span>Tidak Ada Foto</span>
+                                <input type="file" name="foto">
+                            </form>
+                        @else
+                            <img src="{{asset('img/client/user_vector.jpg')}}" alt="Tidak Ada Gambar" width="300px" style="height: 250px">
+                        @endif
+                    </div>
+                </div>
                 <div class="col-md-7 mt-2 px-4">
                     <ul class="list-group">
                         <li class="list-group-item active" aria-current="true">Data Pengguna</li>
@@ -27,39 +39,23 @@
                         </li>
                         <li class="list-group-item">
                             <span>Status :</span>
-                            @if ($result->email == 'pengguna@gmail.com')
-                                <span class="btn btn-primary btn-sm" onclick="showSweetAlert()">
+                            @if ($result->status_langganan != 'Belum berlangganan')
+                                <span class="btn btn-primary btn-sm" onclick="showSweetAlertLangganan()">
                                     Langganan
                                 </span>
                             @else
-                                <span class="btn btn-danger btn-sm" onclick="showSweetAlert()">
+                                <span class="btn btn-danger btn-sm" onclick="showSweetAlertNoLangganan()">
                                     Belum Langganan
                                 </span>
                             @endif
-
-
-                            <script>
-                                function showSweetAlert() {
-                                    Swal.fire({
-                                        title: 'Status',
-                                        text: '{{ $result->nama_lengkap }} Berlangganan',
-                                        icon: 'success',
-                                        confirmButtonText: 'Okay'
-                                    });
-                                }
-                            </script>
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-5 mt-2 px-4 d-flex justify-content-center">
-                    <div class="ml-2">
-                        <div id="maps" style="height: 300px; width: 400px"></div>
-                    </div>
-                </div>
+
             </div>
         </div>
         <hr class="mt-2">
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-md-12">
                 <a href="#settings" class="d-flex justify-content-end px-2 text-primary fs-4 text-decoration-none">
                     Profile Settings
@@ -69,7 +65,7 @@
         </div>
         <div class="row" id="settings">
             <form method="POST" action="/pengguna/postprofile/{{ $result->id }}">
-                <div class="col-md-12 mb-3 mt-2 px-4">
+                <div class="col-md-12 mb-3 px-4">
                     @csrf
                     @method('PUT')
                     <input type="number" name="id" value="{{ $result->id }}" hidden>
@@ -124,13 +120,14 @@
                         <input type="text" class="form-control" name="longitudeInput" id="longitudeInput"
                             value="{{ $result->longitude }}" hidden>
                     </div>
-                    <div class="mb-3" hidden>
+                    <div class="mb-3 text-end">
+                        <button type="submit" class="btn btn-primary px-4">Submit</button>
+                    </div>
+                    <div class="mb-3">
+                        <label for="maps" class="form-label fw-bold">Lokasi Anda</label>
                         <div class="card-body" id="maps" style="height: 400px">
                         </div>
                     </div>
-                </div>
-                <div class="col-md-12 px-4 text-end mb-4">
-                    <button type="submit" class="btn btn-primary px-4">Submit</button>
                 </div>
             </form>
         </div>
