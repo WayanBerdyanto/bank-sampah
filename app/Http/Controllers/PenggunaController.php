@@ -119,4 +119,9 @@ class PenggunaController extends Controller
         $result = User::where('username', $username)->first();
         return view('pengguna.langganan.langgananbuang', ['key'=>'buanglangganan', 'user'=>$user, 'result'=>$result]);
     }
+
+    public function buanglangganan(){
+        $user = Auth::User()->nama_lengkap ?? '';
+        return view('pengguna.langganan.langgananbuang', ['key'=>'buanglangganan', 'user'=>$user]);
+    }
 }
