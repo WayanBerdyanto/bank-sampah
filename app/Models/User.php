@@ -26,6 +26,8 @@ class User extends Authenticatable
         'password',
         'role',
         'nama_lengkap',
+        'status_langganan',
+        'foto',
         'provinsi',
         'kabupaten',
         'kecamatan',

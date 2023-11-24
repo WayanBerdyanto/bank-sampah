@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('password', 80);
             $table->enum('role',['pengguna', 'pengambil', 'banksampah'])->default('pengguna');
             $table->string('nama_lengkap', 50)->nullable();
+            $table->string('status_langganan', 100)->default('Belum berlangganan')->nullable();
+            $table->string('foto', 100)->nullable();
             $table->string('provinsi', 50)->nullable();
             $table->string('kabupaten', 50)->nullable();
             $table->string('kecamatan', 50)->nullable();

@@ -12,17 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('detail_pengambilan', function (Blueprint $table) {
-            $table->bigIncrements('id_dtl_pengambilan');
+            $table->bigIncrements("id_dtl_pengambilan");
 
-            $table->unsignedBigInteger('id_dtl_langganan');
-            $table->foreign('id_dtl_langganan')->references('id_dtl_langganan')->on('detail_langganan');
+            $table->unsignedBigInteger("id_nota");
+            $table->foreign("id_nota")->references("id_nota")->on("master_pengambilan");
 
-            $table->unsignedBigInteger('id');
-            $table->foreign('id')->references('id')->on('users');
-
-            $table->date('tanggal');
-            $table->string('hari', 12);
-            $table->integer('berat');
+            $table->unsignedBigInteger("id_pengambil");
+            $table->foreign("id_pengambil")->references("id")->on("users");
+            
+            $table->integer("berat");
             $table->timestamps();
         });
     }
