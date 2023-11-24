@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("layanan", 100);
             $table->integer("lama_langganan");
             $table->string("desc", 50);
-            $table->text("harga");
+            $table->integer("harga");
             $table->timestamps();
         });
     }

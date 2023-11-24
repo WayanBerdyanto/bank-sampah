@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Langganan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -30,7 +31,8 @@ class PenggunaController extends Controller
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        return view('pengguna.langganan', ['user' => $user, 'key'=>'langganan', 'result'=>$result]);
+        $langganan = Langganan::All();
+        return view('pengguna.langganan', ['user' => $user, 'key'=>'langganan', 'result'=>$result, 'langganan'=>$langganan]);
     }
     public function transaksi()
     {
