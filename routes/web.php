@@ -43,7 +43,6 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::get('/pengguna/ubahpassword', [PenggunaController::class, 'ubahpassword']);
     Route::post('/pengguna/postubahpassword', [PenggunaController::class, 'postubahpassword']);
     Route::get('/pengguna/buangsampah', [PenggunaController::class, 'buangsampah']);
-    Route::get('/pengguna/jemputsampah', [PenggunaController::class, 'jemputsampah']);
     Route::get('/pengguna/transaksi/pembayaran', [PenggunaController::class, 'pembayaran']);
 
     Route::get('/pengguna/buanglangganan', [PenggunaController::class, 'buanglangganan']);
