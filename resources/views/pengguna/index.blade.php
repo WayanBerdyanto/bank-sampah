@@ -55,9 +55,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($result_master as $items)
+                                        @foreach ($result_master as $idx => $items)
                                             <tr>
-                                                <td>{{ $items->id }}</td>
+                                                <td>{{ $result_master->firstItem() + $idx }}</td>
                                                 <td>{{ $items->nama_lengkap }}</td>
                                                 <td>{{ $items->jenis_sampah }}</td>
                                                 <td>{{ $items->jam_pengajuan }}</td>
@@ -69,25 +69,19 @@
 
                                     </tbody>
                                 </table>
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination flex justify-content-end">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                    </ul>
-                                </nav>
+                                <span class="mr-2 page-link pagination">
+                                    {{ $result_master->onEachSide(5)->links() }}
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-5">
                 <div class="col-md-12">
                     <div class="mb-3">
                         <h3 class="form-label fw-bold">Lokasi Rumah</h3>
-                        <div class="card-body" id="maps" style="height: 400px">
+                        <div class="card-body mb-4" id="maps" style="height: 400px">
 
                         </div>
                     </div>
