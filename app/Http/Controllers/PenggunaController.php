@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Charts\PieChartSampah;
 use App\Charts\LineChartPengguna;
+use App\Models\master_pembuangan;
+use DB;
+
 
 class PenggunaController extends Controller
 {
@@ -17,7 +20,10 @@ class PenggunaController extends Controller
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key'=>'index', 'result'=>$result]);
+        $id_pengguna = Auth::User()->id;
+        $result_master = DB::Select("SELECT us.id, us.nama_lengkap, mp.jenis_sampah, mp.jam_pengajuan
+        FROM users us, master_pembuangan mp WHERE us.id = mp.id_bank_sampah");
+        return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key'=>'index', 'result'=>$result, 'result_master'=>$result_master]);
     }
 
     public function logout()
@@ -112,6 +118,26 @@ class PenggunaController extends Controller
         $result = User::where('username', $username)->first();
         $banksampah = User::where('role', 'banksampah')->get();
         return view('pengguna.buangsampah', ['key'=>'buangsampah', 'user'=>$user, 'result'=>$result, 'banksampah'=>$banksampah]);
+    }
+
+    public function postbuangsampah(Request $request) {
+        $validated = $request->validate([
+            'jenis_sampah'=>'required|max:255',
+            'idbanksampah'=>'required',
+            'jam_pengajuan'=> 'required'
+        ]);
+        $id_pengguna = Auth::User()->id;
+        if($validated){
+            master_pembuangan::create([
+                'id_bank_sampah'=>$request->idbanksampah,
+                'id_pengguna'=>$id_pengguna,
+                'jenis_sampah'=>$request->jenis_sampah,
+                'jam_pengajuan'=>$request->jam_pengajuan
+            ]);
+            return redirect('/pengguna/')->with('success', 'Data Sampah Berhasil Diinputkan');
+        }else{
+            return redirect('/pengguna/buangsampah')->with('error', 'Data Sampah Gagal Diinputkan');
+        }
     }
 
 

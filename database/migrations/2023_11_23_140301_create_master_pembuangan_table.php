@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreign("id_bank_sampah")->references("id")->on("users");
             $table->unsignedBigInteger("id_pengguna");
             $table->foreign("id_pengguna")->references("id")->on("users");
-            $table->enum("jenis_sampah", ["Organik","An Organik"]);
+            $table->string("jenis_sampah", 40);
+            $table->time("jam_pengajuan");
             $table->timestamps();
         });
     }

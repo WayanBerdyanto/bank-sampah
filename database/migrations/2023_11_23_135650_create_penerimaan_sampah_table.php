@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements("id_penerimaan_sampah");
             $table->unsignedBigInteger("id_bank_sampah");
             $table->foreign("id_bank_sampah")->references("id")->on("users");
-            $table->enum("confirm", ["Terkonfirmasi","Tidak Terkonfirmasi","Belum Terkonfirmasi"])->default("Belum Terkonfirmasi");
+            $table->string("confirm", 50)->default("Belum Terkonfirmasi");
             $table->time("jam_terima")->nullable();
             $table->date("tanggal_terima")->nullable();
             $table->timestamps();

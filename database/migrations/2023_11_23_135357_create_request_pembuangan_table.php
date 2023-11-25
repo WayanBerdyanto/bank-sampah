@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements("id_request");
             $table->unsignedBigInteger("id_dtl_pengambilan");
             $table->foreign("id_dtl_pengambilan")->references("id_dtl_pengambilan")->on("detail_pengambilan");
-            $table->enum("status",["Diterima","Ditolak"]);
+            $table->string("status", 40);
             $table->timestamps();
         });
     }
