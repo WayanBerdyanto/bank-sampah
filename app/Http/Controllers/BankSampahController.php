@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Charts\PieChartSampah;
+use App\Models\master_pembuangan;
 
 
 
@@ -22,12 +23,20 @@ class BankSampahController extends Controller
     }
     public function dataPenerimaan() {
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('banksampah.dataPenerimaan', ['user'=>$user]);
+        $id_banksampah = Auth::User()->id;
+        $result_master = master_pembuangan::select('users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.jam_pengajuan')
+        ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
+        ->where('users.id', $id_banksampah)
+        ->paginate(5);
+        // dd($result_master);
+        return view('banksampah.dataPenerimaan', ['user'=>$user, 'result_master'=>$result_master]);
     }
     public function detailPenerimaan() {
         $user = Auth::User()->nama_lengkap ?? '';
         return view('banksampah.detailPenerimaan', ['user'=>$user]);
     }
+
+
 
     public function profilebank()
     {

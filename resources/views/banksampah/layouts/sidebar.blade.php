@@ -26,7 +26,7 @@
                 </li>
                 <li class="py-2">
                     <a href="/banksampah/datapenerimaan" class="nav-link px-3">
-                        <span class="me-2"><i class="bi bi-book-fill"></i></span>
+                        <span class="me-2"><i class="bi bi-reception-4"></i></span>
                         <span>Penerimaan</span>
                     </a>
                 </li>
