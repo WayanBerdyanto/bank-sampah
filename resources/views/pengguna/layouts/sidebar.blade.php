@@ -35,15 +35,16 @@
                             </a>
                         </div>
                     </li>
+                @else
+                    <li class="py-2">
+                        <a href="/pengguna/buangsampah"
+                            class="nav-link px-3 {{ $key == 'buangsampah' ? 'active bg-primary' : '' }}">
+                            <span class="mx-2"> <i class="bi bi-trash"></i>
+                            </span>
+                            <span>Buang Sampah</span>
+                        </a>
+                    </li>
                 @endif
-                <li class="py-2">
-                    <a href="/pengguna/buangsampah"
-                        class="nav-link px-3 {{ $key == 'buangsampah' ? 'active bg-primary' : '' }}">
-                        <span class="mx-2"> <i class="bi bi-trash"></i>
-                        </span>
-                        <span>Buang Sampah</span>
-                    </a>
-                </li>
 
                 <li class="py-2">
                     <a href="/pengguna/transaksi"

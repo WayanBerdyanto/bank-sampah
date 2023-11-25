@@ -27,9 +27,9 @@
                             <div class="col-sm-10">
                                 <select class="form-select" aria-label="Default select example">
                                     <option selected>Pilih Lokasi Pembuangan</option>
-                                    <option value="banksampah1">Bank Sampah 1</option>
-                                    <option value="banksampah2">Bank Sampah 2</option>
-                                    <option value="banksampah3">Bank Sampah 3</option>
+                                    @foreach ($banksampah as $data)
+                                        <option value="{{ $data->username }}">{{ $data->nama_lengkap }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -39,27 +39,27 @@
                             <div class="col-sm-10">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="inlineRadio1" value="option1">
+                                        id="inlineRadio1" value="08.00">
                                     <label class="form-check-label" for="inlineRadio1">08.00</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="inlineRadio2" value="option2">
+                                        id="inlineRadio2" value="09.30">
                                     <label class="form-check-label" for="inlineRadio2">09.30</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="inlineRadio3" value="option2">
+                                        id="inlineRadio3" value="11.30">
                                     <label class="form-check-label" for="inlineRadio3">11.30</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="inlineRadio4" value="option2">
+                                        id="inlineRadio4" value="13.30">
                                     <label class="form-check-label" for="inlineRadio4">13.30</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="inlineRadio5" value="option2">
+                                        id="inlineRadio5" value="15.30">
                                     <label class="form-check-label" for="inlineRadio5">15.30</label>
                                 </div>
                             </div>
@@ -75,9 +75,7 @@
                     <div class="mb-3">
                         <h3 class="form-label fw-bold">Lokasi Pembuangan Sampah</h3>
                         <div id="userLabel" data-user-label="{{ $user }}"></div>
-                        <div class="card-body" id="maplabel" style="height: 400px">
-
-                        </div>
+                        <div class="card-body" id="maplabel" style="height: 450px"></div>
                     </div>
                 </div>
             </div>
