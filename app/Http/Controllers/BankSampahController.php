@@ -1,49 +1,50 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Charts\PieChartSampah;
-use App\Models\master_pembuangan;
-
-
 
 class BankSampahController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $user = Auth::User()->nama_lengkap ?? '';
-        return view("banksampah.index", ['user'=>$user]);
+        return view("banksampah.index", ['user' => $user]);
     }
 
-    public function dataPembuangan(){
+    public function dataPembuangan()
+    {
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('banksampah.dataPembuangan', ['user'=>$user]);
+        return view('banksampah.dataPembuangan', ['user' => $user]);
     }
-    public function dataPenerimaan() {
+    public function dataPenerimaan()
+    {
         $user = Auth::User()->nama_lengkap ?? '';
         $id_banksampah = Auth::User()->id;
-        $result_master = master_pembuangan::select('users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.jam_pengajuan')
-        ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
-        ->where('users.id', $id_banksampah)
-        ->paginate(5);
-        // dd($result_master);
-        return view('banksampah.dataPenerimaan', ['user'=>$user, 'result_master'=>$result_master]);
+        $result_master = User::select('mp.id_master_pembuangan', 'users.nama_lengkap as Nama_Bank')
+            ->join('master_pembuangan as mp', 'users.id', '=', 'mp.id_bank_sampah')
+            ->where('users.id', $id_banksampah)
+            ->selectRaw('(SELECT users.nama_lengkap FROM users WHERE users.id = mp.id_pengguna) as nama_lengkap')
+            ->addSelect('mp.jenis_sampah', 'mp.jam_pengajuan')
+            ->orderBy('mp.id_master_pembuangan', 'desc')
+            ->paginate(5);
+        return view('banksampah.dataPenerimaan', ['user' => $user, 'result_master' => $result_master]);
     }
-    public function detailPenerimaan() {
+    public function detailPenerimaan()
+    {
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('banksampah.detailPenerimaan', ['user'=>$user]);
+        return view('banksampah.detailPenerimaan', ['user' => $user]);
     }
-
-
 
     public function profilebank()
     {
         $username = Auth::User()->username ?? '';
         $user = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        return view('banksampah.profile', ['result' => $result, 'user'=>$user]);
+        return view('banksampah.profile', ['result' => $result, 'user' => $user]);
     }
 
     public function postProfile($id, Request $request)
@@ -77,7 +78,7 @@ class BankSampahController extends Controller
     public function ubahpassword()
     {
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('banksampah.ubahpassword', ['user'=>$user]);
+        return view('banksampah.ubahpassword', ['user' => $user]);
     }
 
     public function postubahpassword(Request $request)

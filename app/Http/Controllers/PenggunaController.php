@@ -19,9 +19,10 @@ class PenggunaController extends Controller
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
         $id_pengguna = Auth::User()->id;
-        $result_master = master_pembuangan::select('users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.jam_pengajuan')
+        $result_master = master_pembuangan::select('master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.jam_pengajuan')
             ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
             ->where('master_pembuangan.id_pengguna', $id_pengguna)
+            ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
             ->paginate(5);
         return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master]);
     }

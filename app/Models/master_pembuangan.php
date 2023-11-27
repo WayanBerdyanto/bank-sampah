@@ -12,6 +12,7 @@ class master_pembuangan extends Model
     protected $table = 'master_pembuangan';
 
     protected $fillable = [
+        'id_master_pembuangan',
         'id_bank_sampah',
         'id_pengguna',
         'jenis_sampah',

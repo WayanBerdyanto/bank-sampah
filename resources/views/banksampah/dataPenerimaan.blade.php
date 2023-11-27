@@ -11,6 +11,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="example" class="table table-striped data-table" style="width: 100%">
+
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -21,7 +22,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- {{ dd($result_master) }} --}}
                                         @foreach ($result_master as $idx => $items)
                                             <tr>
                                                 <td>{{ $result_master->firstItem() + $idx }}</td>
@@ -33,10 +33,7 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
-                                </table>
-                                <span class="mr-2 page-link pagination">
-                                    {{ $result_master->onEachSide(5)->links() }}
-                                </span>
+                                </table
                             </div>
                         </div>
                     </div>
