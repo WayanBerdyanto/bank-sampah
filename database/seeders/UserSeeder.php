@@ -21,14 +21,48 @@ class UserSeeder extends Seeder
                 "role" => "pengambil",
                 "nama_lengkap" => "pengambil sampah",
                 "no_telpon" => "123123123",
+                "latitude" => "",
+                "longitude"=> ""
             ],
             [
                 "username" => "banksampah1",
                 "email" => "banksampah@gmail.com",
                 "password" => bcrypt("12345678"),
                 "role" => "banksampah",
-                "nama_lengkap" => "bank sampah",
+                "nama_lengkap" => "bank sampah 1",
                 "no_telpon" => "123123123",
+                "latitude" => "-7.797068",
+                "longitude"=> "110.370529"
+            ],
+            [
+                "username" => "banksampah2",
+                "email" => "banksampah2@gmail.com",
+                "password" => bcrypt("12345678"),
+                "role" => "banksampah",
+                "nama_lengkap" => "bank sampah 2",
+                "no_telpon" => "123123123",
+                "latitude" => "-7.798068",
+                "longitude"=> "110.390529"
+            ],
+            [
+                "username" => "banksampah3",
+                "email" => "banksampah3@gmail.com",
+                "password" => bcrypt("12345678"),
+                "role" => "banksampah",
+                "nama_lengkap" => "bank sampah 3",
+                "no_telpon" => "123123123",
+                "latitude" => "-7.698068",
+                "longitude"=> "110.290529"
+            ],
+            [
+                "username" => "banksampah4",
+                "email" => "banksampah4@gmail.com",
+                "password" => bcrypt("12345678"),
+                "role" => "banksampah",
+                "nama_lengkap" => "bank sampah 4",
+                "no_telpon" => "123123123",
+                "latitude" => "-7.693068",
+                "longitude"=> "110.240529"
             ],
             [
                 "username" => "pengguna1",
@@ -37,6 +71,8 @@ class UserSeeder extends Seeder
                 "role" => "pengguna",
                 "nama_lengkap" => "Pengguna Wayan",
                 "no_telpon" => "123123123",
+                "latitude" => "",
+                "longitude"=> ""
             ],
         ]);
 

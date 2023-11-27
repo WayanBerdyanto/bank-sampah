@@ -15,10 +15,10 @@ return new class extends Migration
             $table->bigIncrements("id_dtl_pembuangan");
             $table->unsignedBigInteger("id_master_pembuangan");
             $table->foreign("id_master_pembuangan")->references("id_master_pembuangan")->on("master_pembuangan");
-            $table->enum("status",["Diterima","Ditolak"]);
+            $table->string("status", 40);
             $table->integer("berat_sampah");
             $table->date("tanggal");
-            $table->time("jam");
+            $table->time("jam_penerimaan");
             $table->string("hari",30);
             $table->timestamps();
         });

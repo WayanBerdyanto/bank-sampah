@@ -20,7 +20,7 @@
                         <div class="card-header text-center fw-bold">
                             Grafik Jenis Sampah Disetiap Hari
                         </div>
-                        <div class="card-body px-4" >
+                        <div class="card-body px-4">
                             {!! $linechart->container() !!}
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                 <div class="col-md-12 mb-3">
                     <div class="card">
                         <div class="card-header">
-                            <span><i class="bi bi-table me-2"></i></span> Data History Pengambilan
+                            <span><i class="bi bi-table me-2"></i></span> Data History Pembuangan
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -48,62 +48,40 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Hari</th>
-                                            <th>Tanggal</th>
-                                            <th>Jam</th>
-                                            <th>Berat</th>
+                                            <th>Nama Banksampah</th>
+                                            <th>Jenis Sampah</th>
+                                            <th>Jam Pengajuan</th>
+                                            <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Senin</td>
-                                            <td>20/11/2023</td>
-                                            <td>08.30</td>
-                                            <td>3kg</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Rabu</td>
-                                            <td>22/11/2023</td>
-                                            <td>08.30</td>
-                                            <td>3kg</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Jumat</td>
-                                            <td>24/11/2023</td>
-                                            <td>08.30</td>
-                                            <td>3kg</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Minggu</td>
-                                            <td>26/11/2023</td>
-                                            <td>09.00</td>
-                                            <td>3kg</td>
-                                        </tr>
+                                        @foreach ($result_master as $idx => $items)
+                                            <tr>
+                                                <td>{{ $result_master->firstItem() + $idx }}</td>
+                                                <td>{{ $items->nama_lengkap }}</td>
+                                                <td>{{ $items->jenis_sampah }}</td>
+                                                <td>{{ $items->jam_pengajuan }}</td>
+                                                <td class="text-center">
+                                                    <a href="" class="btn btn-primary">Detail</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
                                     </tbody>
                                 </table>
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination flex justify-content-end">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                    </ul>
-                                </nav>
+                                <span class="mr-2 page-link pagination">
+                                    {{ $result_master->onEachSide(5)->links() }}
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-5">
                 <div class="col-md-12">
                     <div class="mb-3">
                         <h3 class="form-label fw-bold">Lokasi Rumah</h3>
-                        <div class="card-body" id="maps" style="height: 400px">
+                        <div class="card-body mb-4" id="maps" style="height: 400px">
 
                         </div>
                     </div>
@@ -134,7 +112,6 @@
     </div>
 </div>
 @section('charts')
-
     <script src="{{ $chart->cdn() }}"></script>
     {{ $chart->script() }}
     <script src="{{ $linechart->cdn() }}"></script>

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Charts\LineChartPengguna;
+use App\Charts\PieChartSampah;
 use App\Models\Langganan;
+use App\Models\master_pembuangan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Charts\PieChartSampah;
-use App\Charts\LineChartPengguna;
 
 class PenggunaController extends Controller
 {
@@ -17,13 +18,19 @@ class PenggunaController extends Controller
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key'=>'index', 'result'=>$result]);
+        $id_pengguna = Auth::User()->id;
+        $result_master = master_pembuangan::select('master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.jam_pengajuan')
+            ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
+            ->where('master_pembuangan.id_pengguna', $id_pengguna)
+            ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
+            ->paginate(5);
+        return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master]);
     }
 
     public function logout()
     {
         Auth::logout();
-        return view('guest.login');
+        return redirect('/login');
     }
 
     public function langganan()
@@ -32,14 +39,14 @@ class PenggunaController extends Controller
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
         $langganan = Langganan::All();
-        return view('pengguna.langganan', ['user' => $user, 'key'=>'langganan', 'result'=>$result, 'langganan'=>$langganan]);
+        return view('pengguna.langganan', ['user' => $user, 'key' => 'langganan', 'result' => $result, 'langganan' => $langganan]);
     }
     public function transaksi()
     {
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        return view('pengguna.transaksi', ['user' => $user, 'key'=>'transaksi', 'result'=>$result]);
+        return view('pengguna.transaksi', ['user' => $user, 'key' => 'transaksi', 'result' => $result]);
     }
 
     public function profilesetting()
@@ -47,7 +54,7 @@ class PenggunaController extends Controller
         $username = Auth::User()->username ?? '';
         $user = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        return view('pengguna.profile', ['result' => $result, 'key'=>'profilesettings', 'user'=>$user]);
+        return view('pengguna.profile', ['result' => $result, 'key' => 'profilesettings', 'user' => $user]);
     }
 
     public function postProfile($id, Request $request)
@@ -83,7 +90,7 @@ class PenggunaController extends Controller
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        return view('pengguna.ubahpassword', ['key'=>'ubahpassword', 'user'=>$user, 'result'=>$result]);
+        return view('pengguna.ubahpassword', ['key' => 'ubahpassword', 'user' => $user, 'result' => $result]);
     }
 
     public function postubahpassword(Request $request)
@@ -106,18 +113,41 @@ class PenggunaController extends Controller
             return redirect()->back()->with('error', 'Password saat ini salah.');
         }
     }
-    public function buangsampah(){
+    public function buangsampah()
+    {
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        return view('pengguna.buangsampah', ['key'=>'buangsampah', 'user'=>$user, 'result'=>$result]);
+        $banksampah = User::where('role', 'banksampah')->get();
+        return view('pengguna.buangsampah', ['key' => 'buangsampah', 'user' => $user, 'result' => $result, 'banksampah' => $banksampah]);
     }
 
+    public function postbuangsampah(Request $request)
+    {
+        $validated = $request->validate([
+            'jenis_sampah' => 'required|max:255',
+            'idbanksampah' => 'required',
+            'jam_pengajuan' => 'required',
+        ]);
+        $id_pengguna = Auth::User()->id;
+        if ($validated) {
+            master_pembuangan::create([
+                'id_bank_sampah' => $request->idbanksampah,
+                'id_pengguna' => $id_pengguna,
+                'jenis_sampah' => $request->jenis_sampah,
+                'jam_pengajuan' => $request->jam_pengajuan,
+            ]);
+            return redirect('/pengguna/')->with('success', 'Data Sampah Berhasil Diinputkan');
+        } else {
+            return redirect('/pengguna/buangsampah')->with('error', 'Data Sampah Gagal Diinputkan');
+        }
+    }
 
-    public function buanglangganan(){
+    public function buanglangganan()
+    {
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        return view('pengguna.langganan.langgananbuang', ['key'=>'buanglangganan', 'user'=>$user, 'result'=>$result]);
+        return view('pengguna.langganan.langgananbuang', ['key' => 'buanglangganan', 'user' => $user, 'result' => $result]);
     }
 }

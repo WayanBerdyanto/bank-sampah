@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger("id_pengguna");
             $table->foreign("id_pengguna")->references("id")->on("users");
             
-            $table->enum("jenis_sampah", ["Organik","An Organik"]);
+            $table->string("jenis_sampah", 50);
             $table->time("jam")->nullable();
             $table->string("hari",10);
             $table->date("tanggal")->nullable();
