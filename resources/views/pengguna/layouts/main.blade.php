@@ -115,8 +115,7 @@
 
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrqEdaadXnnDWGx7Lr7WDJTzewjHZSItQ&callback=initMap"></script>
-    <script async defer
-    <script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.3/mapsJavaScriptAPI.js" async defer>
+    <script async defer src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.3/mapsJavaScriptAPI.js" async defer>
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

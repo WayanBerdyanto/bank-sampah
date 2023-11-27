@@ -82,6 +82,6 @@ class PengambilController extends Controller
     public function logout()
     {
         Auth::logout();
-        return view('guest.login');
+        return redirect('/login');
     }
 }
