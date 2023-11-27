@@ -25,23 +25,6 @@
                             <span>No Hp :</span>
                             {{ $result->no_telpon }}
                         </li>
-                        <li class="list-group-item">
-                            <span>Status :</span>
-                            <span class="btn btn-primary btn-sm" onclick="showSweetAlert()">
-                                Langganan
-                            </span>
-
-                            <script>
-                                function showSweetAlert() {
-                                    Swal.fire({
-                                        title: 'Status',
-                                        text: '{{ $result->nama_lengkap }} Berlangganan',
-                                        icon: 'success',
-                                        confirmButtonText: 'Okay'
-                                    });
-                                }
-                            </script>
-                        </li>
                     </ul>
                 </div>
 
