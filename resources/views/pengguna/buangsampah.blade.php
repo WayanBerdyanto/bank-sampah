@@ -28,36 +28,26 @@
                             </div>
                         </div>
 
-                        <div class="mb-3 row">
+                        <div class="mb-3 row" hidden>
                             <label for="jenis" class="col-sm-2 col-form-label">Pilih Jam</label>
                             <div class="col-sm-10">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="jam_pengajuan"
-                                        id="inlineRadio1" value="08:00:00" required>
-                                    <label class="form-check-label" for="inlineRadio1">08.00</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="jam_pengajuan"
-                                        id="inlineRadio2" value="09:30:00" required>
-                                    <label class="form-check-label" for="inlineRadio2">09.30</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="jam_pengajuan"
-                                        id="inlineRadio3" value="11:30:00" required>
-                                    <label class="form-check-label" for="inlineRadio3">11.30</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="jam_pengajuan"
-                                        id="inlineRadio4" value="13:30:00" required>
-                                    <label class="form-check-label" for="inlineRadio4">13.30</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="jam_pengajuan"
-                                        id="inlineRadio5" value="15:30:00" required>
-                                    <label class="form-check-label" for="inlineRadio5">15.30</label>
+                                    <input class="form-check-input" type="text" name="jam_pengajuan"
+                                        id="jam" value="">
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                var jamInput = document.getElementById('jam');
+                        
+                                var currentTime = new Date();
+                        
+                                var formattedTime = currentTime.getHours() + ':' + currentTime.getMinutes() + ':' + currentTime.getSeconds();
+                        
+                                jamInput.value = formattedTime;
+                            });
+                        </script>
                         <div class="col-md-12 px-4 text-end mb-4">
                             <button type="submit" class="btn btn-primary px-4">Submit</button>
                         </div>
