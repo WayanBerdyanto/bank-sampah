@@ -17,5 +17,8 @@ class master_pembuangan extends Model
         'id_pengguna',
         'jenis_sampah',
         'jam_pengajuan',
+        'methode_pembayaran',
+        'bayar',
+        'status_bayar'
     ];
 }

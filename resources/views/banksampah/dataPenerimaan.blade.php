@@ -18,7 +18,7 @@
                                             <th>Nama Pengguna</th>
                                             <th>Jenis Sampah</th>
                                             <th>Jam Pengajuan</th>
-                                            <th>Aksi</th>
+                                            <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -28,8 +28,8 @@
                                                 <td>{{ $items->nama_lengkap }}</td>
                                                 <td>{{ $items->jenis_sampah }}</td>
                                                 <td>{{ $items->jam_pengajuan }}</td>
-                                                <td><a href="/banksampah/dataPenerimaan/detailPenerimaan"
-                                                        class="btn btn-primary">Detail</a></td>
+                                                <td class="text-center"><a href="/banksampah/detailpenerimaan/{{$items->id_dtl_pembuangan}}"
+                                                        class="btn btn-primary">Timbang</a></td>
                                             </tr>
                                         @endforeach
                                     </tbody>

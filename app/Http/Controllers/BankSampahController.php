@@ -6,6 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\master_pembuangan;
+use App\Models\Detail_Pembuangan;
+use Illuminate\Support\Facades\DB;
 
 class BankSampahController extends Controller
 {
@@ -24,19 +27,39 @@ class BankSampahController extends Controller
     {
         $user = Auth::User()->nama_lengkap ?? '';
         $id_banksampah = Auth::User()->id;
-        $result_master = User::select('mp.id_master_pembuangan', 'users.nama_lengkap as Nama_Bank')
-            ->join('master_pembuangan as mp', 'users.id', '=', 'mp.id_bank_sampah')
-            ->where('users.id', $id_banksampah)
-            ->selectRaw('(SELECT users.nama_lengkap FROM users WHERE users.id = mp.id_pengguna) as nama_lengkap')
-            ->addSelect('mp.jenis_sampah', 'mp.jam_pengajuan')
-            ->orderBy('mp.id_master_pembuangan', 'desc')
-            ->paginate(5);
+        $result_master = Detail_Pembuangan::select(
+            'detail_pembuangan.id_dtl_pembuangan',
+            'mp.id_master_pembuangan',
+            'users.nama_lengkap AS Nama_Bank',
+            DB::raw('(SELECT nama_lengkap FROM users WHERE users.id = mp.id_pengguna) AS nama_lengkap'),
+            'mp.jenis_sampah',
+            'mp.jam_pengajuan'
+        )
+        ->join('master_pembuangan as mp', 'detail_pembuangan.id_master_pembuangan', '=', 'mp.id_master_pembuangan')
+        ->join('users', 'users.id', '=', 'mp.id_bank_sampah')
+        ->where('users.id', $id_banksampah)
+        ->orderBy('mp.id_master_pembuangan', 'desc')
+        ->paginate(5);
         return view('banksampah.dataPenerimaan', ['user' => $user, 'result_master' => $result_master]);
     }
-    public function detailPenerimaan()
+    public function detailPenerimaan($id)
     {
+        $detail = Detail_Pembuangan::where('id_dtl_pembuangan', $id)->get();
         $user = Auth::User()->nama_lengkap ?? '';
-        return view('banksampah.detailPenerimaan', ['user' => $user]);
+        $username = Auth::User()->username ?? '';
+        $result = User::where('username', $username)->first();
+
+        return view('banksampah.detailPenerimaan', ['user' => $user, 'result' => $result, 'username' => $username, 'detail'=>$detail]);
+    }
+
+    public function hapusterima($id){
+        // dd($id);
+        $result = Detail_Pembuangan::where('id_dtl_pembuangan',$id)->get();
+        $id_master = $result[0]->id_master_pembuangan;
+        Detail_Pembuangan::where('id_dtl_pembuangan',$id)->delete();
+        return redirect('/banksampah/datapenerimaan')->with('success', 'Data Berhasil DiTolak');
+        
+
     }
 
     public function profilebank()
@@ -49,28 +72,18 @@ class BankSampahController extends Controller
 
     public function postProfile($id, Request $request)
     {
-        $request->validate([
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
         $user = User::find($id);
         if ($user) {
-            if($request->hasFile('foto')){
-                $foto = $request->file('foto');
-                $fileName = $foto->getClientOriginalName();
-                $user->username = $request->username;
-                $user->email = $request->email;
-                $user->foto = $fileName;
-                $user->nama_lengkap = $request->namalengkap;
-                $user->provinsi = $request->provinsi;
-                $user->kabupaten = $request->kabupaten;
-                $user->kecamatan = $request->kecamatan;
-                $user->kelurahan = $request->kelurahan;
-                $user->no_telpon = $request->no_telpon;
-                $user->latitude = $request->latitudeInput;
-                $user->longitude = $request->longitudeInput;
-                $foto->move(public_path('img/banksampah'), $fileName);
-
-            }
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->nama_lengkap = $request->namalengkap;
+            $user->provinsi = $request->provinsi;
+            $user->kabupaten = $request->kabupaten;
+            $user->kecamatan = $request->kecamatan;
+            $user->kelurahan = $request->kelurahan;
+            $user->no_telpon = $request->no_telpon;
+            $user->latitude = $request->latitudeInput;
+            $user->longitude = $request->longitudeInput;
 
             if ($user->save()) {
                 return redirect('/banksampah/')->with('success', 'Profile Berhasil Di Ubah');
