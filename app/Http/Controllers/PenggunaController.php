@@ -6,6 +6,7 @@ use App\Charts\LineChartPengguna;
 use App\Charts\PieChartSampah;
 use App\Models\Langganan;
 use App\Models\master_pembuangan;
+use App\Models\Detail_Pembuangan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,8 +20,9 @@ class PenggunaController extends Controller
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
         $id_pengguna = Auth::User()->id;
-        $result_master = master_pembuangan::select('master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.jam_pengajuan')
+        $result_master = master_pembuangan::select('detail_pembuangan.id_dtl_pembuangan','master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.jam_pengajuan')
             ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
+            ->join('detail_pembuangan', 'detail_pembuangan.id_master_pembuangan', '=', 'master_pembuangan.id_master_pembuangan')
             ->where('master_pembuangan.id_pengguna', $id_pengguna)
             ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
             ->paginate(5);
@@ -146,15 +148,28 @@ class PenggunaController extends Controller
                 'jenis_sampah' => $request->jenis_sampah,
                 'jam_pengajuan' => $request->jam_pengajuan,
             ]);
+            $idMasterPembuangan = master_pembuangan::pluck('id_master_pembuangan')->last();
+            Detail_Pembuangan::create([
+                'id_master_pembuangan'=>$idMasterPembuangan,
+                'status' => $request->status,
+                'hari' => 'menunggu',
+            ]);
             return redirect('/pengguna/')->with('success', 'Data Sampah Berhasil Diinputkan');
         } else {
             return redirect('/pengguna/buangsampah')->with('error', 'Data Sampah Gagal Diinputkan');
         }
     }
 
+    public function detailbuangsampah($id){
+        $detail = Detail_Pembuangan::where('id_dtl_pembuangan', $id)->get();
+        $user = Auth::User()->nama_lengkap ?? '';
+        $username = Auth::User()->username ?? '';
+        $result = User::where('username', $username)->first();
+        return view('pengguna.detailbuangsampah', [ 'key' => 'index', 'result' => $result, 'user' => $user, 'username' => $username, 'detail'=>$detail]);
+    }
+
     public function buanglangganan()
     {
-        $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
         return view('pengguna.langganan.langgananbuang', ['key' => 'buanglangganan', 'user' => $user, 'result' => $result]);

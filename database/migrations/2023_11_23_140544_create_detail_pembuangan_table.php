@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('detail_pembuangan', function (Blueprint $table) {
             $table->bigIncrements("id_dtl_pembuangan");
-            $table->unsignedBigInteger("id_master_pembuangan");
+            $table->unsignedBigInteger("id_master_pembuangan")->nullable();
             $table->foreign("id_master_pembuangan")->references("id_master_pembuangan")->on("master_pembuangan");
             $table->string("status", 40);
-            $table->integer("berat_sampah");
-            $table->date("tanggal");
-            $table->time("jam_penerimaan");
-            $table->string("hari",30);
+            $table->integer("berat_sampah")->nullable();
+            $table->integer("harga")->nullable()->default(5000);
+            $table->date("tanggal")->nullable();
+            $table->time("jam_penerimaan")->nullable();
+            $table->string("hari",30)->nullable();
             $table->timestamps();
         });
     }
