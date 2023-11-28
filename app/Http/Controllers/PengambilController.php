@@ -26,30 +26,36 @@ class PengambilController extends Controller
 
     public function postProfile($id, Request $request)
     {
+        $request->validate([
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
         $user = User::find($id);
-        if ($user) {
-            $user->username = $request->username;
-            $user->email = $request->email;
-            $user->nama_lengkap = $request->namalengkap;
-            $user->provinsi = $request->provinsi;
-            $user->kabupaten = $request->kabupaten;
-            $user->kecamatan = $request->kecamatan;
-            $user->kelurahan = $request->kelurahan;
-            $user->no_telpon = $request->no_telpon;
-            $user->latitude = $request->latitudeInput;
-            $user->longitude = $request->longitudeInput;
-
-            if ($user->save()) {
-                return redirect('/pengambil/')->with('success', 'Profile Berhasil Di Ubah');
-            } else {
-                return redirect('/pengambil/profilepengambil')->with('errors', $validator->messages()->all()[0])->withInput();
-
+            if ($user) {
+                if ($request->hasFile('foto')){
+                    $foto = $request->file('foto');
+                    $fileName = $foto->getClientOriginalName();
+                    $foto->move(public_path('img/pengambil'), $fileName);
+                    $user->username = $request->username;
+                    $user->email = $request->email;
+                    $user->foto = $fileName;
+                    $user->nama_lengkap = $request->namalengkap;
+                    $user->provinsi = $request->provinsi;
+                    $user->kabupaten = $request->kabupaten;
+                    $user->kecamatan = $request->kecamatan;
+                    $user->kelurahan = $request->kelurahan;
+                    $user->no_telpon = $request->no_telpon;
+                    $user->latitude = $request->latitudeInput;
+                    $user->longitude = $request->longitudeInput;
+                    if ($user->save()) {
+                        return redirect('/pengambil/')->with('success', 'Profile Berhasil Di Ubah');
+                    } else {
+                        return redirect('/pengambil/profilepengambil')->with('errors', $validator->messages()->all()[0])->withInput();
+                    }
+                }  
+            } 
+            else {
+                return redirect('/pengambil/profilepengambil')->with('error', 'User Not Found')->with('errors', $validator->messages()->all()[0])->withInput();
             }
-        } else {
-            return redirect('/pengambil/profilepengambil')->with('error', 'User Not Found')->with('errors', $validator->messages()->all()[0])->withInput();
-
-        }
-
     }
 
     public function ubahpassword()
