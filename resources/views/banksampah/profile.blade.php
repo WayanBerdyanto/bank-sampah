@@ -3,6 +3,18 @@
     <main class="mt-5 pt-3">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-md-5 mt-2 px-4 d-flex justify-content-center">
+                    <div class="ml-2 d-flex align-items-center border border-dark px-2 mb-3">
+                        @if ($result->foto == null)
+                            <form method="POST" action="/pengguna/postprofile/{{ $result->id }}" class="text-center">
+                                <span>Tidak Ada Foto</span>
+                                <input type="file" name="foto">
+                            </form>
+                        @else
+                            <img src="{{asset('img/client/user_vector.jpg')}}" alt="Tidak Ada Gambar" width="300px" style="height: 250px">
+                        @endif
+                    </div>
+                </div>
                 <div class="col-md-7 mt-2 px-4">
                     <ul class="list-group">
                         <li class="list-group-item active" aria-current="true">Data BankSampah</li>
@@ -27,14 +39,6 @@
                         </li>
                     </ul>
                 </div>
-
-                <div class="col-md-5 mt-2 px-4 d-flex justify-content-center">
-                    <div class="ml-2">
-                        <div class="" id="map" style="height: 300px; width: 400px">
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
         <hr>

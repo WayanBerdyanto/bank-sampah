@@ -26,15 +26,14 @@ class PengambilController extends Controller
 
     public function postProfile($id, Request $request)
     {
-        // $request->validate([
-        //     'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        // ]);
+        $request->validate([
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
         $user = User::find($id);
             if ($user) {
                 if ($request->hasFile('foto')){
                     $foto = $request->file('foto');
                     $fileName = $foto->getClientOriginalName();
-                    // dd($fileName);
                     $foto->move(public_path('img/pengambil'), $fileName);
                     $user->username = $request->username;
                     $user->email = $request->email;
