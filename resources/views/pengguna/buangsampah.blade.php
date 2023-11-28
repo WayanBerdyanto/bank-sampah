@@ -70,7 +70,7 @@
                         <div class="card-body" id="maplabel" style="height: 450px"></div>
                     </div>
 
-                </div>
+                    </div>
             </div>
         </div>
     </main>
