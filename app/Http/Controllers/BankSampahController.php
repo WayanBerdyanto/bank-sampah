@@ -49,18 +49,28 @@ class BankSampahController extends Controller
 
     public function postProfile($id, Request $request)
     {
+        $request->validate([
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
         $user = User::find($id);
         if ($user) {
-            $user->username = $request->username;
-            $user->email = $request->email;
-            $user->nama_lengkap = $request->namalengkap;
-            $user->provinsi = $request->provinsi;
-            $user->kabupaten = $request->kabupaten;
-            $user->kecamatan = $request->kecamatan;
-            $user->kelurahan = $request->kelurahan;
-            $user->no_telpon = $request->no_telpon;
-            $user->latitude = $request->latitudeInput;
-            $user->longitude = $request->longitudeInput;
+            if($request->hasFile('foto')){
+                $foto = $request->file('foto');
+                $fileName = $foto->getClientOriginalName();
+                $user->username = $request->username;
+                $user->email = $request->email;
+                $user->foto = $fileName;
+                $user->nama_lengkap = $request->namalengkap;
+                $user->provinsi = $request->provinsi;
+                $user->kabupaten = $request->kabupaten;
+                $user->kecamatan = $request->kecamatan;
+                $user->kelurahan = $request->kelurahan;
+                $user->no_telpon = $request->no_telpon;
+                $user->latitude = $request->latitudeInput;
+                $user->longitude = $request->longitudeInput;
+                $foto->move(public_path('img/banksampah'), $fileName);
+
+            }
 
             if ($user->save()) {
                 return redirect('/banksampah/')->with('success', 'Profile Berhasil Di Ubah');

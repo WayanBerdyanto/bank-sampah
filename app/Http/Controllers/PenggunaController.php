@@ -81,7 +81,6 @@ class PenggunaController extends Controller
                 $foto->move(public_path('img/pengguna'), $fileName);
 
             }
-
             if ($user->save()) {
                 return redirect('/pengguna/')->with('success', 'Profile Berhasil Di Ubah');
             } else {

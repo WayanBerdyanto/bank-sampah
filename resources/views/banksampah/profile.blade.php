@@ -4,15 +4,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-5 mt-2 px-4 d-flex justify-content-center">
-                    <div class="ml-2 d-flex align-items-center border border-dark px-2 mb-3">
-                        @if ($result->foto == null)
-                            <form method="POST" action="/pengguna/postprofile/{{ $result->id }}" class="text-center">
-                                <span>Tidak Ada Foto</span>
-                                <input type="file" name="foto">
-                            </form>
-                        @else
-                            <img src="{{asset('img/client/user_vector.jpg')}}" alt="Tidak Ada Gambar" width="300px" style="height: 250px">
-                        @endif
+                    <div class="ml-2 d-flex align-items-center px-2 mb-3">
+                        <img src="{{asset('img/banksampah/'.$result->foto)}}" alt="Tidak Ada Gambar" width="300px"
+                            style="height: 250px">
                     </div>
                 </div>
                 <div class="col-md-7 mt-2 px-4">
@@ -51,7 +45,7 @@
             </div>
         </div>
         <div class="row" id="settings">
-            <form method="POST" action="/banksampah/postprofile/{{ $result->id }}">
+            <form method="POST" action="/banksampah/postprofile/{{ $result->id }}" enctype="multipart/form-data">
                 <div class="col-md-12 mb-3 mt-2 px-4">
                     @csrf
                     @method('PUT')
@@ -73,6 +67,10 @@
                         <label for="email" class="form-label fw-bold">Email address</label>
                         <input type="email" class="form-control" name="email" id="email"
                             aria-describedby="emailHelp" value="{{ $result->email }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="file" class="form-label fw-bold">Foto</label>
+                        <input type="file" class="form-control" name="foto" id="file" required>
                     </div>
                     <div class="mb-3">
                         <label for="provinsi" class="form-label fw-bold">Provinsi</label>

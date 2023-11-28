@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-5 mt-2 px-4 d-flex justify-content-center">
                     <div class="ml-2 d-flex align-items-center px-2 mb-3">
-                        <img src="{{asset('img/pengambil/'.$result->foto)}}" alt="Tidak Ada Gambar" width="300px"
+                        <img src="{{asset('img/pengguna/'.$result->foto)}}" alt="Tidak Ada Gambar" width="300px"
                             style="height: 250px">
                     </div>
                 </div>
