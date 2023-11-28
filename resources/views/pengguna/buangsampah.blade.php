@@ -67,7 +67,7 @@
                     <div class="mb-3">
                         <h3 class="form-label fw-bold">Lokasi Pembuangan Sampah</h3>
                         <div id="userLabel" data-user-label="{{ $user }}"></div>
-                        <div class="card-body" id="mapss" style="height: 450px"></div>
+                        <div class="card-body" id="mapss" style="height: 400px"></div>
                         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
                         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-
                                 20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
