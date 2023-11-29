@@ -4,6 +4,14 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 mt-3">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <i class="bi bi-info-circle"></i>
+                        Anda Belum Berlangganan Berat Max <strong>5 kg</strong>!
+                        <a href="/pengguna/langganan" class="text-primary">
+                            <ins>Langganan</ins>
+                        </a>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                     <form action="/pengguna/postbuangsampah" method="POST">
                         @csrf
                         <h4 class="mb-3 fs-4 fw-bold">Input Buang sampah</h4>
@@ -70,9 +78,7 @@
                         <div class="card-body" id="mapss" style="height: 400px"></div>
                         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
                         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-
-                                20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-
+                                                        20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
                         <script>
                             // Initialize the map
                             var map = L.map('mapss').setView([0, 0], 30);
