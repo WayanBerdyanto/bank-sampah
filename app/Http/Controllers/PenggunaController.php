@@ -20,9 +20,8 @@ class PenggunaController extends Controller
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
         $id_pengguna = Auth::User()->id;
-        $result_master = master_pembuangan::select('detail_pembuangan.id_dtl_pembuangan','master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.jam_pengajuan')
+        $result_master = master_pembuangan::select('master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.jam_pengajuan', 'master_pembuangan.status_terima')
             ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
-            ->join('detail_pembuangan', 'detail_pembuangan.id_master_pembuangan', '=', 'master_pembuangan.id_master_pembuangan')
             ->where('master_pembuangan.id_pengguna', $id_pengguna)
             ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
             ->paginate(5);
@@ -151,8 +150,7 @@ class PenggunaController extends Controller
             $idMasterPembuangan = master_pembuangan::pluck('id_master_pembuangan')->last();
             Detail_Pembuangan::create([
                 'id_master_pembuangan'=>$idMasterPembuangan,
-                'status' => $request->status,
-                'hari' => 'menunggu',
+                'status' => $request->status
             ]);
             return redirect('/pengguna/')->with('success', 'Data Sampah Berhasil Diinputkan');
         } else {

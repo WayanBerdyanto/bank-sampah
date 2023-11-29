@@ -51,7 +51,7 @@
                                             <th>Nama Banksampah</th>
                                             <th>Jenis Sampah</th>
                                             <th>Jam Pengajuan</th>
-                                            <th class="text-center">Aksi</th>
+                                            <th class="text-center">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -62,8 +62,9 @@
                                                 <td>{{ $items->jenis_sampah }}</td>
                                                 <td>{{ $items->jam_pengajuan }}</td>
                                                 <td class="text-center">
-                                                    {{-- <a href="/pengguna/detailbuangsampah/{{$items->id_dtl_pembuangan}}" class="btn btn-primary">Detail</a> --}}
-                                                    <span>Menunggu</span>
+                                                    <span>
+                                                        {{$items->status_terima}}
+                                                    </span>
                                                 </td>
                                             </tr>
                                         @endforeach
