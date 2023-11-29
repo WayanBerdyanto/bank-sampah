@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign("id_pengguna")->references("id")->on("users");
             $table->string("jenis_sampah", 40);
             $table->time("jam_pengajuan");
+            $table->string("status_terima")->default("menunggu");
             $table->string("methode_pembayaran", 40)->nullable();
             $table->integer("bayar")->nullable();
             $table->string("status_bayar", 40)->nullable();

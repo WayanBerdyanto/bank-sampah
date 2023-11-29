@@ -53,13 +53,16 @@ class BankSampahController extends Controller
     }
 
     public function hapusterima($id){
-        // dd($id);
         $result = Detail_Pembuangan::where('id_dtl_pembuangan',$id)->get();
         $id_master = $result[0]->id_master_pembuangan;
-        Detail_Pembuangan::where('id_dtl_pembuangan',$id)->delete();
-        return redirect('/banksampah/datapenerimaan')->with('success', 'Data Berhasil DiTolak');
         
-
+        if($id_master == $result[0]->id_master_pembuangan){
+            master_pembuangan::where('id_master_pembuangan', $id_master)->update(['status_terima'=>'Ditolak']);
+            Detail_Pembuangan::where('id_dtl_pembuangan',$id)->delete();
+            return redirect('/banksampah/datapenerimaan')->with('success', 'Data Berhasil DiTolak');
+        }else{
+            return redirect('/bansampah/detailPenerimaan')->with('error', 'Data Gagal Ditolak');
+        }
     }
 
     public function profilebank()
