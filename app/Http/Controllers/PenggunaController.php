@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use DB;
 
 class PenggunaController extends Controller
 {
@@ -20,18 +21,12 @@ class PenggunaController extends Controller
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
         $id_pengguna = Auth::User()->id;
-        $result_master = master_pembuangan::select('master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.jam_pengajuan', 'master_pembuangan.status_terima')
+        $result_master = master_pembuangan::select('master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.tgl_pengajuan','master_pembuangan.jam_pengajuan', 'master_pembuangan.status_terima')
             ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
             ->where('master_pembuangan.id_pengguna', $id_pengguna)
             ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
             ->paginate(5);
         return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master]);
-    }
-
-    public function logout()
-    {
-        Auth::logout();
-        return redirect('/login');
     }
 
     public function langganan()
@@ -47,7 +42,16 @@ class PenggunaController extends Controller
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        return view('pengguna.transaksi', ['user' => $user, 'key' => 'transaksi', 'result' => $result]);
+
+        $id_pengguna = Auth::User()->id;
+        $result_master = master_pembuangan::select('master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.jam_pengajuan', 'master_pembuangan.status_terima')
+            ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
+            ->where('master_pembuangan.id_pengguna', $id_pengguna)
+            ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
+            ->paginate(5);
+        // dd($result_master);
+
+        return view('pengguna.transaksi', ['user' => $user, 'key' => 'transaksi', 'result' => $result, 'result_master'=>$result_master]);
     }
 
     public function profilesetting()
@@ -145,9 +149,10 @@ class PenggunaController extends Controller
                 'id_bank_sampah' => $request->idbanksampah,
                 'id_pengguna' => $id_pengguna,
                 'jenis_sampah' => $request->jenis_sampah,
+                'tgl_pengajuan' => $request->tgl_pengajuan,
                 'jam_pengajuan' => $request->jam_pengajuan,
             ]);
-            $idMasterPembuangan = master_pembuangan::pluck('id_master_pembuangan')->last();
+            $idMasterPembuangan = master_pembuangan::orderBy('id_master_pembuangan', 'desc')->first()->id_master_pembuangan;
             Detail_Pembuangan::create([
                 'id_master_pembuangan'=>$idMasterPembuangan,
                 'status' => $request->status
@@ -158,12 +163,36 @@ class PenggunaController extends Controller
         }
     }
 
+    public function hapusmasterbuang($id){
+        master_pembuangan::where('id_master_pembuangan', $id)->delete();
+        return redirect('/pengguna/')->with('toast_success', 'Data Berhasil Dihapus');
+    }
+
     public function detailbuangsampah($id){
-        $detail = Detail_Pembuangan::where('id_dtl_pembuangan', $id)->get();
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        return view('pengguna.detailbuangsampah', [ 'key' => 'index', 'result' => $result, 'user' => $user, 'username' => $username, 'detail'=>$detail]);
+        $id_user = Auth::User()->id;
+        $result_master = User::join('master_pembuangan as mp', 'users.id', '=', 'mp.id_pengguna')
+        ->join('detail_pembuangan as dp', 'dp.id_master_pembuangan', '=', 'mp.id_master_pembuangan')
+        ->select(
+            'mp.id_master_pembuangan',
+            'mp.id_pengguna',
+            'mp.status_bayar',
+            DB::raw('(SELECT nama_lengkap FROM users bank WHERE bank.id = mp.id_bank_sampah) AS lokasi_pembuangan'),
+            'dp.jam_penerimaan',
+            'dp.berat_sampah',
+            'mp.status_terima',
+            'mp.jenis_sampah',
+            'dp.tanggal',
+            'dp.hari',
+            DB::raw('dp.harga * dp.berat_sampah AS total')
+        )
+        ->where('users.id', '=', $id_user)
+        ->where('mp.id_master_pembuangan', '=', $id)
+        ->get();
+        // dd($result_master);
+        return view('pengguna.detailbuangsampah', [ 'key' => 'index', 'result' => $result, 'user' => $user, 'username' => $username, 'result_master'=>$result_master]);
     }
 
     public function buanglangganan()
@@ -171,5 +200,11 @@ class PenggunaController extends Controller
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
         return view('pengguna.langganan.langgananbuang', ['key' => 'buanglangganan', 'user' => $user, 'result' => $result]);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/login');
     }
 }

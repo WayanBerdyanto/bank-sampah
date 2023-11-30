@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger("id_pengguna");
             $table->foreign("id_pengguna")->references("id")->on("users");
             $table->string("jenis_sampah", 40);
+            $table->date("tgl_pengajuan");
             $table->time("jam_pengajuan");
             $table->string("status_terima")->default("menunggu");
             $table->string("methode_pembayaran", 40)->nullable();

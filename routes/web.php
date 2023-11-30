@@ -47,6 +47,7 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::get('/pengguna/buanglangganan', [PenggunaController::class, 'buanglangganan']);
     Route::post('/pengguna/postbuangsampah', [PenggunaController::class, 'postbuangsampah']);
     Route::get('/pengguna/detailbuangsampah/{id}', [PenggunaController::class, 'detailbuangsampah']);
+    Route::get('/pengguna/hapusmasterbuang/{id}', [PenggunaController::class, 'hapusmasterbuang']);
 
 });
 

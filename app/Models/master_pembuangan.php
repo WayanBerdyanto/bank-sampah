@@ -16,6 +16,7 @@ class master_pembuangan extends Model
         'id_bank_sampah',
         'id_pengguna',
         'jenis_sampah',
+        'tgl_pengajuan',
         'jam_pengajuan',
         'methode_pembayaran',
         'bayar',

@@ -17,6 +17,7 @@
                                             <th>No</th>
                                             <th>Nama Pengguna</th>
                                             <th>Jenis Sampah</th>
+                                            <th>Tgl Pengajuan</th>
                                             <th>Jam Pengajuan</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
@@ -27,6 +28,7 @@
                                                 <td>{{ $result_master->firstItem() + $idx }}</td>
                                                 <td>{{ $items->nama_lengkap }}</td>
                                                 <td>{{ $items->jenis_sampah }}</td>
+                                                <td>{{ $items->tgl_pengajuan }}</td>
                                                 <td>{{ $items->jam_pengajuan }}</td>
                                                 <td class="text-center"><a href="/banksampah/detailpenerimaan/{{$items->id_dtl_pembuangan}}"
                                                         class="btn btn-primary">Timbang</a></td>

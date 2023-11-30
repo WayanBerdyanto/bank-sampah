@@ -50,8 +50,10 @@
                                             <th>No</th>
                                             <th>Nama Banksampah</th>
                                             <th>Jenis Sampah</th>
+                                            <th>Tanggal Pengajuan</th>
                                             <th>Jam Pengajuan</th>
                                             <th class="text-center">Status</th>
+                                            <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -60,11 +62,25 @@
                                                 <td>{{ $result_master->firstItem() + $idx }}</td>
                                                 <td>{{ $items->nama_lengkap }}</td>
                                                 <td>{{ $items->jenis_sampah }}</td>
+                                                <td>{{ $items->tgl_pengajuan }}</td>
                                                 <td>{{ $items->jam_pengajuan }}</td>
                                                 <td class="text-center">
-                                                    <span>
-                                                        {{$items->status_terima}}
-                                                    </span>
+                                                    <span>{{ $items->status_terima }}</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    @if ($items->status_terima == 'Ditolak')
+                                                        <a href="/pengguna/hapusmasterbuang/{{ $items->id_master_pembuangan }}"
+                                                            class="btn btn-danger">Hapus</a>'
+                                                    @endif
+                                                    @if ($items->status_terima == 'Diterima')
+                                                        <a href="/pengguna/detailbuangsampah/{{ $items->id_master_pembuangan }}"
+                                                            class="btn btn-success">Detail</a>
+                                                    @endif
+                                                    @if ($items->status_terima == 'menunggu')
+                                                        <a href="/pengguna/detailbuangsampah/{{ $items->id_master_pembuangan }}"
+                                                            class="btn btn-primary">Detail</a>
+                                                    @endif
+
                                                 </td>
                                             </tr>
                                         @endforeach
