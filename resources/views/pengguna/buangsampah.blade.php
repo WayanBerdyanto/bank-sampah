@@ -40,7 +40,22 @@
                         </div>
 
                         <div class="mb-3 row" hidden>
-                            <label for="jenis" class="col-sm-2 col-form-label">Pilih Jam</label>
+                            <label for="tgl" class="col-sm-2 col-form-label">Pilih Jam</label>
+                            <div class="col-sm-10">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="text" name="tgl_pengajuan" id="tgl"
+                                        value="">
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            var currentDate = new Date();
+                            var formattedDate = currentDate.toISOString().slice(0, 16).replace("T", " ");
+
+                            document.getElementById("tgl").value = formattedDate;
+                        </script>
+                        <div class="mb-3 row" hidden>
+                            <label for="jam" class="col-sm-2 col-form-label">Pilih Jam</label>
                             <div class="col-sm-10">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="text" name="jam_pengajuan" id="jam"
@@ -62,7 +77,7 @@
                         </script>
                         <input type="text" name="id_dtl_pembuangan" hidden>
                         <input type="text" name="id_master_pembuangan" hidden>
-                        <input type="text" name="status" value="Belum Diterima" hidden>
+                        <input type="text" name="status" value="Belum Bayar" hidden>
 
                         <div class="col-md-12 px-4 text-end mb-4">
                             <button type="submit" class="btn btn-primary px-4">Submit</button>
@@ -77,11 +92,11 @@
                         <div id="userLabel" data-user-label="{{ $user }}"></div>
                         <div class="card-body" id="mapss" style="height: 400px"></div>
                         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
                         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
                             integrity="sha256-
                                                                                                                                                                                                                                                                                                         20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
                             crossorigin=""></script>
-
                         <script>
                             var map = L.map('mapss').setView([0, 0], 30);
                             // Add a basemap (e.g., OpenStreetMap)

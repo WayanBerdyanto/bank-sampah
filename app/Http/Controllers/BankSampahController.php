@@ -30,7 +30,7 @@ class BankSampahController extends Controller
         $result_master = Detail_Pembuangan::select(
             'detail_pembuangan.id_dtl_pembuangan',
             'mp.id_master_pembuangan',
-            'users.nama_lengkap AS Nama_Bank',
+            'users.nama_lengkap AS Nama_Bank', 'mp.tgl_pengajuan',
             DB::raw('(SELECT nama_lengkap FROM users WHERE users.id = mp.id_pengguna) AS nama_lengkap'),
             'mp.jenis_sampah',
             'mp.jam_pengajuan'
