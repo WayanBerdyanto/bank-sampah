@@ -92,11 +92,12 @@
                         <div id="userLabel" data-user-label="{{ $user }}"></div>
                         <div class="card-body" id="mapss" style="height: 400px"></div>
                         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-                        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-
-                                                                                20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="">
-                        </script>
+
+                        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                            integrity="sha256-
+                                                                                                                                                                                                                                                                                                        20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+                            crossorigin=""></script>
                         <script>
-                            // Initialize the map
                             var map = L.map('mapss').setView([0, 0], 30);
                             // Add a basemap (e.g., OpenStreetMap)
                             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -112,19 +113,39 @@
                                 var userLocation = L.marker([lat, lon]).addTo(map);
                                 userLocation.bindPopup('You are here!').openPopup();
                             });
+                            var iconUrls = [
+                                'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                                'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                                'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+                                'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
 
-                            // Add a marker to the all destinations
+                                // Tambahkan lebih banyak link ikon sesuai kebutuhan Anda
+                            ];
+
+
                             var locations = <?php echo json_encode($banksampah); ?>;
                             // console.log(locations);
                             // looping for create marker per location
                             locations.forEach(e => {
+                                var randomIconUrl = iconUrls[Math.floor(Math.random() * iconUrls.length)];
+
+                                var greenIcon = new L.Icon({
+                                    iconUrl: randomIconUrl,
+                                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                                    iconSize: [25, 41],
+                                    iconAnchor: [12, 41],
+                                    popupAnchor: [1, -34],
+                                    shadowSize: [41, 41]
+                                });
+                                // Creating a marker for each bank sampah location with default icon and random color
                                 L.marker([e.latitude,
                                     e.longitude
-                                ]).addTo(map).bindPopup(e.nama_lengkap).openPopup();
+                                ], {
+                                    icon: greenIcon
+                                }).addTo(map).bindPopup(e.nama_lengkap).openPopup();
                             });
                         </script>
                     </div>
-
                 </div>
             </div>
         </div>
