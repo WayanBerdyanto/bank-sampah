@@ -14,18 +14,25 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Total Sampah</th>
+                                            <th>Berat Sampah</th>
                                             <th>Tanggal</th>
                                             <th>Lokasi Pembuangan</th>
                                             <th>Status</th>
-                                            <th>Pembayaran</th>
+                                            <th>Status Pembayaran</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($result_master as $item)
                                         <tr>
-                                            
-                        
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->berat_sampah }}</td>
+                                            <td>{{ $item->tgl_pengajuan }}</td>
+                                            <td>{{ $item->nama_lengkap }}</td>
+                                            <td>{{ $item->status_terima }}</td>
+                                            <td>{{ $item->status_bayar }}</td>
+                                            {{-- <td>{{ $item->status_bayar }}</td> --}}
                                         </tr>
+                                    @endforeach
                         
                                     </tbody>
                                 </table>

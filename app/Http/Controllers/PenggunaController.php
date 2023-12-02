@@ -45,11 +45,24 @@ class PenggunaController extends Controller
         $result = User::where('username', $username)->first();
 
         $id_pengguna = Auth::User()->id;
-        $result_master = master_pembuangan::select('master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.jam_pengajuan', 'master_pembuangan.status_terima')
-            ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
-            ->where('master_pembuangan.id_pengguna', $id_pengguna)
-            ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
-            ->paginate(5);
+        $result_master = master_pembuangan::select(
+            'master_pembuangan.id_master_pembuangan',
+            'users.id as user_id',
+            'users.nama_lengkap',
+            'master_pembuangan.jenis_sampah',
+            'master_pembuangan.tgl_pengajuan',
+            'master_pembuangan.jam_pengajuan',
+            'master_pembuangan.status_terima',
+            'detail_pembuangan.berat_sampah',
+            'master_pembuangan.status_bayar'
+        )
+        ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
+        ->join('detail_pembuangan', 'detail_pembuangan.id_master_pembuangan', '=', 'master_pembuangan.id_master_pembuangan')
+        ->where('master_pembuangan.id_pengguna', $id_pengguna)
+        ->where('status_bayar', '!=',null)
+        ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
+        ->take(5)
+        ->get();
         // dd($result_master);
 
         return view('pengguna.transaksi', ['user' => $user, 'key' => 'transaksi', 'result' => $result, 'result_master'=>$result_master]);
