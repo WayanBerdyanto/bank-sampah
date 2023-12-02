@@ -78,36 +78,36 @@ class UserSeeder extends Seeder
 
         DB::table("langganan")->insert([
             [
-                'kode_langganan'=>'GOLD1',
+                'kode_langganan'=>'kode1',
                 'nama_langganan'=>'Paket Mingguan',
-                'layanan'=>'keren, rapi, aman, dan tentram',
+                'layanan'=>'Berat Sampah max 4 Kg, Sistem Jemput, Praktis, Masa Langganan 7 Hari',
                 'lama_langganan'=> 7,
                 'desc'=>'lorem ipsum',
                 'harga'=>35000,
             ],
             [
-                'kode_langganan'=>'GOLD2',
+                'kode_langganan'=>'kode2',
                 'nama_langganan'=>'Paket Bulanan',
-                'layanan'=>'keren, rapi, aman, dan tentram',
+                'layanan'=>'Berat Sampah Max 6 Kg , Sistem Jemput, Praktis, dan Masa Langganan 7 Hari',
                 'lama_langganan'=> 30,
                 'desc'=>'lorem ipsum',
-                'harga'=>120000,
+                'harga'=>140000,
             ],
             [
-                'kode_langganan'=>'GOLD3',
+                'kode_langganan'=>'kode3',
                 'nama_langganan'=>'Paket 6 Bulanan',
-                'layanan'=>'keren, rapi, aman, dan tentram',
+                'layanan'=>'Berat Sampah Max 7 Kg , Sistem Jemput, Praktis, dan Masa Langganan 180 Hari',
                 'lama_langganan'=> 180,
                 'desc'=>'lorem ipsum',
-                'harga'=>120000,
+                'harga'=>500000,
             ],
             [
-                'kode_langganan'=>'GOLD4',
+                'kode_langganan'=>'kode4',
                 'nama_langganan'=>'Paket Tahunan',
-                'layanan'=>'keren, rapi, aman, dan tentram',
+                'layanan'=>'Berat Sampah Max 7 Kg , Sistem Jemput, Praktis, dan Masa Langganan 365 Hari',
                 'lama_langganan'=> 365,
                 'desc'=>'lorem ipsum',
-                'harga'=>120000,
+                'harga'=>800000,
             ],
 
         ]);

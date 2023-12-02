@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string("methode_pembayaran",50);
             $table->integer("bayar");
             $table->integer("harga");
+            $table->date("masa_langganan");
             $table->enum("status",["Sudah Bayar","Belum Bayar"]);
             $table->date("tanggal");
             $table->timestamps();
