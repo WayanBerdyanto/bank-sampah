@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use DB;
+use Carbon\Carbon;
 
 class PenggunaController extends Controller
 {
@@ -193,6 +194,13 @@ class PenggunaController extends Controller
         ->get();
         // dd($result_master);
         return view('pengguna.detailbuangsampah', [ 'key' => 'index', 'result' => $result, 'user' => $user, 'username' => $username, 'result_master'=>$result_master]);
+    }
+    
+    public function carbon(){
+        $date = Carbon::createFromFormat('Y.m.d', '2023.12.02');
+        $daysToAdd = 7;
+        $date = $date->addDays($daysToAdd);
+        return view('carbon', ['date'=>$date]);
     }
 
     public function buanglangganan()

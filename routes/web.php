@@ -32,6 +32,8 @@ Route::post('/postRegister', [RegisterController::class, 'postRegister']);
 Route::get('/login', [LoginController::class, 'login']);
 Route::post('/loginpengguna', [LoginController::class, 'loginPengguna']);
 
+Route::get('/carbon', [PenggunaController::class, 'carbon']);
+
 // Pengguna Controller
 Route::middleware('cekrole:pengguna')->group(function () {
     Route::get('/pengguna/', [PenggunaController::class, 'index'])->name('pengguna.index');
