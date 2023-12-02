@@ -30,16 +30,17 @@ class BankSampahController extends Controller
         $result_master = Detail_Pembuangan::select(
             'detail_pembuangan.id_dtl_pembuangan',
             'mp.id_master_pembuangan',
-            'users.nama_lengkap AS Nama_Bank', 'mp.tgl_pengajuan',
+            'users.nama_lengkap AS Nama_Bank',
+            'mp.tgl_pengajuan',
             DB::raw('(SELECT nama_lengkap FROM users WHERE users.id = mp.id_pengguna) AS nama_lengkap'),
             'mp.jenis_sampah',
             'mp.jam_pengajuan'
         )
-        ->join('master_pembuangan as mp', 'detail_pembuangan.id_master_pembuangan', '=', 'mp.id_master_pembuangan')
-        ->join('users', 'users.id', '=', 'mp.id_bank_sampah')
-        ->where('users.id', $id_banksampah)
-        ->orderBy('mp.id_master_pembuangan', 'desc')
-        ->paginate(5);
+            ->join('master_pembuangan as mp', 'detail_pembuangan.id_master_pembuangan', '=', 'mp.id_master_pembuangan')
+            ->join('users', 'users.id', '=', 'mp.id_bank_sampah')
+            ->where('users.id', $id_banksampah)
+            ->orderBy('mp.id_master_pembuangan', 'desc')
+            ->paginate(5);
         return view('banksampah.dataPenerimaan', ['user' => $user, 'result_master' => $result_master]);
     }
     public function detailPenerimaan($id)
@@ -49,18 +50,19 @@ class BankSampahController extends Controller
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
 
-        return view('banksampah.detailPenerimaan', ['user' => $user, 'result' => $result, 'username' => $username, 'detail'=>$detail]);
+        return view('banksampah.detailPenerimaan', ['user' => $user, 'result' => $result, 'username' => $username, 'detail' => $detail]);
     }
 
-    public function hapusterima($id){
-        $result = Detail_Pembuangan::where('id_dtl_pembuangan',$id)->get();
+    public function hapusterima($id)
+    {
+        $result = Detail_Pembuangan::where('id_dtl_pembuangan', $id)->get();
         $id_master = $result[0]->id_master_pembuangan;
-        
-        if($id_master == $result[0]->id_master_pembuangan){
-            master_pembuangan::where('id_master_pembuangan', $id_master)->update(['status_terima'=>'Ditolak']);
-            Detail_Pembuangan::where('id_dtl_pembuangan',$id)->delete();
+
+        if ($id_master == $result[0]->id_master_pembuangan) {
+            master_pembuangan::where('id_master_pembuangan', $id_master)->update(['status_terima' => 'Ditolak']);
+            Detail_Pembuangan::where('id_dtl_pembuangan', $id)->delete();
             return redirect('/banksampah/datapenerimaan')->with('success', 'Data Berhasil DiTolak');
-        }else{
+        } else {
             return redirect('/bansampah/detailPenerimaan')->with('error', 'Data Gagal Ditolak');
         }
     }
@@ -132,6 +134,24 @@ class BankSampahController extends Controller
     {
         Auth::logout();
         return redirect('/login');
+    }
+
+    public function terimasampah($id, Request $request)
+    {
+
+        $result = Detail_Pembuangan::where('id_dtl_pembuangan', $id)->get();
+        $id_master = $result[0]->id_master_pembuangan;
+
+        if ($id_master == $result[0]->id_master_pembuangan) {
+            master_pembuangan::where('id_master_pembuangan', $id_master)->update(['status_terima' => 'Diterima']);
+            Detail_Pembuangan::where('id_dtl_pembuangan', $id)->update([
+                'berat_sampah' => $request->berat,
+                'tanggal' => now(),
+                'jam_penerimaan' => $request->jam_penerimaan,
+                'hari' => date('l'),
+            ]);
+            return redirect('/banksampah/datapenerimaan')->with('success', 'Data Berhasil Diterima');
+        }
     }
 
 }

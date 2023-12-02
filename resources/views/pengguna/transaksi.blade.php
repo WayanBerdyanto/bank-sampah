@@ -23,32 +23,10 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
-                                            <td>3 Kg</td>
-                                            <td>20/11/2023</td>
-                                            <td>Bank Sampah 1</td>
-                                            <td class="text-success">Diterima</td>
-                                            <td><button onclick="showSweetAlert()" class="btn btn-primary"
-                                                    type="button">Bayar</button></td>
+                                            
+                        
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>4 Kg</td>
-                                            <td>22/11/2023</td>
-                                            <td>Bank Sampah 2</td>
-                                            <td class="text-warning">Menunggu</td>
-                                            <td><button onclick="showSweetAlert()" class="btn btn-primary disabled"
-                                                    type="button">Bayar</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>10 Kg</td>
-                                            <td>24/11/2023</td>
-                                            <td>Bank Sampah 3</td>
-                                            <td class="text-danger">Ditolak</td>
-                                            <td><button onclick="showSweetAlert()" class="btn btn-primary disabled"
-                                                    type="button">Bayar</button></td>
-                                        </tr>
+                        
                                     </tbody>
                                 </table>
                                 <nav aria-label="Page navigation example">

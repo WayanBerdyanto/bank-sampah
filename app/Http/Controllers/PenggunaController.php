@@ -207,4 +207,9 @@ class PenggunaController extends Controller
         Auth::logout();
         return redirect('/login');
     }
+
+    public function bayar($id, Request $request) {
+        master_pembuangan::where('id_master_pembuangan', $id)->update(['status_bayar' => 'Lunas']);
+        return redirect('/pengguna/detailbuangsampah/'.$id)->with('toast_success','Pembayaran Berhasil');
+    }
 }

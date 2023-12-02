@@ -75,7 +75,69 @@
                                 </li>
                             </ul>
                             @if ($result_master[0]->status_terima == 'Diterima')
-                                <a href="#" class="btn btn-primary">Bayar</a>
+                                @if ($result_master[0]->status_bayar == 'Lunas')
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"
+                                        data-id="{{ $result_master[0]->id_master_pembuangan }}" disabled>
+                                        Bayar
+                                    </button>
+                                    @else
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"
+                                        data-id="{{ $result_master[0]->id_master_pembuangan }}">
+                                        Bayar
+                                    </button>
+                                @endif
+
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <form action="/pengguna/bayar/{{ $result_master[0]->id_master_pembuangan }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="modal-body">
+                                                    <div class="card  w-100">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">Harga :
+                                                                Rp.{{ $result_master[0]->total }}
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                Berat Sampah : {{ $result_master[0]->berat_sampah }} Kg
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                Lokasi Pembuangan :
+                                                                {{ $result_master[0]->lokasi_pembuangan }}
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                Jenis Sampah : {{ $result_master[0]->jenis_sampah }}
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                Tanggal Terima : {{ $result_master[0]->tanggal }}
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <input type="text" name="status_bayar" hidden>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Bayar</button>
+                                                </div>
+                                            </form>
+
+
+                                        </div>
+                                    </div>
+                                </div>
                             @else
                                 <a href="#" class="btn btn-primary disabled">Bayar</a>
                             @endif
