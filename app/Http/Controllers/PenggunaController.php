@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Carbon\Carbon;
+use PDF;
 
 class PenggunaController extends Controller
 {
@@ -38,6 +39,21 @@ class PenggunaController extends Controller
         $langganan = Langganan::All();
         return view('pengguna.langganan', ['user' => $user, 'key' => 'langganan', 'result' => $result, 'langganan' => $langganan]);
     }
+
+    public function invoiceprofile($type){
+        $username = Auth::User()->username ?? '';
+        $user = Auth::User()->username ?? '';
+        $result = User::where('username', $username)->first();
+
+
+        $pdf = PDF::loadView('pengguna.cetakprofile',['result' => $result]);
+        return $pdf->stream('cetak-proile.pdf');
+    }
+
+    public function cetakprofile(){
+        return view('pengguna.cetakprofile');
+    }
+
     public function transaksi()
     {
         $user = Auth::User()->nama_lengkap ?? '';
@@ -68,6 +84,45 @@ class PenggunaController extends Controller
         return view('pengguna.transaksi', ['user' => $user, 'key' => 'transaksi', 'result' => $result, 'result_master'=>$result_master]);
     }
 
+    public function invoice($type){
+        $id_pengguna = Auth::User()->id;
+        $data = master_pembuangan::select(
+            'master_pembuangan.id_master_pembuangan',
+            'users.id as user_id',
+            'users.nama_lengkap',
+            'users.status_langganan',
+            'users.provinsi',
+            'users.kabupaten',
+            'users.kecamatan',
+            'users.kelurahan',
+            'users.no_telpon',
+            'master_pembuangan.jenis_sampah',
+            'master_pembuangan.tgl_pengajuan',
+            'master_pembuangan.jam_pengajuan',
+            'master_pembuangan.status_terima',
+            'detail_pembuangan.berat_sampah',
+            'master_pembuangan.status_bayar',
+            DB::raw('detail_pembuangan.harga * detail_pembuangan.berat_sampah AS total')
+
+        )
+        ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
+        ->join('detail_pembuangan', 'detail_pembuangan.id_master_pembuangan', '=', 'master_pembuangan.id_master_pembuangan')
+        ->where('master_pembuangan.id_pengguna', $id_pengguna)
+        ->where('status_bayar', '!=',null)
+        ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
+        ->take(5)
+        ->get();
+        // dd($data);
+        
+        $users = User::where('id', $id_pengguna )->get();
+        // dd($users);
+
+        $today = Carbon::now();
+
+        $mytime = Carbon::now()->toDateTimeString();
+        $pdf = PDF::loadView('pengguna.cetakpdf',['data'=>$data, 'time'=>$mytime, 'users'=>$users, 'today'=>$today]);
+        return $pdf->stream('cetak-pdf.pdf');
+    }
     public function profilesetting()
     {
         $username = Auth::User()->username ?? '';
@@ -149,6 +204,7 @@ class PenggunaController extends Controller
         $banksampah = User::where('role', 'banksampah')->get();;
         return view('pengguna.buangsampah', ['key' => 'buangsampah', 'user' => $user, 'result' => $result, 'banksampah' => $banksampah]);
     }
+
 
     public function postbuangsampah(Request $request)
     {
