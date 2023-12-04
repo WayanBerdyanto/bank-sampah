@@ -4,6 +4,9 @@
         <div class="container-fluid">
             <div class="row mt-4 mx-2">
                 <div class="col-md-12 mb-3">
+                    <a href="/pengguna/transaksi/download" class="btn btn-success mb-2" target="blank">
+                        <i class="bi bi-arrow-down-circle"></i>
+                        Cetak</a>
                     <div class="card">
                         <div class="card-header">
                             <span><i class="bi bi-table me-2"></i></span> Transaksi Pembuangan
@@ -14,26 +17,23 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th>Lokasi Pembuangan</th>
                                             <th>Berat Sampah</th>
                                             <th>Tanggal</th>
-                                            <th>Lokasi Pembuangan</th>
-                                            <th>Status</th>
-                                            <th>Status Pembayaran</th>
+                                            <th>Status Bayar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($result_master as $item)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->berat_sampah }}</td>
-                                            <td>{{ $item->tgl_pengajuan }}</td>
-                                            <td>{{ $item->nama_lengkap }}</td>
-                                            <td>{{ $item->status_terima }}</td>
-                                            <td>{{ $item->status_bayar }}</td>
-                                            {{-- <td>{{ $item->status_bayar }}</td> --}}
-                                        </tr>
-                                    @endforeach
-                        
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $item->nama_lengkap }}</td>
+                                                <td>{{ $item->berat_sampah }} Kg</td>
+                                                <td>{{ $item->tgl_pengajuan }}</td>
+                                                <td>{{ $item->status_bayar }}</td>
+                                            </tr>
+                                        @endforeach
+
                                     </tbody>
                                 </table>
                                 <nav aria-label="Page navigation example">
