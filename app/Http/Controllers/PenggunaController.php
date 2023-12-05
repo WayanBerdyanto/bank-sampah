@@ -58,7 +58,7 @@ class PenggunaController extends Controller
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        
+        $id = Auth::User()->id ?? '';
         $mytime = Carbon::now()->toDateTimeString();
         $date = Carbon::createFromFormat('Y-m-d H:i:s', $mytime);
         $daysToAdd = 7;
@@ -71,10 +71,16 @@ class PenggunaController extends Controller
                 'kode_langganan'=> $request->kode_langganan,
                 'harga' => $request->harga,
                 'masa_langganan'=>$date,
-                'status' => 'Belum Bayar',
+                'status' => 'Sudah Bayar', //<- Manipulation
                 'tanggal' => $mytime
-             ]
+            ]
         );
+
+        // Send Status Langganan To User
+        $user = User::find($id);
+        $user->status_langganan = 'Sudah Langganan';
+        $user->save();
+
 
         $order = Detail_Langganan::create($request->all());
 
@@ -89,7 +95,7 @@ class PenggunaController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $order->id_dtl_langganan . '_' . uniqid(),
+                'order_id' => $order->id_dtl_langganan . 'Sudah Bayar' . uniqid(), //<- Manipulation Callback
                 'gross_amount' => $order->harga,
             ),
             'customer_details' => array(
@@ -120,8 +126,7 @@ class PenggunaController extends Controller
             }
             return response('OK', 200);
         }else{
-        return response('BAD', 401);
-
+            return response('BAD', 401);
         }
     }
     

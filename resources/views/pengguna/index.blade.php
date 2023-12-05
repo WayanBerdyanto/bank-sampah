@@ -4,11 +4,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    @if (session('flash_success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="bi bi-patch-check-fill"></i>
-                            Selamat Datang Pengguna <strong>{{ $user }}</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    @if (Auth::User()->provinsi == null && Auth::User()->kabupaten == null)
+                        <div class="alert alert-warning" role="alert">
+                            Anda Belum Melengkapi Profile <a href="/pengguna/profilesetting" class="text-primary">Lengkapi</a>
                         </div>
                     @endif
                     <h2 class="mt-2 mb-4 text-center fw-bold fs-2">Dashboard Pengguna</h2>
