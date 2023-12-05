@@ -92,9 +92,10 @@ class PenggunaController extends Controller
         );
 
         // Send Status Langganan To User
-        $user = User::find($id);
-        $user->status_langganan = 'Sudah Langganan';
-        $user->save();
+
+        // $user = User::find($id);
+        // $user->status_langganan = 'Sudah Langganan';
+        // $user->save();
 
 
         $order = Detail_Langganan::create($request->all());
@@ -110,7 +111,7 @@ class PenggunaController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $order->id_dtl_langganan . 'Sudah Bayar' . uniqid(), //<- Manipulation Callback
+                'order_id' => $order->id_dtl_langganan . '_' . uniqid(), //<- Manipulation Callback
                 'gross_amount' => $order->harga,
             ),
             'customer_details' => array(
