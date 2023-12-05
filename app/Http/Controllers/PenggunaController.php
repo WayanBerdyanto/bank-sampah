@@ -7,12 +7,14 @@ use App\Charts\PieChartSampah;
 use App\Models\Langganan;
 use App\Models\master_pembuangan;
 use App\Models\Detail_Pembuangan;
+use App\Models\Detail_Langganan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Carbon\Carbon;
+use PDF;
 
 class PenggunaController extends Controller
 {
@@ -38,6 +40,106 @@ class PenggunaController extends Controller
         $langganan = Langganan::All();
         return view('pengguna.langganan', ['user' => $user, 'key' => 'langganan', 'result' => $result, 'langganan' => $langganan]);
     }
+
+    // Start Sistem Langganan
+    public function order($id){
+        $user = Auth::User()->nama_lengkap ?? '';
+        $username = Auth::User()->username ?? '';
+        $result = User::where('username', $username)->first();
+        $langganan = Langganan::where('kode_langganan', $id)->get();
+        return  view('pengguna.orderlangganan', [
+            'key' => 'langganan', 
+            'result' => $result,
+            'user' => $user,
+            'langganan'=>$langganan]);
+    }
+    
+    public function checkout(Request $request){
+        $user = Auth::User()->nama_lengkap ?? '';
+        $username = Auth::User()->username ?? '';
+        $result = User::where('username', $username)->first();
+        
+        $mytime = Carbon::now()->toDateTimeString();
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', $mytime);
+        $daysToAdd = 7;
+        $date = $date->addDays($daysToAdd);
+
+        $user = Auth::User()->id ?? '';
+        $request->request->add(
+            [
+                'id_pengguna'=>$user,
+                'kode_langganan'=> $request->kode_langganan,
+                'harga' => $request->harga,
+                'masa_langganan'=>$date,
+                'status' => 'Belum Bayar',
+                'tanggal' => $mytime
+             ]
+        );
+
+        $order = Detail_Langganan::create($request->all());
+
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $order->id_dtl_langganan . '_' . uniqid(),
+                'gross_amount' => $order->harga,
+            ),
+            'customer_details' => array(
+                'name' => $request->nama_langganan,
+                'tanggal' => $request->tanggal,
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        return view('pengguna.checkout', [
+            'snapToken'=>$snapToken, 
+            'order'=>$order,
+            'key' =>'langganan', 
+            'result' => $result,
+            'user' => $user,]);
+
+    }
+
+    public function callback(Request $request){
+        $serverkey = config('midtrans.server_key');
+        $hashed = hash('sha512', $request->order_id.$request->status_code.$request->gross_amount.$serverkey);
+        if($hashed == $request->signature_key){
+            if($request->transaction_status == 'capture'){
+                $order = Detail_Langganan::find($request->id_dtl_langganan);
+                $order->status = 'Sudah Bayar';
+                $order->save();
+            }
+            return response('OK', 200);
+        }else{
+        return response('BAD', 401);
+
+        }
+    }
+    
+    // End Sistem Langganan
+    public function invoiceprofile($type){
+        $username = Auth::User()->username ?? '';
+        $user = Auth::User()->username ?? '';
+        $result = User::where('username', $username)->first();
+
+
+        $pdf = PDF::loadView('pengguna.cetakprofile',['result' => $result]);
+        return $pdf->stream('cetak-proile.pdf');
+    }
+
+    public function cetakprofile(){
+        return view('pengguna.cetakprofile');
+    }
+
     public function transaksi()
     {
         $user = Auth::User()->nama_lengkap ?? '';
@@ -68,6 +170,45 @@ class PenggunaController extends Controller
         return view('pengguna.transaksi', ['user' => $user, 'key' => 'transaksi', 'result' => $result, 'result_master'=>$result_master]);
     }
 
+    public function invoice($type){
+        $id_pengguna = Auth::User()->id;
+        $data = master_pembuangan::select(
+            'master_pembuangan.id_master_pembuangan',
+            'users.id as user_id',
+            'users.nama_lengkap',
+            'users.status_langganan',
+            'users.provinsi',
+            'users.kabupaten',
+            'users.kecamatan',
+            'users.kelurahan',
+            'users.no_telpon',
+            'master_pembuangan.jenis_sampah',
+            'master_pembuangan.tgl_pengajuan',
+            'master_pembuangan.jam_pengajuan',
+            'master_pembuangan.status_terima',
+            'detail_pembuangan.berat_sampah',
+            'master_pembuangan.status_bayar',
+            DB::raw('detail_pembuangan.harga * detail_pembuangan.berat_sampah AS total')
+
+        )
+        ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
+        ->join('detail_pembuangan', 'detail_pembuangan.id_master_pembuangan', '=', 'master_pembuangan.id_master_pembuangan')
+        ->where('master_pembuangan.id_pengguna', $id_pengguna)
+        ->where('status_bayar', '!=',null)
+        ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
+        ->take(5)
+        ->get();
+        // dd($data);
+        
+        $users = User::where('id', $id_pengguna )->get();
+        // dd($users);
+
+        $today = Carbon::now();
+
+        $mytime = Carbon::now()->toDateTimeString();
+        $pdf = PDF::loadView('pengguna.cetakpdf',['data'=>$data, 'time'=>$mytime, 'users'=>$users, 'today'=>$today]);
+        return $pdf->stream('cetak-pdf.pdf');
+    }
     public function profilesetting()
     {
         $username = Auth::User()->username ?? '';
@@ -150,6 +291,7 @@ class PenggunaController extends Controller
         return view('pengguna.buangsampah', ['key' => 'buangsampah', 'user' => $user, 'result' => $result, 'banksampah' => $banksampah]);
     }
 
+
     public function postbuangsampah(Request $request)
     {
         $validated = $request->validate([
@@ -210,7 +352,8 @@ class PenggunaController extends Controller
     }
     
     public function carbon(){
-        $date = Carbon::createFromFormat('Y.m.d', '2023.12.02');
+        $mytime = Carbon::now()->toDateTimeString();
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', $mytime);
         $daysToAdd = 7;
         $date = $date->addDays($daysToAdd);
         return view('carbon', ['date'=>$date]);

@@ -14,18 +14,15 @@ return new class extends Migration
         Schema::create('detail_langganan', function (Blueprint $table) {
             $table->bigIncrements("id_dtl_langganan");
             
-            $table->unsignedBigInteger("id_pengguna");
+            $table->unsignedBigInteger("id_pengguna")->nullable();
             $table->foreign("id_pengguna")->references("id")->on("users");
 
-            $table->char("kode_langganan",5);
+            $table->char("kode_langganan",5)->nullable();
             $table->foreign("kode_langganan")->references("kode_langganan")->on("langganan");
-            
-            $table->string("methode_pembayaran",50);
-            $table->integer("bayar");
-            $table->integer("harga");
-            $table->date("masa_langganan");
+            $table->integer("harga")->nullable();
+            $table->date("masa_langganan")->nullable();
             $table->enum("status",["Sudah Bayar","Belum Bayar"]);
-            $table->date("tanggal");
+            $table->date("tanggal")->nullable();
             $table->timestamps();
         });
     }
