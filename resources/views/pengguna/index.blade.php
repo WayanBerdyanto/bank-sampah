@@ -9,6 +9,81 @@
                             Anda Belum Melengkapi Profile <a href="/pengguna/profilesetting" class="text-primary">Lengkapi</a>
                         </div>
                     @endif
+                    @if (Auth::User()->status_langganan == 'Sudah Langganan')
+                        <div class="d-flex justify-content-end">
+                            <div id="countdown">
+                                <h4 class="mx-2 fw-bold fs-4">Masa Langganan Berakhir</h4>
+                                <ul class="d-flex">
+                                    <li class="mx-2">
+                                        <span id="days">Hari</span>
+                                    </li>
+
+                                    <li class="mx-2">
+                                        <span id="hours">Jam</span>
+                                    </li>
+
+                                    <li class="mx-2">
+                                        <span id="minute">Menit</span>
+                                    </li>
+
+                                    <li class="mx-2">
+                                        <span id="seconds">Detik</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <script>
+                            // Fungsi untuk menghitung sisa waktu
+                            function calculateTimeRemaining(endTime) {
+                                const currentTime = new Date();
+                                const difference = new Date(endTime) - currentTime;
+                        
+                                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+                        
+                                return {
+                                    'total': difference,
+                                    'days': days,
+                                    'hours': hours,
+                                    'minutes': minutes,
+                                    'seconds': seconds
+                                };
+                            }
+                        
+                            // Fungsi untuk memperbarui tampilan countdown
+                            function updateCountdown() {
+                                const countdownElement = document.getElementById('countdown');
+                                const daysElement = document.getElementById('days');
+                                const hoursElement = document.getElementById('hours');
+                                const minuteElement = document.getElementById('minute');
+                                const secondsElement = document.getElementById('seconds');
+                        
+                                const endTime = '{{ $date->toDateTimeString() }}'; // Ambil waktu dari Controller
+                        
+                                const timeRemaining = calculateTimeRemaining(endTime);
+                        
+                                daysElement.innerText = timeRemaining.days + ' Hari';
+                                hoursElement.innerText = timeRemaining.hours + ' Jam';
+                                minuteElement.innerText = timeRemaining.minutes + ' Menit';
+                                secondsElement.innerText = timeRemaining.seconds + ' Detik';
+                        
+                                // Jika waktu sudah habis, lakukan sesuatu (misalnya, munculkan pesan)
+                                if (timeRemaining.total <= 0) {
+                                    clearInterval(countdownInterval);
+                                    countdownElement.innerHTML = '<h4>Masa Langganan Telah Berakhir</h4>';
+                                }
+                            }
+                        
+                            // Perbarui setiap detik
+                            const countdownInterval = setInterval(updateCountdown, 1000);
+                        
+                            // Panggil fungsi pertama kali agar countdown tidak menunggu satu detik pertama
+                            updateCountdown();
+                        </script>
+                        
+                    @endif
                     <h2 class="mt-2 mb-4 text-center fw-bold fs-2">Dashboard Pengguna</h2>
                 </div>
             </div>
