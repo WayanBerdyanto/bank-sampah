@@ -86,7 +86,7 @@ class PenggunaController extends Controller
                 'kode_langganan'=> $request->kode_langganan,
                 'harga' => $request->harga,
                 'masa_langganan'=>$date,
-                'status' => 'Sudah Bayar', //<- Manipulation
+                'status' => 'Belum Bayar', //<- Manipulation
                 'tanggal' => $mytime
             ]
         );
