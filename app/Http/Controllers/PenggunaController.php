@@ -32,14 +32,19 @@ class PenggunaController extends Controller
 
         $lama_langganan = DB::select('SELECT langganan.lama_langganan
         FROM users, detail_langganan, langganan
-        WHERE users.id = 6 AND langganan.kode_langganan = detail_langganan.kode_langganan');
+        WHERE users.id = '. $id_pengguna .' AND langganan.kode_langganan = detail_langganan.kode_langganan');
         $mytime = Carbon::now()->toDateTimeString();
         $date = Carbon::createFromFormat('Y-m-d H:i:s', $mytime);
-        $daysToAdd = $lama_langganan[0]->lama_langganan;
+        if(!empty($lama_langganan)){
+            $daysToAdd = $lama_langganan[0]->lama_langganan;
+            $date = $date->addDays($daysToAdd);
+            return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date]);
+        }else{
+            return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date]);
+        }
         
-        $date = $date->addDays($daysToAdd);
 
-        return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date]);
+        
     }
 
     public function langganan()
