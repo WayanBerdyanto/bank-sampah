@@ -111,7 +111,7 @@ class PenggunaController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $order->id_dtl_langganan, //<- Manipulation Callback
+                'order_id' => $order->id_dtl_langganan . '' . uniqid(), //<- Manipulation Callback
                 'gross_amount' => $order->harga,
             ),
             'customer_details' => array(
