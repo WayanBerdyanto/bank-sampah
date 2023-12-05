@@ -12,7 +12,7 @@
                         <label for="namapaket" class="col-sm-2 col-form-label">Nama Paket</label>
                         <div class="col-sm-10">
                             <input type="text" readonly class="form-control-plaintext" id="namapaket"
-                                value=": {{ $langganan[0]->nama_langganan }}" name="lama_langganan">
+                                value=": {{ $langganan[0]->nama_langganan }}" name="nama_langganan">
                         </div>
                     </div>
 

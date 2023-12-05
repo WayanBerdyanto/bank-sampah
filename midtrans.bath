@@ -1,0 +1,4 @@
+php -S localhost:8000 -t bank-sampah/public
+ngrok http localhost:8000 
+
+4811 1111 1111 1114

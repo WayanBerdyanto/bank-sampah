@@ -29,7 +29,22 @@ class PenggunaController extends Controller
             ->where('master_pembuangan.id_pengguna', $id_pengguna)
             ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
             ->paginate(5);
-        return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master]);
+
+        $lama_langganan = DB::select('SELECT langganan.lama_langganan
+        FROM users, detail_langganan, langganan
+        WHERE users.id = '. $id_pengguna .' AND langganan.kode_langganan = detail_langganan.kode_langganan');
+        $mytime = Carbon::now()->toDateTimeString();
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', $mytime);
+        if(!empty($lama_langganan)){
+            $daysToAdd = $lama_langganan[0]->lama_langganan;
+            $date = $date->addDays($daysToAdd);
+            return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date]);
+        }else{
+            return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date]);
+        }
+        
+
+        
     }
 
     public function langganan()
@@ -58,7 +73,7 @@ class PenggunaController extends Controller
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        
+        $id = Auth::User()->id ?? '';
         $mytime = Carbon::now()->toDateTimeString();
         $date = Carbon::createFromFormat('Y-m-d H:i:s', $mytime);
         $daysToAdd = 7;
@@ -71,10 +86,17 @@ class PenggunaController extends Controller
                 'kode_langganan'=> $request->kode_langganan,
                 'harga' => $request->harga,
                 'masa_langganan'=>$date,
-                'status' => 'Belum Bayar',
+                'status' => 'Sudah Bayar', //<- Manipulation
                 'tanggal' => $mytime
-             ]
+            ]
         );
+
+        // Send Status Langganan To User
+
+        // $user = User::find($id);
+        // $user->status_langganan = 'Sudah Langganan';
+        // $user->save();
+
 
         $order = Detail_Langganan::create($request->all());
 
@@ -89,7 +111,7 @@ class PenggunaController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $order->id_dtl_langganan . '_' . uniqid(),
+                'order_id' => $order->id_dtl_langganan . '_' . uniqid(), //<- Manipulation Callback
                 'gross_amount' => $order->harga,
             ),
             'customer_details' => array(
@@ -120,8 +142,7 @@ class PenggunaController extends Controller
             }
             return response('OK', 200);
         }else{
-        return response('BAD', 401);
-
+            return response('BAD', 401);
         }
     }
     

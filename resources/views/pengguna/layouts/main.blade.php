@@ -144,6 +144,7 @@
     <script src="{{ asset('js/map.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/alertlangganan.js') }}"></script>
+    <script src="{{ asset('js/countdown.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 
     <script src="{{ asset('js/password.js') }}"></script>

@@ -16,7 +16,7 @@
                 <li class="my-2">
                     <hr class="dropdown-divider bg-light" />
                 </li>
-                @if ($result->status == 'Sudah berlangganan')
+                @if (Auth::User()->status_langganan == 'Sudah Langganan')
                     <li class="py-2">
                         <a class="nav-link px-3" data-bs-toggle="collapse" href="#collapseExample" role="button"
                             aria-expanded="false" aria-controls="collapseExample">
