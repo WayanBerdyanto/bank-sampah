@@ -25,7 +25,7 @@
                                             {{ $data->harga }}
                                         </span>
                                     </span>
-                                    <a href="/langganan/{{$data->kode_langganan}}" class="btn btn-primary">Beli</a>
+                                    <a href="/pengguna/langganan/{{ $data->kode_langganan }}" class="btn btn-primary">Beli</a>
                                 </div>
                             </div>
                         </div>
