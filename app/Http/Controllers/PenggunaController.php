@@ -7,6 +7,7 @@ use App\Charts\PieChartSampah;
 use App\Models\Langganan;
 use App\Models\master_pembuangan;
 use App\Models\Detail_Pembuangan;
+use App\Models\Detail_Langganan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +41,91 @@ class PenggunaController extends Controller
         return view('pengguna.langganan', ['user' => $user, 'key' => 'langganan', 'result' => $result, 'langganan' => $langganan]);
     }
 
+    // Start Sistem Langganan
+    public function order($id){
+        $user = Auth::User()->nama_lengkap ?? '';
+        $username = Auth::User()->username ?? '';
+        $result = User::where('username', $username)->first();
+        $langganan = Langganan::where('kode_langganan', $id)->get();
+        return  view('pengguna.orderlangganan', [
+            'key' => 'langganan', 
+            'result' => $result,
+            'user' => $user,
+            'langganan'=>$langganan]);
+    }
+    
+    public function checkout(Request $request){
+        $user = Auth::User()->nama_lengkap ?? '';
+        $username = Auth::User()->username ?? '';
+        $result = User::where('username', $username)->first();
+        
+        $mytime = Carbon::now()->toDateTimeString();
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', $mytime);
+        $daysToAdd = 7;
+        $date = $date->addDays($daysToAdd);
+
+        $user = Auth::User()->id ?? '';
+        $request->request->add(
+            [
+                'id_pengguna'=>$user,
+                'kode_langganan'=> $request->kode_langganan,
+                'harga' => $request->harga,
+                'masa_langganan'=>$date,
+                'status' => 'Belum Bayar',
+                'tanggal' => $mytime
+             ]
+        );
+
+        $order = Detail_Langganan::create($request->all());
+
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $order->id_dtl_langganan . '_' . uniqid(),
+                'gross_amount' => $order->harga,
+            ),
+            'customer_details' => array(
+                'name' => $request->nama_langganan,
+                'tanggal' => $request->tanggal,
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        return view('pengguna.checkout', [
+            'snapToken'=>$snapToken, 
+            'order'=>$order,
+            'key' =>'langganan', 
+            'result' => $result,
+            'user' => $user,]);
+
+    }
+
+    public function callback(Request $request){
+        $serverkey = config('midtrans.server_key');
+        $hashed = hash('sha512', $request->order_id.$request->status_code.$request->gross_amount.$serverkey);
+        if($hashed == $request->signature_key){
+            if($request->transaction_status == 'capture'){
+                $order = Detail_Langganan::find($request->id_dtl_langganan);
+                $order->status = 'Sudah Bayar';
+                $order->save();
+            }
+            return response('OK', 200);
+        }else{
+        return response('BAD', 401);
+
+        }
+    }
+    
+    // End Sistem Langganan
     public function invoiceprofile($type){
         $username = Auth::User()->username ?? '';
         $user = Auth::User()->username ?? '';
@@ -266,7 +352,8 @@ class PenggunaController extends Controller
     }
     
     public function carbon(){
-        $date = Carbon::createFromFormat('Y.m.d', '2023.12.02');
+        $mytime = Carbon::now()->toDateTimeString();
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', $mytime);
         $daysToAdd = 7;
         $date = $date->addDays($daysToAdd);
         return view('carbon', ['date'=>$date]);
