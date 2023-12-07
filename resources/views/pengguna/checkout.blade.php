@@ -84,10 +84,10 @@
                                             </div>
                                             <div class="card-body">
                                                 <input type="text" name="id_dtl"
-                                                    value="{{ $result_detail->id_dtl_langganan }}">
+                                                    value="{{ $result_detail->id_dtl_langganan }}" hidden>
                                                 <span class="d-block fw-bold">Harga : {{ $result_detail->harga }}</span>
-                                                <span class="d-block fw-bold">Lama Masa Langganan :
-                                                    {{ $masa_langganan }}</span>
+                                                <span class="d-block fw-bold">Masa Langganan Berakhir:
+                                                    {{ $datenow }}</span>
                                                 <p>
                                                     Dengan ini, saya menyatakan bahwa saya telah membaca dan memahami syarat
                                                     dan
