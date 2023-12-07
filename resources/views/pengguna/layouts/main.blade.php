@@ -115,7 +115,7 @@
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Anda Yakin Logout dari <strong>{{ $user }}</strong> ?
+                    Anda Yakin Logout dari <strong>{{ Auth::User()->nama_lengkap }}</strong> ?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
