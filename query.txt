@@ -1,7 +1,13 @@
+// Query Request Pembuangan Inner Join detail_pengambilan
+SELECT rp.id_request, u.nama_lengkap , rp.`status`, dp.berat
+FROM detail_pengambilan dp, request_pembuangan rp, users u
+WHERE dp.id_dtl_pengambilan = rp.id_dtl_pengambilan AND dp.id_pengambil = u.id
+
 // Query Penerimaan Sampah
-
-
-
+SELECT ps.id_penerimaan_sampah, ps.id_bank_sampah, 
+ps.id_request, ps.confirm, ps.jam_terima, ps.tanggal_terima, rp.id_request, rp.`status`
+FROM penerimaan_sampah ps, request_pembuangan rp, users u
+WHERE ps.id_request = rp.id_request AND ps.id_bank_sampah = u.id
 
 
 // Query Insert master_pengambilan
