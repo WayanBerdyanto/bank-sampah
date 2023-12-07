@@ -61,6 +61,7 @@ Route::middleware('cekrole:pengguna')->group(function () {
     // SYSTEM LANGGANAN
     Route::get('/pengguna/langganan/{type}', [PenggunaController::class, 'order']);
     Route::post('/pengguna/langganan/checkout', [PenggunaController::class, 'checkout']);
+    Route::post('/pengguna/langganan/postCheckout', [PenggunaController::class, 'postCheckout']);
 
 });
 

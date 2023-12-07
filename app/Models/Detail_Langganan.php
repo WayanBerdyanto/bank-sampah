@@ -17,6 +17,7 @@ class Detail_Langganan extends Model
         'kode_langganan',
         'harga',
         'masa_langganan',
+        'methode_pembayaran',
         'status',
         'tanggal',
     ];

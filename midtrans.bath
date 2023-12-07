@@ -2,3 +2,11 @@ php -S localhost:8000 -t bank-sampah/public
 ngrok http localhost:8000 
 
 4811 1111 1111 1114
+
+<div class="col-md-8">
+                    <button class="btn btn-primary" id="pay-button">Bayar</button>
+                </div>
+
+                <div class="col-md-4">
+                    <div id="snap-container" class="w-full"></div>
+                </div>
