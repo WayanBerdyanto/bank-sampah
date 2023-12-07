@@ -1,0 +1,27 @@
+// Query Request Pembuangan Inner Join detail_pengambilan
+SELECT rp.id_request, u.nama_lengkap , rp.`status`, dp.berat
+FROM detail_pengambilan dp, request_pembuangan rp, users u
+WHERE dp.id_dtl_pengambilan = rp.id_dtl_pengambilan AND dp.id_pengambil = u.id
+
+// Query Penerimaan Sampah
+SELECT ps.id_penerimaan_sampah, ps.id_bank_sampah, 
+ps.id_request, ps.confirm, ps.jam_terima, ps.tanggal_terima, rp.id_request, rp.`status`
+FROM penerimaan_sampah ps, request_pembuangan rp, users u
+WHERE ps.id_request = rp.id_request AND ps.id_bank_sampah = u.id
+
+
+// Query Insert master_pengambilan
+INSERT INTO master_pengambilan (id_pengguna, jenis_sampah, jam, hari, tanggal) 
+VALUES (6, 'Organik', '06:00', 'Senin', '2023-11-07')
+
+// Query Insert detail_pengambilan
+INSERT INTO detail_pengambilan (id_nota, id_pengambil, berat) 
+VALUES (1, 1, '3')
+
+//Query Insert request_pembuangan
+INSERT INTO request_pembuangan ( id_dtl_pengambilan, `status`) 
+VALUES (1, 'Diterima')
+
+//Query Insert Penerimaan_Sampah
+INSERT INTO penerimaan_sampah ( id_bank_sampah, id_request, confirm, jam_terima, tanggal_terima) 
+VALUES (2, 1, 'Diterima', '06.00', '2023-11-07')

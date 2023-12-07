@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('penerimaan_sampah', function (Blueprint $table) {
             $table->bigIncrements("id_penerimaan_sampah");
+
+            $table->unsignedBigInteger("id_request");
+            $table->foreign("id_request")->references("id_request")->on("request_pembuangan");
+            
             $table->unsignedBigInteger("id_bank_sampah");
             $table->foreign("id_bank_sampah")->references("id")->on("users");
+
             $table->string("confirm", 50)->default("Belum Terkonfirmasi");
             $table->time("jam_terima")->nullable();
             $table->date("tanggal_terima")->nullable();
