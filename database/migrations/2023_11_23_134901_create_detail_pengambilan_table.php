@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign("id_pengambil")->references("id")->on("users");
             
             $table->integer("berat");
+            $table->string("status_pengambilan",50)->default("Belum diambil");
             $table->timestamps();
         });
     }

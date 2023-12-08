@@ -5,6 +5,7 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PengambilController;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\PenggunaLanggananController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,7 +47,7 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::post('/pengguna/postubahpassword', [PenggunaController::class, 'postubahpassword']);
     Route::get('/pengguna/buangsampah', [PenggunaController::class, 'buangsampah']);
     Route::get('/pengguna/transaksi/pembayaran', [PenggunaController::class, 'pembayaran']);
-    Route::get('/pengguna/buanglangganan', [PenggunaController::class, 'buanglangganan']);
+    // Route::get('/pengguna/buanglangganan', [PenggunaController::class, 'buanglangganan']);
     Route::post('/pengguna/postbuangsampah', [PenggunaController::class, 'postbuangsampah']);
     Route::get('/pengguna/detailbuangsampah/{id}', [PenggunaController::class, 'detailbuangsampah']);
     Route::get('/pengguna/hapusmasterbuang/{id}', [PenggunaController::class, 'hapusmasterbuang']);
@@ -62,6 +63,9 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::get('/pengguna/langganan/{type}', [PenggunaController::class, 'order']);
     Route::post('/pengguna/langganan/checkout', [PenggunaController::class, 'checkout']);
     Route::post('/pengguna/langganan/postCheckout', [PenggunaController::class, 'postCheckout']);
+
+    Route::get('/pengguna/buanglangganan',[PenggunaLanggananController::class,'buanglangganan']);
+    Route::post('/pengguna/postbuanglangganan',[PenggunaLanggananController::class,'postbuanglangganan']);
 
 });
 
@@ -88,4 +92,5 @@ Route::middleware('cekrole:pengambil')->group(function () {
     Route::get('/pengambil/ubahpassword', [PengambilController::class, 'ubahpassword']);
     Route::post('/pengambil/postubahpassword', [PengambilController::class, 'postubahpassword']);
     Route::get('/pengambil/logout', [PengambilController::class, 'logout']);
+    Route::get('/pengambil/penerimaan', [PengambilController::class,'penerimaan']);
 });
