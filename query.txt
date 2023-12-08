@@ -25,3 +25,5 @@ VALUES (1, 'Diterima')
 //Query Insert Penerimaan_Sampah
 INSERT INTO penerimaan_sampah ( id_bank_sampah, id_request, confirm, jam_terima, tanggal_terima) 
 VALUES (2, 1, 'Diterima', '06.00', '2023-11-07')
+
+//Revert
