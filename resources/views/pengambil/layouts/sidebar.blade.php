@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li class="py-2">
-                    <a href="#" class="nav-link px-3">
+                    <a href="/pengambil/penerimaan" class="nav-link px-3">
                         <span class="me-2"><i class="bi bi-book-fill"></i></span>
                         <span>Penerimaan</span>
                     </a>
