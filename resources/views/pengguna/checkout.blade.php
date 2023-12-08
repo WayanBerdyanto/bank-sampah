@@ -23,7 +23,9 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">
-                                        {{ $result_detail->nama_langganan }}
+                                        @if ($result_detail->nama_langganan != null)
+                                            {{ $result_detail->nama_langganan }}
+                                        @endif
                                     </th>
                                     <td>
                                         {{ $result_detail->lama_langganan }} Hari
