@@ -72,8 +72,9 @@ class PenggunaController extends Controller
         $result = User::where('username', $username)->first();
         $id = Auth::User()->id ?? '';
         $mytime = Carbon::now()->toDateTimeString();
+        // dd($mytime);
         $date = Carbon::createFromFormat('Y-m-d H:i:s', $mytime);
-        $daysToAdd = 7;
+        $daysToAdd = $request->lama_langganan;
         $date = $date->addDays($daysToAdd);
         
         $request->request->add(
@@ -82,6 +83,7 @@ class PenggunaController extends Controller
                 'kode_langganan' => $request->kode_langganan,
                 'harga' => $request->harga,
                 'masa_langganan' => $date,
+                'lama_langganan' => $request->lama_langganan,
                 'status' => 'Belum Bayar',
                 'tanggal' => $mytime,
             ]

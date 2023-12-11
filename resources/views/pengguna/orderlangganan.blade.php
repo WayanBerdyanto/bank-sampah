@@ -28,7 +28,7 @@
                         <label for="lamalangganan" class="col-sm-2 col-form-label">Lama Langganan</label>
                         <div class="col-sm-10">
                             <input type="text" readonly class="form-control-plaintext" id="lamalangganan"
-                                value=": {{ $langganan[0]->lama_langganan }}" name="lama_langganan">
+                                value="{{ $langganan[0]->lama_langganan }}" name="lama_langganan">
                         </div>
                     </div>
 

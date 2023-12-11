@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date("masa_langganan")->nullable();
             $table->string("methode_pembayaran", 50)->nullable();
             $table->enum("status",["Sudah Bayar","Belum Bayar"]);
-            $table->date("tanggal")->nullable();
+            $table->dateTime("tanggal");
             $table->timestamps();
         });
     }
