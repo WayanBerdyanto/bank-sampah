@@ -42,8 +42,6 @@ class PenggunaLanggananController extends Controller
         }       
     }
 
-class PenggunaLanggananController extends Controller
-{
     public function buanglangganan()
     {
         $user = Auth::User()->nama_lengkap ?? '';
