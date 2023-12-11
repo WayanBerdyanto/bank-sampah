@@ -13,6 +13,8 @@ use App\Models\master_pembuangan;
 use DB;
 use Carbon\Carbon;
 use PDF;
+use App\Models\Detail_Pembuangan;
+
 
 
 class PenggunaLanggananController extends Controller
@@ -22,11 +24,19 @@ class PenggunaLanggananController extends Controller
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
         $id_pengguna = Auth::User()->id;
-        $result_master = master_pembuangan::select('master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.tgl_pengajuan','master_pembuangan.jam_pengajuan', 'master_pembuangan.status_terima')
-            ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
-            ->where('master_pembuangan.id_pengguna', $id_pengguna)
-            ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
-            ->paginate(5);
+
+        $id_pengambil = DB::table('users')
+        ->select('users.id')
+        ->where('users.role', 'Pengambil')
+        ->first();
+
+        // dd($id_pengguna, $id_pengambil);
+
+
+        $result_master = db::select("SELECT mp.jenis_sampah, mp.jam, mp.hari, mp.tanggal, dp.status_pengambilan, (SELECT users.nama_lengkap FROM users WHERE users.id = '$id_pengambil->id') AS nama_lengkap
+        FROM users us, master_pengambilan mp, detail_pengambilan dp
+        WHERE mp.id_nota = dp.id_nota AND us.id = '$id_pengguna'");
+
 
         $lama_langganan = DB::select('SELECT langganan.lama_langganan, detail_langganan.tanggal
         FROM users, detail_langganan, langganan
@@ -89,7 +99,7 @@ class PenggunaLanggananController extends Controller
                 'id_pengambil' => $request->idpengambil,
                 'berat' => 0
             ]);
-            return redirect('/pengguna/')->with('success', 'Data Sampah Berhasil Diinputkan');
+            return redirect('/penggunalangganan/')->with('success', 'Data Sampah Berhasil Diinputkan');
 
         }
     }
@@ -108,5 +118,9 @@ class PenggunaLanggananController extends Controller
         ->orderBy('detail_langganan.id_pengguna', 'desc')
         ->paginate(5);
        return view('/pengguna/langganan/historylangganan', ['key' => 'historylangganan', 'result'=>$result]);
+    }
+
+    public function transaksipembuangan(){
+       return view('/pengguna/langganan/transaksipembuangan', ['key' =>'transaksipembuangan']);
     }
 }

@@ -38,9 +38,9 @@
                                 <span class="mx-2"><i class="bi bi-trash"></i></span>
                                 <span>Buang Sampah</span>
                             </a>
-                            <a href="/pengguna/transaksi" class="nav-link">
+                            <a href="/pengguna/transaksipembuangan" class="nav-link">
                                 <span class="mx-2"><i class="fa-solid fa-clock-rotate-left"></i></span>
-                                <span>Transaksi</span>
+                                <span>Transaksi Pembuangan</span>
                             </a>
                         </div>
                     </li>

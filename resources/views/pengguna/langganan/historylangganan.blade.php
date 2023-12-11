@@ -10,7 +10,7 @@
                             Cetak</a>
                         <a href="#" class="btn btn-success mb-2" target="blank">
                             <i class="bi bi-arrow-down-circle"></i>
-                            Cetak</a>
+                            Filter</a>
                     </div>
                     <div class="card">
                         <div class="card-header">

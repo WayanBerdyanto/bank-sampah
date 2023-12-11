@@ -64,6 +64,7 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::post('/pengguna/langganan/checkout', [PenggunaController::class, 'checkout']);
     Route::post('/pengguna/langganan/postCheckout', [PenggunaController::class, 'postCheckout']);
 
+    Route::get('/pengguna/transaksipembuangan', [PenggunaLanggananController::class, 'transaksipembuangan']);
     Route::get('/pengguna/historylangganan', [PenggunaLanggananController::class, 'historyLangganan']);
     Route::get('/pengguna/buanglangganan',[PenggunaLanggananController::class,'buanglangganan']);
     Route::post('/pengguna/postbuanglangganan',[PenggunaLanggananController::class,'postbuanglangganan']);
