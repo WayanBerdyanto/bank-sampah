@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('langganan', function (Blueprint $table) {
             $table->char("kode_langganan", 5)->primary();
-            $table->string("nama_langganan", 50);
-            $table->string("layanan", 100);
-            $table->integer("lama_langganan");
-            $table->string("desc", 50);
-            $table->integer("harga");
+            $table->string("nama_langganan", 50)->nullable();
+            $table->string("layanan", 100)->nullable();
+            $table->integer("lama_langganan")->nullable();
+            $table->string("desc", 50)->nullable();
+            $table->integer("harga")->nullable();
             $table->timestamps();
         });
     }

@@ -41,10 +41,7 @@ class PenggunaController extends Controller
             return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date]);
         }else{
             return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date]);
-        }
-        
-
-        
+        }       
     }
 
     public function langganan()
@@ -78,27 +75,26 @@ class PenggunaController extends Controller
         $date = Carbon::createFromFormat('Y-m-d H:i:s', $mytime);
         $daysToAdd = 7;
         $date = $date->addDays($daysToAdd);
+        
+        $request->request->add(
+            [
+                'id_pengguna' => Auth::user()->id,
+                'kode_langganan' => $request->kode_langganan,
+                'harga' => $request->harga,
+                'masa_langganan' => $date,
+                'status' => 'Belum Bayar',
+                'tanggal' => $mytime,
+            ]
+        );
+
+        $order = Detail_Langganan::create($request->all());
         $result_detail = Detail_Langganan::join('langganan as l', 'detail_langganan.kode_langganan', '=', 'l.kode_langganan')
         ->select('detail_langganan.*', 'l.nama_langganan', 'l.layanan', 'l.harga', 'l.lama_langganan')
         ->orderBy('detail_langganan.id_dtl_langganan', 'desc')
         ->first();
 
-        $request->request->add(
-            [
-                'id_pengguna'=>Auth::User()->id,
-                'kode_langganan'=> $request->kode_langganan,
-                'harga' => $request->harga,
-                'masa_langganan'=>$date,
-                'status' => 'Belum Bayar', //<- Manipulation
-                'tanggal' => $mytime
-            ]
-        );
-
-        $order = Detail_Langganan::create($request->all());
-
-
         return view('pengguna.checkout',
-         [ 
+        [ 
             'key' => 'langganan', 
             'user' => $user,
             'id_pengguna'=>$user,
@@ -126,7 +122,7 @@ class PenggunaController extends Controller
         $user = User::where('id',Auth::User()->id)->update([
             'status_langganan' => 'Sudah Langganan'
         ]);    
-        return redirect('/pengguna')->with('success', 'Berhasil Langganan');  
+        return redirect('/penggunalangganan')->with('success', 'Berhasil Langganan');  
     }
 
     public function checkouts(Request $request){
