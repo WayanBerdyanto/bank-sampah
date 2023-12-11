@@ -42,7 +42,8 @@ class PenggunaLanggananController extends Controller
         }       
     }
 
-
+class PenggunaLanggananController extends Controller
+{
     public function buanglangganan()
     {
         $user = Auth::User()->nama_lengkap ?? '';
@@ -91,6 +92,7 @@ class PenggunaLanggananController extends Controller
                 'berat' => 0
             ]);
             return redirect('/pengguna/')->with('success', 'Data Sampah Berhasil Diinputkan');
+
         }
     }
 }
