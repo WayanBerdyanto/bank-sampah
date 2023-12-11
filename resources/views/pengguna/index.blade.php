@@ -37,12 +37,12 @@
                             function calculateTimeRemaining(endTime) {
                                 const currentTime = new Date();
                                 const difference = new Date(endTime) - currentTime;
-                        
+
                                 const days = Math.floor(difference / (1000 * 60 * 60 * 24));
                                 const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                                 const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
                                 const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-                        
+
                                 return {
                                     'total': difference,
                                     'days': days,
@@ -51,7 +51,7 @@
                                     'seconds': seconds
                                 };
                             }
-                        
+
                             // Fungsi untuk memperbarui tampilan countdown
                             function updateCountdown() {
                                 const countdownElement = document.getElementById('countdown');
@@ -59,30 +59,29 @@
                                 const hoursElement = document.getElementById('hours');
                                 const minuteElement = document.getElementById('minute');
                                 const secondsElement = document.getElementById('seconds');
-                        
+
                                 const endTime = '{{ $date->toDateTimeString() }}'; // Ambil waktu dari Controller
-                        
+
                                 const timeRemaining = calculateTimeRemaining(endTime);
-                        
+
                                 daysElement.innerText = timeRemaining.days + ' Hari';
                                 hoursElement.innerText = timeRemaining.hours + ' Jam';
                                 minuteElement.innerText = timeRemaining.minutes + ' Menit';
                                 secondsElement.innerText = timeRemaining.seconds + ' Detik';
-                        
+
                                 // Jika waktu sudah habis, lakukan sesuatu (misalnya, munculkan pesan)
                                 if (timeRemaining.total <= 0) {
                                     clearInterval(countdownInterval);
                                     countdownElement.innerHTML = '<h4>Masa Langganan Telah Berakhir</h4>';
                                 }
                             }
-                        
+
                             // Perbarui setiap detik
                             const countdownInterval = setInterval(updateCountdown, 1000);
-                        
+
                             // Panggil fungsi pertama kali agar countdown tidak menunggu satu detik pertama
                             updateCountdown();
                         </script>
-                        
                     @endif
                     <h2 class="mt-2 mb-4 text-center fw-bold fs-2">Dashboard Pengguna</h2>
                 </div>
@@ -172,9 +171,38 @@
                 <div class="col-md-12">
                     <div class="mb-3">
                         <h3 class="form-label fw-bold">Lokasi Rumah</h3>
-                        <div class="card-body mb-4" id="maps" style="height: 400px">
+                        <div class="card-body mb-4" id="mapsindex" style="height: 400px">
 
                         </div>
+                        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+                        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+                        <script>
+                            var map = L.map('mapsindex').setView([0, 0], 30);
+                            // Add a basemap (e.g., OpenStreetMap)
+                            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                maxZoom: 19,
+                                attribution: '&copy; <ahref = "http://www.openstreetmap.org/copyright" > OpenStreetMap < /a>'
+                            }).addTo(map);
+
+                            // Get the user's geolocation and add a marker
+                            navigator.geolocation.getCurrentPosition(function(position) {
+                                var lat = position.coords.latitude;
+                                var lon = position.coords.longitude;
+                                map.setView([lat, lon], 18);
+                                var userLocation = L.marker([lat, lon]).addTo(map);
+                                userLocation.bindPopup('You are here!').openPopup();
+                            });
+                            var iconUrls = [
+                                'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                                'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                                'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+                                'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+
+                                // Tambahkan lebih banyak link ikon sesuai kebutuhan Anda
+                            ];
+                        </script>
                     </div>
                 </div>
             </div>
