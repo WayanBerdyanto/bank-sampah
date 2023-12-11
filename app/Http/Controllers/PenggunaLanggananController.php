@@ -2,11 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\LineChartPengguna;
+use App\Charts\PieChartSampah;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\master_pengambilan;
 use App\Models\detail_pengambilan;
+use App\Models\master_pembuangan;
+use DB;
+use Carbon\Carbon;
+use PDF;
+
+
+class PenggunaLanggananController extends Controller
+{
+    public function index(PieChartSampah $chart, LineChartPengguna $linechart)
+    {
+        $username = Auth::User()->username ?? '';
+        $result = User::where('username', $username)->first();
+        $id_pengguna = Auth::User()->id;
+        $result_master = master_pembuangan::select('master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.tgl_pengajuan','master_pembuangan.jam_pengajuan', 'master_pembuangan.status_terima')
+            ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
+            ->where('master_pembuangan.id_pengguna', $id_pengguna)
+            ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
+            ->paginate(5);
+
+        $lama_langganan = DB::select('SELECT langganan.lama_langganan, detail_langganan.tanggal
+        FROM users, detail_langganan, langganan
+        WHERE users.id = '. $id_pengguna .' AND langganan.kode_langganan = detail_langganan.kode_langganan');
+        $mytime = $lama_langganan[0]->tanggal;
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', $mytime);
+        if(!empty($lama_langganan)){
+            $daysToAdd = $lama_langganan[0]->lama_langganan;
+            $date = $date->addDays($daysToAdd);
+            return view('pengguna.langganan.indexlangganan', ['username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date]);
+        }else{
+            return view('pengguna.langganan.indexlangganan', ['username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date]);
+        }       
+    }
 
 class PenggunaLanggananController extends Controller
 {
@@ -57,7 +91,8 @@ class PenggunaLanggananController extends Controller
                 'id_pengambil' => $request->idpengambil,
                 'berat' => 0
             ]);
-            return redirect('/pengguna/buanglangganan')->with('success', 'Data Sampah Berhasil Diinputkan');
+            return redirect('/pengguna/')->with('success', 'Data Sampah Berhasil Diinputkan');
+
         }
     }
 }

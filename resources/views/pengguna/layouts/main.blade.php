@@ -127,8 +127,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
 
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrqEdaadXnnDWGx7Lr7WDJTzewjHZSItQ&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrqEdaadXnnDWGx7Lr7WDJTzewjHZSItQ&callback=initMap"></script>
+
     <script async defer src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v6.3/mapsJavaScriptAPI.js" async
         defer></script>
 

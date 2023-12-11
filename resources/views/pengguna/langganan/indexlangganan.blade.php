@@ -23,7 +23,7 @@
                                     </li>
 
                                     <li class="mx-2">
-                                        <span id="minute">Menit</span>
+                                        <span id="minutes">Menit</span>
                                     </li>
 
                                     <li class="mx-2">
@@ -32,8 +32,8 @@
                                 </ul>
                             </div>
                         </div>
+
                         <script>
-                            // Fungsi untuk menghitung sisa waktu
                             function calculateTimeRemaining(endTime) {
                                 const currentTime = new Date();
                                 const difference = new Date(endTime) - currentTime;
@@ -57,16 +57,18 @@
                                 const countdownElement = document.getElementById('countdown');
                                 const daysElement = document.getElementById('days');
                                 const hoursElement = document.getElementById('hours');
-                                const minuteElement = document.getElementById('minute');
+                                const minutesElement = document.getElementById('minutes');
                                 const secondsElement = document.getElementById('seconds');
 
-                                const endTime = '{{ $date->toDateTimeString() }}'; // Ambil waktu dari Controller
+                                // Retrieve the end time from local storage
+                                const storedEndTime = localStorage.getItem('endTime');
+                                const endTime = storedEndTime || '{{ $date }}';
 
                                 const timeRemaining = calculateTimeRemaining(endTime);
 
                                 daysElement.innerText = timeRemaining.days + ' Hari';
                                 hoursElement.innerText = timeRemaining.hours + ' Jam';
-                                minuteElement.innerText = timeRemaining.minutes + ' Menit';
+                                minutesElement.innerText = timeRemaining.minutes + ' Menit';
                                 secondsElement.innerText = timeRemaining.seconds + ' Detik';
 
                                 // Jika waktu sudah habis, lakukan sesuatu (misalnya, munculkan pesan)
@@ -174,6 +176,7 @@
                         <div class="card-body mb-4" id="mapsindex" style="height: 400px">
 
                         </div>
+
                         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
                         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"

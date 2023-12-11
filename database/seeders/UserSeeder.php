@@ -80,7 +80,7 @@ class UserSeeder extends Seeder
             [
                 'kode_langganan'=>'kode1',
                 'nama_langganan'=>'Paket Mingguan',
-                'layanan'=>'Berat Sampah max 4 Kg, Sistem Jemput, Praktis, Masa Langganan 7 Hari',
+                'layanan'=>'Berat Sampah max 7 Kg, Sistem Jemput, Praktis, Masa Langganan 7 Hari',
                 'lama_langganan'=> 7,
                 'desc'=>'lorem ipsum',
                 'harga'=>35000,
@@ -88,7 +88,7 @@ class UserSeeder extends Seeder
             [
                 'kode_langganan'=>'kode2',
                 'nama_langganan'=>'Paket Bulanan',
-                'layanan'=>'Berat Sampah Max 6 Kg , Sistem Jemput, Praktis, dan Masa Langganan 7 Hari',
+                'layanan'=>'Berat Sampah Max 7 Kg , Sistem Jemput, Praktis, dan Masa Langganan 30 Hari',
                 'lama_langganan'=> 30,
                 'desc'=>'lorem ipsum',
                 'harga'=>140000,

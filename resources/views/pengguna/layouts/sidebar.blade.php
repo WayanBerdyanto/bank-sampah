@@ -8,10 +8,19 @@
                     </div>
                 </li>
                 <li>
-                    <a href="/pengguna" class="nav-link px-3 mt-4 {{ $key == 'index' ? 'active bg-primary' : '' }}">
-                        <span class="mx-2"><i class="bi bi-speedometer2"></i></span>
-                        <span>Dashboard</span>
-                    </a>
+                    @if (Auth::User()->status_langganan == 'Sudah Langganan')
+                        <a href="/penggunalangganan"
+                            class="nav-link px-3 mt-4 {{ $key == 'index' ? 'active bg-primary' : '' }}">
+                            <span class="mx-2"><i class="bi bi-speedometer2"></i></span>
+                            <span>Dashboard</span>
+                        </a>
+                    @else
+                        <a href="/pengguna" class="nav-link px-3 mt-4 {{ $key == 'index' ? 'active bg-primary' : '' }}">
+                            <span class="mx-2"><i class="bi bi-speedometer2"></i></span>
+                            <span>Dashboard</span>
+                        </a>
+                    @endif
+
                 </li>
                 <li class="my-2">
                     <hr class="dropdown-divider bg-light" />
@@ -35,6 +44,15 @@
                             </a>
                         </div>
                     </li>
+
+                    <li class="py-2">
+                        <a href="#"
+                            class="nav-link px-3">
+                            <span class="mx-2"><i class="fa-solid fa-clock-rotate-left"></i></span>
+                            <span>History Langganan</span>
+                        </a>
+                    </li>
+
                 @else
                     <li class="py-2">
                         <a href="/pengguna/buangsampah"
@@ -52,15 +70,16 @@
                             <span>Langganan</span>
                         </a>
                     </li>
-                @endif
 
-                <li class="py-2">
-                    <a href="/pengguna/transaksi"
-                        class="nav-link px-3 {{ $key == 'transaksi' ? 'active bg-primary' : '' }}">
-                        <span class="mx-2"><i class="fa-solid fa-clock-rotate-left"></i></span>
-                        <span>Transaksi</span> 
-                    </a>
-                </li>
+
+                    <li class="py-2">
+                        <a href="/pengguna/transaksi"
+                            class="nav-link px-3 {{ $key == 'transaksi' ? 'active bg-primary' : '' }}">
+                            <span class="mx-2"><i class="fa-solid fa-clock-rotate-left"></i></span>
+                            <span>Transaksi</span>
+                        </a>
+                    </li>
+                @endif
             </ul>
         </nav>
     </div>
