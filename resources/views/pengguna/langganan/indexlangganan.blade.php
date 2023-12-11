@@ -62,7 +62,7 @@
 
                                 // Retrieve the end time from local storage
                                 const storedEndTime = localStorage.getItem('endTime');
-                                const endTime = storedEndTime || '{{$date}}';
+                                const endTime = storedEndTime || '{{ $date }}';
 
                                 const timeRemaining = calculateTimeRemaining(endTime);
 
@@ -173,9 +173,39 @@
                 <div class="col-md-12">
                     <div class="mb-3">
                         <h3 class="form-label fw-bold">Lokasi Rumah</h3>
-                        <div class="card-body mb-4" id="maps" style="height: 400px">
+                        <div class="card-body mb-4" id="mapsindex" style="height: 400px">
 
                         </div>
+
+                        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+                        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+                        <script>
+                            var map = L.map('mapsindex').setView([0, 0], 30);
+                            // Add a basemap (e.g., OpenStreetMap)
+                            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                maxZoom: 19,
+                                attribution: '&copy; <ahref = "http://www.openstreetmap.org/copyright" > OpenStreetMap < /a>'
+                            }).addTo(map);
+
+                            // Get the user's geolocation and add a marker
+                            navigator.geolocation.getCurrentPosition(function(position) {
+                                var lat = position.coords.latitude;
+                                var lon = position.coords.longitude;
+                                map.setView([lat, lon], 18);
+                                var userLocation = L.marker([lat, lon]).addTo(map);
+                                userLocation.bindPopup('You are here!').openPopup();
+                            });
+                            var iconUrls = [
+                                'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                                'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                                'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+                                'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+
+                                // Tambahkan lebih banyak link ikon sesuai kebutuhan Anda
+                            ];
+                        </script>
                     </div>
                 </div>
             </div>
