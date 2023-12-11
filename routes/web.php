@@ -64,6 +64,7 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::post('/pengguna/langganan/checkout', [PenggunaController::class, 'checkout']);
     Route::post('/pengguna/langganan/postCheckout', [PenggunaController::class, 'postCheckout']);
 
+    Route::get('/pengguna/historylangganan', [PenggunaLanggananController::class, 'historyLangganan']);
     Route::get('/pengguna/buanglangganan',[PenggunaLanggananController::class,'buanglangganan']);
     Route::post('/pengguna/postbuanglangganan',[PenggunaLanggananController::class,'postbuanglangganan']);
     Route::get('/penggunalangganan/', [PenggunaLanggananController::class, 'index'])->name('pengguna.langganan.indexlangganan');
@@ -77,7 +78,7 @@ Route::middleware('cekrole:banksampah')->group(function () {
     Route::get('/banksampah/datapenerimaan', [BankSampahController::class, 'dataPenerimaan']);
     Route::get('/banksampah/detailpenerimaan/{id}', [BankSampahController::class, 'detailPenerimaan']);
     Route::get('/banksampah/hapusterima/{id}', [BankSampahController::class, 'hapusterima']);
-    
+
     Route::get('/banksampah/profilebank', [BankSampahController::class, 'profilebank']);
     Route::put('/banksampah/postprofile/{id}', [BankSampahController::class, 'postProfile']);
     Route::get('/banksampah/ubahpassword', [BankSampahController::class, 'ubahpassword']);

@@ -39,7 +39,7 @@ class PenggunaLanggananController extends Controller
             return view('pengguna.langganan.indexlangganan', ['username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date]);
         }else{
             return view('pengguna.langganan.indexlangganan', ['username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date]);
-        }       
+        }
     }
 
     public function buanglangganan()
@@ -92,5 +92,21 @@ class PenggunaLanggananController extends Controller
             return redirect('/pengguna/')->with('success', 'Data Sampah Berhasil Diinputkan');
 
         }
+    }
+
+    public function historyLangganan(){
+        $id_pengguna = Auth::User()->id;
+        $result = DB::table('detail_langganan')->select(
+        'detail_langganan.id_pengguna',
+        'langganan.nama_langganan',
+        'detail_langganan.tanggal',
+        'detail_langganan.masa_langganan',
+        'detail_langganan.status'
+        )->join('langganan', 'langganan.kode_langganan', '=', 'detail_langganan.kode_langganan')
+        ->join('users', 'users.id', '=', 'detail_langganan.id_pengguna')
+        ->where('detail_langganan.id_pengguna', $id_pengguna)
+        ->orderBy('detail_langganan.id_pengguna', 'desc')
+        ->paginate(5);
+       return view('/pengguna/langganan/historylangganan', ['key' => 'historylangganan', 'result'=>$result]);
     }
 }

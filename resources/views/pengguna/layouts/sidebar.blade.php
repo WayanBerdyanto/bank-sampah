@@ -46,8 +46,8 @@
                     </li>
 
                     <li class="py-2">
-                        <a href="#"
-                            class="nav-link px-3">
+                        <a href="/pengguna/historylangganan"
+                            class="nav-link px-3 {{ $key == 'historylangganan' ? 'active bg-primary' : ''}}">
                             <span class="mx-2"><i class="fa-solid fa-clock-rotate-left"></i></span>
                             <span>History Langganan</span>
                         </a>
