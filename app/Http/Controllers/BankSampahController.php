@@ -67,6 +67,10 @@ class BankSampahController extends Controller
         }
     }
 
+    public function history(){
+        return view('banksampah.history');
+    }
+
     public function profilebank()
     {
         $username = Auth::User()->username ?? '';
