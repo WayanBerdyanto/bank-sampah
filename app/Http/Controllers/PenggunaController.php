@@ -34,7 +34,6 @@ class PenggunaController extends Controller
         $result_master_langganan = db::select("SELECT mp.jenis_sampah, mp.jam, mp.hari, mp.tanggal, dp.status_pengambilan, (SELECT users.nama_lengkap FROM users WHERE users.id = dp.id_pengambil) AS nama_lengkap
         FROM users us, master_pengambilan mp, detail_pengambilan dp
         WHERE mp.id_nota = dp.id_nota AND us.id = '$id_pengguna' AND mp.id_pengguna = '$id_pengguna'");
-
         $result_master = master_pembuangan::select('master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.tgl_pengajuan','master_pembuangan.jam_pengajuan', 'master_pembuangan.status_terima')
             ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
             ->where('master_pembuangan.id_pengguna', $id_pengguna)
