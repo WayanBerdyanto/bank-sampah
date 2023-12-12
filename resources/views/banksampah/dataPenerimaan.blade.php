@@ -41,12 +41,40 @@
                                                             href="/banksampah/detailpenerimaan/{{ $items->id_dtl_pembuangan }}"
                                                             class="btn btn-primary">Timbang</a></td>
                                                 @endif
-
+                            @if (!empty($result_master->nama_lengkap))
+                                <div class="table-responsive">
+                                    <table id="example" class="table table-striped data-table" style="width: 100%">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama Pengguna</th>
+                                                <th>Jenis Sampah</th>
+                                                <th>Tgl Pengajuan</th>
+                                                <th>Jam Pengajuan</th>
+                                                <th class="text-center">Aksi</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($result_master as $idx => $items)
+                                                <tr>
+                                                    <td>{{ $result_master->firstItem() + $idx }}</td>
+                                                    <td>{{ $items->nama_lengkap }}</td>
+                                                    <td>{{ $items->jenis_sampah }}</td>
+                                                    <td>{{ $items->tgl_pengajuan }}</td>
+                                                    <td>{{ $items->jam_pengajuan }}</td>
+                                                    <td class="text-center"><a
+                                                            href="/banksampah/detailpenerimaan/{{ $items->id_dtl_pembuangan }}"
+                                                            class="btn btn-primary">Timbang</a></td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @else
+                                <div class="w-100 text-center">
+                                    <span class="text-center">Belum Ada Data dari Pengguna</span>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
