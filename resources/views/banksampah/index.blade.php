@@ -4,7 +4,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h4>Dashboard Bank Sampah</h4>
+                    @if (Auth::User()->provinsi == null && Auth::User()->kabupaten == null)
+                        <div class="alert alert-warning" role="alert">
+                            Anda Belum Melengkapi Profile <a href="/pengguna/profilesetting" class="text-primary">Lengkapi</a>
+                        </div>
+                    @endif
+                    <h4 class="text-center my-3">Dashboard Bank Sampah</h4>
                 </div>
             </div>
             <div class="row">
