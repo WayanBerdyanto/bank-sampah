@@ -4,12 +4,14 @@
         <div class="container-fluid">
             <div class="row mt-4 mx-2">
                 <div class="col-md-12 mb-3">
-                    <a href="#" class="btn btn-success mb-2" target="blank">
-                        <i class="bi bi-arrow-down-circle"></i>
-                        Cetak</a>
+                    <div class="w-100 d-flex justify-content-end">
+                        <a href="transaksi/cetak" class="btn btn-primary mb-2" target="blank">
+                            <i class="bi bi-printer-fill"></i>
+                            Cetak Semua</a>
+                    </div>
                     <div class="card">
                         <div class="card-header">
-                            <span><i class="bi bi-table me-2"></i></span> Transaksi Pembuangan
+                            <span><i class="bi bi-table me-2"></i></span> Data History BuangSampah
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -17,34 +19,37 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Lokasi Pembuangan</th>
-                                            <th>Berat Sampah</th>
-                                            <th>Tanggal</th>
-                                            <th>Status Bayar</th>
+                                            <th>Petugas Pengambil</th>
+                                            <th>Jenis Sampah</th>
+                                            <th>Jam Pengajuan</th>
+                                            <th>Hari Pengajuan</th>
+                                            <th>Tanggal Pengajuan</th>
+                                            <th class="text-center">Status Pengambilan</th>
+                                            <th class="text-center">Aksi</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($result_master as $item)
+                                        @foreach ($result as $item)
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
+                                                <td> {{$loop->iteration}} </td>
                                                 <td>{{ $item->nama_lengkap }}</td>
-                                                <td>{{ $item->berat_sampah }} Kg</td>
-                                                <td>{{ $item->tgl_pengajuan }}</td>
-                                                <td>{{ $item->status_bayar }}</td>
+                                                <td>{{ $item->jenis_sampah }}</td>
+                                                <td>{{ $item->jam }}</td>
+                                                <td>{{ $item->hari }}</td>
+                                                <td>{{ $item->tanggal }}</td>
+                                                <td class="text-center">
+                                                    <span class="fst-italic">{{ $item->status_pengambilan }}</span>
+                                                </td>
+                                                <td>
+                                                    <a href="transaksi/cetak/{{$item->id_dtl_pengambilan}}" class="btn btn-primary">
+                                                        <i class="bi bi-printer-fill"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
-                                        @endforeach --}}
-
+                                        @endforeach
                                     </tbody>
                                 </table>
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination flex justify-content-end">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                    </ul>
-                                </nav>
                             </div>
                         </div>
                     </div>

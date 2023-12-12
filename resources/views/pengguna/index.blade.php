@@ -115,7 +115,7 @@
                     @if (Auth::user()->status_langganan == 'Sudah Langganan')
                         <div class="card">
                             <div class="card-header">
-                                <span><i class="bi bi-table me-2"></i></span> Data History Pengambilan
+                                <span><i class="bi bi-table me-2"></i></span> Data History BuangSampah
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">

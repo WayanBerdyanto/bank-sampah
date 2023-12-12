@@ -5,7 +5,7 @@
             <div class="row mt-4 mx-2">
                 <div class="col-md-12 mb-3">
                     <div class="w-100 d-flex justify-content-end">
-                        <a href="#" class="btn btn-success mb-2" target="blank">
+                        <a href="historylangganan/cetaksemua" class="btn btn-primary mb-2" target="blank">
                             <i class="bi bi-printer-fill"></i>
                             Cetak Semua
                         </a>
@@ -36,9 +36,9 @@
                                                 <td>{{ $item->masa_langganan }} Kg</td>
                                                 <td>{{ $item->status }}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-success mb-2" target="blank">
+                                                    <a href="historylangganan/cetak/{{$item->id_dtl_langganan}}" class="btn btn-primary mb-2" target="blank">
                                                         <i class="bi bi-printer-fill"></i>
-                                                        Cetak</a>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach
