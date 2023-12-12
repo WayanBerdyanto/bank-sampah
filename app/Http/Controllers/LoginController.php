@@ -24,11 +24,7 @@ class LoginController extends Controller
             if (Auth::user()->role == 'pengambil') {
                 return redirect('/pengambil/')->with('success', 'Login Berhasil');
             } elseif (Auth::user()->role == 'pengguna') {
-                if(Auth::user()->status_langganan == "Belum berlangganan"){
-                    return redirect('/pengguna/')->with('success', 'Login Berhasil');
-                }else{
-                    return redirect('/penggunalangganan/')->with('success', 'Login Berhasil');
-                }
+                return redirect('/pengguna/')->with('success', 'Login Berhasil');
             } elseif (Auth::user()->role == 'banksampah') {
                 return redirect('/banksampah/')->with('success', 'Login Berhasil');
             } 

@@ -23,7 +23,7 @@
                                     </li>
 
                                     <li class="mx-2">
-                                        <span id="minute">Menit</span>
+                                        <span id="minutes">Menit</span>
                                     </li>
 
                                     <li class="mx-2">
@@ -32,8 +32,8 @@
                                 </ul>
                             </div>
                         </div>
+
                         <script>
-                            // Fungsi untuk menghitung sisa waktu
                             function calculateTimeRemaining(endTime) {
                                 const currentTime = new Date();
                                 const difference = new Date(endTime) - currentTime;
@@ -57,16 +57,18 @@
                                 const countdownElement = document.getElementById('countdown');
                                 const daysElement = document.getElementById('days');
                                 const hoursElement = document.getElementById('hours');
-                                const minuteElement = document.getElementById('minute');
+                                const minutesElement = document.getElementById('minutes');
                                 const secondsElement = document.getElementById('seconds');
 
-                                const endTime = '{{ $date->toDateTimeString() }}'; // Ambil waktu dari Controller
+                                // Retrieve the end time from local storage
+                                const storedEndTime = localStorage.getItem('endTime');
+                                const endTime = storedEndTime || '{{ $date }}';
 
                                 const timeRemaining = calculateTimeRemaining(endTime);
 
                                 daysElement.innerText = timeRemaining.days + ' Hari';
                                 hoursElement.innerText = timeRemaining.hours + ' Jam';
-                                minuteElement.innerText = timeRemaining.minutes + ' Menit';
+                                minutesElement.innerText = timeRemaining.minutes + ' Menit';
                                 secondsElement.innerText = timeRemaining.seconds + ' Detik';
 
                                 // Jika waktu sudah habis, lakukan sesuatu (misalnya, munculkan pesan)
@@ -110,61 +112,134 @@
             </div>
             <div class="row">
                 <div class="col-md-12 mb-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <span><i class="bi bi-table me-2"></i></span> Data History Pembuangan
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="example" class="table table-striped data-table" style="width: 100%">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama Banksampah</th>
-                                            <th>Jenis Sampah</th>
-                                            <th>Tanggal Pengajuan</th>
-                                            <th>Jam Pengajuan</th>
-                                            <th class="text-center">Status</th>
-                                            <th class="text-center">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($result_master as $idx => $items)
+                    @if (Auth::user()->status_langganan == 'Sudah Langganan')
+                        <div class="card">
+                            <div class="card-header">
+                                <span><i class="bi bi-table me-2"></i></span> Data History Pengambilan
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example" class="table table-striped data-table" style="width: 100%">
+                                        <thead>
                                             <tr>
-                                                <td>{{ $result_master->firstItem() + $idx }}</td>
-                                                <td>{{ $items->nama_lengkap }}</td>
-                                                <td>{{ $items->jenis_sampah }}</td>
-                                                <td>{{ $items->tgl_pengajuan }}</td>
-                                                <td>{{ $items->jam_pengajuan }}</td>
-                                                <td class="text-center">
-                                                    <span>{{ $items->status_terima }}</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    @if ($items->status_terima == 'Ditolak')
-                                                        <a href="/pengguna/hapusmasterbuang/{{ $items->id_master_pembuangan }}"
-                                                            class="btn btn-danger">Hapus</a>'
-                                                    @endif
-                                                    @if ($items->status_terima == 'Diterima')
-                                                        <a href="/pengguna/detailbuangsampah/{{ $items->id_master_pembuangan }}"
-                                                            class="btn btn-success">Detail</a>
-                                                    @endif
-                                                    @if ($items->status_terima == 'menunggu')
-                                                        <a href="/pengguna/detailbuangsampah/{{ $items->id_master_pembuangan }}"
-                                                            class="btn btn-primary">Detail</a>
-                                                    @endif
+                                                <th>No</th>
+                                                <th>Petugas Pengambil</th>
+                                                <th>Jenis Sampah</th>
+                                                <th>Jam Pengajuan</th>
+                                                <th>Hari Pengajuan</th>
+                                                <th>Tanggal Pengajuan</th>
+                                                <th class="text-center">Status Pengambilan</th>
+                                                <th class="text-center">Aksi</th>
 
-                                                </td>
                                             </tr>
-                                        @endforeach
+                                        </thead>
+                                        <tbody>
+                                            {{-- {{dd(count($result_master ))}} --}}
+                                            @foreach ($result_master_langganan as $item)
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>{{ $item->nama_lengkap }}</td>
+                                                    <td>{{ $item->jenis_sampah }}</td>
+                                                    <td>{{ $item->jam }}</td>
+                                                    <td>{{ $item->hari }}</td>
+                                                    <td>{{ $item->tanggal }}</td>
+                                                    <td class="text-center">
+                                                        <span class="fst-italic">{{ $item->status_pengambilan }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary"
+                                                            data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                            Detail
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
 
-                                    </tbody>
-                                </table>
-                                <span class="mr-2 page-link pagination">
+                                        </tbody>
+                                    </table>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ...
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Tutup</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- <span class="mr-2 page-link pagination">
                                     {{ $result_master->onEachSide(5)->links() }}
-                                </span>
+                                </span> --}}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="card">
+                            <div class="card-header">
+                                <span><i class="bi bi-table me-2"></i></span> Data History Pembuangan
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example" class="table table-striped data-table" style="width: 100%">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama Banksampah</th>
+                                                <th>Jenis Sampah</th>
+                                                <th>Tanggal Pengajuan</th>
+                                                <th>Jam Pengajuan</th>
+                                                <th class="text-center">Status</th>
+                                                <th class="text-center">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($result_master as $idx => $items)
+                                                <tr>
+                                                    <td>{{ $result_master->firstItem() + $idx }}</td>
+                                                    <td>{{ $items->nama_lengkap }}</td>
+                                                    <td>{{ $items->jenis_sampah }}</td>
+                                                    <td>{{ $items->tgl_pengajuan }}</td>
+                                                    <td>{{ $items->jam_pengajuan }}</td>
+                                                    <td class="text-center">
+                                                        <span>{{ $items->status_terima }}</span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if ($items->status_terima == 'Ditolak')
+                                                            <a href="/pengguna/hapusmasterbuang/{{ $items->id_master_pembuangan }}"
+                                                                class="btn btn-danger">Hapus</a>'
+                                                        @endif
+                                                        @if ($items->status_terima == 'Diterima')
+                                                            <a href="/pengguna/detailbuangsampah/{{ $items->id_master_pembuangan }}"
+                                                                class="btn btn-success">Detail</a>
+                                                        @endif
+                                                        @if ($items->status_terima == 'menunggu')
+                                                            <a href="/pengguna/detailbuangsampah/{{ $items->id_master_pembuangan }}"
+                                                                class="btn btn-primary">Detail</a>
+                                                        @endif
+
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
+                                    </table>
+                                    <span class="mr-2 page-link pagination">
+                                        {{ $result_master->onEachSide(5)->links() }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
                 </div>
             </div>
             <div class="row mb-5">

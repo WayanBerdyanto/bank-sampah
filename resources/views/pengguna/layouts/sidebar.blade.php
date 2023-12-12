@@ -8,19 +8,10 @@
                     </div>
                 </li>
                 <li>
-                    @if (Auth::User()->status_langganan == 'Sudah Langganan')
-                        <a href="/penggunalangganan"
-                            class="nav-link px-3 mt-4 {{ $key == 'index' ? 'active bg-primary' : '' }}">
-                            <span class="mx-2"><i class="bi bi-speedometer2"></i></span>
-                            <span>Dashboard</span>
-                        </a>
-                    @else
-                        <a href="/pengguna" class="nav-link px-3 mt-4 {{ $key == 'index' ? 'active bg-primary' : '' }}">
-                            <span class="mx-2"><i class="bi bi-speedometer2"></i></span>
-                            <span>Dashboard</span>
-                        </a>
-                    @endif
-
+                    <a href="/pengguna" class="nav-link px-3 mt-4 {{ $key == 'index' ? 'active bg-primary' : '' }}">
+                        <span class="mx-2"><i class="bi bi-speedometer2"></i></span>
+                        <span>Dashboard</span>
+                    </a>
                 </li>
                 <li class="my-2">
                     <hr class="dropdown-divider bg-light" />
@@ -47,12 +38,11 @@
 
                     <li class="py-2">
                         <a href="/pengguna/historylangganan"
-                            class="nav-link px-3 {{ $key == 'historylangganan' ? 'active bg-primary' : ''}}">
+                            class="nav-link px-3 {{ $key == 'historylangganan' ? 'active bg-primary' : '' }}">
                             <span class="mx-2"><i class="fa-solid fa-clock-rotate-left"></i></span>
                             <span>History Langganan</span>
                         </a>
                     </li>
-
                 @else
                     <li class="py-2">
                         <a href="/pengguna/buangsampah"

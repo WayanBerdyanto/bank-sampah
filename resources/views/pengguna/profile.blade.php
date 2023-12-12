@@ -125,7 +125,7 @@
                     <div class="mb-3 text-end">
                         <button type="submit" class="btn btn-primary px-4">Submit</button>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" hidden>
                         <label for="maps" class="form-label fw-bold">Lokasi Anda</label>
                         <div class="card-body" id="maps" style="height: 400px">
                         </div>

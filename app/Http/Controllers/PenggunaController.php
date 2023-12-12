@@ -18,19 +18,49 @@ use PDF;
 
 class PenggunaController extends Controller
 {
+    // $result_master = master_pembuangan::select('master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.tgl_pengajuan','master_pembuangan.jam_pengajuan', 'master_pembuangan.status_terima')
+    //         ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
+    //         ->where('master_pembuangan.id_pengguna', $id_pengguna)
+    //         ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
+    //         ->paginate(5);
     public function index(PieChartSampah $chart, LineChartPengguna $linechart)
     {
-        $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
         $id_pengguna = Auth::User()->id;
+
+        $id_pengambil = DB::table('users')
+        ->select('users.id')
+        ->where('users.role', 'Pengambil')
+        ->first();
+
+        // dd($id_pengguna, $id_pengambil);
+
+
+        $result_master_langganan = db::select("SELECT mp.jenis_sampah, mp.jam, mp.hari, mp.tanggal, dp.status_pengambilan, (SELECT users.nama_lengkap FROM users WHERE users.id = '$id_pengambil->id') AS nama_lengkap
+        FROM users us, master_pengambilan mp, detail_pengambilan dp
+        WHERE mp.id_nota = dp.id_nota AND us.id = '$id_pengguna'");
+
         $result_master = master_pembuangan::select('master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.tgl_pengajuan','master_pembuangan.jam_pengajuan', 'master_pembuangan.status_terima')
             ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
             ->where('master_pembuangan.id_pengguna', $id_pengguna)
             ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
             ->paginate(5);
-        return view('pengguna.index', ['user' => $user, 'username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master]);
- 
+
+
+        $lama_langganan = DB::select('SELECT langganan.lama_langganan, detail_langganan.tanggal
+        FROM users, detail_langganan, langganan
+        WHERE users.id = '. $id_pengguna .' AND langganan.kode_langganan = detail_langganan.kode_langganan');
+        
+        if(!empty($lama_langganan)){
+            $mytime = $lama_langganan[0]->tanggal;
+            $date = Carbon::createFromFormat('Y-m-d H:i:s', $mytime);
+            $daysToAdd = $lama_langganan[0]->lama_langganan;
+            $date = $date->addDays($daysToAdd);
+            return view('pengguna.index', ['username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date ,'result_master_langganan'=>$result_master_langganan]);
+        }else{
+            return view('pengguna.index', ['username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'result_master_langganan'=>$result_master_langganan]);
+        }
     }
 
     public function langganan()
@@ -113,7 +143,7 @@ class PenggunaController extends Controller
         $user = User::where('id',Auth::User()->id)->update([
             'status_langganan' => 'Sudah Langganan'
         ]);    
-        return redirect('/penggunalangganan')->with('success', 'Berhasil Langganan');  
+        return redirect('/pengguna')->with('success', 'Berhasil Langganan');  
     }
 
     public function checkouts(Request $request){

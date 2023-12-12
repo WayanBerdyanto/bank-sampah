@@ -4,13 +4,11 @@
         <div class="container-fluid">
             <div class="row mt-4 mx-2">
                 <div class="col-md-12 mb-3">
-                    <div class="w-100 d-flex justify-content-between">
+                    <div class="w-100 d-flex justify-content-end">
                         <a href="#" class="btn btn-success mb-2" target="blank">
-                            <i class="bi bi-arrow-down-circle"></i>
-                            Cetak</a>
-                        <a href="#" class="btn btn-success mb-2" target="blank">
-                            <i class="bi bi-arrow-down-circle"></i>
-                            Filter</a>
+                            <i class="bi bi-printer-fill"></i>
+                            Cetak Semua
+                        </a>
                     </div>
                     <div class="card">
                         <div class="card-header">
@@ -26,6 +24,7 @@
                                             <th>Tanggal Langganan</th>
                                             <th>Masa Langganan</th>
                                             <th>Status Bayar</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -36,6 +35,11 @@
                                                 <td>{{ $item->tanggal }}</td>
                                                 <td>{{ $item->masa_langganan }} Kg</td>
                                                 <td>{{ $item->status }}</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-success mb-2" target="blank">
+                                                        <i class="bi bi-printer-fill"></i>
+                                                        Cetak</a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
