@@ -1,4 +1,4 @@
-@extends('banksampah.layouts.main')
+@extends('pengambil.layouts.main')
 @section('content')
     <main class="mt-5 pt-3">
         <div class="container-fluid">
@@ -20,6 +20,7 @@
                                             <th>Tgl Pengajuan</th>
                                             <th>Jam Pengajuan</th>
                                             <th>Status</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -31,14 +32,24 @@
                                                 <td>{{ $item->tanggal }}</td>
                                                 <td>{{ $item->jam }}</td>
                                                 <td>{{ $item->status_pengambilan }}</td>
+                                                <td>
+                                                    <form action="/pengambil/ambilsampah/{{ $item->id_dtl_pengambilan }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-success">
+                                                            <i class="bi bi-check-square"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
-                                </table </div>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </main>
 @endsection
