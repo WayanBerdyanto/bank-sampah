@@ -69,6 +69,12 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::get('/pengguna/buanglangganan',[PenggunaLanggananController::class,'buanglangganan']);
     Route::post('/pengguna/postbuanglangganan',[PenggunaLanggananController::class,'postbuanglangganan']);
 
+    Route::get('/pengguna/transaksipembuangan/{type}', [PenggunaLanggananController::class, 'cetakSemua']);
+    Route::get('/pengguna/transaksitertentu/{type}/{id}', [PenggunaLanggananController::class, 'cetakBuang']);
+
+    Route::get('pengguna/historylangganan/cetaksemua/{type}', [PenggunaLanggananController::class, 'cetakSemuaLangganan']);
+    Route::get('/pengguna/historylangganan/cetak/{type}/{id}', [PenggunaLanggananController::class, 'cetakLanggananTertentu']);
+
 
 });
 

@@ -5,7 +5,7 @@
             <div class="row mt-4 mx-2">
                 <div class="col-md-12 mb-3">
                     <div class="w-100 d-flex justify-content-end">
-                        <a href="transaksi/cetak" class="btn btn-primary mb-2" target="blank">
+                        <a href="transaksi/transaksi/pembuangan/download" class="btn btn-primary mb-2" target="blank">
                             <i class="bi bi-printer-fill"></i>
                             Cetak Semua</a>
                     </div>
@@ -32,7 +32,7 @@
                                     <tbody>
                                         @foreach ($result as $item)
                                             <tr>
-                                                <td> {{$loop->iteration}} </td>
+                                                <td> {{ $loop->iteration }} </td>
                                                 <td>{{ $item->nama_lengkap }}</td>
                                                 <td>{{ $item->jenis_sampah }}</td>
                                                 <td>{{ $item->jam }}</td>
@@ -42,7 +42,7 @@
                                                     <span class="fst-italic">{{ $item->status_pengambilan }}</span>
                                                 </td>
                                                 <td>
-                                                    <a href="transaksi/cetak/{{$item->id_dtl_pengambilan}}" class="btn btn-primary">
+                                                    <a href="/pengguna/transaksitertentu/download/{{ $item->id_dtl_pengambilan }}" class="btn btn-primary" target="blank">
                                                         <i class="bi bi-printer-fill"></i>
                                                     </a>
                                                 </td>
