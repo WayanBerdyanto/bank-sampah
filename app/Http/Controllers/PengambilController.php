@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\detail_pengambilan;
 use App\Models\master_pengambilan;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -117,5 +118,11 @@ class PengambilController extends Controller
 
         return view('pengambil.penerimaan', ['result' => $result]);
 
+    }
+    public function ambilsampah($id, Request $request) {
+        detail_pengambilan::where('id_dtl_pengambilan',$id)
+            ->update(['status_pengambilan' => 'Sudah Diambil']);
+        
+        return redirect('/pengambil/penerimaan')->with('success', 'Sampah Berhasil Diambil');
     }
 }

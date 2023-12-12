@@ -96,4 +96,5 @@ Route::middleware('cekrole:pengambil')->group(function () {
     Route::post('/pengambil/postubahpassword', [PengambilController::class, 'postubahpassword']);
     Route::get('/pengambil/logout', [PengambilController::class, 'logout']);
     Route::get('/pengambil/penerimaan', [PengambilController::class,'penerimaan']);
+    Route::put('/pengambil/ambilsampah/{id}',[PengambilController::class,'ambilsampah']);
 });
