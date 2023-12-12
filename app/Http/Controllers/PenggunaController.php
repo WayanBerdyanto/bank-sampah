@@ -24,10 +24,10 @@ class PenggunaController extends Controller
         $result = User::where('username', $username)->first();
         $id_pengguna = Auth::User()->id;
 
-        $hasil = db::select("SELECT mp.jenis_sampah, SUM(dp.berat) AS berat
-        FROM master_pengambilan mp, detail_pengambilan dp, users us
-        WHERE mp.id_nota = dp.id_nota AND mp.jenis_sampah = 'anorganik' AND mp.id_pengguna = us.id 
-        AND mp.id_pengguna = 17");
+        // $hasil = db::select("SELECT mp.jenis_sampah, SUM(dp.berat) AS berat
+        // FROM master_pengambilan mp, detail_pengambilan dp, users us
+        // WHERE mp.id_nota = dp.id_nota AND mp.jenis_sampah = 'anorganik' AND mp.id_pengguna = us.id 
+        // AND mp.id_pengguna = '$id_pengguna'");
         
         // dd($hasil);
 
