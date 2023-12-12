@@ -8,6 +8,12 @@
                         @csrf
                         <h4 class="mb-3 fs-4 fw-bold">Input Buang sampah</h4>
                         <div class="mb-3 row">
+                            <label for="berat" class="col-sm-2 col-form-label">Berat Sampah</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" name="berat" placeholder="MAX 7 kg">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
                             <label for="jenis" class="col-sm-2 col-form-label">Jenis Sampah</label>
                             <div class="col-sm-10">
                                 <select class="form-select" name="jenis_sampah" aria-label="Default select example"
@@ -21,8 +27,7 @@
                         <div class="mb-3 row">
                             <label for="jenis" class="col-sm-2 col-form-label">Pengambil</label>
                             <div class="col-sm-10">
-                                <select class="form-select" name="idpengambil" aria-label="Default select example"
-                                    required>
+                                <select class="form-select" name="idpengambil" aria-label="Default select example" required>
                                     <option selected>Pilih Pengambil</option>
                                     @foreach ($pengambil as $data)
                                         <option value="{{ $data->id }}">{{ $data->nama_lengkap }}</option>
@@ -83,7 +88,7 @@
 
                         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
                             integrity="sha256-
-                                                                                                                                                                                                                                                                                                                            20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+                                                                                                                                                                                                                                                                                                                                                    20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
                             crossorigin=""></script>
                         <script>
                             var map = L.map('mapss').setView([0, 0], 30);
@@ -113,7 +118,7 @@
 
                             var locations = <?php echo json_encode($banksampah); ?>;
                             var userLocations = <?php echo json_encode($pengguna); ?>;
-                    
+
                             // console.log(locations);
                             // looping for create marker per location
                             locations.forEach(e => {

@@ -19,38 +19,6 @@ use App\Models\Detail_Pembuangan;
 
 class PenggunaLanggananController extends Controller
 {
-    public function index(PieChartSampah $chart, LineChartPengguna $linechart)
-    {
-        $username = Auth::User()->username ?? '';
-        $result = User::where('username', $username)->first();
-        $id_pengguna = Auth::User()->id;
-
-        $id_pengambil = DB::table('users')
-        ->select('users.id')
-        ->where('users.role', 'Pengambil')
-        ->first();
-
-        // dd($id_pengguna, $id_pengambil);
-
-
-        $result_master = db::select("SELECT mp.jenis_sampah, mp.jam, mp.hari, mp.tanggal, dp.status_pengambilan, (SELECT users.nama_lengkap FROM users WHERE users.id = '$id_pengambil->id') AS nama_lengkap
-        FROM users us, master_pengambilan mp, detail_pengambilan dp
-        WHERE mp.id_nota = dp.id_nota AND us.id = '$id_pengguna'");
-
-
-        $lama_langganan = DB::select('SELECT langganan.lama_langganan, detail_langganan.tanggal
-        FROM users, detail_langganan, langganan
-        WHERE users.id = '. $id_pengguna .' AND langganan.kode_langganan = detail_langganan.kode_langganan');
-        $mytime = $lama_langganan[0]->tanggal;
-        $date = Carbon::createFromFormat('Y-m-d H:i:s', $mytime);
-        if(!empty($lama_langganan)){
-            $daysToAdd = $lama_langganan[0]->lama_langganan;
-            $date = $date->addDays($daysToAdd);
-            return view('pengguna.langganan.indexlangganan', ['username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date]);
-        }else{
-            return view('pengguna.langganan.indexlangganan', ['username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date]);
-        }
-    }
 
     public function buanglangganan()
     {
@@ -72,7 +40,10 @@ class PenggunaLanggananController extends Controller
             'jenis_sampah' => 'required|max:255',
             'idpengambil' => 'required',
             'jam' => 'required',
-            'tgl' => 'required'
+            'tgl' => 'required',
+            'berat'=> 'required|numeric|max:7',
+        ], [
+            'berat.max' => 'Berat Sampah tidak boleh lebih dari 7 KG.',
         ]);
 
         if ($validated) {
@@ -97,10 +68,12 @@ class PenggunaLanggananController extends Controller
             detail_pengambilan::create([
                 'id_nota' => $idnota,
                 'id_pengambil' => $request->idpengambil,
-                'berat' => 0
+                'berat' => $request->berat
             ]);
-            return redirect('/penggunalangganan/')->with('success', 'Data Sampah Berhasil Diinputkan');
+            return redirect('/pengguna/')->with('success', 'Data Sampah Berhasil Diinputkan');
 
+        }else{
+            return redirect('/pengguna/buanglangganan')->with('error', 'Data Gagal Diinputkan');
         }
     }
 
