@@ -101,9 +101,9 @@ class PenggunaLanggananController extends Controller
         ->first();
         $id_pengguna = Auth::User()->id;
 
-        $result_master_langganan = db::select("SELECT dp.id_dtl_pengambilan, mp.jenis_sampah, mp.jam, mp.hari, mp.tanggal, dp.status_pengambilan, (SELECT users.nama_lengkap FROM users WHERE users.id = '$id_pengambil->id') AS nama_lengkap
+        $result_master_langganan = db::select("SELECT dp.id_dtl_pengambilan, mp.jenis_sampah, mp.jam, mp.hari, mp.tanggal, dp.status_pengambilan, (SELECT users.nama_lengkap FROM users WHERE users.id = dp.id_pengambil) AS nama_lengkap
         FROM users us, master_pengambilan mp, detail_pengambilan dp
-        WHERE mp.id_nota = dp.id_nota AND us.id = '$id_pengguna'");
+        WHERE mp.id_nota = dp.id_nota AND us.id = '$id_pengguna' AND mp.id_pengguna = '$id_pengguna'");
         return view('/pengguna/langganan/transaksipembuangan', ['key' =>'transaksipembuangan', 'result'=>$result_master_langganan]);
     }
 

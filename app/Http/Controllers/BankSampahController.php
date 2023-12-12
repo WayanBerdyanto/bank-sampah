@@ -29,6 +29,7 @@ class BankSampahController extends Controller
         $id_banksampah = Auth::User()->id;
         $result_master = Detail_Pembuangan::select(
             'detail_pembuangan.id_dtl_pembuangan',
+            'detail_pembuangan.berat_sampah',
             'mp.id_master_pembuangan',
             'users.nama_lengkap AS Nama_Bank',
             'mp.tgl_pengajuan',
@@ -41,6 +42,7 @@ class BankSampahController extends Controller
             ->where('users.id', $id_banksampah)
             ->orderBy('mp.id_master_pembuangan', 'desc')
             ->paginate(5);
+
         return view('banksampah.dataPenerimaan', ['user' => $user, 'result_master' => $result_master]);
     }
     public function detailPenerimaan($id)
@@ -65,6 +67,10 @@ class BankSampahController extends Controller
         } else {
             return redirect('/bansampah/detailPenerimaan')->with('error', 'Data Gagal Ditolak');
         }
+    }
+
+    public function history(){
+        return view('banksampah.history');
     }
 
     public function profilebank()

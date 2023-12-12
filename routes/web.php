@@ -86,6 +86,7 @@ Route::middleware('cekrole:banksampah')->group(function () {
     Route::get('/banksampah/logout', [BankSampahController::class, 'logout']);
 
     Route::put('/banksampah/terimasampah/{id}',[BanksampahController::class,'terimasampah']);
+    Route::get('/banksampah/history',[BanksampahController::class,'history']);
 });
 
 Route::middleware('cekrole:pengambil')->group(function () {
