@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
                 "email" => "banksampah@gmail.com",
                 "password" => bcrypt("12345678"),
                 "role" => "banksampah",
-                "nama_lengkap" => "bank sampah 1",
+                "nama_lengkap" => "TPA Bausasran",
                 "no_telpon" => "123123123",
                 "latitude" => "-7.797068",
                 "longitude"=> "110.370529"
@@ -39,9 +39,9 @@ class UserSeeder extends Seeder
                 "email" => "banksampah2@gmail.com",
                 "password" => bcrypt("12345678"),
                 "role" => "banksampah",
-                "nama_lengkap" => "bank sampah 2",
+                "nama_lengkap" => "TPA Gondokusuman",
                 "no_telpon" => "123123123",
-                "latitude" => "-7.798068",
+                "latitude" => "-7.788068",
                 "longitude"=> "110.390529"
             ],
             [
@@ -49,9 +49,9 @@ class UserSeeder extends Seeder
                 "email" => "banksampah3@gmail.com",
                 "password" => bcrypt("12345678"),
                 "role" => "banksampah",
-                "nama_lengkap" => "bank sampah 3",
+                "nama_lengkap" => "TPA Banguntapan",
                 "no_telpon" => "123123123",
-                "latitude" => "-7.698068",
+                "latitude" => "-7.698168",
                 "longitude"=> "110.290529"
             ],
             [
@@ -59,9 +59,9 @@ class UserSeeder extends Seeder
                 "email" => "banksampah4@gmail.com",
                 "password" => bcrypt("12345678"),
                 "role" => "banksampah",
-                "nama_lengkap" => "bank sampah 4",
+                "nama_lengkap" => "TPA Godean",
                 "no_telpon" => "123123123",
-                "latitude" => "-7.693068",
+                "latitude" => "-7.691068",
                 "longitude"=> "110.240529"
             ],
             [
@@ -73,6 +73,86 @@ class UserSeeder extends Seeder
                 "no_telpon" => "123123123",
                 "latitude" => "",
                 "longitude"=> ""
+            ],
+            [
+                "username" => "pengambil2",
+                "email" => "pengambil2@gmail.com",
+                "password" => bcrypt("12345678"),
+                "role" => "pengambil",
+                "nama_lengkap" => "pengambil sampah 2",
+                "no_telpon" => "123123123",
+                "latitude" => "",
+                "longitude"=> ""
+            ],
+            [
+                "username" => "pengambil3",
+                "email" => "pengambil3@gmail.com",
+                "password" => bcrypt("12345678"),
+                "role" => "pengambil",
+                "nama_lengkap" => "pengambil sampah 3",
+                "no_telpon" => "123123123",
+                "latitude" => "",
+                "longitude"=> ""
+            ],
+            [
+                "username" => "banksampah5",
+                "email" => "banksampah5@gmail.com",
+                "password" => bcrypt("12345678"),
+                "role" => "banksampah",
+                "nama_lengkap" => "TPA Klitren",
+                "no_telpon" => "123123123",
+                "latitude" => "-7.697068",
+                "longitude"=> "110.370529"
+            ],
+            [
+                "username" => "banksampah6",
+                "email" => "banksampah6@gmail.com",
+                "password" => bcrypt("12345678"),
+                "role" => "banksampah",
+                "nama_lengkap" => "TPA Gejayan",
+                "no_telpon" => "123123123",
+                "latitude" => "-7.697168",
+                "longitude"=> "110.370529"
+            ],
+            [
+                "username" => "banksampah7",
+                "email" => "banksampah7@gmail.com",
+                "password" => bcrypt("12345678"),
+                "role" => "banksampah",
+                "nama_lengkap" => "TPA Tugu",
+                "no_telpon" => "123123123",
+                "latitude" => "-7.697158",
+                "longitude"=> "110.370529"
+            ],
+            [
+                "username" => "banksampah8",
+                "email" => "banksampah8@gmail.com",
+                "password" => bcrypt("12345678"),
+                "role" => "banksampah",
+                "nama_lengkap" => "TPA Timoho",
+                "no_telpon" => "123123123",
+                "latitude" => "-7.697167",
+                "longitude"=> "110.370529"
+            ],
+            [
+                "username" => "banksampah9",
+                "email" => "banksampah9@gmail.com",
+                "password" => bcrypt("12345678"),
+                "role" => "banksampah",
+                "nama_lengkap" => "TPA Tamsis",
+                "no_telpon" => "123123123",
+                "latitude" => "-7.682168",
+                "longitude"=> "110.370529"
+            ],
+            [
+                "username" => "banksampah10",
+                "email" => "banksampah10@gmail.com",
+                "password" => bcrypt("12345678"),
+                "role" => "banksampah",
+                "nama_lengkap" => "TPA Kalasan",
+                "no_telpon" => "123123123",
+                "latitude" => "-7.678168",
+                "longitude"=> "110.370529"
             ],
         ]);
 

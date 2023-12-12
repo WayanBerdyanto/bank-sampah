@@ -97,7 +97,7 @@ class PengambilController extends Controller
     public function penerimaan()
     {
 
-        $pengambil = auth()->user()->id; // Use auth() helper instead of Auth facade
+        $pengambil = Auth::user()->id; // Use auth() helper instead of Auth facade
         $result = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
         ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
         ->where('dp.id_pengambil', '=', $pengambil)

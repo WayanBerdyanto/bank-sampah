@@ -145,7 +145,7 @@
                                                     <td>{{ $item->hari }}</td>
                                                     <td>{{ $item->tanggal }}</td>
                                                     <td class="text-center">
-                                                        <span class="fst-italic">{{ $item->status_pengambilan }}</span>
+                                                        <span class="fst-italic fw-bold">{{ $item->status_pengambilan }}</span>
                                                     </td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary"
