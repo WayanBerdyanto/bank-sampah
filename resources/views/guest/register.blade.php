@@ -128,7 +128,7 @@
                 <button
                     class="bg-blue-500 hover:bg-blue-700 mt-2 text-white font-bold py-1 w-full px-4 rounded focus:outline-none focus:shadow-outline"
                     type="submit">
-                    Sign In
+                    Sign Up
                 </button>
             </div>
             <span class="mt-3 block">
