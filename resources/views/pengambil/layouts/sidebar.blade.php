@@ -8,7 +8,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#" class="nav-link px-3 active mt-4">
+                    <a href="/pengambil/" class="nav-link px-3 active mt-4">
                         <span class="me-2"><i class="bi bi-speedometer2"></i></span>
                         <span>Dashboards</span>
                     </a>
@@ -18,8 +18,8 @@
                 </li>
                 <li class="py-2">
                     <a href="#" class="nav-link px-3">
-                        <span class="me-2"><i class="bi bi-book-fill"></i></span>
-                        <span>Data Pembuangans</span>
+                        <span class="me-2"><i class="bi bi-trash"></i></span>
+                        <span>Request Pembuangan</span>
                     </a>
                 </li>
                 <li class="py-2">
@@ -29,9 +29,9 @@
                     </a>
                 </li>
                 <li class="py-2">
-                    <a href="#" class="nav-link px-3">
-                        <span class="me-2"><i class="bi bi-book-fill"></i></span>
-                        <span>Nontification</span>
+                    <a href="/pengambil/history" class="nav-link px-3">
+                        <span class="me-2"><i class="bi bi-clock-history"></i></span>
+                        <span>History</span>
                     </a>
                 </li>
             </ul>
