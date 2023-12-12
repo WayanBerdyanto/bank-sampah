@@ -125,4 +125,27 @@ class PengambilController extends Controller
         
         return redirect('/pengambil/penerimaan')->with('success', 'Sampah Berhasil Diambil');
     }
+    public function history() {
+
+        $pengambil = auth()->user()->id; 
+        $result = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
+        ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+        ->where('dp.id_pengambil', '=', $pengambil)
+        ->select(
+            'master_pengambilan.id_pengguna',
+            'dp.id_dtl_pengambilan',
+            'dp.id_nota',
+            'dp.id_pengambil',
+            'master_pengambilan.jenis_sampah',
+            'master_pengambilan.hari',
+            'master_pengambilan.tanggal',
+            'master_pengambilan.jam',
+            'us.nama_lengkap',
+            'dp.status_pengambilan'
+        )
+        ->get();
+
+
+        return view('pengambil.history', ['result' => $result]);
+    }
 }

@@ -18,8 +18,8 @@
                 </li>
                 <li class="py-2">
                     <a href="#" class="nav-link px-3">
-                        <span class="me-2"><i class="bi bi-book-fill"></i></span>
-                        <span>Data Pembuangans</span>
+                        <span class="me-2"><i class="bi bi-trash"></i></span>
+                        <span>Request Pembuangan</span>
                     </a>
                 </li>
                 <li class="py-2">
@@ -29,9 +29,9 @@
                     </a>
                 </li>
                 <li class="py-2">
-                    <a href="#" class="nav-link px-3">
-                        <span class="me-2"><i class="bi bi-receipt"></i></span>
-                        <span>History Pengambilan</span>
+                    <a href="/pengambil/history" class="nav-link px-3">
+                        <span class="me-2"><i class="bi bi-clock-history"></i></span>
+                        <span>History</span>
                     </a>
                 </li>
             </ul>
