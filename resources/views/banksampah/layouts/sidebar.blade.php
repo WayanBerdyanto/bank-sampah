@@ -19,21 +19,15 @@
                     <hr class="dropdown-divider bg-light" />
                 </li>
                 <li class="py-2">
-                    <a href="/banksampah/datapembuangan" class="nav-link px-3">
-                        <span class="me-2"><i class="bi bi-book-fill"></i></span>
-                        <span>Data Pembuangan</span>
-                    </a>
-                </li>
-                <li class="py-2">
                     <a href="/banksampah/datapenerimaan" class="nav-link px-3">
-                        <span class="me-2"><i class="bi bi-reception-4"></i></span>
+                        <span class="me-2"><i class="bi bi-reception-2"></i></span>
                         <span>Penerimaan</span>
                     </a>
                 </li>
                 <li class="py-2">
-                    <a href="#" class="nav-link px-3">
-                        <span class="me-2"><i class="bi bi-book-fill"></i></span>
-                        <span>Nontification</span>
+                    <a href="/banksampah/history" class="nav-link px-3">
+                        <span class="me-2"><i class="bi bi-clock-history"></i></span>
+                        <span>History</span>
                     </a>
                 </li>
             </ul>

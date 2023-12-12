@@ -40,7 +40,7 @@
             </button>
             <div class="collapse navbar-collapse" id="topNavBar">
                 <form class="d-flex ms-auto my-3 my-lg-0">
-                    <div class="input-group">
+                    <div class="input-group" hidden>
                         <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
                         <button class="btn btn-primary" type="submit">
                             <i class="bi bi-search"></i>
