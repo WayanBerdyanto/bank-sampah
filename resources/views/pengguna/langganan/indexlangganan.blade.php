@@ -114,7 +114,7 @@
                 <div class="col-md-12 mb-3">
                     <div class="card">
                         <div class="card-header">
-                            <span><i class="bi bi-table me-2"></i></span> Data History Pembuangan
+                            <span><i class="bi bi-table me-2"></i></span> Data History Pengambilan
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -122,48 +122,69 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Banksampah</th>
+                                            <th>Petugas Pengambil</th>
                                             <th>Jenis Sampah</th>
-                                            <th>Tanggal Pengajuan</th>
                                             <th>Jam Pengajuan</th>
-                                            <th class="text-center">Status</th>
+                                            <th>Hari Pengajuan</th>
+                                            <th>Tanggal Pengajuan</th>
+                                            <th class="text-center">Status Pengambilan</th>
                                             <th class="text-center">Aksi</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($result_master as $idx => $items)
+                                        {{-- {{dd(count($result_master ))}} --}}
+                                        @foreach ($result_master as $item)
                                             <tr>
-                                                <td>{{ $result_master->firstItem() + $idx }}</td>
-                                                <td>{{ $items->nama_lengkap }}</td>
-                                                <td>{{ $items->jenis_sampah }}</td>
-                                                <td>{{ $items->tgl_pengajuan }}</td>
-                                                <td>{{ $items->jam_pengajuan }}</td>
+                                                <td>1</td>
+                                                <td>{{ $item->nama_lengkap }}</td>
+                                                <td>{{ $item->jenis_sampah }}</td>
+                                                <td>{{ $item->jam }}</td>
+                                                <td>{{ $item->hari }}</td>
+                                                <td>{{ $item->tanggal }}</td>
                                                 <td class="text-center">
-                                                    <span>{{ $items->status_terima }}</span>
+                                                    @if ($item->status_pengambilan == 'Belum diambil')
+                                                        <span class="btn btn-primary"
+                                                            onclick="showSweetAlertNoStatus()">{{ $item->status_pengambilan }}</span>
+                                                    @else
+                                                        <span class="btn btn-success"
+                                                            onclick="showSweetAlertStatus()">{{ $item->status_pengambilan }}
+                                                        </span>
+                                                    @endif
                                                 </td>
-                                                <td class="text-center">
-                                                    @if ($items->status_terima == 'Ditolak')
-                                                        <a href="/pengguna/hapusmasterbuang/{{ $items->id_master_pembuangan }}"
-                                                            class="btn btn-danger">Hapus</a>'
-                                                    @endif
-                                                    @if ($items->status_terima == 'Diterima')
-                                                        <a href="/pengguna/detailbuangsampah/{{ $items->id_master_pembuangan }}"
-                                                            class="btn btn-success">Detail</a>
-                                                    @endif
-                                                    @if ($items->status_terima == 'menunggu')
-                                                        <a href="/pengguna/detailbuangsampah/{{ $items->id_master_pembuangan }}"
-                                                            class="btn btn-primary">Detail</a>
-                                                    @endif
-
+                                                <td>
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal">
+                                                        Detail
+                                                    </button>
                                                 </td>
                                             </tr>
                                         @endforeach
 
                                     </tbody>
                                 </table>
-                                <span class="mr-2 page-link pagination">
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                ...
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Tutup</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <span class="mr-2 page-link pagination">
                                     {{ $result_master->onEachSide(5)->links() }}
-                                </span>
+                                </span> --}}
                             </div>
                         </div>
                     </div>

@@ -38,16 +38,16 @@
                                 <span class="mx-2"><i class="bi bi-trash"></i></span>
                                 <span>Buang Sampah</span>
                             </a>
-                            <a href="/pengguna/transaksi" class="nav-link">
+                            <a href="/pengguna/transaksipembuangan" class="nav-link">
                                 <span class="mx-2"><i class="fa-solid fa-clock-rotate-left"></i></span>
-                                <span>Transaksi</span>
+                                <span>Transaksi Pembuangan</span>
                             </a>
                         </div>
                     </li>
 
                     <li class="py-2">
-                        <a href="#"
-                            class="nav-link px-3">
+                        <a href="/pengguna/historylangganan"
+                            class="nav-link px-3 {{ $key == 'historylangganan' ? 'active bg-primary' : ''}}">
                             <span class="mx-2"><i class="fa-solid fa-clock-rotate-left"></i></span>
                             <span>History Langganan</span>
                         </a>

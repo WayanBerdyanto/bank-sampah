@@ -13,6 +13,8 @@ use App\Models\master_pembuangan;
 use DB;
 use Carbon\Carbon;
 use PDF;
+use App\Models\Detail_Pembuangan;
+
 
 
 class PenggunaLanggananController extends Controller
@@ -22,11 +24,19 @@ class PenggunaLanggananController extends Controller
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
         $id_pengguna = Auth::User()->id;
-        $result_master = master_pembuangan::select('master_pembuangan.id_master_pembuangan', 'users.id', 'users.nama_lengkap', 'master_pembuangan.jenis_sampah', 'master_pembuangan.tgl_pengajuan','master_pembuangan.jam_pengajuan', 'master_pembuangan.status_terima')
-            ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
-            ->where('master_pembuangan.id_pengguna', $id_pengguna)
-            ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
-            ->paginate(5);
+
+        $id_pengambil = DB::table('users')
+        ->select('users.id')
+        ->where('users.role', 'Pengambil')
+        ->first();
+
+        // dd($id_pengguna, $id_pengambil);
+
+
+        $result_master = db::select("SELECT mp.jenis_sampah, mp.jam, mp.hari, mp.tanggal, dp.status_pengambilan, (SELECT users.nama_lengkap FROM users WHERE users.id = '$id_pengambil->id') AS nama_lengkap
+        FROM users us, master_pengambilan mp, detail_pengambilan dp
+        WHERE mp.id_nota = dp.id_nota AND us.id = '$id_pengguna'");
+
 
         $lama_langganan = DB::select('SELECT langganan.lama_langganan, detail_langganan.tanggal
         FROM users, detail_langganan, langganan
@@ -39,7 +49,7 @@ class PenggunaLanggananController extends Controller
             return view('pengguna.langganan.indexlangganan', ['username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date]);
         }else{
             return view('pengguna.langganan.indexlangganan', ['username' => $username], ['chart' => $chart->build(), 'linechart' => $linechart->build(), 'key' => 'index', 'result' => $result, 'result_master' => $result_master, 'date'=>$date]);
-        }       
+        }
     }
 
     public function buanglangganan()
@@ -89,8 +99,28 @@ class PenggunaLanggananController extends Controller
                 'id_pengambil' => $request->idpengambil,
                 'berat' => 0
             ]);
-            return redirect('/pengguna/')->with('success', 'Data Sampah Berhasil Diinputkan');
+            return redirect('/penggunalangganan/')->with('success', 'Data Sampah Berhasil Diinputkan');
 
         }
+    }
+
+    public function historyLangganan(){
+        $id_pengguna = Auth::User()->id;
+        $result = DB::table('detail_langganan')->select(
+        'detail_langganan.id_pengguna',
+        'langganan.nama_langganan',
+        'detail_langganan.tanggal',
+        'detail_langganan.masa_langganan',
+        'detail_langganan.status'
+        )->join('langganan', 'langganan.kode_langganan', '=', 'detail_langganan.kode_langganan')
+        ->join('users', 'users.id', '=', 'detail_langganan.id_pengguna')
+        ->where('detail_langganan.id_pengguna', $id_pengguna)
+        ->orderBy('detail_langganan.id_pengguna', 'desc')
+        ->paginate(5);
+       return view('/pengguna/langganan/historylangganan', ['key' => 'historylangganan', 'result'=>$result]);
+    }
+
+    public function transaksipembuangan(){
+       return view('/pengguna/langganan/transaksipembuangan', ['key' =>'transaksipembuangan']);
     }
 }
