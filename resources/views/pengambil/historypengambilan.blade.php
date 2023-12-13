@@ -1,3 +1,8 @@
+<div class="w-100 d-flex mx-4">
+    <a href="/pengambil/history/download" class="btn btn-primary mb-2" target="blank">
+        <i class="bi bi-printer-fill"></i>
+        Cetak Semua</a>
+</div>
 <div class="card mx-4 mt-2">
     <div class="card-header">
         <span><i class="bi bi-table me-2"></i></span> Data Penerimaan Sampah
@@ -9,31 +14,33 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Petugas Pengambil</th>
+                        <th>Nama Pengguna</th>
                         <th>Jenis Sampah</th>
+                        <th>Berat Sampah</th>
+                        <th>Tgl Pengajuan</th>
                         <th>Jam Pengajuan</th>
-                        <th>Hari Pengajuan</th>
-                        <th>Tanggal Pengajuan</th>
-                        <th class="text-center">Status Pengambilan</th>
-                        <th class="text-center">Aksi</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($result as $item)
+                    @foreach ($result as $idx => $item)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
                             <td>{{ $item->nama_lengkap }}</td>
                             <td>{{ $item->jenis_sampah }}</td>
-                            <td>{{ $item->jam }}</td>
-                            <td>{{ $item->hari }}</td>
+                            <td>{{ $item->berat }} kg</td>
                             <td>{{ $item->tanggal }}</td>
-                            <td class="text-center">
-                                <span class="fst-italic fw-bold">{{ $item->status_pengambilan }}</span>
-                            </td>
+                            <td>{{ $item->jam }}</td>
+                            <td>{{ $item->status_pengambilan }}</td>
                             <td>
-                                <a class="btn btn-primary" href="/pengambil">
+                                
+                            <td>
+                                <a href="/pengambil/history/download/{{ $item->id_dtl_pengambilan }}"
+                                    class="btn btn-primary" target="blank">
                                     <i class="bi bi-printer-fill"></i>
                                 </a>
+                            </td>
                             </td>
                         </tr>
                     @endforeach

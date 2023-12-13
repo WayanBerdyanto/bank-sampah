@@ -5,7 +5,7 @@
             <div class="row mt-4 mx-2">
                 <div class="col-md-12 mb-3">
                     <div class="w-100 d-flex justify-content-end">
-                        <a href="transaksi/transaksi/pembuangan/download" class="btn btn-primary mb-2" target="blank">
+                        <a href="/pengguna/transaksipembuangan/download" class="btn btn-primary mb-2" target="blank">
                             <i class="bi bi-printer-fill"></i>
                             Cetak Semua</a>
                     </div>
