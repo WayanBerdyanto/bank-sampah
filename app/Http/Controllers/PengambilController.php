@@ -113,7 +113,8 @@ class PengambilController extends Controller
             'us.nama_lengkap',
             'us.latitude',
             'us.longitude',
-            'dp.status_pengambilan'
+            'dp.status_pengambilan',
+            'dp.berat'
         )
         ->orderBy('master_pengambilan.tanggal', 'desc')
         ->orderBy('master_pengambilan.jam', 'desc')
@@ -180,7 +181,8 @@ class PengambilController extends Controller
             'master_pengambilan.tanggal',
             'master_pengambilan.jam',
             'us.nama_lengkap',
-            'dp.status_pengambilan'
+            'dp.status_pengambilan',
+            'dp.berat'
         )
         ->orderBy('master_pengambilan.tanggal', 'desc')
         ->orderBy('master_pengambilan.jam', 'desc')

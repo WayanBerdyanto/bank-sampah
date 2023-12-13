@@ -11,6 +11,7 @@
                         <th>No</th>
                         <th>Nama Pengguna</th>
                         <th>Jenis Sampah</th>
+                        <th>Berat Sampah</th>
                         <th>Tgl Pengajuan</th>
                         <th>Jam Pengajuan</th>
                         <th>Status</th>
@@ -23,6 +24,7 @@
                             <td>{{ $loop->index + 1 }}</td>
                             <td>{{ $item->nama_lengkap }}</td>
                             <td>{{ $item->jenis_sampah }}</td>
+                            <td>{{ $item->berat }} kg</td>
                             <td>{{ $item->tanggal }}</td>
                             <td>{{ $item->jam }}</td>
                             <td>{{ $item->status_pengambilan }}</td>
