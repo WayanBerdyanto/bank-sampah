@@ -1,55 +1,22 @@
 @extends('banksampah.layouts.main')
 @section('content')
-    <main class="mt-5 pt-3">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <h4 class="my-3 text-center">Data Penerimaan Sampah Pengguna <i class="bi bi-receipt"></i></h4>
-                    <div class="card">
-                        <div class="card-header">
-                            <span><i class="bi bi-table me-2"></i></span> Data Penerimaan Sampah
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="example" class="table table-striped data-table" style="width: 100%">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama Pengguna</th>
-                                            <th>Jenis Sampah</th>
-                                            <th>Tgl Pengajuan</th>
-                                            <th>Jam Pengajuan</th>
-                                            <th class="text-center">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($result_master as $idx => $items)
-                                            <tr>
-                                                <td>{{ $result_master->firstItem() + $idx }}</td>
-                                                <td>{{ $items->nama_lengkap }}</td>
-                                                <td>{{ $items->jenis_sampah }}</td>
-                                                <td>{{ $items->tgl_pengajuan }}</td>
-                                                <td>{{ $items->jam_pengajuan }}</td>
-                                                @if (!empty($items->berat_sampah))
-                                                    <td class="text-center">
-                                                        <button href="/banksampah/detailpenerimaan/{{ $items->id_dtl_pembuangan }}"
-                                                            class="btn btn-success" disabled>Timbang
-                                                        </button>
-                                                    </td>
-                                                @else
-                                                    <td class="text-center"><a
-                                                            href="/banksampah/detailpenerimaan/{{ $items->id_dtl_pembuangan }}"
-                                                            class="btn btn-primary">Timbang</a></td>
-                                                @endif
-
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <main class="mt-5 pt-3 p-4">
+        <ul class="nav nav-tabs ml-4" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pengguna-tab" data-bs-toggle="tab" data-bs-target="#pengguna"
+                    type="button" role="tab" aria-controls="pengguna" aria-selected="true">Pengguna</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pengambil-tab" data-bs-toggle="tab" data-bs-target="#pengambil"
+                    type="button" role="tab" aria-controls="pengambil" aria-selected="false">Pengambil</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="pengguna" role="tabpanel" aria-labelledby="pengguna-tab">
+                @include('banksampah.penerimaanpengguna')
+            </div>
+            <div class="tab-pane fade" id="pengambil" role="tabpanel" aria-labelledby="pengambil-tab">
+                @include('banksampah.penerimaanpengambil')
             </div>
         </div>
     </main>

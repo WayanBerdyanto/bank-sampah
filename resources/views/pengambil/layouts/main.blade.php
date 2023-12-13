@@ -21,7 +21,7 @@
     @vite('resources/js/script.js') --}}
     {{-- @vite('resources/js/bootstrap.bundle.min.js') --}}
 
-    <title>Bank Sampah Page</title>
+    <title>Pengambil Sampah Page</title>
 </head>
 
 <body>
