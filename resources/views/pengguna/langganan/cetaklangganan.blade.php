@@ -75,15 +75,16 @@
                     </div>
 
                     <div class="row my-2 mx-1 justify-content-center">
-                        <h3>Nota Transaksi</h3>
+                        <h3>Nota Pengambilan</h3>
                         <table class="table table-striped table-borderless">
                             <thead style="background-color:#84B0CA ;" class="text-white">
                                 <tr>
                                     <th scope="col">No</th>
-                                    <th scope="col">Lokasi Pembuangan</th>
-                                    <th scope="col">Status Bayar</th>
+                                    <th scope="col">Nama Pengambil</th>
+                                    <th scope="col">Jenis Sampah</th>
+                                    <th scope="col">Hari</th>
                                     <th scope="col">Berat</th>
-                                    <th scope="col">Total</th>
+                                    <th scope="col">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,10 +92,10 @@
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ $data[0]->nama_lengkap }}</td>
-                                        <td>{{ $data[0]->jam }}</td>
+                                        <td>{{ $data[0]->jenis_sampah }}</td>
                                         <td>{{ $data[0]->hari }}</td>
-                                        <td>{{ $data[0]->tanggal }}</td>
                                         <td>{{ $data[0]->berat }}</td>
+                                        <td>{{ $data[0]->status_pengambilan }}</td>
                                     </tr>
                                 @endforeach
 
@@ -106,7 +107,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-xl-10">
-                            <p>Terima Kasih Sudah Buang Di Mobile Trash</p>
+                            <p>Terima Kasih Sudah Berlangganan Di Mobile Trash</p>
                         </div>
                     </div>
 

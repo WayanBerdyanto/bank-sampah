@@ -5,7 +5,7 @@
             <div class="row mt-4 mx-2">
                 <div class="col-md-12 mb-3">
                     <div class="w-100 d-flex justify-content-end">
-                        <a href="historylangganan/cetaksemua" class="btn btn-primary mb-2" target="blank">
+                        <a href="/pengguna/historylangganan/cetaksemua/download" class="btn btn-primary mb-2" target="blank">
                             <i class="bi bi-printer-fill"></i>
                             Cetak Semua
                         </a>
@@ -33,10 +33,10 @@
                                                 <td>{{ $result->firstItem() + $idx }}</td>
                                                 <td>{{ $item->nama_langganan }}</td>
                                                 <td>{{ $item->tanggal }}</td>
-                                                <td>{{ $item->masa_langganan }} Kg</td>
+                                                <td>{{ $item->masa_langganan }}</td>
                                                 <td>{{ $item->status }}</td>
                                                 <td>
-                                                    <a href="historylangganan/cetak/{{$item->id_dtl_langganan}}" class="btn btn-primary mb-2" target="blank">
+                                                    <a href="/pengguna/historylangganan/cetak/download/{{$item->id_dtl_langganan}}" class="btn btn-primary mb-2" target="blank">
                                                         <i class="bi bi-printer-fill"></i>
                                                     </a>
                                                 </td>

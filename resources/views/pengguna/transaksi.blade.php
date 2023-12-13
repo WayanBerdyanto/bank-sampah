@@ -5,7 +5,7 @@
             <div class="row mt-4 mx-2">
                 <div class="col-md-12 mb-3">
                     <a href="/pengguna/transaksi/download" class="btn btn-success mb-2" target="blank">
-                        <i class="bi bi-arrow-down-circle"></i>
+                        <i class="bi bi-printer-fill"></i>
                         Cetak</a>
                     <div class="card">
                         <div class="card-header">
@@ -21,6 +21,7 @@
                                             <th>Berat Sampah</th>
                                             <th>Tanggal</th>
                                             <th>Status Bayar</th>
+                                            <th>Print</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -31,20 +32,16 @@
                                                 <td>{{ $item->berat_sampah }} Kg</td>
                                                 <td>{{ $item->tgl_pengajuan }}</td>
                                                 <td>{{ $item->status_bayar }}</td>
+                                                <td>
+                                                    <a href="" class="btn btn-success">
+                                                        <i class="bi bi-printer-fill"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
 
                                     </tbody>
                                 </table>
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination flex justify-content-end">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                    </ul>
-                                </nav>
                             </div>
                         </div>
                     </div>

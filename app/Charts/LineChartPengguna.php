@@ -2,6 +2,7 @@
 
 namespace App\Charts;
 
+use App\Models\master_pengambilan;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 
 use App\Models\Langganan;
@@ -26,35 +27,32 @@ class LineChartPengguna
 
     public function build(): \ArielMejiaDev\LarapexCharts\LineChart
     {
-        if(Auth::user()->status_langganan == 'Sudah Langganan'){
-            $id = Auth::user()->id;
-            $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        $id = Auth::user()->id;
+        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-            $query = "SELECT mp.jenis_sampah, SUM(dp.berat) AS berat, mp.hari
-                FROM master_pengambilan mp, detail_pengambilan dp, users us
-                WHERE mp.id_nota = dp.id_nota 
-                    AND mp.jenis_sampah = 'anorganik' 
-                    AND mp.id_pengguna = us.id 
-                    AND mp.id_pengguna = $id
-                GROUP BY mp.hari";
+        if (Auth::user()->status_langganan == 'Sudah Langganan') {
+            // Fetch data for 'anorganik'
+            $anorganikResults = master_pengambilan::join('detail_pengambilan', 'master_pengambilan.id_nota', '=', 'detail_pengambilan.id_nota')
+                ->where('master_pengambilan.jenis_sampah', 'anorganik')
+                ->where('master_pengambilan.id_pengguna', $id)
+                ->groupBy('master_pengambilan.hari')
+                ->selectRaw('master_pengambilan.hari, SUM(detail_pengambilan.berat) as berat')
+                ->get();
 
-            $query_organik = "SELECT mp.jenis_sampah, SUM(dp.berat) AS berat, mp.hari
-                FROM master_pengambilan mp, detail_pengambilan dp, users us
-                WHERE mp.id_nota = dp.id_nota 
-                    AND mp.jenis_sampah = 'organik' 
-                    AND mp.id_pengguna = us.id 
-                    AND mp.id_pengguna = $id
-                GROUP BY mp.hari";
-            
-            $result = DB::select($query);
+            // Fetch data for 'organik'
+            $organikResults = master_pengambilan::join('detail_pengambilan', 'master_pengambilan.id_nota', '=', 'detail_pengambilan.id_nota')
+                ->where('master_pengambilan.jenis_sampah', 'organik')
+                ->where('master_pengambilan.id_pengguna', $id)
+                ->groupBy('master_pengambilan.hari')
+                ->selectRaw('master_pengambilan.hari, SUM(detail_pengambilan.berat) as berat')
+                ->get();
 
-            $result_organik = DB::select($query_organik);
-            
+
             // Initialize an array to store the results for each day
             $dayResults = [];
 
             $dayResulsOrganik = [];
-            
+
             // Initialize the dayResults array with default values
             foreach ($days as $day) {
                 $dayResults[$day] = ['jenis_sampah' => $day, 'berat' => 0, 'hari' => $day];
@@ -63,59 +61,49 @@ class LineChartPengguna
             foreach ($days as $day) {
                 $dayResulsOrganik[$day] = ['jenis_sampah' => $day, 'berat' => 0, 'hari' => $day];
             }
-            
+
             // Update the dayResults array with actual values from the query result
-            foreach ($result as $row) {
+            foreach ($anorganikResults as $row) {
                 $dayResults[$row->hari] = ['jenis_sampah' => $row->jenis_sampah, 'berat' => $row->berat, 'hari' => $row->hari];
             }
-            foreach ($result_organik as $row) {
+            foreach ($organikResults as $row) {
                 $dayResulsOrganik[$row->hari] = ['jenis_sampah' => $row->jenis_sampah, 'berat' => $row->berat, 'hari' => $row->hari];
             }
-            
-            // Now, $dayResults contains the sum of berat for each day
-            
-                            
+
             return $this->chart->lineChart()
-            ->setTitle('Di Hitung Berdasarkan Berat (kg)')
-            ->addData('Organik', array_map(function ($day) use ($dayResults) {
-                return intval($dayResults[$day]['berat']);
-            }, $days))
-            ->addData('An-Organik',array_map(function ($day) use ($dayResulsOrganik) {
-                return intval($dayResulsOrganik[$day]['berat']);
-            }, $days))
-            ->setXAxis(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
-            ->setFontColor('#000')
-            ->setHeight(200) 
-            ->setWidth(300);
-        }else{
-            $id = Auth::user()->id;
-            $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                ->setTitle('Di Hitung Berdasarkan Berat (kg)')
+                ->addData('Organik', array_map(function ($day) use ($dayResults) {
+                    return intval($dayResults[$day]['berat']);
+                }, $days))
+                ->addData('An-Organik', array_map(function ($day) use ($dayResulsOrganik) {
+                    return intval($dayResulsOrganik[$day]['berat']);
+                }, $days))
+                ->setXAxis(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
+                ->setFontColor('#000')
+                ->setHeight(200)
+                ->setWidth(300);
 
-            $query = "SELECT mp.jenis_sampah, SUM(dp.berat) AS berat, mp.hari
-                FROM master_pengambilan mp, detail_pengambilan dp, users us
-                WHERE mp.id_nota = dp.id_nota 
-                    AND mp.jenis_sampah = 'anorganik' 
-                    AND mp.id_pengguna = us.id 
-                    AND mp.id_pengguna = $id
-                GROUP BY mp.hari";
+        } else {
+            // Fetch data for 'anorganik'
+            $anorganikResults = master_pembuangan::join('detail_pembuangan', 'master_pembuangan.id_master_pembuangan', '=', 'detail_pembuangan.id_master_pembuangan')
+                ->where('master_pembuangan.jenis_sampah', 'anorganik')
+                ->where('master_pembuangan.id_pengguna', $id)
+                ->groupBy('detail_pembuangan.hari')
+                ->selectRaw('detail_pembuangan.hari, SUM(detail_pembuangan.berat_sampah) as berat')
+                ->get();
 
-            $query_organik = "SELECT mp.jenis_sampah, SUM(dp.berat) AS berat, mp.hari
-                FROM master_pengambilan mp, detail_pengambilan dp, users us
-                WHERE mp.id_nota = dp.id_nota 
-                    AND mp.jenis_sampah = 'organik' 
-                    AND mp.id_pengguna = us.id 
-                    AND mp.id_pengguna = $id
-                GROUP BY mp.hari";
-            
-            $result = DB::select($query);
+            // Fetch data for 'organik'
+            $organikResults = master_pembuangan::join('detail_pembuangan', 'master_pembuangan.id_master_pembuangan', '=', 'detail_pembuangan.id_master_pembuangan')
+                ->where('master_pembuangan.jenis_sampah', 'organik')
+                ->where('master_pembuangan.id_pengguna', $id)
+                ->groupBy('detail_pembuangan.hari')
+                ->selectRaw('detail_pembuangan.hari, SUM(detail_pembuangan.berat_sampah) as berat')
+                ->get();
 
-            $result_organik = DB::select($query_organik);
-            
-            // Initialize an array to store the results for each day
             $dayResults = [];
 
             $dayResulsOrganik = [];
-            
+
             // Initialize the dayResults array with default values
             foreach ($days as $day) {
                 $dayResults[$day] = ['jenis_sampah' => $day, 'berat' => 0, 'hari' => $day];
@@ -124,31 +112,27 @@ class LineChartPengguna
             foreach ($days as $day) {
                 $dayResulsOrganik[$day] = ['jenis_sampah' => $day, 'berat' => 0, 'hari' => $day];
             }
-            
+
             // Update the dayResults array with actual values from the query result
-            foreach ($result as $row) {
+            foreach ($anorganikResults as $row) {
                 $dayResults[$row->hari] = ['jenis_sampah' => $row->jenis_sampah, 'berat' => $row->berat, 'hari' => $row->hari];
             }
-            foreach ($result_organik as $row) {
+            foreach ($organikResults as $row) {
                 $dayResulsOrganik[$row->hari] = ['jenis_sampah' => $row->jenis_sampah, 'berat' => $row->berat, 'hari' => $row->hari];
             }
-            
-            // Now, $dayResults contains the sum of berat for each day
-            
-                            
+
             return $this->chart->lineChart()
-            ->setTitle('Di Hitung Berdasarkan Berat (kg)')
-            ->addData('Organik', array_map(function ($day) use ($dayResults) {
-                return intval($dayResults[$day]['berat']);
-            }, $days))
-            ->addData('An-Organik',array_map(function ($day) use ($dayResulsOrganik) {
-                return intval($dayResulsOrganik[$day]['berat']);
-            }, $days))
-            ->setXAxis(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
-            ->setFontColor('#000')
-            ->setHeight(200) 
-            ->setWidth(300);
+                ->setTitle('Di Hitung Berdasarkan Berat (kg)')
+                ->addData('Organik', array_map(function ($day) use ($dayResults) {
+                    return intval($dayResults[$day]['berat']);
+                }, $days))
+                ->addData('An-Organik', array_map(function ($day) use ($dayResulsOrganik) {
+                    return intval($dayResulsOrganik[$day]['berat']);
+                }, $days))
+                ->setXAxis(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
+                ->setFontColor('#000')
+                ->setHeight(200)
+                ->setWidth(300);
         }
-        
     }
 }
