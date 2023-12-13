@@ -32,7 +32,8 @@ class UserSeeder extends Seeder
                 "nama_lengkap" => "TPA Bausasran",
                 "no_telpon" => "123123123",
                 "latitude" => "-7.797068",
-                "longitude"=> "110.370529"
+                "longitude"=> "110.370529",
+                "kapasitas"=> 50
             ],
             [
                 "username" => "banksampah2",
@@ -42,7 +43,8 @@ class UserSeeder extends Seeder
                 "nama_lengkap" => "TPA Gondokusuman",
                 "no_telpon" => "123123123",
                 "latitude" => "-7.788068",
-                "longitude"=> "110.390529"
+                "longitude"=> "110.390529",
+                "kapasitas"=> 50
             ],
             [
                 "username" => "banksampah3",
@@ -52,7 +54,8 @@ class UserSeeder extends Seeder
                 "nama_lengkap" => "TPA Banguntapan",
                 "no_telpon" => "123123123",
                 "latitude" => "-7.698168",
-                "longitude"=> "110.290529"
+                "longitude"=> "110.290529",
+                "kapasitas"=> 50
             ],
             [
                 "username" => "banksampah4",
@@ -62,7 +65,8 @@ class UserSeeder extends Seeder
                 "nama_lengkap" => "TPA Godean",
                 "no_telpon" => "123123123",
                 "latitude" => "-7.691068",
-                "longitude"=> "110.240529"
+                "longitude"=> "110.240529",
+                "kapasitas"=> 50
             ],
             [
                 "username" => "pengguna1",
@@ -102,7 +106,8 @@ class UserSeeder extends Seeder
                 "nama_lengkap" => "TPA Klitren",
                 "no_telpon" => "123123123",
                 "latitude" => "-7.697068",
-                "longitude"=> "110.370529"
+                "longitude"=> "110.370529",
+                "kapasitas"=> 50
             ],
             [
                 "username" => "banksampah6",
@@ -112,7 +117,8 @@ class UserSeeder extends Seeder
                 "nama_lengkap" => "TPA Gejayan",
                 "no_telpon" => "123123123",
                 "latitude" => "-7.697168",
-                "longitude"=> "110.370529"
+                "longitude"=> "110.370529",
+                "kapasitas"=> 50
             ],
             [
                 "username" => "banksampah7",
@@ -122,7 +128,8 @@ class UserSeeder extends Seeder
                 "nama_lengkap" => "TPA Tugu",
                 "no_telpon" => "123123123",
                 "latitude" => "-7.697158",
-                "longitude"=> "110.370529"
+                "longitude"=> "110.370529",
+                "kapasitas"=> 50
             ],
             [
                 "username" => "banksampah8",
@@ -132,7 +139,8 @@ class UserSeeder extends Seeder
                 "nama_lengkap" => "TPA Timoho",
                 "no_telpon" => "123123123",
                 "latitude" => "-7.697167",
-                "longitude"=> "110.370529"
+                "longitude"=> "110.370529",
+                "kapasitas"=> 50
             ],
             [
                 "username" => "banksampah9",
@@ -142,7 +150,8 @@ class UserSeeder extends Seeder
                 "nama_lengkap" => "TPA Tamsis",
                 "no_telpon" => "123123123",
                 "latitude" => "-7.682168",
-                "longitude"=> "110.370529"
+                "longitude"=> "110.370529",
+                "kapasitas"=> 50
             ],
             [
                 "username" => "banksampah10",
@@ -152,7 +161,8 @@ class UserSeeder extends Seeder
                 "nama_lengkap" => "TPA Kalasan",
                 "no_telpon" => "123123123",
                 "latitude" => "-7.678168",
-                "longitude"=> "110.370529"
+                "longitude"=> "110.370529",
+                "kapasitas"=> 50
             ],
         ]);
 
