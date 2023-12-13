@@ -102,8 +102,8 @@
                                             <th>Nama Pengguna</th>
                                             <th>Jenis Sampah</th>
                                             <th>Berat Sampah</th>
-                                            <th>Tujuan Buang</th>
-                                            <th class="text-center">Status Request</th>
+                                            <th class="text-center ">Tujuan Buang</th>
+                                            <th class="text-center">Status Confirmasi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -118,18 +118,15 @@
                                                     {{ $item->berat }} Kg
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $item->penerima_nama_lengkap }} Kg
+                                                    {{ $item->lokasi_buang }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{$item->status_request}}
+                                                    {{$item->confirm}}
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <span class="mr-2 page-link pagination">
-                                    {{ $result->onEachSide(5)->links() }}
-                                </span>
                             </div>
                         </div>
                     </div>

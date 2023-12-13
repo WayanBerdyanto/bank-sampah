@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use PDF;
 use App\Charts\PieChartSampah;
+use DB;
 
 
 
@@ -22,22 +23,30 @@ class PengambilController extends Controller
 
         $pengambil = Auth::user()->id;
         // Tidak Bisa Menampilkan Data Result Tujuan Buang Sampah
-        $result = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
-        ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
-        ->where('dp.id_pengambil', '=', $pengambil)
-        ->select(
-            'master_pengambilan.id_pengguna',
-            'dp.id_dtl_pengambilan',
-            'dp.id_nota',
-            'dp.id_pengambil',
-            'master_pengambilan.jenis_sampah',
-            'us.nama_lengkap',
-            'dp.status_pengambilan',
-            'dp.berat',
-            'dp.status_request'
-        )
-        ->orderBy('dp.id_dtl_pengambilan', 'desc')
-        ->paginate(10);
+        $result = db::select("SELECT 
+        mp.id_pengguna,
+        dp.id_dtl_pengambilan,
+        dp.id_nota,
+        dp.id_pengambil,
+        mp.jenis_sampah,
+        us.nama_lengkap,
+        dp.status_pengambilan,
+        dp.berat,
+        dp.status_request,
+        ps.confirm,
+        (SELECT users.nama_lengkap FROM users WHERE ps.id_bank_sampah = users.id) AS lokasi_buang
+        FROM 
+            master_pengambilan mp
+        JOIN 
+            detail_pengambilan dp ON mp.id_nota = dp.id_nota
+        JOIN 
+            users us ON mp.id_pengguna = us.id
+        JOIN 
+            request_pembuangan rp ON dp.id_dtl_pengambilan = rp.id_dtl_pengambilan
+        JOIN 
+            penerimaan_sampah ps ON rp.id_request = ps.id_request
+        WHERE 
+        dp.id_pengambil = '$pengambil'");
 
         
 
