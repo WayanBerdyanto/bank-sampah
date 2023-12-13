@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\master_pengambilan;
 use App\Models\requestpembuangan;
 use App\Models\penerimaansampah;
-
+use App\Models\detail_pengambilan;
 
 class RequestController extends Controller
 {
@@ -26,7 +26,7 @@ class RequestController extends Controller
             'dp.id_pengambil',
             'master_pengambilan.jenis_sampah',
             'us.nama_lengkap',
-            'dp.status_pengambilan',
+            'dp.status_pengambilan','dp.status_request',
             'dp.berat'
         )
         ->orderBy('master_pengambilan.tanggal', 'desc')
@@ -56,6 +56,9 @@ class RequestController extends Controller
                     'id_bank_sampah' => $request->idbanksampah,
                     'id_request' => $id_request,
                     'confirm' => 'Belum Diterima',
+                ]);
+                detail_pengambilan::where('id_dtl_pengambilan', $request->id_dtl_pengambilan)->update([
+                    'status_request'=> 'Sudah Request'
                 ]);
                 return redirect('/pengambil/requestpembuangan')->with('toast_success', 'Data Berhasil direquest ke banksampah');
             }else{

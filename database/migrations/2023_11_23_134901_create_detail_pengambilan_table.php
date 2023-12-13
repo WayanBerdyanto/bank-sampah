@@ -22,6 +22,7 @@ return new class extends Migration
             
             $table->integer("berat");
             $table->string("status_pengambilan",50)->default("Belum diambil");
+            $table->string("status_request",50)->default("Belum Request");
             $table->timestamps();
         });
     }

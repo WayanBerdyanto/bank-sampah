@@ -16,6 +16,7 @@ class detail_pengambilan extends Model
         'id_nota',
         'id_pengambil',
         'berat',
-        'status_pengambilan'
+        'status_pengambilan',
+        'status_request'
     ];
 }

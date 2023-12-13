@@ -16,8 +16,29 @@ class PengambilController extends Controller
 {
     public function index()
     {
+        $getBank = user::where('role', 'banksampah')->get();
+
+        $pengambil = Auth::user()->id;
+        $result = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
+        ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+        ->where('dp.id_pengambil', '=', $pengambil)
+        ->select(
+            'master_pengambilan.id_pengguna',
+            'dp.id_dtl_pengambilan',
+            'dp.id_nota',
+            'dp.id_pengambil',
+            'master_pengambilan.jenis_sampah',
+            'us.nama_lengkap',
+            'dp.status_pengambilan',
+            'dp.berat',
+            'dp.status_request'
+        )
+        ->orderBy('master_pengambilan.tanggal', 'desc')
+        ->orderBy('master_pengambilan.jam', 'desc')
+        ->paginate(10);
+
         $user = Auth::User()->nama_lengkap ?? '';
-        return view("pengambil.index", ['user' => $user]);
+        return view("pengambil.index", ['user' => $user, 'result'=>$result]);
     }
 
     public function profilepengambil()
@@ -188,7 +209,27 @@ class PengambilController extends Controller
         ->orderBy('master_pengambilan.jam', 'desc')
         ->paginate(10);
 
+        $getBank = user::where('role', 'banksampah')->get();
 
-        return view('pengambil.history', ['result' => $result]);
+        $result_pembuangan = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
+        ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+        ->where('dp.id_pengambil', '=', 1)
+        ->where('dp.status_request', '=', 'Sudah Request')
+        ->select(
+            'master_pengambilan.id_pengguna',
+            'dp.id_dtl_pengambilan',
+            'dp.id_nota',
+            'dp.id_pengambil',
+            'master_pengambilan.jenis_sampah',
+            'us.nama_lengkap',
+            'dp.status_pengambilan',
+            'dp.status_request',
+            'dp.berat'
+        )
+        ->orderBy('master_pengambilan.tanggal', 'desc')
+        ->orderBy('master_pengambilan.jam', 'desc')
+        ->paginate(10);
+
+        return view('pengambil.history', ['result' => $result, 'result_pembuangan'=> $result_pembuangan]);
     }
 }
