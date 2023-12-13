@@ -1,3 +1,6 @@
+<a href="" class="btn btn-primary ml-2 mt-2" target="blank">
+                            <i class="bi bi-printer-fill"></i>
+                            Cetak Semua</a>
 <div class="card mx-4 mt-2">
     <div class="card-header">
         <span><i class="bi bi-table me-2"></i></span> Data Penerimaan Sampah Pengguna
@@ -18,16 +21,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
+                    @foreach ($result_master as $idx => $items)
+                        <tr>
+                            <td>{{ $result_master->firstItem() + $idx }}</td>
+                            <td>{{ $items->nama_lengkap }}</td>
+                            <td>{{ $items->jenis_sampah }}</td>
+                            <td>{{ $items->tgl_pengajuan }}</td>
+                            <td>{{ $items->jam_pengajuan }}</td>
+                            <td>{{ $items->status_terima }}</td>
+                            <td>
+                                <a href="" class="btn btn-primary" target="blank">
+                                                        <i class="bi bi-printer-fill"></i>
+                                                    </a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

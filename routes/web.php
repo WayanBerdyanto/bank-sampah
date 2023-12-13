@@ -57,7 +57,7 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::put('pengguna/bayar/{id}', [PenggunaController::class, 'bayar']);
 
     Route::get('/pengguna/transaksi/{type}', [PenggunaController::class, 'invoice']);
-
+    Route::get('/pengguna/transaksi/{type}/{id}', [PenggunaController::class, 'invoiceTertentu']);
     Route::get('/pengguna/profile/{type}', [PenggunaController::class, 'invoiceprofile']);
     Route::get('/pengguna/profile/cetak-profile', [PenggunaController::class, 'cetakprofile']);
 

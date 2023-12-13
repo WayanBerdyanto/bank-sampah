@@ -91,10 +91,9 @@
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ $item->nama_lengkap }}</td>
-                                        <td>{{ $item->jam }}</td>
-                                        <td>{{ $item->hari }}</td>
-                                        <td>{{ $item->tanggal }}</td>
-                                        <td>{{ $item->berat }}</td>
+                                        <td>{{ $item->status_bayar }}</td>
+                                        <td>{{ $item->berat_sampah }}</td>
+                                        <td>{{ $item->total }}</td>
                                     </tr>
                                 @endforeach
 

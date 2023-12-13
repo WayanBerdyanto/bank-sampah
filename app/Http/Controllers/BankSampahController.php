@@ -25,10 +25,10 @@ class BankSampahController extends Controller
         AND rp.id_request = ps.id_request
         AND ps.confirm = 'Sudah Diterima'");
 
-        $hasil = $kapasitas - intval($beratsampah[0]->berat); 
+        $hasil = $kapasitas - intval($beratsampah[0]->berat);
         $format = number_format($hasil, 2);
 
-        return view("banksampah.index", ['user' => $user, 'format'=>$format, 'kapasitas'=>$kapasitas]);
+        return view("banksampah.index", ['user' => $user, 'format' => $format, 'kapasitas' => $kapasitas]);
     }
 
     public function dataPembuangan()
@@ -57,13 +57,52 @@ class BankSampahController extends Controller
             ->paginate(5);
 
         $result_pengambilan = User::join('detail_pengambilan as dp', 'users.id', '=', 'dp.id_pengambil')
-        ->join('request_pembuangan as rp', 'dp.id_dtl_pengambilan', '=', 'rp.id_dtl_pengambilan')
-        ->join('penerimaan_sampah as ps', 'rp.id_request', '=', 'ps.id_request')
-        ->join('master_pengambilan as mp', 'dp.id_nota', '=', 'mp.id_nota')
-        ->select('users.nama_lengkap', 'mp.jenis_sampah', 'dp.berat', 'ps.id_penerimaan_sampah', 'ps.confirm')
-        ->paginate(10);
+            ->join('request_pembuangan as rp', 'dp.id_dtl_pengambilan', '=', 'rp.id_dtl_pengambilan')
+            ->join('penerimaan_sampah as ps', 'rp.id_request', '=', 'ps.id_request')
+            ->join('master_pengambilan as mp', 'dp.id_nota', '=', 'mp.id_nota')
+            ->select('users.nama_lengkap', 'mp.jenis_sampah','mp.tanggal','mp.jam','dp.berat', 'ps.id_penerimaan_sampah', 'ps.confirm')
+            ->paginate(10);
 
-        return view('banksampah.dataPenerimaan', ['user' => $user, 'result_master' => $result_master, 'result_pengambilan'=>$result_pengambilan]);
+        return view('banksampah.dataPenerimaan', ['user' => $user, 'result_master' => $result_master, 'result_pengambilan' => $result_pengambilan]);
+    }
+    public function history()
+    {
+        $user = Auth::User()->nama_lengkap ?? '';
+        $id_banksampah = Auth::User()->id;
+        $result_master = Detail_Pembuangan::select(
+            'detail_pembuangan.id_dtl_pembuangan',
+            'detail_pembuangan.berat_sampah',
+            'mp.id_master_pembuangan',
+            'users.nama_lengkap AS Nama_Bank',
+            'mp.tgl_pengajuan',
+            'mp.status_terima',
+            DB::raw('(SELECT nama_lengkap FROM users WHERE users.id = mp.id_pengguna) AS nama_lengkap'),
+            'mp.jenis_sampah',
+            'mp.jam_pengajuan'
+        )
+            ->join('master_pembuangan as mp', 'detail_pembuangan.id_master_pembuangan', '=', 'mp.id_master_pembuangan')
+            ->join('users', 'users.id', '=', 'mp.id_bank_sampah')
+            ->where('users.id', $id_banksampah)
+            ->orderBy('mp.id_master_pembuangan', 'desc')
+            ->paginate(5);
+
+        $result_pengambilan = DB::table('users')
+            ->join('detail_pengambilan as dp', 'users.id', '=', 'dp.id_pengambil')
+            ->join('request_pembuangan as rp', 'dp.id_dtl_pengambilan', '=', 'rp.id_dtl_pengambilan')
+            ->join('penerimaan_sampah as ps', 'rp.id_request', '=', 'ps.id_request')
+            ->join('master_pengambilan as mp', 'dp.id_nota', '=', 'mp.id_nota')
+            ->select(
+                'users.nama_lengkap',
+                'mp.jenis_sampah',
+                'dp.berat',
+                'ps.id_penerimaan_sampah',
+                'ps.confirm',
+                'mp.tanggal',
+                'mp.jam'
+            )
+            ->paginate(10);
+
+        return view('banksampah.history', ['user' => $user, 'result_master' => $result_master, 'result_pengambilan' => $result_pengambilan]);
     }
     public function detailPenerimaan($id)
     {
@@ -89,35 +128,34 @@ class BankSampahController extends Controller
         }
     }
 
-    public function terimaambil($id){
+    public function terimaambil($id)
+    {
         $data = penerimaansampah::where('id_penerimaan_sampah', $id)->update([
-            'confirm'=>'Sudah Diterima',
+            'confirm' => 'Sudah Diterima',
             'jam_terima' => Carbon::now()->toTimeString(),
             'tanggal_terima' => Carbon::now()->toDateString()
         ]);
-        if($data){
+        if ($data) {
             return redirect('/banksampah/datapenerimaan')->with('toast_success', 'Data Berhasil Diterima');
-        }else{
+        } else {
             return redirect('/banksampah/datapenerimaan')->with('toast_error', 'Data Gagal Diterima');
         }
     }
 
-    public function tolakambil($id){
+    public function tolakambil($id)
+    {
         $data = penerimaansampah::where('id_penerimaan_sampah', $id)->update([
-            'confirm'=>'Ditolak',
+            'confirm' => 'Ditolak',
             'jam_terima' => Carbon::now()->toTimeString(),
             'tanggal_terima' => Carbon::now()->toDateString()
         ]);
-        if($data){
+        if ($data) {
             return redirect('/banksampah/datapenerimaan')->with('toast_success', 'Data Berhasil Ditolak');
-        }else{
+        } else {
             return redirect('/banksampah/datapenerimaan')->with('toast_error', 'Data Gagal Ditolak');
         }
     }
 
-    public function history(){
-        return view('banksampah.history');
-    }
 
     public function profilebank()
     {

@@ -251,7 +251,8 @@ class PenggunaController extends Controller
             'master_pembuangan.jam_pengajuan',
             'master_pembuangan.status_terima',
             'detail_pembuangan.berat_sampah',
-            'master_pembuangan.status_bayar'
+            'master_pembuangan.status_bayar',
+            'detail_pembuangan.id_dtl_pembuangan'
         )
         ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
         ->join('detail_pembuangan', 'detail_pembuangan.id_master_pembuangan', '=', 'master_pembuangan.id_master_pembuangan')
@@ -295,6 +296,46 @@ class PenggunaController extends Controller
         ->get();
         // dd($data);
         
+        $users = User::where('id', $id_pengguna )->get();
+        // dd($users);
+
+        $today = Carbon::now();
+
+        $mytime = Carbon::now()->toDateTimeString();
+        $pdf = PDF::loadView('pengguna.cetakpdf',['data'=>$data, 'time'=>$mytime, 'users'=>$users, 'today'=>$today]);
+        return $pdf->stream('cetak-pdf.pdf');
+    }
+    public function invoiceTertentu($type, $id){
+        $id_pengguna = Auth::User()->id;
+        $data = master_pembuangan::select(
+            'master_pembuangan.id_master_pembuangan',
+            'users.id as user_id',
+            'users.nama_lengkap',
+            'users.status_langganan',
+            'users.provinsi',
+            'users.kabupaten',
+            'users.kecamatan',
+            'users.kelurahan',
+            'users.no_telpon',
+            'master_pembuangan.jenis_sampah',
+            'master_pembuangan.tgl_pengajuan',
+            'master_pembuangan.jam_pengajuan',
+            'master_pembuangan.status_terima',
+            'detail_pembuangan.berat_sampah',
+            'master_pembuangan.status_bayar',
+            DB::raw('detail_pembuangan.harga * detail_pembuangan.berat_sampah AS total')
+
+        )
+        ->join('users', 'users.id', '=', 'master_pembuangan.id_bank_sampah')
+        ->join('detail_pembuangan', 'detail_pembuangan.id_master_pembuangan', '=', 'master_pembuangan.id_master_pembuangan')
+        ->where('master_pembuangan.id_pengguna', $id_pengguna)
+        ->where('status_bayar', '!=',null)
+        ->where('detail_pembuangan.id_dtl_pembuangan', $id)
+        ->orderBy('master_pembuangan.id_master_pembuangan', 'desc')
+        ->take(5)
+        ->get();
+        // dd($data);
+
         $users = User::where('id', $id_pengguna )->get();
         // dd($users);
 

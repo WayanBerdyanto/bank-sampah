@@ -33,7 +33,8 @@
                                                 <td>{{ $item->tgl_pengajuan }}</td>
                                                 <td>{{ $item->status_bayar }}</td>
                                                 <td>
-                                                    <a href="" class="btn btn-success">
+                                                    <a href="/pengguna/transaksi/download/{{ $item->id_dtl_pembuangan }}"
+                                                        class="btn btn-success" target="blank">
                                                         <i class="bi bi-printer-fill"></i>
                                                     </a>
                                                 </td>
