@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('no_telpon', 15);
             $table->string('latitude', 40)->nullable();
             $table->string('longitude', 40)->nullable();
+            $table->integer('kapasitas')->nullable();
             $table->timestamps();
         });
     }
