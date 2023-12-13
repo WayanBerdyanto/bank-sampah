@@ -113,7 +113,9 @@ class PengambilController extends Controller
             'us.nama_lengkap',
             'dp.status_pengambilan'
         )
-        ->get();
+        ->orderBy('master_pengambilan.tanggal', 'desc')
+        ->orderBy('master_pengambilan.jam', 'desc')
+        ->paginate(10);
 
 
         return view('pengambil.penerimaan', ['result' => $result]);

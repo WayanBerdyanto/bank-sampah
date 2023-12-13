@@ -33,18 +33,36 @@
                                                 <td>{{ $item->jam }}</td>
                                                 <td>{{ $item->status_pengambilan }}</td>
                                                 <td>
-                                                    <form action="/pengambil/ambilsampah/{{ $item->id_dtl_pengambilan }}" method="POST">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit" class="btn btn-success">
-                                                            <i class="bi bi-check-square"></i>
-                                                        </button>
-                                                    </form>
+                                                    @if ($item->status_pengambilan == 'Sudah Diambil')
+                                                        <form
+                                                            action="/pengambil/ambilsampah/{{ $item->id_dtl_pengambilan }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <button type="submit" class="btn btn-success" disabled>
+                                                                <i class="bi bi-check-square"></i>
+                                                            </button>
+                                                        </form>
+                                                    @else
+                                                        <form
+                                                            action="/pengambil/ambilsampah/{{ $item->id_dtl_pengambilan }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <button type="submit" class="btn btn-primary">
+                                                                <i class="bi bi-check-square"></i>
+                                                            </button>
+                                                        </form>
+                                                    @endif
+
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <span class="mr-2 page-link pagination">
+                                    {{ $result->onEachSide(5)->links() }}
+                                </span>
                             </div>
                         </div>
                     </div>
