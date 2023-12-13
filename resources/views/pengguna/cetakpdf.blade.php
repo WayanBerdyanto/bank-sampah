@@ -90,11 +90,11 @@
                                 @foreach ($data as $item)
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ $data[0]->nama_lengkap }}</td>
-                                        <td>{{ $data[0]->jam }}</td>
-                                        <td>{{ $data[0]->hari }}</td>
-                                        <td>{{ $data[0]->tanggal }}</td>
-                                        <td>{{ $data[0]->berat }}</td>
+                                        <td>{{ $item->nama_lengkap }}</td>
+                                        <td>{{ $item->jam }}</td>
+                                        <td>{{ $item->hari }}</td>
+                                        <td>{{ $item->tanggal }}</td>
+                                        <td>{{ $item->berat }}</td>
                                     </tr>
                                 @endforeach
 
@@ -102,7 +102,7 @@
 
                         </table>
                     </div>
-                
+
                     <hr>
                     <div class="row">
                         <div class="col-xl-10">

@@ -115,4 +115,6 @@ Route::middleware('cekrole:pengambil')->group(function () {
 
     Route::get('/pengambil/history/{type}', [PengambilController::class,'cetakSemua']);
     Route::get('/pengambil/history/{type}/{id}', [PengambilController::class,'cetakTertentu']);
+    Route::get('/pengambil/historypembuangan/{type}/{id}', [PengambilController::class,'cetakPembuangan']);
+    Route::get('/pengambil/historypembuangan/{type}', [PengambilController::class,'cetakSemuaPembuangan']);
 });

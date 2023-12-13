@@ -22,7 +22,8 @@ class UserSeeder extends Seeder
                 "nama_lengkap" => "pengambil sampah",
                 "no_telpon" => "123123123",
                 "latitude" => "",
-                "longitude"=> ""
+                "longitude"=> "",
+                "kapasitas"=> 50
             ],
             [
                 "username" => "banksampah1",
@@ -76,7 +77,8 @@ class UserSeeder extends Seeder
                 "nama_lengkap" => "Pengguna Wayan",
                 "no_telpon" => "123123123",
                 "latitude" => "",
-                "longitude"=> ""
+                "longitude"=> "",
+                "kapasitas"=> 50
             ],
             [
                 "username" => "pengambil2",
@@ -86,7 +88,8 @@ class UserSeeder extends Seeder
                 "nama_lengkap" => "pengambil sampah 2",
                 "no_telpon" => "123123123",
                 "latitude" => "",
-                "longitude"=> ""
+                "longitude"=> "",
+                "kapasitas"=> 50
             ],
             [
                 "username" => "pengambil3",
@@ -96,7 +99,8 @@ class UserSeeder extends Seeder
                 "nama_lengkap" => "pengambil sampah 3",
                 "no_telpon" => "123123123",
                 "latitude" => "",
-                "longitude"=> ""
+                "longitude"=> "",
+                "kapasitas"=> 50
             ],
             [
                 "username" => "banksampah5",
