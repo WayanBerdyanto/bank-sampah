@@ -18,6 +18,7 @@
                                             <th>Nama Pengguna</th>
                                             <th>Jenis Sampah</th>
                                             <th>Berat Sampah</th>
+                                            <th>Status</th>
                                             <th>Lokasi Pembuangan</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
@@ -33,7 +34,10 @@
                                                 <td class="text-center">
                                                     {{$item->berat}} Kg
                                                 </td>
-                                                <form action="" method="POST">
+                                                <td class="text-center">
+                                                    ttt
+                                                </td>
+                                                <form action="/pengambil/requestpostdata" method="POST">
                                                     @csrf
                                                     <td hidden>
                                                         <input type="text" name="id_dtl_pengambilan" value="{{$item->id_dtl_pengambilan}}">
@@ -41,7 +45,6 @@
                                                     <td>
                                                         <select class="form-select" name="idbanksampah"
                                                             aria-label="Default select example" required>
-                                                            <option selected>Pilih Lokasi Pembuangan</option>
                                                             @foreach ($getBank as $data)
                                                             
                                                                 <option value="{{ $data->id }}">
@@ -50,7 +53,16 @@
                                                             @endforeach
                                                         </select>
                                                     </td>
+                                                    <td hidden>
+                                                        <input type="text" name="status" value="proses">
+                                                    </td>
                                                     <td>
+                                                        @if (!empty($id_request))
+
+                                                            
+                                                        @else
+                                                            
+                                                        @endif
                                                         <button type="submit" class="btn btn-primary">Request</button>
                                                     </td>
                                                 </form>

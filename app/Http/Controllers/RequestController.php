@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\master_pengambilan;
-
+use App\Models\requestpembuangan;
+use App\Models\penerimaansampah;
 
 
 class RequestController extends Controller
@@ -32,6 +33,36 @@ class RequestController extends Controller
         ->orderBy('master_pengambilan.jam', 'desc')
         ->paginate(10);
 
-        return view('pengambil.requestpembuaganpage', ['getBank'=>$getBank, 'result'=>$result]);
+        $penerimaan = requestpembuangan::All();
+
+        return view('pengambil.requestpembuaganpage', ['getBank'=>$getBank, 'result'=>$result, 'penerimaan'=>$penerimaan]);
+    }
+
+    public function requestpostdata(Request $request){
+        $validated = $request->validate([
+            'id_dtl_pengambilan' => 'required',
+            'idbanksampah' => 'required',
+            'status' => 'required',
+        ]);
+
+        if($validated){
+            requestpembuangan::create([
+                'id_dtl_pengambilan'=>$request->id_dtl_pengambilan,    
+                'status'=>$request->status,    
+            ]);
+            $id_request = requestpembuangan::latest()->first()->id_request;
+            if(!empty($id_request)){
+                penerimaansampah::create([
+                    'id_bank_sampah' => $request->idbanksampah,
+                    'id_request' => $id_request,
+                    'confirm' => 'Belum Diterima',
+                ]);
+                return redirect('/pengambil/requestpembuangan')->with('toast_success', 'Data Berhasil direquest ke banksampah');
+            }else{
+                return redirect('/pengambil/requestpembuangan')->with('toast_error', 'Data Gagal direquest ke banksampah');
+            }
+        }else{
+            return redirect('/pengambil/requestpembuangan')->with('toast_error', 'Terjadi Kesalahan data');
+        }
     }
 }

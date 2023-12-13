@@ -108,4 +108,5 @@ Route::middleware('cekrole:pengambil')->group(function () {
     Route::put('/pengambil/ambilsampah/{id}',[PengambilController::class,'ambilsampah']);
     Route::get('/pengambil/history',[PengambilController::class,'history']);
     Route::get('/pengambil/requestpembuangan',[RequestController::class,'requestpembuangan']);
+    Route::post('/pengambil/requestpostdata',[RequestController::class,'requestpostdata']);
 });
