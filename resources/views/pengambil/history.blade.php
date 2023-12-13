@@ -16,7 +16,7 @@
                     @include('pengambil.historypengambilan')
                 </div>
                 <div class="tab-pane fade" id="pembuangan" role="tabpanel" aria-labelledby="pembuangan-tab">
-                    cek
+                    @include('pengambil.historypembuangan')
                 </div>
             </div>
     </main>

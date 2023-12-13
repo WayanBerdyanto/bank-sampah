@@ -26,27 +26,30 @@
                                     <tbody>
                                         @foreach ($result as $idx => $item)
                                             <tr>
-                                                <td> {{$loop->index + 1 }} </td>
-                                                <td>{{$item->nama_lengkap}}</td>
+                                                <td> {{ $loop->index + 1 }} </td>
+                                                <td>{{ $item->nama_lengkap }}</td>
                                                 <td>
-                                                    {{$item->jenis_sampah}}
+                                                    {{ $item->jenis_sampah }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{$item->berat}} Kg
+                                                    {{ $item->berat }} Kg
                                                 </td>
                                                 <td class="text-center">
-                                                    ttt
+                                                    {{ $item->status_request }}
                                                 </td>
                                                 <form action="/pengambil/requestpostdata" method="POST">
                                                     @csrf
                                                     <td hidden>
-                                                        <input type="text" name="id_dtl_pengambilan" value="{{$item->id_dtl_pengambilan}}">
+                                                        <input type="text" name="id_dtl_pengambilan"
+                                                            value="{{ $item->id_dtl_pengambilan }}">
+                                                    </td>
+                                                    <td hidden>
+                                                        <input type="text" name="status_request">
                                                     </td>
                                                     <td>
                                                         <select class="form-select" name="idbanksampah"
                                                             aria-label="Default select example" required>
                                                             @foreach ($getBank as $data)
-                                                            
                                                                 <option value="{{ $data->id }}">
                                                                     {{ $data->nama_lengkap }}
                                                                 </option>
@@ -57,13 +60,13 @@
                                                         <input type="text" name="status" value="proses">
                                                     </td>
                                                     <td>
-                                                        @if (!empty($id_request))
-
-                                                            
+                                                        @if ($item->status_request == 'Sudah Request')
+                                                            <button type="submit" class="btn btn-primary"
+                                                                disabled>Request</button>
                                                         @else
-                                                            
+                                                            <button type="submit" class="btn btn-primary">Request</button>
                                                         @endif
-                                                        <button type="submit" class="btn btn-primary">Request</button>
+
                                                     </td>
                                                 </form>
 

@@ -1,11 +1,6 @@
-<div class="w-100 d-flex mx-4">
-    <a href="/pengambil/history/download" class="btn btn-primary mb-2" target="blank">
-        <i class="bi bi-printer-fill"></i>
-        Cetak Semua</a>
-</div>
 <div class="card mx-4 mt-2">
     <div class="card-header">
-        <span><i class="bi bi-table me-2"></i></span> Data Penerimaan Sampah
+        <span><i class="bi bi-table me-2"></i></span> Data Pembuangan Sampah
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -17,30 +12,22 @@
                         <th>Nama Pengguna</th>
                         <th>Jenis Sampah</th>
                         <th>Berat Sampah</th>
-                        <th>Tgl Pengajuan</th>
-                        <th>Jam Pengajuan</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
+                        <th>Status Request</th>
+                        <th>Cetak</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($result as $idx => $item)
+                    @foreach ($result_pembuangan as $item)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
                             <td>{{ $item->nama_lengkap }}</td>
                             <td>{{ $item->jenis_sampah }}</td>
-                            <td>{{ $item->berat }} kg</td>
-                            <td>{{ $item->tanggal }}</td>
-                            <td>{{ $item->jam }}</td>
-                            <td>{{ $item->status_pengambilan }}</td>
+                            <td>{{ $item->berat }}</td>
+                            <td>{{ $item->status_request }}</td>
                             <td>
-                                
-                            <td>
-                                <a href="/pengambil/history/download/{{ $item->id_dtl_pengambilan }}"
-                                    class="btn btn-primary" target="blank">
+                                <a class="btn btn-primary" href="/pengambil/history/download/{{$item->id_dtl_pengambilan}}">
                                     <i class="bi bi-printer-fill"></i>
                                 </a>
-                            </td>
                             </td>
                         </tr>
                     @endforeach
