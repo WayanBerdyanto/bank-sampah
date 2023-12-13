@@ -39,6 +39,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <span class="mr-2 page-link pagination">
+                {{ $result->onEachSide(5)->links() }}
+            </span>
         </div>
     </div>
 </div>

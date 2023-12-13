@@ -133,6 +133,7 @@ class PengambilController extends Controller
         $result = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
         ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
         ->where('dp.id_pengambil', '=', $pengambil)
+        ->where('dp.status_pengambilan', '=', 'Sudah Diambil')
         ->select(
             'master_pengambilan.id_pengguna',
             'dp.id_dtl_pengambilan',
@@ -145,7 +146,9 @@ class PengambilController extends Controller
             'us.nama_lengkap',
             'dp.status_pengambilan'
         )
-        ->get();
+        ->orderBy('master_pengambilan.tanggal', 'desc')
+        ->orderBy('master_pengambilan.jam', 'desc')
+        ->paginate(10);
 
 
         return view('pengambil.history', ['result' => $result]);
