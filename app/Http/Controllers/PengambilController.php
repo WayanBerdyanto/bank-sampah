@@ -111,14 +111,50 @@ class PengambilController extends Controller
             'master_pengambilan.tanggal',
             'master_pengambilan.jam',
             'us.nama_lengkap',
+            'us.latitude',
+            'us.longitude',
             'dp.status_pengambilan'
         )
         ->orderBy('master_pengambilan.tanggal', 'desc')
         ->orderBy('master_pengambilan.jam', 'desc')
         ->paginate(10);
 
+        $getPengguna = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
+        ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+        ->where('dp.id_pengambil', '=', $pengambil)
+        ->where('dp.status_pengambilan', '=', 'Belum diambil')
+        ->select(
+            'us.nama_lengkap',
+            'us.latitude',
+            'us.longitude',
+            'us.kabupaten',
+            'us.kecamatan',
+            'us.kelurahan',
+            'dp.status_pengambilan'
+        )
+        ->get();
 
-        return view('pengambil.penerimaan', ['result' => $result]);
+        $progress = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
+        ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+        ->where('dp.id_pengambil', '=', $pengambil)
+        ->where('dp.status_pengambilan', '=', 'Sudah diambil')
+        ->count();
+
+        $sampahDiambil = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
+            ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+            ->where('dp.id_pengambil', '=', $pengambil)
+            ->where('dp.status_pengambilan', '=', 'Belum diambil')
+            ->count();
+
+        $totalSampah = $progress + $sampahDiambil; 
+
+        if ($totalSampah > 0) {
+            $progressPercentage = ($progress / $totalSampah) * 100;
+            $formattedProgress = number_format($progressPercentage, 2);
+        } else {
+            $formattedProgress = 0; 
+        }
+        return view('pengambil.penerimaan', ['result' => $result,'getPengguna'=>$getPengguna, 'formattedProgress'=>$formattedProgress]);
 
     }
     public function ambilsampah($id, Request $request) {

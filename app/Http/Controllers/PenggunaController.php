@@ -376,7 +376,7 @@ class PenggunaController extends Controller
         $user = Auth::User()->nama_lengkap ?? '';
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
-        $banksampah = User::where('role', 'banksampah')->get();;
+        $banksampah = User::where('role', 'banksampah')->get();
         return view('pengguna.buangsampah', ['key' => 'buangsampah', 'user' => $user, 'result' => $result, 'banksampah' => $banksampah]);
     }
 
