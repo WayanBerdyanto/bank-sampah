@@ -17,7 +17,7 @@
                     <hr class="dropdown-divider bg-light" />
                 </li>
                 <li class="py-2">
-                    <a href="#" class="nav-link px-3">
+                    <a href="/pengambil/requestpembuangan" class="nav-link px-3">
                         <span class="me-2"><i class="bi bi-trash"></i></span>
                         <span>Request Pembuangan</span>
                     </a>

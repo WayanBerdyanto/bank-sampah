@@ -8,6 +8,8 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PenggunaLanggananController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RequestController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -105,4 +107,5 @@ Route::middleware('cekrole:pengambil')->group(function () {
     Route::get('/pengambil/penerimaan', [PengambilController::class,'penerimaan']);
     Route::put('/pengambil/ambilsampah/{id}',[PengambilController::class,'ambilsampah']);
     Route::get('/pengambil/history',[PengambilController::class,'history']);
+    Route::get('/pengambil/requestpembuangan',[RequestController::class,'requestpembuangan']);
 });
