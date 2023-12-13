@@ -10,16 +10,40 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Pengambil</th>
-                        <th>Berat Sampah</th>
-                        <th>Tgl Pengajuan</th>
-                        <th>Jam Pengajuan</th>
+                        <th>Jenis Sampah</th>
+                        <th class="text-center">Berat Sampah</th>
+                        <th class="text-center">Status Konfirmasi</th>
                         <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                    </tr>
+                    @foreach ($result_pengambilan as $idx=> $item)
+                        <tr>
+                            <td>
+                                {{$result_pengambilan->firstItem() + $idx}}
+                            </td>
+                            <td>
+                                {{$item->nama_lengkap}}
+                            </td>
+                            <td>
+                                {{$item->jenis_sampah}}
+                            </td>
+                            <td class="text-center">
+                                {{$item->berat}} Kg
+                            </td>
+                            <td class="text-center">
+                                {{$item->confirm}}
+                            </td>
+                            <td colspan="2" class="text-center">
+                                <a href="/banksampah/terimaambil/{{$item->id_penerimaan_sampah}}" class="btn btn-primary">
+                                    <i class="bi bi-check-square-fill"></i>
+                                </a>
+                                <a href="/banksampah/tolakambil/{{$item->id_penerimaan_sampah}}"class="btn btn-danger">
+                                    <i class="bi bi-x-square-fill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

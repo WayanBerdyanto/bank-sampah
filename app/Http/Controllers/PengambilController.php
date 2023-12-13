@@ -21,6 +21,7 @@ class PengambilController extends Controller
         $getBank = user::where('role', 'banksampah')->get();
 
         $pengambil = Auth::user()->id;
+        // Tidak Bisa Menampilkan Data Result Tujuan Buang Sampah
         $result = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
         ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
         ->where('dp.id_pengambil', '=', $pengambil)
@@ -35,9 +36,10 @@ class PengambilController extends Controller
             'dp.berat',
             'dp.status_request'
         )
-        ->orderBy('master_pengambilan.tanggal', 'desc')
-        ->orderBy('master_pengambilan.jam', 'desc')
+        ->orderBy('dp.id_dtl_pengambilan', 'desc')
         ->paginate(10);
+
+        
 
         $user = Auth::User()->nama_lengkap ?? '';
         return view("pengambil.index", ['user' => $user, 'result'=>$result]);

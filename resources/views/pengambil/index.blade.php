@@ -102,6 +102,7 @@
                                             <th>Nama Pengguna</th>
                                             <th>Jenis Sampah</th>
                                             <th>Berat Sampah</th>
+                                            <th>Tujuan Buang</th>
                                             <th class="text-center">Status Request</th>
                                         </tr>
                                     </thead>
@@ -115,6 +116,9 @@
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $item->berat }} Kg
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->penerima_nama_lengkap }} Kg
                                                 </td>
                                                 <td class="text-center">
                                                     {{$item->status_request}}

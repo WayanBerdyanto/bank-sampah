@@ -13,48 +13,6 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3 mb-3">
-                    <div class="card bg-primary text-white h-100">
-                        <div class="card-header">
-                            <span>Data Dipenerimaan</span>
-                        </div>
-                        <div class="card-body py-5 text-center">
-                            <span class="text-center fs-2">50</span>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card bg-warning text-dark h-100">
-                        <div class="card-header">
-                            <span>Data Yang diterima</span>
-                        </div>
-                        <div class="card-body py-5 text-center">
-                            <span class="text-center fs-2">50</span>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card bg-success text-white h-100">
-                        <div class="card-header">
-                            Sampah Organik
-                        </div>
-                        <div class="card-body py-5">Success Card</div>
-                        
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card bg-danger text-white h-100">
-                        <div class="card-header">
-                            Sampah An-Organik
-                        </div>
-                        <div class="card-body py-5">Danger Card</div>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-md-6 mb-3">
                     <div class="card h-100">
                         <div class="card-header">
@@ -80,9 +38,16 @@
             </div>
             <div class="row">
                 <div class="col-md-12 mb-3">
+                    <div>
+                        <h4 class="my-3">Kapasitas Sampah</h4>
+                        <div class="progress mb-2">
+                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                                aria-valuemin="0" aria-valuemax="100">25%</div>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-header">
-                            <span><i class="bi bi-table me-2"></i></span> Data Table
+                            <span><i class="bi bi-table me-2"></i></span> Data Sampah Masuk
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

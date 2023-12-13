@@ -29,8 +29,7 @@ class RequestController extends Controller
             'dp.status_pengambilan','dp.status_request',
             'dp.berat'
         )
-        ->orderBy('master_pengambilan.tanggal', 'desc')
-        ->orderBy('master_pengambilan.jam', 'desc')
+        ->orderBy('dp.id_dtl_pengambilan', 'desc')
         ->paginate(10);
 
         $penerimaan = requestpembuangan::All();

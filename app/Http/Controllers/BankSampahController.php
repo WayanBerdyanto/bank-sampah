@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\master_pembuangan;
 use App\Models\Detail_Pembuangan;
+use App\Models\penerimaansampah;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class BankSampahController extends Controller
@@ -43,7 +45,14 @@ class BankSampahController extends Controller
             ->orderBy('mp.id_master_pembuangan', 'desc')
             ->paginate(5);
 
-        return view('banksampah.dataPenerimaan', ['user' => $user, 'result_master' => $result_master]);
+        $result_pengambilan = User::join('detail_pengambilan as dp', 'users.id', '=', 'dp.id_pengambil')
+        ->join('request_pembuangan as rp', 'dp.id_dtl_pengambilan', '=', 'rp.id_dtl_pengambilan')
+        ->join('penerimaan_sampah as ps', 'rp.id_request', '=', 'ps.id_request')
+        ->join('master_pengambilan as mp', 'dp.id_nota', '=', 'mp.id_nota')
+        ->select('users.nama_lengkap', 'mp.jenis_sampah', 'dp.berat', 'ps.id_penerimaan_sampah', 'ps.confirm')
+        ->paginate(10);
+
+        return view('banksampah.dataPenerimaan', ['user' => $user, 'result_master' => $result_master, 'result_pengambilan'=>$result_pengambilan]);
     }
     public function detailPenerimaan($id)
     {
@@ -66,6 +75,32 @@ class BankSampahController extends Controller
             return redirect('/banksampah/datapenerimaan')->with('success', 'Data Berhasil DiTolak');
         } else {
             return redirect('/bansampah/detailPenerimaan')->with('error', 'Data Gagal Ditolak');
+        }
+    }
+
+    public function terimaambil($id){
+        $data = penerimaansampah::where('id_penerimaan_sampah', $id)->update([
+            'confirm'=>'Sudah Diterima',
+            'jam_terima' => Carbon::now()->toTimeString(),
+            'tanggal_terima' => Carbon::now()->toDateString()
+        ]);
+        if($data){
+            return redirect('/banksampah/datapenerimaan')->with('toast_success', 'Data Berhasil Diterima');
+        }else{
+            return redirect('/banksampah/datapenerimaan')->with('toast_error', 'Data Gagal Diterima');
+        }
+    }
+
+    public function tolakambil($id){
+        $data = penerimaansampah::where('id_penerimaan_sampah', $id)->update([
+            'confirm'=>'Ditolak',
+            'jam_terima' => Carbon::now()->toTimeString(),
+            'tanggal_terima' => Carbon::now()->toDateString()
+        ]);
+        if($data){
+            return redirect('/banksampah/datapenerimaan')->with('toast_success', 'Data Berhasil Ditolak');
+        }else{
+            return redirect('/banksampah/datapenerimaan')->with('toast_error', 'Data Gagal Ditolak');
         }
     }
 
