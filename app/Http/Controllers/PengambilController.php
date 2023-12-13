@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use PDF;
 use App\Charts\PieChartSampah;
 
 
@@ -99,47 +101,47 @@ class PengambilController extends Controller
 
         $pengambil = Auth::user()->id; // Use auth() helper instead of Auth facade
         $result = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
-        ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
-        ->where('dp.id_pengambil', '=', $pengambil)
-        ->select(
-            'master_pengambilan.id_pengguna',
-            'dp.id_dtl_pengambilan',
-            'dp.id_nota',
-            'dp.id_pengambil',
-            'master_pengambilan.jenis_sampah',
-            'master_pengambilan.hari',
-            'master_pengambilan.tanggal',
-            'master_pengambilan.jam',
-            'us.nama_lengkap',
-            'us.latitude',
-            'us.longitude',
-            'dp.status_pengambilan',
-            'dp.berat'
-        )
-        ->orderBy('master_pengambilan.tanggal', 'desc')
-        ->orderBy('master_pengambilan.jam', 'desc')
-        ->paginate(10);
+            ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+            ->where('dp.id_pengambil', '=', $pengambil)
+            ->select(
+                'master_pengambilan.id_pengguna',
+                'dp.id_dtl_pengambilan',
+                'dp.id_nota',
+                'dp.id_pengambil',
+                'master_pengambilan.jenis_sampah',
+                'master_pengambilan.hari',
+                'master_pengambilan.tanggal',
+                'master_pengambilan.jam',
+                'us.nama_lengkap',
+                'us.latitude',
+                'us.longitude',
+                'dp.status_pengambilan',
+                'dp.berat'
+            )
+            ->orderBy('master_pengambilan.tanggal', 'desc')
+            ->orderBy('master_pengambilan.jam', 'desc')
+            ->paginate(10);
 
         $getPengguna = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
-        ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
-        ->where('dp.id_pengambil', '=', $pengambil)
-        ->where('dp.status_pengambilan', '=', 'Belum diambil')
-        ->select(
-            'us.nama_lengkap',
-            'us.latitude',
-            'us.longitude',
-            'us.kabupaten',
-            'us.kecamatan',
-            'us.kelurahan',
-            'dp.status_pengambilan'
-        )
-        ->get();
+            ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+            ->where('dp.id_pengambil', '=', $pengambil)
+            ->where('dp.status_pengambilan', '=', 'Belum diambil')
+            ->select(
+                'us.nama_lengkap',
+                'us.latitude',
+                'us.longitude',
+                'us.kabupaten',
+                'us.kecamatan',
+                'us.kelurahan',
+                'dp.status_pengambilan'
+            )
+            ->get();
 
         $progress = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
-        ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
-        ->where('dp.id_pengambil', '=', $pengambil)
-        ->where('dp.status_pengambilan', '=', 'Sudah diambil')
-        ->count();
+            ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+            ->where('dp.id_pengambil', '=', $pengambil)
+            ->where('dp.status_pengambilan', '=', 'Sudah diambil')
+            ->count();
 
         $sampahDiambil = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
             ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
@@ -147,48 +149,118 @@ class PengambilController extends Controller
             ->where('dp.status_pengambilan', '=', 'Belum diambil')
             ->count();
 
-        $totalSampah = $progress + $sampahDiambil; 
+        $totalSampah = $progress + $sampahDiambil;
 
         if ($totalSampah > 0) {
             $progressPercentage = ($progress / $totalSampah) * 100;
             $formattedProgress = number_format($progressPercentage, 2);
         } else {
-            $formattedProgress = 0; 
+            $formattedProgress = 0;
         }
-        return view('pengambil.penerimaan', ['result' => $result,'getPengguna'=>$getPengguna, 'formattedProgress'=>$formattedProgress]);
+        return view('pengambil.penerimaan', ['result' => $result, 'getPengguna' => $getPengguna, 'formattedProgress' => $formattedProgress]);
 
     }
-    public function ambilsampah($id, Request $request) {
-        detail_pengambilan::where('id_dtl_pengambilan',$id)
+    public function ambilsampah($id, Request $request)
+    {
+        detail_pengambilan::where('id_dtl_pengambilan', $id)
             ->update(['status_pengambilan' => 'Sudah Diambil']);
-        
+
         return redirect('/pengambil/penerimaan')->with('success', 'Sampah Berhasil Diambil');
     }
-    public function history() {
+    public function history()
+    {
 
-        $pengambil = auth()->user()->id; 
+        $pengambil = auth()->user()->id;
         $result = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
-        ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
-        ->where('dp.id_pengambil', '=', $pengambil)
-        ->where('dp.status_pengambilan', '=', 'Sudah Diambil')
-        ->select(
-            'master_pengambilan.id_pengguna',
-            'dp.id_dtl_pengambilan',
-            'dp.id_nota',
-            'dp.id_pengambil',
-            'master_pengambilan.jenis_sampah',
-            'master_pengambilan.hari',
-            'master_pengambilan.tanggal',
-            'master_pengambilan.jam',
-            'us.nama_lengkap',
-            'dp.status_pengambilan',
-            'dp.berat'
-        )
-        ->orderBy('master_pengambilan.tanggal', 'desc')
-        ->orderBy('master_pengambilan.jam', 'desc')
-        ->paginate(10);
+            ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+            ->where('dp.id_pengambil', '=', $pengambil)
+            ->where('dp.status_pengambilan', '=', 'Sudah Diambil')
+            ->select(
+                'master_pengambilan.id_pengguna',
+                'dp.id_dtl_pengambilan',
+                'dp.id_nota',
+                'dp.id_pengambil',
+                'master_pengambilan.jenis_sampah',
+                'master_pengambilan.hari',
+                'master_pengambilan.tanggal',
+                'master_pengambilan.jam',
+                'us.nama_lengkap',
+                'dp.status_pengambilan',
+                'dp.berat'
+            )
+            ->orderBy('master_pengambilan.tanggal', 'desc')
+            ->orderBy('master_pengambilan.jam', 'desc')
+            ->paginate(10);
 
 
         return view('pengambil.history', ['result' => $result]);
     }
+    public function cetakSemua($type)
+    {
+        $pengambil = auth()->user()->id;
+        $result = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
+            ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+            ->where('dp.id_pengambil', '=', $pengambil)
+            ->where('dp.status_pengambilan', '=', 'Sudah Diambil')
+            ->select(
+                'master_pengambilan.id_pengguna',
+                'dp.id_dtl_pengambilan',
+                'dp.id_nota',
+                'dp.id_pengambil',
+                'master_pengambilan.jenis_sampah',
+                'master_pengambilan.hari',
+                'master_pengambilan.tanggal',
+                'master_pengambilan.jam',
+                'us.nama_lengkap',
+                'dp.status_pengambilan',
+                'dp.berat'
+            )
+            ->orderBy('master_pengambilan.tanggal', 'desc')
+            ->orderBy('master_pengambilan.jam', 'desc')
+            ->get();
+
+        // dd($result[0]->nama_lengkap);    
+
+        $users = User::where('id', $pengambil)->get();
+
+        $today = Carbon::now();
+
+        $mytime = Carbon::now()->toDateTimeString();
+        $pdf = PDF::loadView('pengambil.cetakhistorypengambil', ['data' => $result, 'time' => $mytime, 'users' => $users, 'today' => $today]);
+        return $pdf->stream('cetak-pdf.pdf');
+    }
+    public function cetakTertentu($type, $id)
+    {
+        $pengambil = auth()->user()->id;
+        $result = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
+            ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+            ->where('dp.id_pengambil', '=', $pengambil)
+            ->where('dp.status_pengambilan', '=', 'Sudah Diambil')
+            ->where('dp.id_dtl_pengambilan', '=', $id)
+            ->select(
+                'master_pengambilan.id_pengguna',
+                'dp.id_dtl_pengambilan',
+                'dp.id_nota',
+                'dp.id_pengambil',
+                'master_pengambilan.jenis_sampah',
+                'master_pengambilan.hari',
+                'master_pengambilan.tanggal',
+                'master_pengambilan.jam',
+                'us.nama_lengkap',
+                'dp.status_pengambilan',
+                'dp.berat'
+            )
+            ->orderBy('master_pengambilan.tanggal', 'desc')
+            ->orderBy('master_pengambilan.jam', 'desc')
+            ->get();
+
+        $users = User::where('id', $pengambil)->get();
+
+        $today = Carbon::now();
+
+        $mytime = Carbon::now()->toDateTimeString();
+        $pdf = PDF::loadView('pengambil.cetakhistorypengambil', ['data' => $result, 'time' => $mytime, 'users' => $users, 'today' => $today]);
+        return $pdf->stream('cetak-pdf.pdf');
+    }
+
 }

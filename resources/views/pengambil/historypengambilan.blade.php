@@ -1,3 +1,8 @@
+<div class="w-100 d-flex mx-4">
+    <a href="/pengambil/history/download" class="btn btn-primary mb-2" target="blank">
+        <i class="bi bi-printer-fill"></i>
+        Cetak Semua</a>
+</div>
 <div class="card mx-4 mt-2">
     <div class="card-header">
         <span><i class="bi bi-table me-2"></i></span> Data Penerimaan Sampah
@@ -29,13 +34,13 @@
                             <td>{{ $item->jam }}</td>
                             <td>{{ $item->status_pengambilan }}</td>
                             <td>
-                                <form action="#" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="btn btn-success">
-                                        <i class="bi bi-printer"></i>
-                                    </button>
-                                </form>
+                                
+                            <td>
+                                <a href="/pengambil/history/download/{{ $item->id_dtl_pengambilan }}"
+                                    class="btn btn-primary" target="blank">
+                                    <i class="bi bi-printer-fill"></i>
+                                </a>
+                            </td>
                             </td>
                         </tr>
                     @endforeach
