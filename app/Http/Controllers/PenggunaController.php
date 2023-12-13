@@ -71,11 +71,16 @@ class PenggunaController extends Controller
         $username = Auth::User()->username ?? '';
         $result = User::where('username', $username)->first();
         $langganan = Langganan::where('kode_langganan', $id)->get();
-        return  view('pengguna.orderlangganan', [
-            'key' => 'langganan', 
-            'result' => $result,
-            'user' => $user,
-            'langganan'=>$langganan]);
+        if(Auth::User()->provinsi == null && Auth::User()->kabupaten == null){
+            return redirect('/pengguna/profilesetting')->with('toast_error', 'Lengkapi Data diri dulu');
+        }else{
+            return  view('pengguna.orderlangganan', [
+                'key' => 'langganan', 
+                'result' => $result,
+                'user' => $user,
+                'langganan'=>$langganan]);
+        }
+        
     }
 
     public function checkout(Request $request){
