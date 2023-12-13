@@ -66,9 +66,7 @@
                                     <th scope="col">Nama Pengguna</th>
                                     <th scope="col">Jenis Sampah</th>
                                     <th scope="col">Berat Sampah</th>
-                                    <th scope="col">Tgl Pengajuan</th>
-                                    <th scope="col">Jam Pengajuan</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Status Request</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,9 +76,7 @@
                                         <td>{{ $item->nama_lengkap }}</td>
                                         <td>{{ $item->jenis_sampah }}</td>
                                         <td>{{ $item->berat }}</td>
-                                        <td>{{ $item->tanggal }}</td>
-                                        <td>{{ $item->jam }}</td>
-                                        <td>{{ $item->status_pengambilan }}</td>
+                                        <td>{{ $item->status_request }}</td>
                                     </tr>
                                 @endforeach
 

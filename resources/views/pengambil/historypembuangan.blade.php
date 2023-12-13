@@ -1,3 +1,8 @@
+<div class="w-100 d-flex mx-4">
+    <a href="/pengambil/historypembuangan/download" class="btn btn-primary mb-2" target="blank">
+        <i class="bi bi-printer-fill"></i>
+        Cetak Semua</a>
+</div>
 <div class="card mx-4 mt-2">
     <div class="card-header">
         <span><i class="bi bi-table me-2"></i></span> Data Pembuangan Sampah
@@ -25,7 +30,7 @@
                             <td>{{ $item->berat }}</td>
                             <td>{{ $item->status_request }}</td>
                             <td>
-                                <a class="btn btn-primary" href="/pengambil/history/download/{{$item->id_dtl_pengambilan}}">
+                                <a class="btn btn-primary" href="/pengambil/historypembuangan/download/{{$item->id_dtl_pengambilan}}">
                                     <i class="bi bi-printer-fill"></i>
                                 </a>
                             </td>

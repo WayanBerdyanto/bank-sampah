@@ -170,13 +170,13 @@ class PengambilController extends Controller
             ->where('dp.status_pengambilan', '=', 'Belum diambil')
             ->count();
 
-        $totalSampah = $progress + $sampahDiambil; 
+        $totalSampah = $progress + $sampahDiambil;
 
         if ($totalSampah > 0) {
             $progressPercentage = ($progress / $totalSampah) * 100;
             $formattedProgress = number_format($progressPercentage, 2);
         } else {
-            $formattedProgress = 0; 
+            $formattedProgress = 0;
         }
         return view('pengambil.penerimaan', ['result' => $result,'getPengguna'=>$getPengguna, 'formattedProgress'=>$formattedProgress]);
 
@@ -190,7 +190,7 @@ class PengambilController extends Controller
     }
     public function history() {
 
-        $pengambil = auth()->user()->id; 
+        $pengambil = auth()->user()->id;
         $result = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
         ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
         ->where('dp.id_pengambil', '=', $pengambil)
@@ -216,7 +216,7 @@ class PengambilController extends Controller
 
         $result_pembuangan = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
         ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
-        ->where('dp.id_pengambil', '=', 1)
+        ->where('dp.id_pengambil', '=', $pengambil)
         ->where('dp.status_request', '=', 'Sudah Request')
         ->select(
             'master_pengambilan.id_pengguna',
@@ -259,7 +259,7 @@ class PengambilController extends Controller
             ->orderBy('master_pengambilan.jam', 'desc')
             ->get();
 
-        // dd($result[0]->nama_lengkap);    
+        // dd($result[0]->nama_lengkap);
 
         $users = User::where('id', $pengambil)->get();
 
@@ -302,5 +302,69 @@ class PengambilController extends Controller
         $pdf = PDF::loadView('pengambil.cetakhistorypengambil', ['data' => $result, 'time' => $mytime, 'users' => $users, 'today' => $today]);
         return $pdf->stream('cetak-pdf.pdf');
     }
+
+    public function cetakPembuangan($type, $id)
+    {
+        $pengambil = auth()->user()->id;
+        $result_pembuangan = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
+        ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+        ->where('dp.id_pengambil', '=', $pengambil)
+        ->where('dp.status_request', '=', 'Sudah Request')
+        ->where('dp.id_dtl_pengambilan', '=', $id)
+        ->select(
+            'master_pengambilan.id_pengguna',
+            'dp.id_dtl_pengambilan',
+            'dp.id_nota',
+            'dp.id_pengambil',
+            'master_pengambilan.jenis_sampah',
+            'us.nama_lengkap',
+            'dp.status_pengambilan',
+            'dp.status_request',
+            'dp.berat'
+        )
+        ->orderBy('master_pengambilan.tanggal', 'desc')
+        ->orderBy('master_pengambilan.jam', 'desc')
+        ->paginate(10);
+
+        $users = User::where('id', $pengambil)->get();
+
+        $today = Carbon::now();
+
+        $mytime = Carbon::now()->toDateTimeString();
+        $pdf = PDF::loadView('pengambil.cetakhistorypembuangan', ['data' => $result_pembuangan, 'time' => $mytime, 'users' => $users, 'today' => $today]);
+        return $pdf->stream('cetak-pdf.pdf');
+    }
+
+    public function cetakSemuaPembuangan($type)
+    {
+        $pengambil = auth()->user()->id;
+        $result_pembuangan = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
+        ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+        ->where('dp.id_pengambil', '=', $pengambil)
+        ->where('dp.status_request', '=', 'Sudah Request')
+        ->select(
+            'master_pengambilan.id_pengguna',
+            'dp.id_dtl_pengambilan',
+            'dp.id_nota',
+            'dp.id_pengambil',
+            'master_pengambilan.jenis_sampah',
+            'us.nama_lengkap',
+            'dp.status_pengambilan',
+            'dp.status_request',
+            'dp.berat'
+        )
+        ->orderBy('master_pengambilan.tanggal', 'desc')
+        ->orderBy('master_pengambilan.jam', 'desc')
+        ->paginate(10);
+
+        $users = User::where('id', $pengambil)->get();
+
+        $today = Carbon::now();
+
+        $mytime = Carbon::now()->toDateTimeString();
+        $pdf = PDF::loadView('pengambil.cetakhistorypembuangan', ['data' => $result_pembuangan, 'time' => $mytime, 'users' => $users, 'today' => $today]);
+        return $pdf->stream('cetak-pdf.pdf');
+    }
+
 
 }
