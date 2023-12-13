@@ -39,10 +39,10 @@
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <div>
-                        <h4 class="my-3">Kapasitas Sampah</h4>
+                        <h4 class="my-3">Sisa Kapasitas Sampah</h4>
                         <div class="progress mb-2">
-                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                                aria-valuemin="0" aria-valuemax="100">25%</div>
+                            <div class="progress-bar" role="progressbar" style="width: {{$format}}%;" aria-valuenow="{{$format}}"
+                                aria-valuemin="0" aria-valuemax="{{$kapasitas}}"> {{$format}} Kg </div>
                         </div>
                     </div>
                     <div class="card">

@@ -17,7 +17,18 @@ class BankSampahController extends Controller
     public function index()
     {
         $user = Auth::User()->nama_lengkap ?? '';
-        return view("banksampah.index", ['user' => $user]);
+        $kapasitas = Auth::User()->kapasitas ?? '';
+
+        $beratsampah = db::select("SELECT SUM(dp.berat) AS berat 
+        FROM detail_pengambilan dp, request_pembuangan rp, penerimaan_sampah ps
+        WHERE dp.id_dtl_pengambilan = rp.id_dtl_pengambilan 
+        AND rp.id_request = ps.id_request
+        AND ps.confirm = 'Sudah Diterima'");
+
+        $hasil = $kapasitas - intval($beratsampah[0]->berat); 
+        $format = number_format($hasil, 2);
+
+        return view("banksampah.index", ['user' => $user, 'format'=>$format, 'kapasitas'=>$kapasitas]);
     }
 
     public function dataPembuangan()
@@ -122,6 +133,7 @@ class BankSampahController extends Controller
         if ($user) {
             $user->username = $request->username;
             $user->email = $request->email;
+            $user->kapasitas = $request->kapasitas;
             $user->nama_lengkap = $request->namalengkap;
             $user->provinsi = $request->provinsi;
             $user->kabupaten = $request->kabupaten;

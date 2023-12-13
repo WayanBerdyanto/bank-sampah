@@ -69,6 +69,11 @@
                             aria-describedby="emailHelp" value="{{ $result->email }}" required>
                     </div>
                     <div class="mb-3">
+                        <label for="kapasitas" class="form-label fw-bold">Update Kapasitas</label>
+                        <input type="number" class="form-control" name="kapasitas" id="kapasitas"
+                            value="{{ $result->kapasitas }}" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="file" class="form-label fw-bold">Foto</label>
                         <input type="file" class="form-control" name="foto" id="file" required>
                     </div>
