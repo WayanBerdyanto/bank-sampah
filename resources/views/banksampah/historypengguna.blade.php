@@ -1,4 +1,4 @@
-<a href="" class="btn btn-primary ml-2 mt-2" target="blank">
+<a href="/banksampah/history/download" class="btn btn-primary ml-2 mt-2" target="blank">
                             <i class="bi bi-printer-fill"></i>
                             Cetak Semua</a>
 <div class="card mx-4 mt-2">
@@ -30,7 +30,7 @@
                             <td>{{ $items->jam_pengajuan }}</td>
                             <td>{{ $items->status_terima }}</td>
                             <td>
-                                <a href="" class="btn btn-primary" target="blank">
+                                <a href="/banksampah/history/download/{{ $items->id_dtl_pembuangan }}" class="btn btn-primary" target="blank">
                                                         <i class="bi bi-printer-fill"></i>
                                                     </a>
                             </td>

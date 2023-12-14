@@ -98,6 +98,12 @@ Route::middleware('cekrole:banksampah')->group(function () {
 
     Route::get('/banksampah/terimaambil/{id}',[BanksampahController::class,'terimaambil']);
     Route::get('/banksampah/tolakambil/{id}',[BanksampahController::class,'tolakambil']);
+
+    Route::get('/banksampah/history/{type}', [BankSampahController::class, 'cetakSemua']);
+    Route::get('/banksampah/history/{type}/{id}', [BankSampahController::class, 'cetakTertentu']);
+    
+    Route::get('/history/pengambil/{type}', [BankSampahController::class, 'cetakPengambilSemua']);
+    Route::get('/banksampah/history/pengambil/{type}/{id}', [BankSampahController::class, 'cetakPengambilTertentu']);
 });
 
 Route::middleware('cekrole:pengambil')->group(function () {

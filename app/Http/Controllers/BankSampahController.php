@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Charts\PieChartBankSampah;
 use App\Charts\BarChartBankSampah;
+use PDF;
 
 
 class BankSampahController extends Controller
@@ -36,7 +37,7 @@ class BankSampahController extends Controller
         ]);
         $format = number_format($hasil, 2);
 
-        return view("banksampah.index", ['user' => $user, 'format' => $format, 'kapasitas' => $kapasitas,'chart' => $chart->build(), 'barchart' => $barchart->build()]);
+        return view("banksampah.index", ['user' => $user, 'format' => $format, 'kapasitas' => $kapasitas, 'chart' => $chart->build(), 'barchart' => $barchart->build()]);
     }
 
     public function dataPembuangan()
@@ -68,7 +69,7 @@ class BankSampahController extends Controller
             ->join('request_pembuangan as rp', 'dp.id_dtl_pengambilan', '=', 'rp.id_dtl_pengambilan')
             ->join('penerimaan_sampah as ps', 'rp.id_request', '=', 'ps.id_request')
             ->join('master_pengambilan as mp', 'dp.id_nota', '=', 'mp.id_nota')
-            ->select('users.nama_lengkap', 'mp.jenis_sampah','mp.tanggal','mp.jam','dp.berat', 'ps.id_penerimaan_sampah', 'ps.confirm', 'mp.hari')
+            ->select('users.nama_lengkap', 'mp.jenis_sampah', 'mp.tanggal', 'mp.jam', 'dp.berat', 'ps.id_penerimaan_sampah', 'ps.confirm', 'mp.hari')
             ->paginate(10);
 
         return view('banksampah.dataPenerimaan', ['user' => $user, 'result_master' => $result_master, 'result_pengambilan' => $result_pengambilan]);
@@ -100,6 +101,7 @@ class BankSampahController extends Controller
             ->join('penerimaan_sampah as ps', 'rp.id_request', '=', 'ps.id_request')
             ->join('master_pengambilan as mp', 'dp.id_nota', '=', 'mp.id_nota')
             ->select(
+                'dp.id_dtl_pengambilan',
                 'users.nama_lengkap',
                 'mp.jenis_sampah',
                 'dp.berat',
@@ -251,6 +253,123 @@ class BankSampahController extends Controller
             ]);
             return redirect('/banksampah/datapenerimaan')->with('success', 'Data Berhasil Diterima');
         }
+    }
+    public function cetakSemua($type)
+    {
+        // $user = Auth::User()->nama_lengkap ?? '';
+        $id_banksampah = Auth::User()->id;
+        $result_master = Detail_Pembuangan::select(
+            'detail_pembuangan.id_dtl_pembuangan',
+            'detail_pembuangan.berat_sampah',
+            'mp.id_master_pembuangan',
+            'users.nama_lengkap AS Nama_Bank',
+            'mp.tgl_pengajuan',
+            'mp.status_terima',
+            DB::raw('(SELECT nama_lengkap FROM users WHERE users.id = mp.id_pengguna) AS nama_lengkap'),
+            'mp.jenis_sampah',
+            'mp.jam_pengajuan'
+        )
+            ->join('master_pembuangan as mp', 'detail_pembuangan.id_master_pembuangan', '=', 'mp.id_master_pembuangan')
+            ->join('users', 'users.id', '=', 'mp.id_bank_sampah')
+            ->where('users.id', $id_banksampah)
+            ->orderBy('mp.id_master_pembuangan', 'desc')
+            ->paginate(5);
+
+        $users = User::where('id', $id_banksampah)->get();
+
+        $today = Carbon::now();
+
+        $mytime = Carbon::now()->toDateTimeString();
+        $pdf = PDF::loadView('banksampah.cetakhistorypengguna', ['data' => $result_master, 'time' => $mytime, 'users' => $users, 'today' => $today]);
+        return $pdf->stream('cetak-pdf.pdf');
+    }
+
+    public function cetakTertentu($type, $id) {
+        $id_banksampah = Auth::User()->id;
+        $result_master = Detail_Pembuangan::select(
+            'detail_pembuangan.id_dtl_pembuangan',
+            'detail_pembuangan.berat_sampah',
+            'mp.id_master_pembuangan',
+            'users.nama_lengkap AS Nama_Bank',
+            'mp.tgl_pengajuan',
+            'mp.status_terima',
+            DB::raw('(SELECT nama_lengkap FROM users WHERE users.id = mp.id_pengguna) AS nama_lengkap'),
+            'mp.jenis_sampah',
+            'mp.jam_pengajuan'
+        )
+            ->join('master_pembuangan as mp', 'detail_pembuangan.id_master_pembuangan', '=', 'mp.id_master_pembuangan')
+            ->join('users', 'users.id', '=', 'mp.id_bank_sampah')
+            ->where('users.id', $id_banksampah)
+            ->where('detail_pembuangan.id_dtl_pembuangan',$id)
+            ->orderBy('mp.id_master_pembuangan', 'desc')
+            ->paginate(5);
+
+        $users = User::where('id', $id_banksampah)->get();
+
+        $today = Carbon::now();
+
+        $mytime = Carbon::now()->toDateTimeString();
+        $pdf = PDF::loadView('banksampah.cetakhistorypengguna', ['data' => $result_master, 'time' => $mytime, 'users' => $users, 'today' => $today]);
+        return $pdf->stream('cetak-pdf.pdf');
+    }
+    public function cetakPengambilSemua($type)
+    {
+        $id_banksampah = Auth::User()->id;
+        $result_pengambilan = DB::table('users')
+            ->join('detail_pengambilan as dp', 'users.id', '=', 'dp.id_pengambil')
+            ->join('request_pembuangan as rp', 'dp.id_dtl_pengambilan', '=', 'rp.id_dtl_pengambilan')
+            ->join('penerimaan_sampah as ps', 'rp.id_request', '=', 'ps.id_request')
+            ->join('master_pengambilan as mp', 'dp.id_nota', '=', 'mp.id_nota')
+            ->select(
+                'dp.id_dtl_pengambilan',
+                'users.nama_lengkap',
+                'mp.jenis_sampah',
+                'dp.berat',
+                'ps.id_penerimaan_sampah',
+                'ps.confirm',
+                'mp.tanggal',
+                'mp.jam'
+            )
+            ->paginate(10);
+
+        $users = User::where('id', $id_banksampah)->get();
+
+        $today = Carbon::now();
+
+        $mytime = Carbon::now()->toDateTimeString();
+
+        $pdf = PDF::loadView('banksampah.cetakhistorypengambil', ['data' => $result_pengambilan, 'time' => $mytime, 'users' => $users, 'today' => $today]);
+        return $pdf->stream('cetak-pdf.pdf');
+    }
+    public function cetakPengambilTertentu($type,$id)
+    {
+        $id_banksampah = Auth::User()->id;
+        $result_pengambilan = DB::table('users')
+            ->join('detail_pengambilan as dp', 'users.id', '=', 'dp.id_pengambil')
+            ->join('request_pembuangan as rp', 'dp.id_dtl_pengambilan', '=', 'rp.id_dtl_pengambilan')
+            ->join('penerimaan_sampah as ps', 'rp.id_request', '=', 'ps.id_request')
+            ->join('master_pengambilan as mp', 'dp.id_nota', '=', 'mp.id_nota')
+            ->select(
+                'dp.id_dtl_pengambilan',
+                'users.nama_lengkap',
+                'mp.jenis_sampah',
+                'dp.berat',
+                'ps.id_penerimaan_sampah',
+                'ps.confirm',
+                'mp.tanggal',
+                'mp.jam'
+            )
+            ->where('dp.id_dtl_pengambilan',$id)
+            ->paginate(10);
+
+        $users = User::where('id', $id_banksampah)->get();
+
+        $today = Carbon::now();
+
+        $mytime = Carbon::now()->toDateTimeString();
+
+        $pdf = PDF::loadView('banksampah.cetakhistorypengambil', ['data' => $result_pengambilan, 'time' => $mytime, 'users' => $users, 'today' => $today]);
+        return $pdf->stream('cetak-pdf.pdf');
     }
 
 }
