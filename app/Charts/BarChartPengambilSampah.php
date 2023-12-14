@@ -31,36 +31,31 @@ class BarChartPengambilSampah
         ->join('request_pembuangan', 'detail_pengambilan.id_dtl_pengambilan', '=', 'request_pembuangan.id_dtl_pengambilan')
         ->join('penerimaan_sampah', 'request_pembuangan.id_request', '=', 'penerimaan_sampah.id_request')
         ->join('master_pengambilan', 'detail_pengambilan.id_nota', '=', 'master_pengambilan.id_nota')
-        ->where('master_pengambilan.jenis_sampah', '=', 'anorganik') // Add this condition
+        ->where('master_pengambilan.jenis_sampah', '=', 'anorganik')
+        ->where('penerimaan_sampah.confirm', '=', 'Sudah Diterima')
+        ->groupBy('master_pengambilan.jenis_sampah', 'master_pengambilan.hari')
         ->select(
-            'users.nama_lengkap',
             'master_pengambilan.jenis_sampah',
-            'master_pengambilan.tanggal',
             'master_pengambilan.hari',
-            'master_pengambilan.jam',
-            'detail_pengambilan.berat',
-            'penerimaan_sampah.id_penerimaan_sampah',
-            'penerimaan_sampah.confirm'
+            DB::raw('SUM(detail_pengambilan.berat) AS berat')
         )
         ->get();
 
         // Fetch data for 'organik'
-        $organikResults =User::join('detail_pengambilan', 'users.id', '=', 'detail_pengambilan.id_pengambil')
-        ->join('request_pembuangan', 'detail_pengambilan.id_dtl_pengambilan', '=', 'request_pembuangan.id_dtl_pengambilan')
-        ->join('penerimaan_sampah', 'request_pembuangan.id_request', '=', 'penerimaan_sampah.id_request')
-        ->join('master_pengambilan', 'detail_pengambilan.id_nota', '=', 'master_pengambilan.id_nota')
-        ->where('master_pengambilan.jenis_sampah', '=', 'organik') // Add this condition
-        ->select(
-            'users.nama_lengkap',
-            'master_pengambilan.jenis_sampah',
-            'master_pengambilan.tanggal',
-            'master_pengambilan.hari',
-            'master_pengambilan.jam',
-            'detail_pengambilan.berat',
-            'penerimaan_sampah.id_penerimaan_sampah',
-            'penerimaan_sampah.confirm'
-        )
-        ->get();
+        $organikResults = User::join('detail_pengambilan', 'users.id', '=', 'detail_pengambilan.id_pengambil')
+    ->join('request_pembuangan', 'detail_pengambilan.id_dtl_pengambilan', '=', 'request_pembuangan.id_dtl_pengambilan')
+    ->join('penerimaan_sampah', 'request_pembuangan.id_request', '=', 'penerimaan_sampah.id_request')
+    ->join('master_pengambilan', 'detail_pengambilan.id_nota', '=', 'master_pengambilan.id_nota')
+    ->where('master_pengambilan.jenis_sampah', '=', 'organik')
+    ->where('penerimaan_sampah.confirm', '=', 'Sudah Diterima')
+    ->groupBy('master_pengambilan.jenis_sampah', 'master_pengambilan.hari')
+    ->select(
+        'master_pengambilan.jenis_sampah',
+        'master_pengambilan.hari',
+        DB::raw('SUM(detail_pengambilan.berat) AS berat')
+    )
+    ->get();
+
 
 
 

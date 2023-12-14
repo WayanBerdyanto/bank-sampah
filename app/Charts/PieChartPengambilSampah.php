@@ -26,56 +26,24 @@ class PieChartPengambilSampah
 
     public function build(): \ArielMejiaDev\LarapexCharts\PieChart
     {
-        $organik = User::join('detail_pengambilan', 'users.id', '=', 'detail_pengambilan.id_pengambil')
+        $organik = DB::table('users')
+        ->join('detail_pengambilan', 'users.id', '=', 'detail_pengambilan.id_pengambil')
         ->join('request_pembuangan', 'detail_pengambilan.id_dtl_pengambilan', '=', 'request_pembuangan.id_dtl_pengambilan')
         ->join('penerimaan_sampah', 'request_pembuangan.id_request', '=', 'penerimaan_sampah.id_request')
         ->join('master_pengambilan', 'detail_pengambilan.id_nota', '=', 'master_pengambilan.id_nota')
         ->where('master_pengambilan.jenis_sampah', '=', 'organik')
-        ->select(
-            'users.nama_lengkap',
-            'master_pengambilan.jenis_sampah',
-            'master_pengambilan.tanggal',
-            'master_pengambilan.hari',
-            'master_pengambilan.jam',
-            DB::raw('SUM(detail_pengambilan.berat) AS total_berat'),
-            'penerimaan_sampah.id_penerimaan_sampah',
-            'penerimaan_sampah.confirm'
-        )
-        ->groupBy(
-            'users.nama_lengkap',
-            'master_pengambilan.jenis_sampah',
-            'master_pengambilan.tanggal',
-            'master_pengambilan.hari',
-            'master_pengambilan.jam',
-            'penerimaan_sampah.id_penerimaan_sampah',
-            'penerimaan_sampah.confirm'
-        )
+        ->where('penerimaan_sampah.confirm','=','Sudah Diterima')
+        ->select(DB::raw('SUM(detail_pengambilan.berat) AS total_berat'))
         ->get();
-    $anorganik = User::join('detail_pengambilan', 'users.id', '=', 'detail_pengambilan.id_pengambil')
-        ->join('request_pembuangan', 'detail_pengambilan.id_dtl_pengambilan', '=', 'request_pembuangan.id_dtl_pengambilan')
-        ->join('penerimaan_sampah', 'request_pembuangan.id_request', '=', 'penerimaan_sampah.id_request')
-        ->join('master_pengambilan', 'detail_pengambilan.id_nota', '=', 'master_pengambilan.id_nota')
-        ->where('master_pengambilan.jenis_sampah', '=', 'anorganik')
-        ->select(
-            'users.nama_lengkap',
-            'master_pengambilan.jenis_sampah',
-            'master_pengambilan.tanggal',
-            'master_pengambilan.hari',
-            'master_pengambilan.jam',
-            DB::raw('SUM(detail_pengambilan.berat) AS total_berat'),
-            'penerimaan_sampah.id_penerimaan_sampah',
-            'penerimaan_sampah.confirm'
-        )
-        ->groupBy(
-            'users.nama_lengkap',
-            'master_pengambilan.jenis_sampah',
-            'master_pengambilan.tanggal',
-            'master_pengambilan.hari',
-            'master_pengambilan.jam',
-            'penerimaan_sampah.id_penerimaan_sampah',
-            'penerimaan_sampah.confirm'
-        )
-        ->get();
+    $anorganik = DB::table('users')
+    ->join('detail_pengambilan', 'users.id', '=', 'detail_pengambilan.id_pengambil')
+    ->join('request_pembuangan', 'detail_pengambilan.id_dtl_pengambilan', '=', 'request_pembuangan.id_dtl_pengambilan')
+    ->join('penerimaan_sampah', 'request_pembuangan.id_request', '=', 'penerimaan_sampah.id_request')
+    ->join('master_pengambilan', 'detail_pengambilan.id_nota', '=', 'master_pengambilan.id_nota')
+    ->where('master_pengambilan.jenis_sampah', '=', 'anorganik')
+    ->where('penerimaan_sampah.confirm','=','Sudah Diterima')
+    ->select(DB::raw('SUM(detail_pengambilan.berat) AS total_berat'))
+    ->get();
 
     return $this->chart->pieChart()
         ->setTitle('Dihitung Berdasarkan Berat (kg)')
