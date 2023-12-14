@@ -30,11 +30,13 @@ class BankSampahController extends Controller
         AND rp.id_request = ps.id_request
         AND ps.confirm = 'Sudah Diterima'");
 
+
         $hasil = $kapasitas - intval($beratsampah[0]->berat);
 
-        User::where('id', $id)->update([
-            'kapasitas' => $hasil
-        ]);
+        // User::where('id', $id)->update([
+        //     'kapasitas' => $hasil
+        // ]);
+        
         $format = number_format($hasil, 2);
 
         return view("banksampah.index", ['user' => $user, 'format' => $format, 'kapasitas' => $kapasitas, 'chart' => $chart->build(), 'barchart' => $barchart->build()]);
