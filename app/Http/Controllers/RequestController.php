@@ -9,6 +9,7 @@ use App\Models\master_pengambilan;
 use App\Models\requestpembuangan;
 use App\Models\penerimaansampah;
 use App\Models\detail_pengambilan;
+use Illuminate\Support\Facades\DB;
 
 class RequestController extends Controller
 {

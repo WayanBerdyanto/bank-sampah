@@ -113,8 +113,6 @@
                                 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
                                 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
                                 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
-                                'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-purple.png',
-                                'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
                             ];
 
 
@@ -142,7 +140,7 @@
                                 }).addTo(map);
 
                                 // Creating a popup with information and attaching it to the marker
-                                var popupContent = "<b>" + e.nama_lengkap + "</b><br>Penampungan: " + e.kapasitas + " Kg";
+                                var popupContent = "<b>" + e.nama_lengkap + "</b><br>Sisa Kapasitas: " + e.kapasitas + " Kg";
                                 marker.bindPopup(popupContent).openPopup();
                             });
                         </script>
