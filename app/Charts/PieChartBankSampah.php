@@ -32,6 +32,7 @@ class PieChartBankSampah
         ->join('penerimaan_sampah', 'request_pembuangan.id_request', '=', 'penerimaan_sampah.id_request')
         ->join('master_pengambilan', 'detail_pengambilan.id_nota', '=', 'master_pengambilan.id_nota')
         ->where('master_pengambilan.jenis_sampah', '=', 'organik')
+        ->where('penerimaan_sampah.confirm','=','Sudah Diterima')
         ->select(DB::raw('SUM(detail_pengambilan.berat) AS total_berat'))
         ->get();
         $anorganik = DB::table('users')
@@ -40,6 +41,7 @@ class PieChartBankSampah
         ->join('penerimaan_sampah', 'request_pembuangan.id_request', '=', 'penerimaan_sampah.id_request')
         ->join('master_pengambilan', 'detail_pengambilan.id_nota', '=', 'master_pengambilan.id_nota')
         ->where('master_pengambilan.jenis_sampah', '=', 'anorganik')
+        ->where('penerimaan_sampah.confirm','=','Sudah Diterima')
         ->select(DB::raw('SUM(detail_pengambilan.berat) AS total_berat'))
         ->get();
 
@@ -53,7 +55,7 @@ class PieChartBankSampah
                 $organik[0]->jenis_sampah ?? 'Organik',
                 $anorganik[0]->jenis_sampah ?? 'Anorganik',
             ])
-            ->setColors(['#ffc63b', '#ff6384'])
+            ->setColors(['#ff6384','#ffc63b'])
             ->setFontColor('#fff')
             ->setHeight(200)
             ->setWidth(300);
