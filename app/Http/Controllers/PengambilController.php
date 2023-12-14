@@ -10,14 +10,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use PDF;
-use App\Charts\PieChartSampah;
 use DB;
-
-
+use App\Charts\PieChartPengambilSampah;
+use App\Charts\BarChartPengambilSampah;
 
 class PengambilController extends Controller
 {
-    public function index()
+    public function index(PieChartPengambilSampah $piechart, BarChartPengambilSampah $barchart)
     {
         $getBank = user::where('role', 'banksampah')->get();
 
@@ -83,7 +82,7 @@ class PengambilController extends Controller
         }
 
         $user = Auth::User()->nama_lengkap ?? '';
-        return view("pengambil.index", ['user' => $user, 'result'=>$result,'formattedProgress'=>$formattedProgress, 'count_id'=>$count_id, 'belum_diambil'=>$belum_diambil]);
+        return view("pengambil.index", ['user' => $user, 'result'=>$result,'formattedProgress'=>$formattedProgress, 'count_id'=>$count_id, 'belum_diambil'=>$belum_diambil,'piechart'=>$piechart->build(), 'barchart'=>$barchart->build()]);
     }
 
     public function profilepengambil()

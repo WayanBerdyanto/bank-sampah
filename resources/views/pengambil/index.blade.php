@@ -81,10 +81,12 @@
                     <div class="card h-100">
                         <div class="card-header">
                             <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                            Area Chart Example
+                            Banyak Sampah Yang Diambil
                         </div>
                         <div class="card-body">
-                            <canvas class="chart" width="400" height="200"></canvas>
+                            <div class="chart" width="400" height="200">
+                                {!! $barchart->container() !!}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -92,10 +94,12 @@
                     <div class="card h-100">
                         <div class="card-header">
                             <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                            Area Chart Example
+                            Jenis Sampah Yang Banyak Di Ambil
                         </div>
                         <div class="card-body">
-                            <canvas class="chart" width="400" height="200"></canvas>
+                            <div class="chart" width="400" height="200">
+                                {!! $piechart->container() !!}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -147,4 +151,11 @@
             </div>
         </div>
     </main>
+@endsection
+
+@section('charts')
+    <script src="{{ $barchart->cdn() }}"></script>
+    {{ $barchart->script() }}
+    <script src="{{ $piechart->cdn() }}"></script>
+    {{ $piechart->script() }}
 @endsection
