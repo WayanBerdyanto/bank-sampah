@@ -48,10 +48,42 @@ class PengambilController extends Controller
         WHERE 
         dp.id_pengambil = '$pengambil'");
 
-        
+        $count_id = db::select("SELECT COUNT(detail_pengambilan.id_dtl_pengambilan) AS total_id
+        FROM detail_pengambilan
+        JOIN request_pembuangan ON detail_pengambilan.id_dtl_pengambilan = request_pembuangan.id_dtl_pengambilan
+        JOIN users ON detail_pengambilan.id_pengambil = users.id
+        WHERE detail_pengambilan.id_pengambil = '$pengambil'");
+
+
+        $progress = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
+        ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+        ->where('dp.id_pengambil', '=', $pengambil)
+        ->where('dp.status_pengambilan', '=', 'Sudah diambil')
+        ->count();
+
+        $belum_diambil = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
+        ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+        ->where('dp.id_pengambil', '=', $pengambil)
+        ->where('dp.status_pengambilan', '=', 'Belum diambil')
+        ->count();
+
+        $sampahDiambil = master_pengambilan::join('detail_pengambilan as dp', 'master_pengambilan.id_nota', '=', 'dp.id_nota')
+            ->join('users as us', 'master_pengambilan.id_pengguna', '=', 'us.id')
+            ->where('dp.id_pengambil', '=', $pengambil)
+            ->where('dp.status_pengambilan', '=', 'Belum diambil')
+            ->count();
+
+        $totalSampah = $progress + $sampahDiambil;
+
+        if ($totalSampah > 0) {
+            $progressPercentage = ($progress / $totalSampah) * 100;
+            $formattedProgress = number_format($progressPercentage, 2);
+        } else {
+            $formattedProgress = 0;
+        }
 
         $user = Auth::User()->nama_lengkap ?? '';
-        return view("pengambil.index", ['user' => $user, 'result'=>$result]);
+        return view("pengambil.index", ['user' => $user, 'result'=>$result,'formattedProgress'=>$formattedProgress, 'count_id'=>$count_id, 'belum_diambil'=>$belum_diambil]);
     }
 
     public function profilepengambil()

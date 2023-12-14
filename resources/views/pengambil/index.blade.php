@@ -14,7 +14,7 @@
                             Data Request Pembuangan
                         </div>
                         <div class="card-body py-5">
-                            50
+                            {{ $count_id[0]->total_id }}
                         </div>
                         <a href="/pengambil/requestpembuangan" class="btn text-light">
                             <div class="card-footer d-flex">
@@ -32,7 +32,9 @@
                             Sampah yang belum Diambil
                         </div>
                         <div class="card-body py-5">
-                            <span>Success Card</span>
+                            <span>
+                                {{ $belum_diambil }}
+                            </span>
                         </div>
                         <a href="/pengambil/penerimaan" class="btn text-light">
                             <div class="card-footer d-flex">
@@ -50,7 +52,9 @@
                             Data History
                         </div>
                         <div class="card-body py-5">
-                            <span>Danger Card</span>
+                            <span>
+                                Data History Pengambilan Dan Pembuangan
+                            </span>
                         </div>
                         <a href="/pengambil/history" class="btn text-light">
                             <div class="card-footer d-flex">
@@ -63,7 +67,16 @@
                     </div>
                 </div>
             </div>
+
             <div class="row mb-5">
+                <div class="mt-2">
+                    <span>Sampah Yang sudah Diambil</span>
+                    <div class="progress my-2">
+                        <div class="progress-bar" role="progressbar" style="width: {{ $formattedProgress }}%;"
+                            aria-valuenow="{{ $formattedProgress }}" aria-valuemin="0" aria-valuemax="100">
+                            {{ $formattedProgress }} %</div>
+                    </div>
+                </div>
                 <div class="col-md-6 mb-3">
                     <div class="card h-100">
                         <div class="card-header">
@@ -121,7 +134,7 @@
                                                     {{ $item->lokasi_buang }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{$item->confirm}}
+                                                    {{ $item->confirm }}
                                                 </td>
                                             </tr>
                                         @endforeach
