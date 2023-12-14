@@ -11,6 +11,7 @@
                         <th>No</th>
                         <th>Nama Pengambil</th>
                         <th>Jenis Sampah</th>
+                        <th>Hari</th>
                         <th class="text-center">Berat Sampah</th>
                         <th class="text-center">Status Konfirmasi</th>
                         <th class="text-center">Aksi</th>
@@ -27,6 +28,9 @@
                             </td>
                             <td>
                                 {{$item->jenis_sampah}}
+                            </td>
+                            <td>
+                                {{$item->hari}}
                             </td>
                             <td class="text-center">
                                 {{$item->berat}} Kg

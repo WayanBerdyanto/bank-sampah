@@ -81,7 +81,7 @@ Route::middleware('cekrole:pengguna')->group(function () {
 });
 
 Route::middleware('cekrole:banksampah')->group(function () {
-    Route::get('/banksampah/', [BankSampahController::class, 'index']);
+    Route::get('/banksampah/', [BankSampahController::class, 'index'])->name('banksampah.index');
     Route::get('/banksampah/datapembuangan', [BankSampahController::class, 'dataPembuangan']);
     Route::get('/banksampah/datapenerimaan', [BankSampahController::class, 'dataPenerimaan']);
     Route::get('/banksampah/detailpenerimaan/{id}', [BankSampahController::class, 'detailPenerimaan']);

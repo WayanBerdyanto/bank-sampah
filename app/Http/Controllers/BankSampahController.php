@@ -11,10 +11,13 @@ use App\Models\Detail_Pembuangan;
 use App\Models\penerimaansampah;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Charts\PieChartBankSampah;
+use App\Charts\BarChartBankSampah;
+
 
 class BankSampahController extends Controller
 {
-    public function index()
+    public function index(PieChartBankSampah $chart, BarChartBankSampah $barchart)
     {
         $user = Auth::User()->nama_lengkap ?? '';
         $kapasitas = Auth::User()->kapasitas ?? '';
@@ -28,7 +31,7 @@ class BankSampahController extends Controller
         $hasil = $kapasitas - intval($beratsampah[0]->berat);
         $format = number_format($hasil, 2);
 
-        return view("banksampah.index", ['user' => $user, 'format' => $format, 'kapasitas' => $kapasitas]);
+        return view("banksampah.index", ['user' => $user, 'format' => $format, 'kapasitas' => $kapasitas,'chart' => $chart->build(), 'barchart' => $barchart->build()]);
     }
 
     public function dataPembuangan()
@@ -60,7 +63,7 @@ class BankSampahController extends Controller
             ->join('request_pembuangan as rp', 'dp.id_dtl_pengambilan', '=', 'rp.id_dtl_pengambilan')
             ->join('penerimaan_sampah as ps', 'rp.id_request', '=', 'ps.id_request')
             ->join('master_pengambilan as mp', 'dp.id_nota', '=', 'mp.id_nota')
-            ->select('users.nama_lengkap', 'mp.jenis_sampah','mp.tanggal','mp.jam','dp.berat', 'ps.id_penerimaan_sampah', 'ps.confirm')
+            ->select('users.nama_lengkap', 'mp.jenis_sampah','mp.tanggal','mp.jam','dp.berat', 'ps.id_penerimaan_sampah', 'ps.confirm', 'mp.hari')
             ->paginate(10);
 
         return view('banksampah.dataPenerimaan', ['user' => $user, 'result_master' => $result_master, 'result_pengambilan' => $result_pengambilan]);

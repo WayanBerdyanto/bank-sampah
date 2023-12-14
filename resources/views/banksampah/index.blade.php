@@ -9,29 +9,27 @@
                             Anda Belum Melengkapi Profile <a href="/pengguna/profilesetting" class="text-primary">Lengkapi</a>
                         </div>
                     @endif
-                    <h4 class="text-center my-3">Dashboard Bank Sampah</h4>
+                    <h3 class="text-center my-3 fw-bold fs-4">Dashboard Bank Sampah</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                    <div class="card bg-blue-600 text-light" style="height:330px">
+                        <div class="card-header text-center fw-bold mb-1">
                             Perbandingan Sampah Yang Masuk
                         </div>
-                        <div class="card-body">
-                            <canvas class="chart" width="400" height="200"></canvas>
+                        <div class="card-body px-4 text-dark">
+                            {!! $barchart->container() !!}
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                    <div class="card bg-green-500 text-light" style="height: 330px">
+                        <div class="card-header text-center fw-bold mb-1">
                             Jenis Sampah Yang Masuk
                         </div>
-                        <div class="card-body">
-                            <canvas class="chart" width="400" height="200"></canvas>
+                        <div class="card-body px-4">
+                            {!! $chart->container() !!}
                         </div>
                     </div>
                 </div>
@@ -41,12 +39,19 @@
                     <div>
                         <h4 class="my-3">Sisa Kapasitas Sampah</h4>
                         <div class="progress mb-2">
-                            <div class="progress-bar" role="progressbar" style="width: {{$format}}%;" aria-valuenow="{{$format}}"
-                                aria-valuemin="0" aria-valuemax="{{$kapasitas}}"> {{$format}} Kg </div>
+                            <div class="progress-bar" role="progressbar" style="width: {{ $format }}%;"
+                                aria-valuenow="{{ $format }}" aria-valuemin="0" aria-valuemax="{{ $kapasitas }}">
+                                {{ $format }} Kg </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+@endsection
+@section('charts')
+    <script src="{{ $chart->cdn() }}"></script>
+    {{ $chart->script() }}
+    <script src="{{ $barchart->cdn() }}"></script>
+    {{ $barchart->script() }}
 @endsection
