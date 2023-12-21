@@ -1,4 +1,4 @@
-#MobileTrash
+## MOBILE TRASH
 This Project Software Engineering Course Mobile Trash
 This project was created by a group of Duta Wacana Christian University students:
 <ul>
